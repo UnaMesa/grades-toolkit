@@ -1,0 +1,32 @@
+<head>
+  <title>grades-app</title>
+</head>
+<!-- This page would be the default dashboard for a social worker -->
+<body>
+  <div class="container">
+    <div class="row-fluid">
+    <div class="span4">{{> static}}</div>
+    <div class="span8">{{> stream}}</div>
+    </div>
+  </div>
+</body>
+
+<template name="static">
+  <h1>Resources</h1>
+  <ul>
+    <li> Fast Facts</li>
+    <li> Contacts </li>
+    <li> Other docs</li>
+  </ul>
+</template>
+
+<template name="stream">
+  <h2>Streams</h2>
+<button>+ msg</button>
+<button>+ case </button>
+  <ul>
+    <li> MSG 2: @sw3 #case33 message here</li>
+    <li> MSG 1: @sw2 previous message </li>
+    <li> Make these live and add template and code for creating them</li>
+  </ul>
+</template>
