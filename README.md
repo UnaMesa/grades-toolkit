@@ -8,6 +8,7 @@ Prototype mobile web app for social workers.
 - [History](#history)
 - [Quick Start](#quick-start)
 - [Installation](#installation)
+- [License](#license)
 
 ## History
 
@@ -36,3 +37,9 @@ $ mrt
 ```
 
 You may have to enter credentials for google authorization.
+
+
+## License
+
+MIT
+
