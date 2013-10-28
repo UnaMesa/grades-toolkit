@@ -1,4 +1,4 @@
-grades-toolkit
+Grades Toolkit
 ==============
 
 Prototype mobile web app for social workers.
