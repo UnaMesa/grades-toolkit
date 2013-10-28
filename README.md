@@ -12,7 +12,7 @@ Prototype mobile web app for social workers.
 
 ## History
 
-**Latest Version:** 0.0.1
+**Latest Version:** 0.1
 
 See the History.md file for changes (including breaking changes) across
 versions. (TODO)
