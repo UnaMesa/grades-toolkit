@@ -1,0 +1,45 @@
+{
+  "meteor": {},
+  "dependencies": {
+    "basePackages": {
+      "spin": {},
+      "paginated-subscription": {},
+      "iron-router": {},
+      "moment": {},
+      "bootstrap3-less": {},
+      "font-awesome-4": {}
+    },
+    "packages": {
+      "spin": {
+        "git": "https://github.com/SachaG/meteor-spin.git",
+        "tag": "v0.2.0",
+        "commit": "fd3a2871a69442848b4b4e74f5e1ae28fa4a95a4"
+      },
+      "paginated-subscription": {
+        "git": "https://github.com/tmeasday/meteor-paginated-subscription.git",
+        "tag": "v0.1.2",
+        "commit": "35e0c6112df2b4cfeb60b559276a93cac5ee2dd6"
+      },
+      "iron-router": {
+        "git": "https://github.com/EventedMind/iron-router.git",
+        "tag": "v0.6.0",
+        "commit": "c63e92d24c8210e2304ff5fed1b5c463394aeaf6"
+      },
+      "moment": {
+        "git": "https://github.com/acreeger/meteor-moment.git",
+        "tag": "v2.2.1",
+        "commit": "9ee12e714afe56b189f53076447b7b54f3012065"
+      },
+      "bootstrap3-less": {
+        "git": "https://github.com/eprochasson/bootstrap3-less",
+        "tag": "v0.1.4",
+        "commit": "23ec918f8377b15b22cba33e13b717214235c88a"
+      },
+      "font-awesome-4": {
+        "git": "https://github.com/michaelbishop/meteor-font-awesome-4.git",
+        "tag": "v4.0.0",
+        "commit": "c28b5a0f2a2bd233c495642b40a167eda95172f5"
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+
+<template name="contacts"> 
+    <div class="contacts">
+        {{#each sortedContacts}} 
+            {{> contact}}
+        {{/each}}
+
+        {{#if contactsReady}}
+            {{#unless allContactsLoaded}}
+                <a class="load-more" href="#">Load more</a>
+            {{/unless}}
+        {{else}}
+            <div>{{> spinner}}</div>
+        {{/if}}
+    </div> 
+</template>
+
+<template name="contact">
+    <div class="well well-sm contact">
+        {{#if services.google.picture}}
+          <img class="img-rounded contact-picture" src="{{services.google.picture}}" />
+        {{else}}
+           <i class="fa fa-user fa-3x"></i>
+        {{/if}}
+        {{profile.name}}
+    </div>
+</template>

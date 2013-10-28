@@ -1,0 +1,23 @@
+
+<template name="home"> 
+    <div class="container">
+      <div class="jumbotron">
+        <h3 class="text-muted">Grades</h3>
+        <p><small>An application for social workers to keep track of their foster children cases 
+          and share information about the case with fellow workers.</small></p>
+        {{#if currentUser}}
+          <p>Hi {{currentUser.services.google.given_name}}</p>
+        {{else}}
+          {{#if loggingIn}}
+            <p>{{> spinner}}</p>
+          {{else}}
+          <p class="text-center">
+            <button type="button" class="btn btn-success navbar-btn btn-lg" id="login">
+              <i class="fa fa-google-plus fa-2x"></i> Login with Google
+            </button>
+          </p>
+          {{/if}}
+        {{/if}}
+      </div>
+    </div>
+</template>

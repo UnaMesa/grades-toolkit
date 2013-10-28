@@ -1,0 +1,138 @@
+//
+//  Using Less to do Bootstrap 3
+//
+
+@import "/packages/bootstrap3-less/bootstrap.lessimport";
+
+// Do not let navbars collapse
+@grid-float-breakpoint: 100px;
+
+@screen-xs-max: 100px;
+//@screen-xs: 300px;
+//@screen-sm: 100px;
+//@screen-sm:                  500px;
+
+body { 
+    padding-top: 50px; 
+    padding-bottom: 70px; 
+}
+
+#spinner { 
+    height: 250px 
+} 
+
+#small-spinner {
+    height: 50px;
+    margin-bottom: 20px;
+}
+
+.pulldown-space {
+    height: 30px;
+}
+
+.profile-picture {
+    height:32px;
+    margin-top: 10px;
+}
+
+.contact {
+    zoom: 1; /*   was *zoom */
+    -webkit-transition: all 300ms 0ms; 
+    -webkit-transition-delay: ease-in; 
+    -moz-transition: all 300ms 0ms ease-in; 
+    -o-transition: all 300ms 0ms ease-in; 
+    transition: all 300ms 0ms ease-in; 
+    position: relative;
+    opacity: 1;
+    margin-bottom: 10px;
+}
+
+.contact:before, .contact:after {
+    content: "";
+    display: table; 
+}
+
+.contact:after { clear: both } 
+
+.contact.invisible { opacity: 0 } 
+
+.contact .contact-content { float: left } 
+
+.contact .contact-content h3 {
+    margin: 0; line-height: 1.4; font-size: 18px;
+}
+
+.contact .contact-content h3 a {
+    display: inline-block;
+    margin-right: 5px; 
+}
+
+.contact .contact-content h3 span { 
+    font-weight: normal; 
+    font-size: 14px;
+    display: inline-block; color: #aaaaaa;
+}
+
+.contact .contact-content p { margin: 0 }
+
+.contact .discuss {
+    display: block; 
+    float: right; 
+    margin-top: 7px;
+}
+
+.contact-picture {
+    height:32px;
+    vertical-align: baseline;
+    margin-right: 5px;
+}
+
+#login {
+    margin-right: 10px;
+}
+
+#login-dropdown {
+    padding-left: 10px;
+}
+
+.titlebar {
+    min-height: 25px;
+    margin-bottom: 0px;
+}
+
+.navtitle {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 0px;
+}
+
+.messages-list-box {
+    max-height: 180px;
+    overflow: auto;
+    margin-bottom: 10px;
+}
+
+.message-body {
+    xmin-width: 50px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 7px;
+    border-radius: 10px;
+}
+
+.my-message-body {
+    background-color: #7cf;
+}
+
+#new-message {
+    position: fixed;
+    bottom: 60px;
+    margin-bottom: 0;
+    width: 95%;
+    left: 2%;
+    right: 2%;
+}

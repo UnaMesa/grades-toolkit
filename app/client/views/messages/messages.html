@@ -1,0 +1,54 @@
+
+
+<template name="messages">
+
+      {{> messagesList}}
+
+    <form role="form">
+        <input type="text" class="form-control" name="message" id="new-message" placeholder="Type your Message" />
+    </form>
+</template>
+
+
+<template name="messagesList">
+    {{#unless haveMessages}}
+        {{#if messagesReady}}
+            <h4 class="alert alert-warning text-center">No messages !</h4>
+        {{/if}}
+    {{else}}
+        <div class="messages-list-box">
+            {{#unless allMessagesLoaded}}
+                {{> smallSpinner}}
+            {{/unless}}
+            {{#each currentMessages}}
+                {{> message}}
+            {{/each}}
+        </div>
+    {{/unless}}
+</template>  
+
+
+<template name="message">
+    <div class="message clearfix">
+        <div class="message-date text-center text-muted">{{submittedText}}</div>
+        {{#if myMessage}}
+            <span class="author pull-left">{{> author}}</span>
+            <span class="well well-sm pull-left text-center message-body my-message-body">{{message}}</span>
+        {{else}}
+            <span class="author pull-right">{{> author}}</span>
+            <span class="well well-sm pull-right message-body">{{message}}</span>        
+        {{/if}}
+    </div>
+</template>
+
+<template name="author">
+    {{#if authorUrl}}
+        <img class="img-circle contact-picture" src="{{authorUrl}}" />
+    {{else}}
+        <i class="fa fa-user fa-2x"></i>
+    {{/if}}
+</template>
+
+
+
+
