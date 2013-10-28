@@ -18,9 +18,18 @@
           <i class="fa fa-gear fa-lg"></i>
         </a>
         <ul class="dropdown-menu">
-          <li><a>Account Settings</a></li>
+          <li class="{{activeRouteClass 'googleDocs'}}">
+            <a href="{{pathFor 'googleDocs'}}">
+              <i class="fa fa-google-plus-square"></i> Google Docs Test
+            </a>
+          </li>
+          <li class="{{activeRouteClass 'settings'}}">
+            <a href="{{pathFor 'settings'}}">
+              <i class="fa fa-wrench"></i> Settings
+            </a>
+          </li>
           <li class="divider"></li>
-          <li><a id="logout">Logout</a></li>
+          <li><a id="logout"><i class="fa fa-sign-out"></i> Logout</a></li>
         </ul>
       </li>
      {{/unless}}

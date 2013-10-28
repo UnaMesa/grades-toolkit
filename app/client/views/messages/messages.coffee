@@ -61,6 +61,7 @@ Template.messages.events
     
 Template.messages.rendered = ->
     console.log("render template messages")
+    #_.once ->
     setMessageListHeight()
     scrollToBottom()
     hideSpinner()
@@ -71,8 +72,9 @@ Template.messagesList.created = ->
 
 Template.messagesList.rendered = ->
     console.log("render template messagesList")
-    scrollToBottom()
-    hideSpinner()
+    # Note: messages.rendered should be called after this...
+    #scrollToBottom()
+    #hideSpinner()
         
 Template.messagesList.helpers
     haveMessages: ->
@@ -111,8 +113,13 @@ Template.messagesList.events
 
 Template.message.rendered = ->
     #console.log("message rendered")
-    scrollToBottom()
-    hideSpinner()
+
+    ###
+    # Commenting out for they should get called above 
+    # when the outer template is rendered
+    ###
+    #scrollToBottom()
+    #hideSpinner()
 
 Template.message.helpers
     submittedText: ->

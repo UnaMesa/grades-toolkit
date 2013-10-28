@@ -26,7 +26,19 @@ Router.map ->
       data:
         title: 'Messages'
 
+    @route 'settings',
+      data:
+        title: 'Settings'
 
+    @route 'googleDocs',
+      path: '/googledocs'
+      data:
+        title: 'Google Docs'
+
+    @route 'newGoogleDoc',
+      path: '/googledocs/new'
+      data:
+        title: 'Create Google Doc'
 
 mustBeSignedIn = ->
   if not Meteor.user()
