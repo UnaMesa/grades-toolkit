@@ -1,3 +1,13 @@
+#
+#  Messages Page Back end  
+#
+
+###
+TODO: Clean this up.  I went a little nuts trying to get things to work reliably.
+I probably do not need all the Meteor.defer calls and the redundant calls to get
+the scrolling correct.
+
+###
 
 scrollToBottomOK = true
 
@@ -73,7 +83,12 @@ Template.messagesList.helpers
             sort:
                 timestamp: -1
             limit: MessagesHandle.limit()
-        messages = cursor.fetch().reverse()
+        #
+        # I am affraid this rerenders all the cells on one cell change
+        # BUT, cannot find a way to reverse the order on the cursor and
+        # use #each
+        #
+        messages = cursor.fetch().reverse() # TODO: Find a better way 
 
     messagesReady: ->
         MessagesHandle.ready()
@@ -93,9 +108,6 @@ Template.messagesList.events
                     scrollToBottomOK = false
                     Meteor.defer ->
                         MessagesHandle.loadNextPage()
-
-        #else
-        #    scrollToBottomOK = true
 
 Template.message.rendered = ->
     #console.log("message rendered")
