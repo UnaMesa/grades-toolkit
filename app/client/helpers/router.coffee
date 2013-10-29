@@ -52,5 +52,9 @@ mustBeSignedIn = ->
 # this hook will run on almost all routes
 Router.before mustBeSignedIn, except: ['home']
 
+# this hook will run on all routes
+Router.before ->
+  CoffeeErrors.clearSeen()
+
 Router.after  ->
     Session.set('path', location.pathname)

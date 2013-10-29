@@ -9,6 +9,10 @@ Template.newGoogleDoc.rendered = ->
 
 
 Template.newGoogleDoc.events
+    "click #cancel": (e) ->
+        e.preventDefault()
+        Router.go("googleDocs")
+
     "submit form": (e) ->
         e.preventDefault()
 
@@ -53,7 +57,6 @@ Template.newGoogleDoc.events
             if file.title is doc.title
                 CoffeeErrors.success("Created new doc")            
                 Router.go("googleDocs")
-                gDrive.dirty = true
             else
                 CoffeeErrors.throw("Error creating document")
 

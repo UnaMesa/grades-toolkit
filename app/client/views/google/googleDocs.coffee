@@ -5,9 +5,11 @@ Template.googleDocs.created = ->
       
 Template.googleDocs.rendered = ->
     console.log("googleDocs renderd")
-    if gDrive.fileList().length is 0 or gDrive.dirty
+    if gDrive.fileList().length is 0 or not gDrive.fileListLoaded
         gDrive.call(gDrive.getFileList)
     
+Template.googleDocs.destroyed = ->
+    gDrive.fileListLoaded = false
   
 Template.fileList.helpers
     haveFiles: ->

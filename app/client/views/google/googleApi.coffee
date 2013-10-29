@@ -17,7 +17,7 @@
 
     _gettingList: false
 
-    dirty: false
+    fileListLoaded: false
 
     init: ->
         console.log("gDrive.init")
@@ -45,19 +45,23 @@
             console.log("checkAuth")
             #Meteor.defer ->
             gapi.auth.authorize
-                    'client_id': "543454987250.apps.googleusercontent.com"
-                    'scope': "https://www.googleapis.com/auth/drive.file"
-                    'immediate': true
-                , (authResult) ->
-                    if authResult and not authResult.error
-                        gDrive.authorized = true
-                        console.log(authResult)
-                        if gDrive._callBack
-                            gDrive._callBack()
-                    else
-                        CoffeeError.throw("Authorization Failed")
+                'client_id': "543454987250.apps.googleusercontent.com"
+                'scope': "https://www.googleapis.com/auth/drive.file"
+                'immediate': true
+            , (authResult) ->
+                if authResult and not authResult.error
+                    gDrive.authorized = true
+                    console.log(authResult)
+                    if gDrive._callBack
+                        gDrive._callBack()
+                else
+                    CoffeeError.throw("Authorization Failed")
+        else if gDrive._callBack?
+            gDrive._callBack()
+
     
     call: (callBack) ->
+        console.log("gDrive.call")
         gDrive._callBack = callBack
         if not gapi.client?.drive?
             console.log("gapi.client.drive is not loaded", gapi.client)
@@ -110,4 +114,6 @@
                 # Done
                 console.log("List Complete", gDrive._fileList)
                 gDrive._gettingList = false
+                gDrive.fileListLoaded = true
+
                 
