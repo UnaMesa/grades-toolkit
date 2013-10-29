@@ -1,12 +1,12 @@
 
 Template.googleDocs.created = ->
     console.log("googleDocs created")
-    gDrive.init(gDrive.getFileList)
+    gDrive.init()
       
 Template.googleDocs.rendered = ->
     console.log("googleDocs renderd")
     if gDrive.fileList().length is 0 or gDrive.dirty
-        gDrive.getFileList()
+        gDrive.call(gDrive.getFileList)
     
   
 Template.fileList.helpers
@@ -19,7 +19,7 @@ Template.fileList.helpers
 
 Template.fileItem.helpers
     dateString: ->
-        new moment(@createdDate).format("llll")
+        new moment(@createdDate).format("lll")
 
 
 Template.fileItem.events
