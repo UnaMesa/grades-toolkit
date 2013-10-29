@@ -5,10 +5,11 @@ Template.home.events
         Meteor.loginWithGoogle
             requestPermissions: [
                 "https://www.googleapis.com/auth/userinfo.email",
-                "https://www.googleapis.com/auth/drive.file"
+                #"https://www.googleapis.com/auth/drive.file"   # Files created by this app ?!?!
+                "https://www.googleapis.com/auth/drive"   # All files?
             ]
             forceApprovalPrompt: false
-            requestOfflineToken: false
+            requestOfflineToken: true
         ,
             (error) ->
                 if error

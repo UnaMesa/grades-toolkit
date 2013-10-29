@@ -5,11 +5,16 @@ googleapis = require("googleapis");
 
 readline = require("readline");
 
-CLIENT_ID = "543454987250.apps.googleusercontent.com";
-
+CLIENT_ID = "543454987250@developer.gserviceaccount.com";
+//CLIENT_ID = "543454987250.apps.googleusercontent.com";
 CLIENT_SECRET = "j8wGc1nCpWMqDX211vlr3lz5";
-
 REDIRECT_URL = "http://localhost:3000/_oauth/google?close";
+
+/*
+CLIENT_ID = "695672960977.apps.googleusercontent.com";
+CLIENT_SECRET = "-FiR4Hj2eRGzCj_ObdwswG08";
+REDIRECT_URL = "http://localhost";
+*/
 
 SCOPE = "https://www.googleapis.com/auth/drive.file";
 
