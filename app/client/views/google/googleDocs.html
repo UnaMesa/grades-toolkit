@@ -44,8 +44,15 @@
         <span>{{title}}</span>
         </a>
         <span class="text-muted file-date-string"><small>{{dateString}}</small></span>
-        <a target="_blank" class="pull-right" href="{{webContactLink}}">
-            <i class="fa fa-download fa-lg pull-left"></i>
-        </a>
+        <span class="pull-right">
+            <a target="_blank" href="{{webContactLink}}">
+                <i class="fa fa-download fa-lg"></i>
+            </a>
+
+            <a class="delete-file" href="#">
+                <i class="fa fa-trash-o fa-lg"></i>
+            </a>
+        </span>
     </li>
 </template>
+

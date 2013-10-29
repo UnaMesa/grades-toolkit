@@ -30,6 +30,14 @@
         gDrive._fileList = gDrive._fileList.concat(newFiles)
         gDrive._currentLikeCountListeners.changed()
 
+    removeFileFromList: (fileId) ->
+        newList = []
+        for element in gDrive._fileList
+            if element.id isnt fileId
+                newList.push(element)
+        gDrive._fileList = newList
+        gDrive._currentLikeCountListeners.changed()
+
     afterLoad: ->
         gDrive.checkAuth()
 
