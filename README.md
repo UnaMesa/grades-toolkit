@@ -3,19 +3,22 @@ Grades Toolkit
 
 Prototype mobile web app for social workers.
 
-**Table of Contents**
+##Table of Contents
+ - [About] (#about)
+ - [History](#history)
+ - [Quick Start](#quick-start)
+ - [Installation](#installation)
+ - [License](#license)
 
-- [History](#history)
-- [Quick Start](#quick-start)
-- [Installation](#installation)
-- [License](#license)
+## About
+This is a mobile web app for helping social workers place foster children in homes.  Matching the student based on school, age, and other needs.
 
 ## History
 
 **Latest Version:** 0.1
 
-See the History.md file for changes (including breaking changes) across
-versions. (TODO)
+See the CHANGELOG.md file for changes (including breaking changes) across
+versions.
 
 ## Installation
 

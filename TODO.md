@@ -1,14 +1,15 @@
 Grades Toolkit TODO
 ===================
 
+
 - [x] Google Docs API working
 
 - [-] Create and Display Cases
-    [ ] Fill out the hooks
-    [ ] Impliment notes (comments about a given case)
-    
+ 	* Fill out the hooks
+	* Impliment notes (comments about a given case)
+
 - [ ] Encryption
-    * Symetric Key on Records
+    * Symmetric Key on Records
     * Public/Private encryption on above keys for each user
     * Some sort of Encryption on user's private key
     * Note: Unencrypted data should only be on the client, never on the server
@@ -17,5 +18,4 @@ Grades Toolkit TODO
 
 - [ ] Add testing
 
-- [ ] Fix the CSS error coming from the bootstrap-switch less  
-      (Invalid CSS property declaration at: *)  *background-color  ???
+- [ ] Fix the CSS error coming from the bootstrap-switch less  (Invalid CSS property declaration at: *)  *background-color  ???
