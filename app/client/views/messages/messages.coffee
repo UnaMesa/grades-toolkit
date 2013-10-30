@@ -68,17 +68,23 @@ Template.messages.rendered = ->
     setMessageListHeight()
     scrollToBottom()
     hideSpinner()
+
     
 Template.messagesList.created = ->
     #console.log("created template messagesList")
     scrollToBottomOK = true
 
 Template.messagesList.rendered = ->
-    #console.log("render template messagesList")
+    console.log("render template messagesList")
     # Note: messages.rendered should be called after this...
     #scrollToBottom()
     #hideSpinner()
-        
+    
+
+Template.messagesList.destroyed = ->
+    console.log("messasgeList destroyed")
+
+
 Template.messagesList.helpers
     haveMessages: ->
         Messages?.find?().count() > 0
@@ -91,7 +97,7 @@ Template.messagesList.helpers
         #
         # I am affraid this rerenders all the cells on one cell change
         # BUT, cannot find a way to reverse the order on the cursor and
-        # use #each
+        # use #each, Probably have to use the observe on the cursor
         #
         messages = cursor.fetch().reverse() # TODO: Find a better way 
 
