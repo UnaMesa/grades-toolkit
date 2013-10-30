@@ -21,7 +21,7 @@ Template.newCase.events
         console.log("new case", newCase)
 
         if not newCase.name
-            CoffeeErrors.throw("You need fill in the name")
+            CoffeeAlerts.error("You need fill in the name!")
             $("[name=name]").parent().addClass('has-error')
             window.scrollTo(0, 1)
             return
@@ -29,9 +29,9 @@ Template.newCase.events
         Meteor.call "newCase", newCase, (error, id) ->
             if error
                 # Display error to the user
-                CoffeeErrors.throw(error.reason)
+                CoffeeAlerts.error(error.reason)
             else
-                CoffeeErrors.success("Created Case")
+                CoffeeAlerts.success("Created Case")
                 # TODO: Go to the Document            
                 Router.go("cases")
                 

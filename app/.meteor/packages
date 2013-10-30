@@ -12,8 +12,8 @@ less
 moment
 bootstrap3-less
 coffeescript
-coffee-errors
 accounts-google
 font-awesome-4
 google-api
 bootstrap-switch
+coffee-alerts

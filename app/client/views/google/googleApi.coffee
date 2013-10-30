@@ -55,7 +55,7 @@
                     if gDrive._callBack
                         gDrive._callBack()
                 else
-                    CoffeeError.throw("Authorization Failed")
+                    CoffeeAlerts.error("Authorization Failed")
         else if gDrive._callBack?
             gDrive._callBack()
 

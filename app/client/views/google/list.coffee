@@ -33,7 +33,7 @@ Template.fileItem.events
                 'fileId': @id
             ).execute (response) ->
                 console.log(response, theId)
-                CoffeeErrors.info("Deleted document")
+                CoffeeAlerts.info("Deleted document")
                 gDrive.removeFileFromList(theId) 
                 Meteor.defer ->
                     gDrive.getFileList()

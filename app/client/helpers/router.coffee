@@ -98,7 +98,8 @@ Router.before mustBeSignedIn, except: ['home']
 
 # this hook will run on all routes
 Router.before ->
-  CoffeeErrors.clearSeen()
+  CoffeeAlerts.clearSeen()
+  
 
 Router.after  ->
-    Session.set('path', location.pathname)
+  Session.set('path', location.pathname)

@@ -53,7 +53,7 @@ Template.messages.events
         Meteor.call "submitMessage", message, (error, id) ->
             if error
                 # Display error to the user
-                CoffeeErrors.throw(error.reason)
+                CoffeeAlerts.error(error.reason)
             else
                 console.log("New Message Insert")
                 scrollToBottomOK = true

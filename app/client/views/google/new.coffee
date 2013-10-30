@@ -21,7 +21,7 @@ Template.newGoogleDoc.events
             body: $(e.target).find("[name=documentBody]").val()
 
         if not doc.title
-            CoffeeErrors.throw("Please fill in a document title")
+            CoffeeAlerts.error("Please fill in a document title")
             return
 
         console.log("create new doc", doc)
@@ -55,10 +55,10 @@ Template.newGoogleDoc.events
         ).execute (file) ->
             console.log("Created file", file)
             if file.title is doc.title
-                CoffeeErrors.success("Created new doc")            
+                CoffeeAlerts.success("Created new doc")            
                 Router.go("googleDocs")
             else
-                CoffeeErrors.throw("Error creating document")
+                CoffeeAlerts.error("Error creating document")
 
 
         ###
@@ -68,9 +68,9 @@ Template.newGoogleDoc.events
         Meteor.call "newGoogleDoc", doc, (error, id) ->
             if error
                 # Display error to the user
-                CoffeeErrors.throw(error.reason)
+                CoffeeAlerts.error(error.reason)
             else
-                CoffeeErrors.success("Created new doc")            
+                CoffeeAlerts.success("Created new doc")            
                 Router.go("googleDocs")
                 # Go somewhere to look at the document
         ###
