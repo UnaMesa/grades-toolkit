@@ -23,7 +23,7 @@ scrollToBottomOK = true
 @hideSpinner = ->
     Meteor.defer ->
         if MessagesHandle.ready()
-            console.log("Hide Spinner")
+            #console.log("Hide Spinner")
             $('#small-spinner').fadeTo(100, 0)
             if not scrollToBottomOK
                 Meteor.defer ->
@@ -36,7 +36,7 @@ setMessageListHeight = ->
         maxHeight -= 10
         $(".messages-list-box").css("max-height", maxHeight + "px")
         messageWidth = $(".message").width() - $(".contact-picture").width() - 30
-        console.log("messageWidth", messageWidth)
+        #console.log("messageWidth", messageWidth)
         $(".message-body").css("max-width", messageWidth + "px")
         #console.log("setMessageListHeight:" + $(".messages-list-box").css("max-height"))
 
@@ -63,18 +63,18 @@ Template.messages.events
 
     
 Template.messages.rendered = ->
-    console.log("render template messages")
+    #console.log("render template messages")
     #_.once ->
     setMessageListHeight()
     scrollToBottom()
     hideSpinner()
     
 Template.messagesList.created = ->
-    console.log("created template messagesList")
+    #console.log("created template messagesList")
     scrollToBottomOK = true
 
 Template.messagesList.rendered = ->
-    console.log("render template messagesList")
+    #console.log("render template messagesList")
     # Note: messages.rendered should be called after this...
     #scrollToBottom()
     #hideSpinner()
@@ -104,7 +104,7 @@ Template.messagesList.helpers
 Template.messagesList.events
     'scroll .messages-list-box': (e) ->
         if MessagesHandle.ready() and Messages.find().count() > MessagesHandle.loaded()
-            console.log("scroll:" + $('.messages-list-box').scrollTop())
+            #console.log("scroll:" + $('.messages-list-box').scrollTop())
             if $('.messages-list-box').scrollTop() == 0
                 $('#small-spinner').fadeTo(100, 1)
                 Meteor.defer ->
