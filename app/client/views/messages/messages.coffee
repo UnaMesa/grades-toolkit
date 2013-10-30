@@ -35,7 +35,10 @@ setMessageListHeight = ->
         maxHeight -= $(".messages-list-box").offset().top 
         maxHeight -= 10
         $(".messages-list-box").css("max-height", maxHeight + "px")
-        console.log("setMessageListHeight:" + $(".messages-list-box").css("max-height"))
+        messageWidth = $(".message").width() - $(".contact-picture").width() - 30
+        console.log("messageWidth", messageWidth)
+        $(".message-body").css("max-width", messageWidth + "px")
+        #console.log("setMessageListHeight:" + $(".messages-list-box").css("max-height"))
 
 # If on a browser handle if the user resized the browser
 $(window).resize(setMessageListHeight)
