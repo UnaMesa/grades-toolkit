@@ -6,7 +6,7 @@ Grades Toolkit TODO
 
 - [-] Create and Display Cases
  	* Fill out the hooks
-	* Impliment notes (comments about a given case)
+	* Implement notes (comments about a given case)
 
 - [ ] Encryption
     * Symmetric Key on Records
