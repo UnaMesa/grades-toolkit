@@ -20,14 +20,14 @@ Meteor.subscribe "userData"
 
 Meteor.startup ->
     console.log("Meteor Start on Client")
-
+    ###
     cursor = Messages.find()
     cursor.observe
         addedAt: (message, atIndex, before) ->
             if not before and message.userId != Meteor.userId()
                 console.log("New Message")
                 document.getElementById('newMessageSound').play()
-
+    ###
 
     
     ###

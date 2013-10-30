@@ -1,7 +1,7 @@
 
 Template.cases.rendered = ->
     console.log("Cases Rendered")
-    $("[rel='tooltip']").tooltip()
+    #$("[rel='tooltip']").tooltip()
 
 
 Template.cases.helpers

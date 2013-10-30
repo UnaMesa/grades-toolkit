@@ -25,19 +25,28 @@
 <Template name="case">
     <div class="case well well-sm">
         <div class="case-content">
-            <h3>{{name}} <span>Age: {{age}}</span></h3>
-            <p>
-                submitted by {{author}}
-                <a href="{{pathFor 'caseNotes' this}}">{{pluralize commentsCount "note"}}</a> 
-                  <a class="btn btn-link btn-xs" 
-                     href="{{pathFor 'editCase' this}}" 
-                     data-toggle="tooltip"
-                     title="Edit" 
-                     rel='tooltip'>
-                    <i class="fa fa-pencil-square-o fa-lg"></i>
-                  </a>
+            <h3 class="case-name">{{name}}</h3> 
+            <span class="case-age text-muted">Age {{age}}</span>
+
+            <p class="case-author text-muted">
+                <em>submitted by {{author}}</em>
             </p>
+        </div>
+        <div class="case-btns pull-right">
+            
+            <a class="case-edit-btn btn btn-default btn-xs" 
+                href="{{pathFor 'editCase' this}}">
+                <i class="fa fa-pencil-square-o"></i>
+            </a>
+
+            <a class="case-notes-btn btn btn-xs btn-default"
+                href="{{pathFor 'caseNotes' this}}" >
+                <i class="fa fa-file-text-o"></i> 
+                Notes
+                <span class="badge case-comments-badge">{{commentsCount}}</span>
+            </a>
+            
         </div> 
-        <a href="{{pathFor 'caseNotes' this}}" class="discuss btn btn-default"><i class="fa fa-file-text-o"></i> Notes</a>
+        
     </div>
 </Template>
