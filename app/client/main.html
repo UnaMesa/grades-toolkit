@@ -11,10 +11,10 @@
 </head>
 
 <template name="layout">
-    <div class="container">
+    <div class="main-conatiner container">
         {{> headline}}
         {{> coffeeAlerts}}
-        <div id="main" class="row-fluid">
+        <div id="main" class="main">
             {{yield}}
         </div>
         {{#if currentUser}}
