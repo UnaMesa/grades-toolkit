@@ -1,0 +1,43 @@
+
+<Template name="cases">
+    <div class="cases container">
+        {{#if haveCases}}
+            {{#each sortedCases}} 
+                {{> case}}
+            {{/each}}
+
+            {{#if casesReady}}
+                {{#unless allCasesLoaded}}
+                    <a class="load-more" href="#">Load more</a>
+                {{/unless}}
+            {{else}}
+                <div>{{> spinner}}</div>
+            {{/if}}
+        {{else}}
+            <div class="well">
+                <div class="text-center"><strong>No Cases ... </strong> <i class="fa fa-frown-o fa-lg"></i></div>
+            </div>
+        {{/if}}
+    </div> 
+</Template>
+
+
+<Template name="case">
+    <div class="case well well-sm">
+        <div class="case-content">
+            <h3>{{name}} <span>Age: {{age}}</span></h3>
+            <p>
+                submitted by {{author}}
+                <a href="{{pathFor 'caseNotes' this}}">{{pluralize commentsCount "note"}}</a> 
+                  <a class="btn btn-link btn-xs" 
+                     href="{{pathFor 'editCase' this}}" 
+                     data-toggle="tooltip"
+                     title="Edit" 
+                     rel='tooltip'>
+                    <i class="fa fa-pencil-square-o fa-lg"></i>
+                  </a>
+            </p>
+        </div> 
+        <a href="{{pathFor 'caseNotes' this}}" class="discuss btn btn-default"><i class="fa fa-file-text-o"></i> Notes</a>
+    </div>
+</Template>

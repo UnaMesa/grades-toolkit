@@ -1,0 +1,61 @@
+<template name="newCase">
+    <div class="well well-sm">
+     <div class="media">
+      <span class="pull-left">
+        <i class="media-object fa fa-user fa-3x"></i>
+      </span>
+      <div class="media-body">
+        <h4 class="media-heading">New Case</h4>
+        Open a placement case for a child
+      </div>
+     </div>
+    </div>
+    <div class="container">
+    <form role="form">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" name="name" placeholder="firstname optional:middlename lastname" required />
+            <span class="help-block">A unique name for the child.  Include middle name or initial if needed,</span>
+        </div>
+
+            <div class="form-group">
+              <label for="urgent">Urgent</label>
+              <div>
+                <span class="make-switch" data-on-label="Yes" data-off-label="No">
+                  <input name="urgent" type="radio">
+                </span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="isMale">Sex</label>
+              <div>
+                <span class="make-switch" data-on-label="Male" data-off-label="Female">
+                  <input name="isMale" type="radio" checked>
+                </span>
+              </div>
+            </div>
+          
+            <div class="form-group">
+              <label for="age">Age</label>
+              <input type="number" name="age" class="age-control form-control" value="10" name="age">
+            </div>
+
+        <div class="form-group">
+            <label for="contactName">Contact</label>
+            <input type="text" class="form-control" name="contactName" placeholder="Primary Contact's name for this child" />
+        </div>
+        <div class="form-group">
+            <label for="contactNumber">Contact Number</label>
+            <input type="tel" class="form-control" name="contactNumber" placeholder="(555) 555-5555" />
+        </div>
+        <div class="form-group">
+            <label for="location">Location</label>
+            <textarea class="form-control" rows="3" name="location" placeholder="Enter current address of Child"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Open</button>
+        <button id="cancel" class="btn btn-default">Cancel</button>
+    </form>
+</div>
+
+</template>

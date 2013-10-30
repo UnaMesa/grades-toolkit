@@ -18,6 +18,6 @@ Template.contacts.helpers
 
 Template.contacts.events
     'click .load-more': (e) ->
-        e.preventDefault();
+        e.preventDefault()
         ContactsHandle.loadNextPage()
 

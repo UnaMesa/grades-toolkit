@@ -1,6 +1,6 @@
 
 # Make sure collection is global with '@'
-@Messages = new Meteor.Collection('messages');
+@Messages = new Meteor.Collection('messages')
 
 
 Meteor.methods 

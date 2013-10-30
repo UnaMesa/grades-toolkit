@@ -27,3 +27,14 @@ Meteor.publish "messages", (limit) ->
         sort: 
             timestamp: -1
         limit: limit
+
+# TODO: Limit this to the ones a user can see 
+Meteor.publish "cases", (limit) ->
+    Cases.find {},
+        sort:
+            modified: -1
+        limit: limit
+
+Meteor.publish "singleCase", (id) ->
+    if id
+        Cases.find(id)

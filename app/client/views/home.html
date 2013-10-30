@@ -3,10 +3,10 @@
     <div class="container">
       <div class="jumbotron">
         <h3 class="text-muted">Grades</h3>
-        <p><small>An application for social workers to keep track of their foster children cases 
+        <p>An application<small> for social workers to keep track of their foster children cases 
           and share information about the case with fellow workers.</small></p>
         {{#if currentUser}}
-          <p>Hi {{currentUser.services.google.given_name}}</p>
+          <p><small><strong><a href="mailto:gregwolff@unamesa.org">Send Feedback</a></strong></small></p>
         {{else}}
           {{#if loggingIn}}
             <p>{{> spinner}}</p>

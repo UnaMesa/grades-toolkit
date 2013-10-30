@@ -13,6 +13,50 @@ Router.map ->
     @route 'cases',
       data:
         title: 'Cases'
+        doNewRecord: true
+        recordName: 'Case'
+        newRecordPath: 'newCase'
+
+    @route 'newCase',
+      path: 'cases/new'
+      data:
+        title: 'New Case'
+
+    @route 'viewCase',
+      path: 'cases/:_id'
+      before: ->
+        Session.set('currentCaseId', @params._id)
+      waitOn: ->
+        Meteor.subscribe('singleCase', @params._id)
+      data: ->
+        data = Posts.findOne(@params._id)
+        data.title = "#{data.name}"
+        data.goBackPath = "cases"
+        data
+
+    @route 'editCase',
+      path: 'cases/edit/:_id'
+      before: ->
+        Session.set('currentCaseId', @params._id)
+      waitOn: ->
+        Meteor.subscribe('singleCase', @params._id)
+      data: ->
+        data = Cases.findOne(@params._id)
+        data.title = "Edit Case #{data.name}"
+        data.goBackPath = "cases"
+        data
+
+    @route 'caseNotes',
+      path: 'cases/notes/:_id'
+      before: ->
+        Session.set('currentCaseId', @params._id)
+      waitOn: ->
+        Meteor.subscribe('singleCase', @params._id)
+      data: ->
+        data = Cases.findOne(@params._id)
+        data.title = "#{data.name} Case Notes"
+        data.goBackPath = "cases"
+        data
 
     @route 'info',
       data:

@@ -2,7 +2,14 @@
 //  Using Less to do Bootstrap 3
 //
 
+
 @import "/packages/bootstrap3-less/bootstrap.lessimport";
+
+// Adding in support for bootstrap-switch
+@import "/packages/bootstrap-switch/lib/less/bootstrap-switch.lessimport";
+//@import "/packages/bootstrap-switch/lib/css/flat-ui-fonts.css";
+//@import "/packages/bootstrap-switch/lib/css/bootstrap-switch.css";
+
 
 // Do not let navbars collapse
 @grid-float-breakpoint: 100px;
@@ -11,6 +18,10 @@
 //@screen-xs: 300px;
 //@screen-sm: 100px;
 //@screen-sm:                  500px;
+
+//.close {
+//    opacity: 0.2;
+//}
 
 body { 
     padding-top: 50px; 
@@ -104,8 +115,21 @@ body {
     margin-top: 5px;
     margin-bottom: 5px;
     padding: 0px;
+    xdisplay: inline-block;
 }
 
+.new-record {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+}
+
+.back-button {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    display: inline-block;
+}
 .messages-list-box {
     max-height: 180px;
     overflow: auto;
@@ -151,6 +175,62 @@ body {
     margin-left: 5px;
 }
 
+.age-control {
+    width: 60px;
+}
+
+
+.case {
+    zoom: 1; /*   was *zoom */
+    -webkit-transition: all 300ms 0ms; 
+    -webkit-transition-delay: ease-in; 
+    -moz-transition: all 300ms 0ms ease-in; 
+    -o-transition: all 300ms 0ms ease-in; 
+    transition: all 300ms 0ms ease-in; 
+    position: relative;
+    opacity: 1;
+}
+
+.case:before, .case:after {
+    content: "";
+    display: table; 
+}
+
+.case:after { clear: both } 
+
+.case.invisible { opacity: 0 } 
+
+.case .upvote {
+    display: block; 
+    margin: 7px 12px 0 0; 
+    float: left;
+}
+
+.case .case-content { float: left } 
+
+.case .case-content h3 {
+    margin: 0; line-height: 1.4; font-size: 18px;
+}
+
+.case .case-content h3 a {
+    display: inline-block;
+    margin-right: 5px; 
+}
+
+.case .case-content h3 span { 
+    font-weight: normal; 
+    font-size: 14px;
+    display: inline-block; 
+    color: #aaaaaa;
+}
+
+.case .case-content p { margin: 0 }
+
+.case .discuss {
+    display: block; 
+    float: right; 
+    margin-top: 7px;
+}
 
 
 
