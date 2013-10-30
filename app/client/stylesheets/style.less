@@ -130,25 +130,84 @@ body {
     left: 5px;
     display: inline-block;
 }
+
+
 .messages-list-box {
     max-height: 180px;
     overflow: auto;
     margin-bottom: 10px;
 }
 
+.message {
+
+}
+
+.message-sub {
+}
+
+.message-author {
+ 
+}
+
+.message-author-picture {
+    width:32px;
+    margin: 0px;
+}
+
+.message-author-name {
+    font-size: 8px;
+    margin:0;
+    margin-top: 0px;
+    padding: 0;
+    position: relative;
+    left: 46px;
+}
+
+.message-date {
+    font-size: 10px;
+}
+
 .message-body {
-    padding-left: 7px;
-    padding-right: 7px;
+    padding-left: 5px;
+    padding-right: 5px;
     padding-top: 3px;
     padding-bottom: 3px;
-    margin-right: 10px;
-    margin-left: 10px;
-    margin-bottom: 7px;
+    margin-right: 6px;
+    margin-left: 6px;
+    margin-bottom: 6px;
     border-radius: 10px;
+    position: relative;
+    border-style: none;
+    z-index: 1;
+    background-color: #eee;
+}
+
+.message-bubble-arrow {
+  border-color: transparent #eee transparent transparent;
+  border-style: solid;
+  border-width: 10px;
+  height:0;
+  width:0;
+  position:absolute;
+  top: 2px;
+  left: -14px;
+  z-index: 10;
 }
 
 .my-message-body {
     background-color: #7cf;
+}
+
+.my-message-bubble-arrow {
+  border-color: transparent transparent transparent #7cf;
+  border-style: solid;
+  border-width: 10px;
+  height:0;
+  width:0;
+  position:absolute;
+  top: 2px;
+  right: -16px;
+  z-index: 10;
 }
 
 #new-message {
@@ -258,6 +317,4 @@ body {
     float: right; 
     margin-top: 7px;
 }
-
-
 

@@ -35,8 +35,8 @@ setMessageListHeight = ->
         maxHeight -= $(".messages-list-box").offset().top 
         maxHeight -= 10
         $(".messages-list-box").css("max-height", maxHeight + "px")
-        messageWidth = $(".message").width() - $(".contact-picture").width() - 30
-        #console.log("messageWidth", messageWidth)
+        messageWidth = $(".message").width() - $(".message-author-picture").width() - 20
+        console.log("messageWidth", $(".message").width(), $(".message-author-picture").width(), messageWidth)
         $(".message-body").css("max-width", messageWidth + "px")
         #console.log("setMessageListHeight:" + $(".messages-list-box").css("max-height"))
 
@@ -65,9 +65,10 @@ Template.messages.events
 Template.messages.rendered = ->
     #console.log("render template messages")
     #_.once ->
-    setMessageListHeight()
-    scrollToBottom()
-    hideSpinner()
+    #Meteor.defer ->
+        setMessageListHeight()
+        scrollToBottom()
+        hideSpinner()
 
     
 Template.messagesList.created = ->

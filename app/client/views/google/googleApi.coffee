@@ -55,6 +55,10 @@
                     if gDrive._callBack
                         gDrive._callBack()
                 else
+                    if authResult?.error?
+                        console.log("Google Auth Error", authResult.error)
+                    else
+                        console.log("Google Bad Auth Return", authResult)
                     CoffeeAlerts.error("Authorization Failed")
         else if gDrive._callBack?
             gDrive._callBack()
