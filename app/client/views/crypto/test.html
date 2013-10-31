@@ -1,0 +1,88 @@
+
+<template name="cryptoTest">
+  <div class="container ">
+  <div class="center-template">
+
+    <div class="btn-group generate-keys-controls">
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-value="{{keySize}}" data-toggle="dropdown" href='#'>
+          {{keySize}} bit 
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="change-key-size" data-value="512"  href="#">512 bit</a></li>
+          <li><a class="change-key-size" data-value="1024" href="#">1024 bit</a></li>
+          <li><a class="change-key-size" data-value="2048" href="#">2048 bit</a></li>
+        </ul>
+      </div>
+
+      <button id="generate-key" class="btn btn-primary " type="button">
+        <i class="fa fa-cogs"></i> Generate
+      </button>
+
+    </div>
+
+ 
+
+{{#if generatingKeys}}
+        {{> spinner}}
+{{else}}
+
+{{#if haveKeys}}
+
+  <div class="well well-sm">
+      {{#if generationTime}}
+        <strong>Keys took {{generationTime}} seconds to generate</strong>
+      {{/if}}
+  </div>
+
+<div class="clearfix">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Public Key</h3>
+  </div>
+  <div class="panel-body">
+    <pre class="text-left pre-scrollable">{{publicKey}}</pre>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Private Key</h3>
+  </div>
+  <div class="panel-body">
+    <pre class="text-left pre-scrollable">{{privateKey}}</pre>
+  </div>
+</div>
+</div>
+
+<div class="row"><br /></div>
+<div class="row">
+  <div class="col-lg-4">
+    <label for="input">Unencrypted Text:</label><br/>
+    <textarea id="input" name="input" style="width: 100%" rows="4">This is a test!</textarea>
+  </div>
+  
+  <div class="col-lg-4">
+    <button id="execute" class="btn btn-primary">
+      {{#if encrypted}}
+        Decrypt  <i class="fa fa-undo"></i>
+      {{else}}
+        Encrypt <i class="fa fa-key"></i>
+      {{/if}}
+    </button>
+  </div>
+  
+  <div class="col-lg-4">
+    <label for="crypted">Encrypted:</label><br/>
+    <textarea id="crypted" name="crypted" style="width: 100%" rows="4"></textarea>
+  </div>
+</div>
+
+{{/if}}
+{{/if}}
+</div>
+</div>
+
+</template>

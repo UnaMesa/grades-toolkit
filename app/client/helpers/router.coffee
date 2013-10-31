@@ -84,6 +84,12 @@ Router.map ->
       data:
         title: 'Create Google Doc'
 
+    @route 'cryptoTest',
+      path: '/crypto/test'
+      data:
+          title: "Key Generation Test"
+
+
 mustBeSignedIn = ->
   if not Meteor.user()
     if Meteor.loggingIn()

@@ -18,6 +18,11 @@
           <i class="fa fa-gear fa-lg"></i>
         </a>
         <ul class="dropdown-menu">
+          <li class="{{activeRouteClass 'cryptoTest'}}">
+            <a href="{{pathFor 'cryptoTest'}}">
+              <i class="fa fa-key"></i> Encryption Tests
+            </a>
+          </li>
           <li class="{{activeRouteClass 'googleDocs'}}">
             <a href="{{pathFor 'googleDocs'}}">
               <i class="fa fa-google-plus-square"></i> Google Docs Test
