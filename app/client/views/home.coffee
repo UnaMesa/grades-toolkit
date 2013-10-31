@@ -8,7 +8,7 @@ Template.home.events
                 #"https://www.googleapis.com/auth/drive.file"   # Files created by this app ?!?!
                 "https://www.googleapis.com/auth/drive"   # All files?
             ]
-            forceApprovalPrompt: false
+            forceApprovalPrompt: true
             requestOfflineToken: true
         ,
             (error) ->

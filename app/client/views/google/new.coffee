@@ -54,7 +54,9 @@ Template.newGoogleDoc.events
             body: multipartRequestBody
         ).execute (file) ->
             console.log("Created file", file)
-            if file.title is doc.title
+            if file?.error?
+                CoffeeAlerts.success("Error creating document #{file?.error?.message} #{file?.error?.code}")
+            else if file.title is doc.title
                 CoffeeAlerts.success("Created new doc")            
                 Router.go("googleDocs")
             else

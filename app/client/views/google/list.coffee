@@ -11,6 +11,15 @@ Template.googleDocs.rendered = ->
 Template.googleDocs.destroyed = ->
     gDrive.fileListLoaded = false
   
+Template.googleDocs.helpers
+    authorized: ->
+        gDrive.authorized()
+
+Template.googleDocs.events
+    "click #authorize": (e) ->
+        gDrive.call(gDrive.getFileList)
+
+
 Template.fileList.helpers
     haveFiles: ->
         gDrive.fileList().length > 0
@@ -37,3 +46,4 @@ Template.fileItem.events
                 gDrive.removeFileFromList(theId) 
                 Meteor.defer ->
                     gDrive.getFileList()
+

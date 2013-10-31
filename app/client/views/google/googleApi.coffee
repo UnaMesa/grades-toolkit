@@ -21,6 +21,8 @@
 
     init: ->
         console.log("gDrive.init")
+        if not gDrive._currentFileListListeners?
+            gDrive._currentFileListListeners = new Deps.Dependency()
         gDrive.load()
 
     load: ->
@@ -40,26 +42,30 @@
         if Meteor.user()
             gDrive.checkAuth()
 
+    authorized: ->
+        gDrive._currentFileListListeners.depend()
+        gDrive._authorized;
+
     checkAuth: ->
-        if not gDrive.authorized
+        if not gDrive._authorized
             console.log("checkAuth")
-            #Meteor.defer ->
             gapi.auth.authorize
                 'client_id': "543454987250.apps.googleusercontent.com"
-                'scope': "https://www.googleapis.com/auth/drive.file"
-                'immediate': true
+                'scope': "https://www.googleapis.com/auth/drive"
+                'immediate': false
             , (authResult) ->
                 if authResult and not authResult.error
-                    gDrive.authorized = true
-                    console.log(authResult)
+                    gDrive._authorized = true
+                    gDrive._currentFileListListeners.changed()
+                    console.log("Google Auth", authResult)
                     if gDrive._callBack
                         gDrive._callBack()
                 else
                     if authResult?.error?
                         console.log("Google Auth Error", authResult.error)
                     else
-                        console.log("Google Bad Auth Return", authResult)
-                    CoffeeAlerts.error("Authorization Failed")
+                        console.log("Google No Auth Return", authResult)
+                    CoffeeAlerts.error("Google Authorization Failed  #{authResult?.error?.message}")
         else if gDrive._callBack?
             gDrive._callBack()
 
@@ -75,8 +81,6 @@
     
     fileList: ->
         console.log("fileList")
-        if not gDrive._currentFileListListeners?
-            gDrive._currentFileListListeners = new Deps.Dependency()
         gDrive._currentFileListListeners.depend()
         gDrive._fileList
 
@@ -94,7 +98,7 @@
         gDrive._currentFileListListeners.changed()
     
     getFileList: ->
-        if gDrive.authorized and not gDrive._gettingList
+        if gDrive._authorized and not gDrive._gettingList
             gDrive._gettingList = true
             console.log("getFileList")
             gDrive._callBack = null
