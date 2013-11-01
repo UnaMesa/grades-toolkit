@@ -11,7 +11,16 @@
     </div>
     <div class="panel panel-default filelist">
         <div class="panel-heading">
-            <h3 class="panel-title">Current Application Files</h3>
+            <h3 class="panel-title">
+            {{#if directory}}
+                <a id="parent-dir" class="btn btn-link" href="#"><i class="fa fa-mail-reply"></i></a> 
+            {{/if}}
+            
+                Application Files 
+                {{#if directory}}
+                    in {{directory}}
+                {{/if}}
+            </h3>
         </div>
         <div class="panel-body">
             {{> fileList}}
@@ -45,7 +54,11 @@
 
 <template name="fileItem">
     <li class="list-group-item">
-        <a target="_blank" href="{{alternateLink}}">
+        {{#if isaFolder}}
+            <a class="folder" href="#">
+        {{else}}
+            <a target="_blank" href="{{alternateLink}}">
+        {{/if}}
         <img src="{{iconLink}}"/>
         <span>{{title}}</span>
         </a>
