@@ -1,0 +1,21 @@
+
+<template name="loginTemplate">
+    {{yield}}
+</template>
+
+<template name="login">   
+  <div class="login-container container">
+    {{#if loggingIn}}
+            <h1>Grades</h1>
+            <p>{{> spinner}}</p>
+    {{else}}
+    <h1>Grades</h1>
+    <p class="text-center">
+        <button type="button" class="btn btn-success navbar-btn btn-lg" id="login">
+            <i class="fa fa-google-plus fa-2x"></i> Login with Google
+        </button>
+    </p>
+    <p><small><a href="mailto:gregwolff@unamesa.org">help?</a><small></p>
+    {{/if}}
+  </div>
+</template>
