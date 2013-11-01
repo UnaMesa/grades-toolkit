@@ -4,27 +4,27 @@
     <ul class="nav navbar-nav">
       <li class="{{activeRouteClass 'home'}}">
         <a href="{{pathFor 'home'}}">
-          <i class="fa fa-home fa-lg"></i><div class="nav-button-text">Home</div>
+          <i class="fa fa-home fa-2x fa-fw"></i><div class="nav-button-text">Home</div>
         </a>
       </li>
       <li class="{{activeRouteClass 'messages'}}">
         <a href="{{pathFor 'messages'}}">
-          <i class="fa fa-comments fa-lg"></i><div class="nav-button-text">Messages</div>
+          <i class="fa fa-comments fa-2x fa-fw"></i><div class="nav-button-text">Messages</div>
         </a>
       </li>
       <li class="{{activeRouteClass 'cases'}}">
         <a href="{{pathFor 'cases'}}">
-          <i class="fa fa-folder-open fa-lg"></i><div class="nav-button-text">Cases</div>
+          <i class="fa fa-folder-open fa-2x fa-fw"></i><div class="nav-button-text">Cases</div>
         </a>
       </li>
       <li class="{{activeRouteClass 'docs'}}">
         <a href="{{pathFor 'docs'}}">
-          <i class="fa fa-file-text fa-lg"></i><div class="nav-button-text">Documents</div>
+          <i class="fa fa-file-text fa-2x fa-fw"></i><div class="nav-button-text">Docs</div>
         </a>
       </li>
       <li class="{{activeRouteClass 'contacts'}}">
         <a href="{{pathFor 'contacts'}}">
-          <i class="fa fa-group fa-lg"></i></i><div class="nav-button-text">Contacts</div>
+          <i class="fa fa-group fa-2x fa-fw"></i></i><div class="nav-button-text">Contacts</div>
         </a>
       </li>
     </ul>
@@ -32,26 +32,26 @@
      {{#unless loggingIn}}
       <li class="dropdown">
         <a id="login-dropdown" href="#" class="dropdown-toggle" data-toggle="dropdown">
-          <i class="fa fa-gear fa-lg"></i><div class="nav-button-text">Settings</div>
+          <i class="fa fa-gear fa-2x fa-fw"></i><div class="nav-button-text">Settings</div>
         </a>
         <ul class="dropdown-menu">
           <li class="{{activeRouteClass 'cryptoTest'}}">
             <a href="{{pathFor 'cryptoTest'}}">
-              <i class="fa fa-key"></i> Encryption Tests
+              <i class="fa fa-key fa-2x fa-fw"></i> Encryption Tests
             </a>
           </li>
           <li class="{{activeRouteClass 'googleDocs'}}">
             <a href="{{pathFor 'googleDocs'}}">
-              <i class="fa fa-google-plus-square"></i> Google Docs Test
+              <i class="fa fa-google-plus-square fa-2x fa-fw"></i> Google Tests
             </a>
           </li>
           <li class="{{activeRouteClass 'settings'}}">
             <a href="{{pathFor 'settings'}}">
-              <i class="fa fa-wrench"></i> Settings
+              <i class="fa fa-wrench fa-2x fa-fw"></i> Settings
             </a>
           </li>
           <li class="divider"></li>
-          <li><a id="logout"><i class="fa fa-sign-out"></i> Logout</a></li>
+          <li><a id="logout"><i class="fa fa-sign-out fa-2x fa-fw"></i> Logout</a></li>
         </ul>
       </li>
      {{/unless}}

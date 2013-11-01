@@ -12,8 +12,8 @@
     {{#if authorized}}
     <div class="panel panel-default filelist">
         <div class="panel-heading">
-            <h3 class="panel-title">
-                <ol class="breadcrumb">
+            <div class="panel-title">
+                <ol class="google-path breadcrumb">
                     {{#each path}}
                         {{#if last}}
                             <li class="active">{{title}}</li>
@@ -22,7 +22,7 @@
                         {{/if}}
                     {{/each}}
                 </ol>
-            </h3>
+            </div>
         </div>
         <div class="panel-body">
             {{> fileList}}
