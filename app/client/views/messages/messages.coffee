@@ -33,7 +33,7 @@ setMessageListHeight = ->
     if $(".messages-list-box")?.offset?() and $("#new-message")?.offset?()
         maxHeight = $("#new-message").offset().top 
         maxHeight -= $(".messages-list-box").offset().top 
-        maxHeight -= 10
+        maxHeight -= 5
         $(".messages-list-box").css("max-height", maxHeight + "px")
         messageWidth = $(".message").width() - $(".message-author-picture").width() - 20
         console.log("messageWidth", $(".message").width(), $(".message-author-picture").width(), messageWidth)

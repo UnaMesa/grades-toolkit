@@ -23,8 +23,10 @@
 
 
 <Template name="case">
+    <a href="{{pathFor 'viewCase' this}}">
     <div class="case well well-sm">
         <div class="case-content">
+
             <h3 class="case-name">{{name}}</h3> 
             <span class="case-age text-muted">Age {{age}}</span>
 
@@ -45,8 +47,7 @@
                 Notes
                 <span class="badge case-comments-badge">{{commentsCount}}</span>
             </a>
-            
         </div> 
-        
     </div>
+    </a>
 </Template>

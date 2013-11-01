@@ -23,7 +23,6 @@ Router.map ->
     @route 'cases',
       data:
         title: 'Cases'
-        doNewRecord: true
         recordName: 'Case'
         newRecordPath: 'newCase'
 
@@ -31,6 +30,7 @@ Router.map ->
       path: 'cases/new'
       data:
         title: 'New Case'
+        goBackPath: "cases"
 
     @route 'viewCase',
       path: 'cases/:_id'
@@ -39,8 +39,8 @@ Router.map ->
       waitOn: ->
         Meteor.subscribe('singleCase', @params._id)
       data: ->
-        data = Posts.findOne(@params._id)
-        data.title = "#{data.name}"
+        data = Cases.findOne(@params._id)
+        data.title = "Case"
         data.goBackPath = "cases"
         data
 

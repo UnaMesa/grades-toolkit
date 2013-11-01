@@ -1,13 +1,11 @@
 
 
+
+
 Template.login.events
     "click #login": (e, tmpl) ->
         Meteor.loginWithGoogle
-            requestPermissions: [
-                "https://www.googleapis.com/auth/userinfo.email",
-                #"https://www.googleapis.com/auth/drive.file"   # Files created by this app ?!?!
-                "https://www.googleapis.com/auth/drive"   # All files?
-            ]
+            requestPermissions: googleScopes
             forceApprovalPrompt: true
             requestOfflineToken: true
         ,

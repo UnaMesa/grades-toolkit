@@ -20,3 +20,10 @@ Template.cases.helpers
     
     allCasesLoaded: ->
         CasesHandle.ready() and Cases.find().count() < CasesHandle.loaded()
+
+
+Template.case.events
+    "click .case": ->
+        console.log("case click", @_id)
+        Router.go 'viewCase',
+            _id: @_id 

@@ -39,10 +39,25 @@
                 Grades
             {{/if}}
         </h5>
-        {{#if doNewRecord}}
+        {{#if newRecordPath}}
             <span class="new-record">
                 <a class="btn btn-link btn-xs" href={{pathFor newRecordPath}}><i class="fa fa-plus-circle fa-lg"></i></a>
             </span>
         {{/if}}
     </nav>
 </template>
+
+
+<template name="userImage">
+     {{#if currentUser}}
+        <span>
+            {{#if currentUser.services.google.picture}}
+                <img class="img-rounded profile-picture navbar-btn" src="{{currentUser.services.google.picture}}" /> 
+            {{else}}
+                <i class="fa fa-user fa-2x"></i>
+            {{/if}}
+        </span>
+    {{/if}}
+</template>
+
+

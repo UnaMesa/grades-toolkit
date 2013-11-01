@@ -24,7 +24,7 @@
 //}
 
 body { 
-    padding-top: 30px; 
+    padding-top: 34px; 
     padding-bottom: 50px;
     background-color: #ddd; 
 }
@@ -69,6 +69,8 @@ body {
 .profile-picture {
     height:32px;
     margin-top: 10px;
+    display: inline-block;
+
 }
 
 .contact {
@@ -132,21 +134,46 @@ body {
 }
 
 .titlebar {
-    min-height: 25px;
+    min-height: 30px;
     margin-bottom: 0px;
-    background-color: #eee;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    background-color: @brand-primary;
     border-style: none;
-    border-radius: 5px;
-    margin-left: 3px;
-    margin-right: 3px;
-    margin-top: 1px;
+    xborder-radius: 5px;
+    color: white;
+    border-bottom: 1px solid #e3e3e3;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
 .navtitle {
     margin-top: 5px;
     margin-bottom: 5px;
     padding: 0px;
-    xdisplay: inline-block;
+}
+
+.bottom-navbar {
+    min-height: 30px;
+}
+
+.bottom-navbar li {
+    text-align: center;
+}
+.bottom-navbar li a {
+    padding-top: 7px;
+    padding-bottom: 5px;
+    padding-right: 7px;
+    padding-left: 7px;
+
+}
+
+.nav-button-text {
+    font-size: 8px;
+    color: white;
+    text-align: center;
+    line-height: 9px;
+    padding-right: 0px;
 }
 
 .new-record {
@@ -155,21 +182,30 @@ body {
     right: 5px;
 }
 
-.back-button {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    display: inline-block;
+.new-record a {
+    color: white; // @brand-success;
 }
 
+
+.back-button {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    display: inline-block;
+    color: white;
+}
+
+.back-button a {
+    color: white;
+}
 
 .messages-list-box {
     padding-left: 2px;
     padding-right: 2px;
+    margin-bottom: 0px;
     max-height: 180px;
     overflow-x: hidden;
     overflow-y: auto;
-    margin-bottom: 10px;
     border-radius: 10px;
     border-style: solid;
     border-width: 1px;
@@ -251,11 +287,11 @@ body {
 
 #new-message {
     position: fixed;
-    bottom: 60px;
+    bottom: 45px;
     margin-bottom: 0;
-    width: 95%;
-    left: 2%;
-    right: 2%;
+    width: 98%;
+    left: 1%;
+    right: 1%;
 }
 
 .filelist {
@@ -293,6 +329,8 @@ body {
     margin: 0;
     margin-top: 10px;
     margin-bottom: 10px;
+    background-color: #f9f9f9;
+    cursor: pointer;
 }
 
 .case:before, .case:after {
@@ -377,5 +415,21 @@ body {
     margin-top: 20px;
     margin-bottom:  20px;
 }
+
+.record-view {
+    margin-top: 40px;
+    background-color: white;
+    text-align: center;
+}
+
+.td-key {
+    text-align: right;
+    text-transform: capitalize;
+}
+.td-val {
+    text-align: left;
+}
+
+
 
 

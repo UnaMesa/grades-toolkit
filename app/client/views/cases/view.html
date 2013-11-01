@@ -1,8 +1,19 @@
-
-<Template name="viewCase">
-    <div class="jumbotron">
-      <div class="container">
-        <h1>TODO!</h1>
-      </div>
-  </div>
-</Template>
+<template name="viewCase">
+    <div class="container">
+    <div class="well record-view">
+        <h3>{{name}}</h3>
+    <table class="table table-striped table-condensed">
+        <tbody>
+    {{#each case}}  
+        <tr class="">
+            <td class="td-key"><strong>{{key}} :</strong></td>
+            <td class="td-val">
+                <strong>{{value}}</strong>
+            </td>
+        </tr>
+    {{/each}}
+</tbody>
+    </table>
+</div>
+</div>
+</template>

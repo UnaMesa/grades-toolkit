@@ -15,34 +15,40 @@ Template.googleDocs.helpers
     authorized: ->
         gDrive.authorized()
 
+    authorizing: ->
+        gDrive.authorizing()
+
     directory: ->
         if gDrive.currentDirectory().id isnt 'root'
             gDrive.currentDirectory().title
 
+    path: ->
+        gDrive.path()
+
 Template.googleDocs.events
     "click #authorize": (e) ->
+        console.log("authorized clicked")
+        gDrive.userInitiatedAuth()
         gDrive.call(gDrive.getFileList)
 
     "click #parent-dir": (e) ->
         gDrive.uptoDirectory()
 
+    "click .path-link": (e) ->
+        console.log($(e.target).attr('id'))
+        gDrive.uptoDirectory($(e.target).attr('id'))
+
 
 Template.fileList.helpers
+    loading: ->
+        console.log("loading called", gDrive.gettingFileList())
+        gDrive.gettingFileList()
+
     haveFiles: ->
         gDrive.fileList().length > 0
 
     files: ->
-        theFiles = []
-        console.log("Get files in ", gDrive.currentDirectory().title)
-        for file in gDrive.fileList()
-            if gDrive.currentDirectory().id is 'root'
-                if file.parents?[0]?.isRoot
-                    theFiles.push file
-                    console.log("root file/dir", file)
-            else if file.parents?[0]?.id is gDrive.currentDirectory().id
-                theFiles.push file
-                console.log("file/dir in", file.title, gDrive.currentDirectory().id, file.parents)
-        theFiles
+        gDrive.getFilesInCurrentFolder()
 
 
 Template.fileItem.helpers
