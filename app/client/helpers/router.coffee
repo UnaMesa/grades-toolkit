@@ -7,8 +7,18 @@ Router.configure
 Router.map ->
     @route 'home',
       path: '/'
+
+      before: ->
+        if not Meteor.user()
+          @render("login")
+          @stop();
+
       data:
-        title: 'Home'
+        title: 'Grades'
+
+    @route 'login',
+      path: '/login',
+      layoutTemplate: 'loginLayout',
 
     @route 'cases',
       data:
@@ -58,9 +68,9 @@ Router.map ->
         data.goBackPath = "cases"
         data
 
-    @route 'info',
+    @route 'docs',
       data:
-        title: 'Information'
+        title: 'Documents'
 
     @route 'contacts',
       data:

@@ -11,8 +11,10 @@
 </head>
 
 <template name="layout">
-    <div class="main-conatiner container">
-        {{> headline}}
+    <div class="main-container">
+        {{#if currentUser}}
+            {{> headline}}
+        {{/if}}
         {{> coffeeAlerts}}
         <div id="main" class="main">
             {{yield}}
@@ -30,13 +32,13 @@
                 <a class="btn btn-link btn-xs" href={{pathFor goBackPath}}><i class="fa fa-reply fa-2x"></i></a>
             </span>
         {{/if}}
-        <h3 class="text-center navtitle">
+        <h5 class="text-center navtitle">
             {{#if currentUser}}
                 {{title}}
             {{else}}
-                Login
+                Grades
             {{/if}}
-        </h3>
+        </h5>
         {{#if doNewRecord}}
             <span class="new-record">
                 <a class="btn btn-success btn-xs" href={{pathFor newRecordPath}}><i class="fa fa-plus-circle"></i> New</a>
