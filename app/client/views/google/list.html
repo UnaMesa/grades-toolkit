@@ -9,6 +9,7 @@
             Page for getting the google drive docs working with the site.
         </div>
     </div>
+    {{#if authorized}}
     <div class="panel panel-default filelist">
         <div class="panel-heading">
             <h3 class="panel-title">
@@ -26,7 +27,6 @@
             {{> fileList}}
         </div>
     </div>
-    {{#if authorized}}
       <p>
         <a class="btn btn-success" href="{{pathFor 'newGoogleDoc'}}">
             <i class="fa fa-pencil-square-o"></i> New Document
