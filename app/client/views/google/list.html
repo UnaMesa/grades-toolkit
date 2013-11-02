@@ -57,13 +57,17 @@
         {{> spinner}}
   {{else}}
     {{#if haveFiles}}
-    <ul class="list-group">
-        {{#each files}}
-            {{> gDriveItem}}
-        {{/each}}
-    </ul>
+        {{#if haveFilesInCurrentDirectory}}
+            <ul class="list-group">
+            {{#each files}}
+                {{> gDriveItem}}
+            {{/each}}
+            </ul>
+        {{else}}
+            <div class="text-muted">No files in this directory</div>
+        {{/if}}
     {{else}}
-        <div>No application files.  <small>You may need to authorize.</small></div>
+        <div>No files.  <small>You may need to authorize.</small></div>
     {{/if}}
   {{/if}}
 </template>

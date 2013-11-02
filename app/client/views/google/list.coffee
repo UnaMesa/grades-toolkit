@@ -41,6 +41,9 @@ Template.gDriveFileList.helpers
     files: ->
         gDrive.getFilesInCurrentFolder()
 
+    haveFilesInCurrentDirectory: ->
+        gDrive.getFilesInCurrentFolder().length > 0
+
 Template.gDrive.events
     "click .path-link": (e) ->
         gDrive.uptoDirectory($(e.target).attr('id'))

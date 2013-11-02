@@ -196,7 +196,7 @@
     setTopDirectory: ->
         gDrive._path = [
             id:    null
-            title: "No Matching Directory"
+            title: "#{gDrive.topDirectory} Directory Not Found"
             last:  true
         ]
         for file in gDrive._fileList
