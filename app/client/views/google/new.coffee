@@ -34,6 +34,10 @@ Template.newGoogleDoc.events
             title: doc.title
             mimeType: contentType
 
+        # Insert into current directory
+        if gDrive.currentParent()?
+            metadata.parents = [gDrive.currentParent()]
+
         base64Data = btoa(doc.body)
 
         multipartRequestBody = delimiter + 

@@ -28,6 +28,7 @@
         last: true
     ]
 
+
     init: ->
         console.log("gDrive.init")
         if not gDrive._currentFileListListeners?
@@ -184,7 +185,7 @@
             else
                 # Done
                 console.log("List Complete", gDrive._fileList.length)
-                #console.log("List Complete", gDrive._fileList)
+                console.log("List Complete", gDrive._fileList)
                 
                 gDrive._gettingFileList = false
                 gDrive.fileListLoaded = true
@@ -235,6 +236,14 @@
             else if file.parents?[0]?.id is gDrive.currentDirectory().id
                 theFiles.push file
         theFiles
+
+    currentParent: ->
+        if gDrive.currentDirectory().id isnt 'root'
+            parent =
+                id: gDrive.currentDirectory().id
+                isRoot: false
+                kind: "drive#parentReference"
+
 
     #pathToFolder: (folderName) ->
 
