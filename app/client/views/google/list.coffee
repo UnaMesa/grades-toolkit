@@ -6,6 +6,8 @@ Template.googleDocs.created = ->
 Template.googleDocs.rendered = ->
     console.log("googleDocs renderd")
     if gDrive.fileList().length is 0 or not gDrive.fileListLoaded
+        gDrive.topDirectory = null
+        gDrive.deleteOk = true;
         gDrive.call(gDrive.getFileList)
     
 Template.googleDocs.destroyed = ->
@@ -18,47 +20,43 @@ Template.googleDocs.helpers
     authorizing: ->
         gDrive.authorizing()
 
-    directory: ->
-        if gDrive.currentDirectory().id isnt 'root'
-            gDrive.currentDirectory().title
-
-    path: ->
-        gDrive.path()
 
 Template.googleDocs.events
     "click #authorize": (e) ->
-        console.log("authorized clicked")
         gDrive.userInitiatedAuth()
         gDrive.call(gDrive.getFileList)
 
-    "click #parent-dir": (e) ->
-        gDrive.uptoDirectory()
 
-    "click .path-link": (e) ->
-        console.log($(e.target).attr('id'))
-        gDrive.uptoDirectory($(e.target).attr('id'))
+Template.gDrive.helpers
+    path: ->
+        gDrive.path()
 
-
-Template.fileList.helpers
+Template.gDriveFileList.helpers
     loading: ->
-        console.log("loading called", gDrive.gettingFileList())
         gDrive.gettingFileList()
 
     haveFiles: ->
-        gDrive.fileList().length > 0
+        gDrive.fileList?().length > 0
 
     files: ->
         gDrive.getFilesInCurrentFolder()
 
+Template.gDrive.events
+    "click .path-link": (e) ->
+        gDrive.uptoDirectory($(e.target).attr('id'))
 
-Template.fileItem.helpers
+
+Template.gDriveItem.helpers
     dateString: ->
         new moment(@createdDate).format("lll")
 
     isaFolder: ->
         @mimeType is 'application/vnd.google-apps.folder'
 
-Template.fileItem.events
+    deleteOk: ->
+        gDrive.deleteOk
+
+Template.gDriveItem.events
     "click .delete-file": (e) ->
         if confirm("Are you sure you want to delete '#{@title}'")
             console.log("Deleting", @title)

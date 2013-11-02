@@ -1,8 +1,19 @@
 
 <template name="docs">
-    <h4>Put google docs stuff here</h4>
-    <ul>
-    <li>Some info</li>
-    <li>Some more info</li>
-    </ul>
+    {{#if authorized}}
+      {{> gDrive}}
+    {{else}}
+      <div class="containter text-center">
+        {{#if authorizing}}
+            <button class="btn btn-warning" id="authorize">
+                <i class="fa fa-google-plus-square"></i> Restart Authorization
+            </button>
+            {{> spinner}}
+        {{else}}
+            <button class="btn btn-success" id="authorize">
+                <i class="fa fa-google-plus-square"></i> Authorize
+            </button>
+        {{/if}}
+      </div>
+    {{/if}}
 </template>

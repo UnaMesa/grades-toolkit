@@ -10,24 +10,7 @@
         </div>
     </div>
     {{#if authorized}}
-    <div class="panel panel-default filelist">
-        <div class="panel-heading">
-            <div class="panel-title">
-                <ol class="google-path breadcrumb">
-                    {{#each path}}
-                        {{#if last}}
-                            <li class="active">{{title}}</li>
-                        {{else}}
-                            <li><a id="{{id}}" class="path-link {{class}}" href="#">{{title}}</a></li>
-                        {{/if}}
-                    {{/each}}
-                </ol>
-            </div>
-        </div>
-        <div class="panel-body">
-            {{> fileList}}
-        </div>
-    </div>
+      {{> gDrive}}
       <p>
         <a class="btn btn-success" href="{{pathFor 'newGoogleDoc'}}">
             <i class="fa fa-pencil-square-o"></i> New Document
@@ -43,20 +26,40 @@
             <button class="btn btn-success" id="authorize">
                 <i class="fa fa-google-plus-square"></i> Authorize
             </button>
-        {{/if}}
-            
+        {{/if}}  
     {{/if}}
     </div>
 </template>
 
-<template name="fileList">
+<template name="gDrive">
+    <div class="panel panel-default filelist">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <ol class="google-path breadcrumb">
+                    {{#each path}}
+                        {{#if last}}
+                            <li class="active">{{title}}</li>
+                        {{else}}
+                            <li><a id="{{id}}" class="path-link {{class}}" href="#">{{title}}</a></li>
+                        {{/if}}
+                    {{/each}}
+                </ol>
+            </div>
+        </div>
+        <div class="panel-body">
+            {{> gDriveFileList}}
+        </div>
+    </div>
+</template>
+
+<template name="gDriveFileList">
   {{#if loading}}
         {{> spinner}}
   {{else}}
     {{#if haveFiles}}
     <ul class="list-group">
         {{#each files}}
-            {{> fileItem}}
+            {{> gDriveItem}}
         {{/each}}
     </ul>
     {{else}}
@@ -65,7 +68,7 @@
   {{/if}}
 </template>
 
-<template name="fileItem">
+<template name="gDriveItem">
     <li class="list-group-item">
         {{#if isaFolder}}
             <a class="folder" href="#">
@@ -79,10 +82,11 @@
             <a target="_blank" href="{{webContactLink}}">
                 <i class="fa fa-download fa-lg"></i>
             </a>
-
+            {{#if deleteOk}}
             <a class="delete-file" href="#">
                 <i class="fa fa-trash-o fa-lg"></i>
             </a>
+            {{/if}}
         </span>
         <div class="text-muted file-date-string"><small>{{dateString}}</small></div>
     </li>

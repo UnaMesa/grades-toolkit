@@ -23,11 +23,13 @@
     fileListLoaded: false
 
     _path: [
-        id:"root"
-        title:"My Drive"
-        last: true
+        id:    "root"
+        title: "My Drive"
+        last:  true
     ]
 
+    topDirectory: null
+    deleteOk: false
 
     init: ->
         console.log("gDrive.init")
@@ -109,7 +111,6 @@
 
     
     call: (callBack) ->
-        console.log("gDrive.call")
         gDrive._callBack = callBack
         if not gapi.client?.drive?
             console.log("gapi.client.drive is not loaded", gapi.client)
@@ -140,7 +141,6 @@
         gDrive._path[gDrive._path.length-1]
 
     fileList: ->
-        console.log("fileList")
         gDrive._currentFileListListeners.depend()
         gDrive._fileList
 
@@ -169,13 +169,11 @@
             console.log("getFileList")
             gDrive._callBack = null
             initialRequest = gapi.client.drive.files.list()
-            console.log("Initial request")
             gDrive._fileList = []
             gDrive._retrievePageOfFiles(initialRequest)
 
 
     _retrievePageOfFiles: (request) ->
-        console.log("_retrievePageOfFiles")
         request.execute (resp) ->
             gDrive._appendToFileList(resp.items)
             nextPageToken = resp.nextPageToken
@@ -185,11 +183,30 @@
             else
                 # Done
                 console.log("List Complete", gDrive._fileList.length)
-                console.log("List Complete", gDrive._fileList)
+                #console.log("List Complete", gDrive._fileList)
                 
+                if gDrive.topDirectory?
+                    gDrive.setTopDirectory()
+
                 gDrive._gettingFileList = false
                 gDrive.fileListLoaded = true
                 gDrive._currentStateListeners.changed()
+
+
+    setTopDirectory: ->
+        gDrive._path = [
+            id:    null
+            title: "No Matching Directory"
+            last:  true
+        ]
+        for file in gDrive._fileList
+            if file.mimeType is 'application/vnd.google-apps.folder'
+                if file.title is gDrive.topDirectory
+                    gDrive._path = [
+                        id:    file.id
+                        title: gDrive.topDirectory
+                        last:  true
+                    ]
 
     getFileListInRootFolder: ->
         gDrive.getFilesInFolder('root')
@@ -202,7 +219,6 @@
             gDrive._callBack = null
             initialRequest = gapi.client.drive.children.list
                 'folderId': folderId
-            console.log("Initial request")
             gDrive._fileList = []
             gDrive._retrievePageOfFilesInFolder(folderId, initialRequest)
 
@@ -245,10 +261,6 @@
                 kind: "drive#parentReference"
 
 
-    #pathToFolder: (folderName) ->
-
-
-    #getFilesInFolder: (folderName) ->
     
         
 
