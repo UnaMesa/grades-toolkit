@@ -6,8 +6,9 @@ Prototype mobile web app for social workers.
 ##Table of Contents
  - [About] (#about)
  - [History](#history)
- - [Quick Start](#quick-start)
  - [Installation](#installation)
+ - [Quick Start](#quick-start)
+ - [Message Streams] (#streams)
  - [License](#license)
 
 ## About
@@ -40,6 +41,13 @@ $ mrt
 ```
 
 You may have to enter credentials for google authorization.
+
+## Message Streams
+
+The message streams will interpret a few "hash tag" like symbols.
+* '#xxx' - A code for a case worker, family, or a case.  Examples: #tp, #ds1, #rjk
+* '@' - A link to a document or a url.
+
 
 
 ## License

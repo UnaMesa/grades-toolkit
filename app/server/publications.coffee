@@ -5,22 +5,28 @@ Meteor.publish "userData", ->
         _id: @userId
     ,
         fields:
+            'tag': 1
             'services.google.picture': 1
             'services.google.given_name': 1
 
 
 Meteor.publish "contacts", (limit) ->
-    Meteor.users.find {},
+    cursors = []
+    cursors.push Meteor.users.find {},
         sort:
             'services.google.family_name': 1
             'services.google.given_name': 1
         fields:
+            'tag': 1
             'profile.name': 1
             'services.google.picture': 1
             'services.google.given_name': 1
             'services.google.family_name': 1
         limit: limit
 
+    # Add more ?
+
+    cursors
 
 Meteor.publish "messages", (limit) ->
     Messages.find {},

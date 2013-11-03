@@ -69,7 +69,7 @@ Template.newGoogleDoc.events
 
         ###
         #
-        #  Not working ?!??!
+        #  Server Based: Not working ?!??!
         #
         Meteor.call "newGoogleDoc", doc, (error, id) ->
             if error

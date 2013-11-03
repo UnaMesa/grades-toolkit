@@ -1,14 +1,17 @@
 
 
 <template name="messages">
-
+    <div class="clearfix">
       {{> messagesList}}
+      {{> newMessageBox}}
+    </div>
+</template>
 
+<template name="newMessageBox">
     <form role="form">
         <input type="text" class="form-control" name="message" id="new-message" placeholder="Type your Message" />
     </form>
 </template>
-
 
 <template name="messagesList">
     {{#unless haveMessages}}

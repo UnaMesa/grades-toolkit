@@ -5,6 +5,31 @@
 #
 
 Meteor.methods
+
+    createTag: (tagFromString) ->
+        createTag(tagFromString)
+
+    addUserTag: ->
+        user = Meteor.user()
+        # ensure the user is logged in
+        throw new Meteor.Error(401, "Error on Login")  unless user
+  
+        name = user.profile.name
+        tag = createTag(name)
+        console.log("Add tag to user record", user.profile.name, tag, user)
+        Meteor.users.update 
+            _id: user._id
+        ,
+            $set:
+                tag: tag
+
+    validTag: (tag) ->
+        Meteor.users.findOne(tag: tag) of Cases.findOne(tag: tag) or Families.findOne(tag: tag)
+
+    #
+    #  Server based New doc create
+    #    Not working!!!  Using the client side instead (sync issues?)
+    #
     newGoogleDoc: (doc, callback) ->
         user = Meteor.user()
         console.log("Create a new google doc", doc, user)

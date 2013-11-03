@@ -36,41 +36,85 @@ setMessageListHeight = ->
         maxHeight -= 5
         $(".messages-list-box").css("max-height", maxHeight + "px")
         messageWidth = $(".message").width() - $(".message-author-picture").width() - 20
-        console.log("messageWidth", $(".message").width(), $(".message-author-picture").width(), messageWidth)
+        #console.log("messageWidth", $(".message").width(), $(".message-author-picture").width(), messageWidth)
         $(".message-body").css("max-width", messageWidth + "px")
         #console.log("setMessageListHeight:" + $(".messages-list-box").css("max-height"))
 
 # If on a browser handle if the user resized the browser
 $(window).resize(setMessageListHeight)
 
-Template.messages.events
-    "submit form": (e) ->
-        e.preventDefault()
-        
-        message =
-            message: $(e.target).find("[name=message]").val()
+@newTag = ""
 
-        Meteor.call "submitMessage", message, (error, id) ->
-            if error
-                # Display error to the user
-                CoffeeAlerts.error(error.reason)
-            else
-                console.log("New Message Insert")
-                scrollToBottomOK = true
-                scrollToBottom()
-                $(e.target).find("[name=message]").val("")
+
+Template.messages.rendered = ->
+    setMessageListHeight()
+    scrollToBottom()
+    hideSpinner()
+
+Template.newMessageBox.rendered = ->
+    newTag = ""
+
+Template.newMessageBox.destroyed = ->
+    newTag = ""
+
+Template.newMessageBox.events
+    "submit form": (e) =>
+        e.preventDefault()
+        console.log("Submit", @newTag, @newTag?)
+        if @newTag?.length > 0 and not Meteor.call("tagIsValid", @newTag[1..])
+            alert("Tag #{@newTag} is not valid")
+            message = $("[name=message]").val()
+            $("[name=message]").val(message[0..message.length-@newTag.length+1])
+            @newTag = "#"
+        else 
+            @newTag = null
+            message =
+                message: $(e.target).find("[name=message]").val()
+
+            Meteor.call "submitMessage", message, (error, id) ->
+                if error
+                    # Display error to the user
+                    CoffeeAlerts.error(error.reason)
+                else
+                    console.log("New Message Insert")
+                    scrollToBottomOK = true
+                    scrollToBottom()
+                    $(e.target).find("[name=message]").val("")
                 
 
-    
-Template.messages.rendered = ->
-    #console.log("render template messages")
-    #_.once ->
-    #Meteor.defer ->
-        setMessageListHeight()
-        scrollToBottom()
-        hideSpinner()
+    "keydown": (e) =>
+        console.log("keydown", e.keyCode)
+        if e.keyCode is 8 # backspace
+            if @newTag is '#'
+                @newTag = ""
+            else
+                @newTag = @newTag[0..@newTag.length-2]
+            console.log(@newTag)
 
-    
+    "keypress #new-message": (e) =>
+        console.log("keypress", e.keyCode)
+        if @newTag?.length > 0
+            if e.keyCode is 32 # Got a space after a #string
+                # check the tag
+                console.log("Tag Done, do check", @newTag)
+                if not Meteor.call("tagIsValid", @newTag[1..])
+                    e.preventDefault()
+                    alert("Tag #{@newTag} is not valid")
+                    message = $("[name=message]").val()
+                    fixedString = message[0..message.length-@newTag.length]
+                    Meteor.defer ->
+                        console.log("'#{fixedString}'")
+                        $("[name=message]").val(fixedString)
+                    @newTag = "#"
+                else
+                    @newTag = null
+            else
+                @newTag += String.fromCharCode(e.keyCode)
+                console.log("tagging", @newTag)
+        else if e.keyCode is 35  # We got a #
+            @newTag = "#"
+            console.log("starting tag", @newTag)
+  
 Template.messagesList.created = ->
     #console.log("created template messagesList")
     scrollToBottomOK = true
