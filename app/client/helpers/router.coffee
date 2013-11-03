@@ -68,6 +68,31 @@ Router.map ->
         data.goBackPath = "cases"
         data
 
+    @route 'bid',
+      path: "cases/bid/:_id"
+      before: ->
+        Session.set('currentCaseId', @params._id)
+      waitOn: ->
+        Meteor.subscribe('singleCase', @params._id)
+      data: ->
+        data = Cases.findOne(@params._id)
+        data.title = "Create BID"
+        data.goBackPath = "viewCase"
+        console.log("data", data)
+        data
+
+    @route 'mou',
+      path: "cases/mou/:_id"
+      before: ->
+        Session.set('currentCaseId', @params._id)
+      waitOn: ->
+        Meteor.subscribe('singleCase', @params._id)
+      data: ->
+        data = Cases.findOne(@params._id)
+        data.title = "Create MOU"
+        data.goBackPath = "viewCase"
+        data
+
     @route 'docs',
       data:
         title: 'Documents'
@@ -116,6 +141,20 @@ Router.before mustBeSignedIn, except: ['home']
 Router.before ->
   CoffeeAlerts.clearSeen()
   
+Router.after ->
+  console.log("URL:",document.URL)
+  if /mobile/i.test(navigator.userAgent)
+    #
+    # Trying to hide browers bar on iOS.  TODO: Get this to work
+    #
+    Meteor.setTimeout ->
+      # Does not pull this off....
+      window.scrollTo(0, 1)
+      console.log("Scroll to top?", window)
+    , 500
 
 Router.after  ->
   Session.set('path', location.pathname)
+
+
+

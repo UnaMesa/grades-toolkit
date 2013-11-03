@@ -14,3 +14,6 @@ Template.viewCase.helpers
                     value: value
         console.log(caseAsArray)
         caseAsArray
+
+    caseId: ->
+        Session.get('currentCaseId')

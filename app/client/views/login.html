@@ -9,18 +9,24 @@
             <h1>Grades</h1>
             <p>{{> spinner}}</p>
     {{else}}
-    <h1>Grades</h1>
-    <p class="text-center">
-        <button type="button" class="btn btn-success navbar-btn btn-lg" id="login">
-            <i class="fa fa-google-plus fa-2x"></i> Login with Google
-        </button>
-    </p>
-    <p><small><a href="mailto:gregwolff@unamesa.org">help?</a><small></p>
+        <h1>Grades</h1>
+        <p class="text-center">
+            {{#if doDemoLaunch}}
+                <button type="button" class="btn btn-danger navbar-btn" id="demo">
+                    <i class="fa fa-rocket fa-lg"></i> Launch Mobile Demo
+                </button>
+            {{else}}
+                <button type="button" class="btn btn-success navbar-btn" id="login">
+                    <i class="fa fa-google-plus fa-lg"></i> Login with Google
+                </button>
+            {{/if}}
+        </p>
+        <p><small><a href="mailto:gregwolff@unamesa.org">help?</a></small></p>
     {{/if}}
-    <p><small><a onclick="document.location='/';return false;">
-        <i class="fa fa-refresh"></i>
-        Reload
-    </a><small></p>   
-</a>
+    <p><small>
+        <a onclick="document.location='/';return false;">
+            <i class="fa fa-refresh"></i> Reload
+        </a>
+    </small></p>   
   </div>
 </template>

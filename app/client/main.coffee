@@ -18,17 +18,12 @@ Meteor.subscribe "userData"
         10
 
 
+
 Meteor.startup ->
     console.log("Meteor Start on Client")
-    
-#
-# Trying to hide browers bar on iOS.  TODO: Get this to work
-#
-window.addEventListener "load", ->
-    # Set a timeout...
-    setTimeout ->
-        # Hide the address bar!
-        window.scrollTo(0, 1)
-    , 0
-
-       
+    #console.log("URL:",document.URL)
+    if /mobile/i.test(navigator.userAgent)
+        console.log('Mobile Device')
+    else
+        console.log("Not a mobile device", window)
+        #window.open(Meteor.absoluteUrl(), 'Grades Demo', "height=600,width=400")
