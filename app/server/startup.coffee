@@ -2,6 +2,11 @@
 Meteor.startup ->
     console.log("Server Startup")
 
+    console.log("tp", tagToTagObject("tp"))
+    console.log("tp1", tagToTagObject("tp1"))
+    console.log("nn1", tagToTagObject("nn1"))
+
+
     #
     #  Redefine the callback
     #

@@ -28,5 +28,9 @@ Meteor.methods
                 number: caseAttributes.contactNumber
         )
 
+        # Only available on the server
+        if not @isSimulation
+            theCase.tag = createTag(caseAttributes.name)
+
         Cases.insert(theCase)
         

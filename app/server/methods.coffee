@@ -24,7 +24,8 @@ Meteor.methods
                 tag: tag
 
     tagIsValid: (tag) ->
-        Meteor.users.findOne(tag: tag) of Cases.findOne(tag: tag) or Families.findOne(tag: tag)
+        console.log("tagIsValid", tag, Meteor.users.findOne(tag: tag))
+        Meteor.users.findOne(tag: tag) or Cases.findOne(tag: tag) or Families.findOne(tag: tag)
 
     #
     #  Server based New doc create
