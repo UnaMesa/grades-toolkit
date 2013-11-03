@@ -6,8 +6,10 @@ Meteor.publish "userData", ->
     ,
         fields:
             'tag': 1
+            'commentsCount': 1
             'services.google.picture': 1
             'services.google.given_name': 1
+            'services.google.family_name': 1
 
 
 Meteor.publish "contacts", (limit) ->
@@ -18,6 +20,7 @@ Meteor.publish "contacts", (limit) ->
             'services.google.given_name': 1
         fields:
             'tag': 1
+            'commentsCount': 1
             'profile.name': 1
             'services.google.picture': 1
             'services.google.given_name': 1

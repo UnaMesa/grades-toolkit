@@ -49,5 +49,19 @@
             tag: tag
             name: tagObject.name
 
+@updateCommentsCount = (tag) ->
+    console.log("update comments count", tag)
+    if tag.type is 'user'
+        collectionToUpdate = Meteor.users
+    else if tag.type is 'case'
+        collectionToUpdate = Cases
+    else if tag.type is 'family'
+        collectionToUpdate = Families
+
+    collectionToUpdate.update
+        _id: tag._id
+    ,
+        $inc:
+            commentsCount: 1
 
 

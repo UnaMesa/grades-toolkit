@@ -78,7 +78,7 @@ Template.newMessageBox.events
             message = $("[name=message]").val()
             if tag = message.match(/\#[^ ]+$/)
                 console.log("Tag", tag)
-                Meteor.call "tagIsValid", tag, (error, result) ->
+                Meteor.call "tagIsValid", tag[0], (error, result) ->
                     if error or not result
                         alert("Tag #{tag[0]} is not valid")
                         revertString = message[0..message.length - tag[0].length]

@@ -29,6 +29,7 @@ Meteor.methods
                 message.tags = []
                 for tagString in tagStrings
                     if tagObj = tagToTagObject(tagString)
+                        updateCommentsCount(tagObj)
                         message.tags.push(tagObj)
                     else
                         throw new Meteor.Error(422, "Invalid tag #{tagString} in message")
