@@ -26,3 +26,10 @@ Grades Toolkit TODO
 11/2/2013
 	
 	Links to MOU and BID forms.
+
+11/2/2013
+	
+	 Unique Tag creation for users
+	 Bad tag detection on message stream
+
+
