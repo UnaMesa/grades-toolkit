@@ -23,7 +23,7 @@ Meteor.methods
             $set:
                 tag: tag
 
-    validTag: (tag) ->
+    tagIsValid: (tag) ->
         Meteor.users.findOne(tag: tag) of Cases.findOne(tag: tag) or Families.findOne(tag: tag)
 
     #
