@@ -1,4 +1,30 @@
 
+messagesIn = ""
+detailsIn = "in"
+
+Template.viewCase.created = ->
+    messagesIn = ""
+    detailsIn = "in"
+
+Template.viewCase.rendered = ->
+    $("#collapseMessages").on "hidden.bs.collapse", ->
+        messagesIn = ""
+    $("#collapseDetails").on "shown.bs.collapse", ->
+        detailsIn = "in"
+    $("#collapseMessages").on "shown.bs.collapse", ->
+        messagesIn = "in"
+        Meteor.defer ->
+            console.log("shown.bs.collapse")
+            height =  setMessageListHeight()
+            $("#collapseMessages").css("height", height + "px")
+            scrollToBottom()
+    $("#collapseDetails").on "hidden.bs.collapse", ->
+        detailsIn = ""
+        Meteor.defer ->
+            console.log("shown.bs.collapse")
+            height = setMessageListHeight()
+            $("#collapseMessages").css("height", height + "px")
+
 Template.viewCase.helpers
     case: ->
         theCase = Cases.findOne(Session.get('currentRecordId'))
@@ -18,5 +44,16 @@ Template.viewCase.helpers
         Session.get('currentRecordId')
 
     isUrgent: ->
-        console.log(@)
         @urgent is 'on'
+
+    messagesIn: ->
+        messagesIn
+
+    detailsIn: ->
+        detailsIn
+
+Template.viewCase.events
+    "shown.bs.collapse #collapseMessages": (e)  ->
+        console.log("shown.bs.collapse")
+        setMessageListHeight()
+        scrollToBottom()

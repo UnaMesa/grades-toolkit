@@ -1,24 +1,50 @@
 <template name="viewCase">
     <div class="container">
-    <div class="well record-view">
-         {{#if isUrgent}}<a href="#"><span class="urgent badge">URGENT</span></a>{{/if}}
-         {{#if tag}}<a href="#"><span class="tag tag-case badge">{{tag}}</span></a>{{/if}}
-        <h3>{{name}}</h3>
-        <a class="btn btn-primary btn-sm pull-right" href={{pathFor 'mou'}}>MOU</a>
-        <a class="btn btn-primary btn-sm pull-right" href={{pathFor 'bid'}}>BID</a>
-    <table class="table table-striped table-condensed">
-        <tbody>
-    {{#each case}}  
-        <tr class="">
-            <td class="td-key"><strong>{{key}} :</strong></td>
-            <td class="td-val">
-                <strong>{{value}}</strong>
-            </td>
-        </tr>
-    {{/each}}
-</tbody>
-    </table>
-</div>
-{{> messages}}
-</div>
+        <div class="well record-view">
+            {{#if isUrgent}}<a href="#"><span class="urgent badge">URGENT</span></a>{{/if}}
+            {{#if tag}}<a href="#"><span class="tag tag-case badge">{{tag}}</span></a>{{/if}}
+            <h3>{{name}}</h3>
+            <a class="btn btn-primary btn-sm pull-right" href={{pathFor 'mou'}}>MOU</a>
+            <a class="btn btn-primary btn-sm pull-right" href={{pathFor 'bid'}}>BID</a>
+        </div>
+        <div class="well record-details">
+            <div class="">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseDetails">
+                    Details
+                </button>
+            </div>
+            
+
+            <div id="collapseDetails" class="panel-collapse collapse {{detailsIn}}">
+                <table class="table table-striped table-condensed">
+                    <tbody>
+                    {{#each case}}  
+                    <tr class="">
+                        <td class="td-key"><strong>{{key}} :</strong></td>
+                        <td class="td-val">
+                            <strong>{{value}}</strong>
+                        </td>
+                    </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        
+        <div class="well record-comments">
+            <div class="">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseMessages">
+                    Messages 
+                </button>
+                <div class="badge">{{commentsCount}}</div>
+            </div>
+            
+            <div id="collapseMessages" class="panel-collapse collapse {{messagesIn}}">
+                {{> messages}}
+            </div>
+        </div>
+
+    </div>
+
 </template>

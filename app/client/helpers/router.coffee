@@ -147,7 +147,6 @@ Router.before ->
   Session.set('currentRecordId', null)
   
 Router.after ->
-  console.log("URL:",document.URL)
   if /mobile/i.test(navigator.userAgent)
     #
     # Trying to hide browers bar on iOS.  TODO: Get this to work

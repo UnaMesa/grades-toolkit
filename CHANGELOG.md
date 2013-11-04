@@ -33,5 +33,6 @@ Grades Toolkit TODO
 	 Bad tag detection on message stream
 	 Messages can now be filtered by type and a record _id
 	 Filtered message boxes on other pages
+	 Message box sizing on case page
 
 

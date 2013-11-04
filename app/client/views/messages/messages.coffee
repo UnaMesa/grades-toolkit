@@ -31,7 +31,7 @@ messageFilter = {}
                 Meteor.defer ->
                     $('.messages-list-box').scrollTop($('#small-spinner').height() + 10)
       
-setMessageListHeight = ->
+@setMessageListHeight = ->
     if $(".messages-list-box")?.offset?() and $("#new-message")?.offset?()
         maxHeight = $("#new-message").offset().top 
         maxHeight -= $(".messages-list-box").offset().top 
@@ -41,6 +41,7 @@ setMessageListHeight = ->
         #console.log("messageWidth", $(".message").width(), $(".message-author-picture").width(), messageWidth)
         $(".message-body").css("max-width", messageWidth + "px")
         #console.log("setMessageListHeight:" + $(".messages-list-box").css("max-height"))
+        maxHeight
 
 # If on a browser handle if the user resized the browser
 $(window).resize(setMessageListHeight)
