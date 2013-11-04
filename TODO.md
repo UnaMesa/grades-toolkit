@@ -6,9 +6,9 @@ Grades Toolkit TODO
 
 - [-] Create and Display Cases
  	* Fill out the hooks
-	* Implement notes (comments about a given case)
+ 	* Case editing
 
-- [ ] Message streams for Cases
+- [x] Message streams for Cases
 
 - [ ] BID and MOU Forms
 	* Fill out
@@ -23,5 +23,6 @@ Grades Toolkit TODO
 
 - [ ] Add testing
 
-- [ ] Fix the CSS error coming from the bootstrap-switch less  (Invalid CSS property declaration at: *)  *background-color  ???
+- [ ] Fix the CSS error coming from the bootstrap-switch less  
+      (Invalid CSS property declaration at: *)  *background-color  ???
 

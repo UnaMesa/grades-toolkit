@@ -22,3 +22,6 @@ Template.contacts.events
 Template.contact.helpers
     me: ->
         Meteor.userId() is @_id
+
+    type: ->
+        'user'

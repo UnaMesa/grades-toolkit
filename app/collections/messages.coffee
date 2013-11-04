@@ -4,7 +4,7 @@
 
 
 Meteor.methods 
-    submitMessage: (messageAttributes) ->
+    submitMessage: (messageAttributes, tag) ->
         user = Meteor.user()
         
         # ensure the user is logged in
@@ -23,10 +23,14 @@ Meteor.methods
 
         # Only available on the server
         if not @isSimulation
+            message.tags = []
+            if tag?
+                tagObj = fillOutTagFromId(tag)
+                updateCommentsCount(tagObj)
+                message.tags.push(tagObj)
             # Pull out tags and tag this message
             tagStrings = message.message.match(/\#[^ ]+/g)
             if tagStrings?
-                message.tags = []
                 for tagString in tagStrings
                     if tagObj = tagToTagObject(tagString)
                         updateCommentsCount(tagObj)

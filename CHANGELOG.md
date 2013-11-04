@@ -31,5 +31,7 @@ Grades Toolkit TODO
 	
 	 Unique Tag creation for users
 	 Bad tag detection on message stream
+	 Messages can now be filtered by type and a record _id
+	 Filtered message boxes on other pages
 
 

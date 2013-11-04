@@ -35,10 +35,12 @@ Router.map ->
     @route 'viewCase',
       path: 'cases/:_id'
       before: ->
-        Session.set('currentCaseId', @params._id)
+        Session.set('currentRecordId', @params._id)
+        Session.set('messageTagFilter', 'case')
       waitOn: ->
         Meteor.subscribe('singleCase', @params._id)
       data: ->
+        console.log(Cases.findOne(@params._id))
         data = Cases.findOne(@params._id)
         data.title = "Case"
         data.goBackPath = "cases"
@@ -47,7 +49,7 @@ Router.map ->
     @route 'editCase',
       path: 'cases/edit/:_id'
       before: ->
-        Session.set('currentCaseId', @params._id)
+        Session.set('currentRecordId', @params._id)
       waitOn: ->
         Meteor.subscribe('singleCase', @params._id)
       data: ->
@@ -59,7 +61,8 @@ Router.map ->
     @route 'caseNotes',
       path: 'cases/notes/:_id'
       before: ->
-        Session.set('currentCaseId', @params._id)
+        Session.set('currentRecordId', @params._id)
+        Session.set('messageTagFilter', 'case')
       waitOn: ->
         Meteor.subscribe('singleCase', @params._id)
       data: ->
@@ -71,7 +74,7 @@ Router.map ->
     @route 'bid',
       path: "cases/bid/:_id"
       before: ->
-        Session.set('currentCaseId', @params._id)
+        Session.set('currentRecordId', @params._id)
       waitOn: ->
         Meteor.subscribe('singleCase', @params._id)
       data: ->
@@ -84,7 +87,7 @@ Router.map ->
     @route 'mou',
       path: "cases/mou/:_id"
       before: ->
-        Session.set('currentCaseId', @params._id)
+        Session.set('currentRecordId', @params._id)
       waitOn: ->
         Meteor.subscribe('singleCase', @params._id)
       data: ->
@@ -140,6 +143,8 @@ Router.before mustBeSignedIn, except: ['home']
 # this hook will run on all routes
 Router.before ->
   CoffeeAlerts.clearSeen()
+  Session.set('messageTagFilter', null)
+  Session.set('currentRecordId', null)
   
 Router.after ->
   console.log("URL:",document.URL)

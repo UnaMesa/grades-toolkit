@@ -10,6 +10,13 @@
 //@import "/packages/bootstrap-switch/lib/css/flat-ui-fonts.css";
 //@import "/packages/bootstrap-switch/lib/css/bootstrap-switch.css";
 
+@message-color: #ccc;
+@my-message-color: @brand-primary;
+@my-message-text-color: #fff;
+
+@user-color: #44d;
+@case-color: #4b1;
+@family-color: #f73;
 
 // Do not let navbars collapse
 @grid-float-breakpoint: 100px;
@@ -217,7 +224,7 @@ body {
     padding-left: 2px;
     padding-right: 2px;
     margin-bottom: 0px;
-    max-height: 180px;
+    max-height: 80px;
     overflow-x: hidden;
     overflow-y: auto;
     border-radius: 5px;
@@ -269,11 +276,11 @@ body {
     border-radius: 10px;
     position: relative;
     //border-style: none;
-    //background-color: #eee;
+    background-color: @message-color;
 }
 
 .message-bubble-arrow {
-  border-color: transparent #eee transparent transparent;
+  border-color: transparent @message-color transparent transparent;
   border-style: solid;
   border-width: 10px;
   height:0;
@@ -281,14 +288,16 @@ body {
   position:absolute;
   top: 2px;
   left: -15px;
+  //background-color: @message-color;
 }
 
 .my-message-body {
-    background-color: #7cf;
+    background-color: @my-message-color;
+    color: @my-message-text-color;
 }
 
 .my-message-bubble-arrow {
-  border-color: transparent transparent transparent #7cf;
+  border-color: transparent transparent transparent @my-message-color;
   border-style: solid;
   border-width: 10px;
   height:0;
@@ -301,11 +310,13 @@ body {
 
 #new-message {
     position: fixed;
-    bottom: 56px;
+    bottom: 51px;
     margin-bottom: 0;
-    width: 98%;
-    left: 1%;
-    right: 1%;
+    width: 99.5%;
+    //margin-right: auto;
+    //margin-left: auto;
+    left: 1px;
+    right: 1px;
 }
 
 .filelist {
@@ -378,6 +389,11 @@ body {
     font-size: 11px;
 }
 
+.case .case-content .tag {
+    position: absolute; 
+    top: 0px;
+    left: 0px;
+}
 
 .case .btn {
     font-size: 10px;
@@ -426,18 +442,27 @@ body {
     margin-top: 7px;
 }
 
+.message-sub .badge {
+    font-size: 8px;
+}
+
 .tag {
     padding: 3px;
     font-size: 8px; 
 }
 
-.case .tag {   
-    background-color: #4b1;
+.tag-case {   
+    background-color: @case-color;
 }
 
-.family .tag {
-    background-color: #f73;
+.tag-family {
+    background-color: @family-color;
 }
+
+.tag-user {
+    background-color: @user-color;
+}
+
 
 .generate-keys-controls {
     margin: 10px;
@@ -455,6 +480,7 @@ body {
 
 .record-view {
     margin-top: 10px;
+    margin-bottom: 10px;
     padding: 10px;
     background-color: white;
     text-align: center;
@@ -462,17 +488,39 @@ body {
 
 .record-view h3 {
     margin-top: 10px;
-    margin-left: 5px;
+    margin-left: 0px;
     text-align: left;
     display: inline-block;
 }
 .record-view a {
-    margin-right:5px;
-    margin-left:5px;
+    margin-right: 2px;
+    margin-left: 2px;
     padding-top: 2px;
     padding-bottom: 2px;
 }
 
+.record-view .tag {
+    position: absolute;
+    top: 53px;
+    left: 23px;
+    font-size: 12px;
+    padding: 5px;
+}
+
+.record-view .urgent {
+    position: absolute;
+    top: 45px;
+    left: 75px;
+    //font-size: 12px;
+    //padding: 5px;
+    background-color: red;
+}
+
+
+.record-view .table {
+    margin-bottom: 0px;
+    font-size: 10px;
+}
 
 .td-key {
     text-align: right;
@@ -497,10 +545,6 @@ body {
     padding: 3px;
     margin: 0px;
 }
-
-.contact .tag {
-    background-color: @brand-primary;
-} 
 
 
 

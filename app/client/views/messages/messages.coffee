@@ -11,6 +11,8 @@ the scrolling correct.
 
 scrollToBottomOK = true
 
+messageFilter = {}
+
 @scrollToBottom = ->
     if scrollToBottomOK
         #console.log("scrollToBottom")
@@ -63,7 +65,14 @@ Template.newMessageBox.events
         e.preventDefault()
         message =
             message: $("[name=message]").val()
-        Meteor.call "submitMessage", message, (error, id) ->
+        if Session.get('messageTagFilter')? and Session.get('currentRecordId')?
+            tag =
+                type: Session.get('messageTagFilter')
+                _id: Session.get('currentRecordId')
+        else
+            tag = null
+
+        Meteor.call "submitMessage", message, tag, (error, id) ->
             if error
                 # Display error to the user
                 alert(error.reason)
@@ -87,8 +96,17 @@ Template.newMessageBox.events
 
 
 Template.messagesList.created = ->
-    #console.log("created template messagesList")
+    console.log("created template messagesList")
     scrollToBottomOK = true
+    messageFilter = {}
+    if Session.get('messageTagFilter')?
+            messageFilter = tags:
+                $elemMatch:
+                    type: 'case'
+            if Session.get('currentRecordId')?
+                messageFilter.tags.$elemMatch._id = Session.get('currentRecordId')
+
+    console.log('filter', messageFilter)
 
 Template.messagesList.rendered = ->
     console.log("render template messagesList")
@@ -103,15 +121,17 @@ Template.messagesList.destroyed = ->
 
 Template.messagesList.helpers
     haveMessages: ->
-        Messages?.find?().count() > 0
+        console.log('haveMessages filter', @, messageFilter)
+        Messages?.find?(messageFilter).count() > 0
 
     currentMessages: ->
-        cursor = Messages.find {},
+        console.log('currentMessages filter', messageFilter)
+        cursor = Messages.find messageFilter,
             sort:
                 timestamp: -1
             limit: MessagesHandle.limit()
         #
-        # I am affraid this rerenders all the cells on one cell change
+        # I am afraid this rerenders all the cells on one cell change
         # BUT, cannot find a way to reverse the order on the cursor and
         # use #each, Probably have to use the observe on the cursor
         #
@@ -121,11 +141,11 @@ Template.messagesList.helpers
         MessagesHandle.ready()
     
     allMessagesLoaded: ->
-        MessagesHandle.ready() and Messages.find().count() < MessagesHandle.loaded()
+        MessagesHandle.ready() and Messages.find(messageFilter).count() < MessagesHandle.loaded()
 
 Template.messagesList.events
     'scroll .messages-list-box': (e) ->
-        if MessagesHandle.ready() and Messages.find().count() > MessagesHandle.loaded()
+        if MessagesHandle.ready() and Messages.find(messageFilter).count() > MessagesHandle.loaded()
             #console.log("scroll:" + $('.messages-list-box').scrollTop())
             if $('.messages-list-box').scrollTop() == 0
                 $('#small-spinner').fadeTo(100, 1)
@@ -136,8 +156,13 @@ Template.messagesList.events
                     Meteor.defer ->
                         MessagesHandle.loadNextPage()
 
+Template.message.created = ->
+    #console.log("message created")
+
+
 Template.message.rendered = ->
-    #console.log("message rendered")
+    #console.log("message rendered", @data)
+
 
     ###
     # Commenting out for they should get called above 
@@ -153,6 +178,11 @@ Template.message.helpers
     myMessage: ->
         @userId is Meteor.userId()
 
+    displayMessage: ->
+        if @tags?
+            for tag in @tags
+                @message = @message.replace(new RegExp(tag.tag,"g"), Template.tag(tag))
+        @message
 
 Template.author.helpers
     authorUrl: ->
@@ -160,6 +190,12 @@ Template.author.helpers
         theAuther?.services?.google?.picture
 
 
+Template.tag.helpers
+    path: ->
+        if @type is 'case'
+            'viewCase'
+        else 
+            'contacts'
 
 
 

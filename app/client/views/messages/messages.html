@@ -38,7 +38,7 @@
           <div class="message-sub pull-right">
             <span class="message-author pull-right">{{> author}}</span>
             <span class="well well-sm pull-right text-center message-body my-message-body">
-                {{message}}
+                {{{displayMessage}}}
                 <div class="my-message-bubble-arrow"></div>
             </span>
           </div>
@@ -46,7 +46,7 @@
             <div class="message-author-name text-muted">{{author}}</div>
             <div class="message-sub pull-left">
                 <span class="message-author pull-left">{{> author}}</span>
-                <span class="well well-sm pull-left text-center message-body">{{message}}
+                <span class="well well-sm pull-left text-center message-body">{{{displayMessage}}}
                     <div class="message-bubble-arrow"></div>
                 </span> 
             </div>       
@@ -62,6 +62,8 @@
     {{/if}}
 </template>
 
-
+<template name="tag">
+    <a href='{{pathFor path}}'><span class='badge tag-{{type}}'>{{name}}</span></a>
+</template>
 
 
