@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script>
+function createJSON( form )
+{
+	var formTypejs = form.formType.value;
+	var caseIDjs = form.caseID.value;
+	var FirstNamejs = form.FirstName.value;
+	var LastNamejs = form. LastName.value;
+	var SSNjs = form.SSN.value;
+	var outputJSON = ' { "fdf_fields" : { ' +
+		' "formType" : "' + formTypejs  + '",' +
+		' "caseID" : "' + caseIDjs + '",' +
+		' "field" : [ ' +
+		' 	{ "key" : "FirstName", "value" : "' + FirstNamejs + '", "type" : "textString" },' +
+		' 	{ "key" : "LastName", "value" : "' + LastNamejs + '", "type" : "textString" },' +
+		' 	{ "key" : "SSN", "value" : "' + SSNjs + '", "type" : "textString" }' +
+		' ]}}'
+	document.getElementById( "demo" ).innerHTML= outputJSON;
+	
+}
+</script>
+
+</head>
+
+<body>
+
+<h3>GRADES forms</h3>
+<p>This form reads and creates a JSON file that can be the input to fdf.py.
+
+
+<form ACTION="" METHOD="GET">
+	formType: <input type="text" name="formType"><br>
+	caseID: <input type="text" name="caseID"><br>
+	FirstName: <input type="text" name="FirstName"><br>
+	LastName: <input type="text" name="LastName"><br>
+	SSN: <input type="text" name="SSN"><br>
+	<input type="button" name="Click" value="Create JSON" onClick="createJSON(this.form)">
+</form>
+
+<p id="demo">Copy this text into the JSON file.</p>
+
+
+</body>
+
+</html> 
