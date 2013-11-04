@@ -1,0 +1,11 @@
+{ "fdf_fields" : {
+	"formType" : "1040ez",
+	"caseID" : "Revere",
+	"field" : [
+		{ "key" : "FirstName", "value" : "Paul", "type" : "textString" },
+		{ "key" : "LastName", "value" : "Revere", "type" : "textString" },
+		{ "key" : "SSN", "value" : "987654321", "type" : "textString" }
+	]
+}}
+	
+	
