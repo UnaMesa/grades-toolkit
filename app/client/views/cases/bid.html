@@ -1,0 +1,36 @@
+<template name="bid">
+    <div class="container">
+    <form role="form">
+        <div class="form-group">
+            <label for="name">Something</label>
+            <input type="text" class="form-control" name="something" placeholder="Some suggestion" required />
+            <span class="help-block">Required Field</span>
+        </div>
+
+        <div class="form-group">
+              <label for="urgent">Urgent</label>
+              <div>
+                <span class="make-switch" data-on-label="Yes" data-off-label="No">
+                  <input name="urgent" type="radio">
+                </span>
+              </div>
+        </div>
+
+    
+        <div class="form-group">
+            <label for="contactName">Contact</label>
+            <input type="text" class="form-control" name="contactName" placeholder="Primary Contact's name for this child" />
+        </div>
+        <div class="form-group">
+            <label for="contactNumber">Contact Number</label>
+            <input type="tel" class="form-control" name="contactNumber" placeholder="(555) 555-5555" />
+        </div>
+        <div class="form-group">
+            <label for="location">Location</label>
+            <textarea class="form-control" rows="3" name="location" placeholder="Enter current address of Child"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button id="cancel" class="btn btn-default">Cancel</button>
+    </form>
+</div>
+</template>
