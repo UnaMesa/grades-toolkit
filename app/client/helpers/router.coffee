@@ -7,12 +7,10 @@ Router.configure
 Router.map ->
     @route 'home',
       path: '/'
-
       before: ->
         if not Meteor.user()
           @render("login")
           @stop();
-
       data:
         title: 'Grades'
 
@@ -79,7 +77,7 @@ Router.map ->
         Meteor.subscribe('singleCase', @params._id)
       data: ->
         data = Cases.findOne(@params._id)
-        data.title = "Create BID"
+        data.title = "BID for #{data.name}"
         data.goBackPath = "viewCase"
         console.log("data", data)
         data
@@ -92,13 +90,17 @@ Router.map ->
         Meteor.subscribe('singleCase', @params._id)
       data: ->
         data = Cases.findOne(@params._id)
-        data.title = "Create MOU"
+        data.title = "Create MOU for #{data.name}"
         data.goBackPath = "viewCase"
         data
 
     @route 'docs',
       data:
         title: 'Documents'
+
+    @route 'googleAuth',
+      data:
+        title: "Google Drive"
 
     @route 'contacts',
       data:
@@ -136,9 +138,21 @@ mustBeSignedIn = ->
       @render("accessDenied")
     @stop()
 
+googleDriveAuthorize = ->
+  console.log("Check google auth", gDrive)
+  if Meteor.user()
+    if not gDrive.userDeclined and not gDrive.authorized() and not gDrive.authorizing()
+      @render("googleAuth")
+      @stop()
+
+
 
 # this hook will run on almost all routes
 Router.before mustBeSignedIn, except: ['home']
+
+# this hook will run on almost all routes
+Router.after googleDriveAuthorize, except: []
+
 
 # this hook will run on all routes
 Router.before ->

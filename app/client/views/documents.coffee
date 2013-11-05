@@ -1,10 +1,12 @@
 Template.docs.created = ->
-    console.log("googleDocs created")
+    console.log("documents created")
+    gDrive.reset()
     gDrive.init()
 
 Template.docs.rendered = ->
-    console.log("googleDocs renderd")
+    console.log("documents renderd")
     if gDrive.fileList().length is 0 or not gDrive.fileListLoaded
+        gDrive.deleteOk = true;
         gDrive.topDirectory = "FastFacts"
         gDrive.call(gDrive.getFileList)
     

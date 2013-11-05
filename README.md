@@ -9,6 +9,7 @@ Prototype mobile web app for social workers.
  - [Installation](#installation)
  - [Quick Start](#quick-start)
  - [Message Streams] (#streams)
+ - [External Tools] (#external-tools)
  - [License](#license)
 
 ## About
@@ -49,6 +50,11 @@ The message streams will interpret a few "hash tag" like symbols.
 * '@' - A link to a document or a url.
 
 
+## External Tools
+* [Meteor] (http://www.meteor.com)
+* [Bootstrap] (http://http://getbootstrap.com)
+* [Google Drive] (https://developers.google.com/drive/)
+* HTML to PDF? [jsPDF](https://github.com/MrRio/jsPDF)
 
 ## License
 

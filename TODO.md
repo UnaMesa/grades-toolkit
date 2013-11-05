@@ -13,7 +13,11 @@ Grades Toolkit TODO
 - [ ] BID and MOU Forms
 	* Fill out
 	* Submit writes to google doc and generates a message with a href link to the form
+	* HTML to PDF [jsPDF](https://github.com/MrRio/jsPDF)
 
+- [ ] Get this working as an iOS Web App
+	* Need Meteor Oauth without popup 
+	* [iOS Web App] (https://developer.apple.com/library/safari/referencelibrary/GettingStarted/GS_iPhoneWebApp/_index.html)
 
 - [ ] Encryption
     * Symmetric Key on Records

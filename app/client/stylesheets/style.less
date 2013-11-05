@@ -39,8 +39,16 @@ html {
 
 body {
     padding-top: 40px; 
-    padding-bottom: 50px;
+    padding-bottom: 60px;
     background-color: #ddd; 
+}
+
+.zero-padding {
+    padding: 0
+}
+
+.zero-height {
+    height: 0px;
 }
 
 .main-container {
@@ -223,15 +231,14 @@ body {
 .messages-list-box {
     padding-left: 2px;
     padding-right: 2px;
-    margin-bottom: 0px;
+    margin: 0px;
     max-height: 80px;
     overflow-x: hidden;
     overflow-y: auto;
-    border-radius: 5px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.121569) 0px 2px 3px 0px inset;
 }
 
 .message {
@@ -305,18 +312,35 @@ body {
   position:absolute;
   top: 2px;
   right: -15px;
-  z-index: 10;
+  //z-index: 10;
 }
 
-#new-message {
-    position: fixed;
-    bottom: 51px;
+.message-center {
+    height: 100%;
+}
+
+#new-message-group {
+    //position: fixed;
+    //bottom: 51px;
     margin-bottom: 0;
-    width: 99.5%;
+    //width: 100%;
     //margin-right: auto;
     //margin-left: auto;
     left: 1px;
     right: 1px;
+    //border-top-left-radius: 0;
+    //border-top-right-radius: 0;
+}
+
+#new-message {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+#hash-input {
+    //border-left: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 .filelist {

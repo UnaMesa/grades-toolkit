@@ -16,6 +16,17 @@
             <i class="fa fa-pencil-square-o"></i> New Document
         </a>
       </p>
+      <p>
+        <div class="input-group">
+            <span class="input-group-btn">
+                <button class="btn btn-success" id="new-folder-test">
+                    <i class="fa fa-folder"></i> Create Folder
+                </button>
+            </span>
+            <input type="text" name="newFolderName" class="form-control" />
+        </div>
+
+      </p>
     {{else}}
         {{#if authorizing}}
             <button class="btn btn-warning" id="authorize">
@@ -28,7 +39,7 @@
             </button>
         {{/if}}  
     {{/if}}
-    </div>
+  </div>
 </template>
 
 <template name="gDrive">

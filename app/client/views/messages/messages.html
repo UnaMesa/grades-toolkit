@@ -1,7 +1,7 @@
 
 
 <template name="messages">
-    <div class="clearfix">
+    <div class="message-center clearfix">
       {{> messagesList}}
       {{> newMessageBox}}
     </div>
@@ -9,7 +9,12 @@
 
 <template name="newMessageBox">
     <form role="form">
-        <input type="text" class="form-control" name="message" id="new-message" placeholder="Type your Message" />
+        <div id="new-message-group" class="input-group">
+            <span class="input-group-btn">
+                <button href="#" id="hash-input" class="btn btn-primary" type="button">#</button>
+            </span>
+            <input type="text" class="form-control" name="message" id="new-message" placeholder="Type your Message" />
+        </div>
     </form>
 </template>
 
@@ -20,12 +25,12 @@
         {{/if}}
     {{else}}
         <div class="messages-list-box">
-            {{#unless allMessagesLoaded}}
-                {{> smallSpinner}}
-            {{/unless}}
             {{#each currentMessages}}
                 {{> message}}
             {{/each}}
+            {{#unless allMessagesLoaded}}
+                {{> smallSpinner}}
+            {{/unless}}
         </div>
     {{/unless}}
 </template>  

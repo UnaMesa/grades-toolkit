@@ -9,38 +9,46 @@ the scrolling correct.
 
 ###
 
-scrollToBottomOK = true
+scrollToTopOk = true
+scrollToBottomOk = false
 
 messageFilter = {}
 
 @scrollToBottom = ->
-    if scrollToBottomOK
-        #console.log("scrollToBottom")
+    if scrollToBottomOk
         $('.messages-list-box').scrollTop($('.messages-list-box').prop("scrollHeight"))
         true
 
 @scrollToTop = ->
-    $('.messages-list-box').scrollTop(1)
+    if scrollToTopOk
+        $('.messages-list-box').scrollTop(0)
+        true
   
 @hideSpinner = ->
     Meteor.defer ->
         if MessagesHandle.ready()
-            #console.log("Hide Spinner")
             $('#small-spinner').fadeTo(100, 0)
-            if not scrollToBottomOK
+            if not scrollToTopOk
                 Meteor.defer ->
-                    $('.messages-list-box').scrollTop($('#small-spinner').height() + 10)
+                    $('.messages-list-box').scrollTop($('.messages-list-box').prop("scrollHeight") - $('#small-spinner').height() - 10)
       
 @setMessageListHeight = ->
-    if $(".messages-list-box")?.offset?() and $("#new-message")?.offset?()
-        maxHeight = $("#new-message").offset().top 
-        maxHeight -= $(".messages-list-box").offset().top 
-        maxHeight -= 5
+    if $(".messages-list-box")?.offset? and $(".bottom-navbar")?.offset? and $("#new-message-group")?.height?
+        if $(".navbar").hasClass("zero-height")
+            maxHeight = $(window).height()
+            maxHeight -= $("#new-message-group").height()
+            maxHeight -= 1
+        else
+            maxHeight = $(".bottom-navbar").offset().top 
+            maxHeight -= $(".messages-list-box").offset().top 
+            maxHeight -= $("#new-message-group").height()
+            maxHeight -= 1
+
         $(".messages-list-box").css("max-height", maxHeight + "px")
         messageWidth = $(".message").width() - $(".message-author-picture").width() - 20
         #console.log("messageWidth", $(".message").width(), $(".message-author-picture").width(), messageWidth)
         $(".message-body").css("max-width", messageWidth + "px")
-        #console.log("setMessageListHeight:" + $(".messages-list-box").css("max-height"))
+        #console.log("message-list-box height:" + $(".messages-list-box").css("max-height"), fullscreen)
         maxHeight
 
 # If on a browser handle if the user resized the browser
@@ -49,16 +57,16 @@ $(window).resize(setMessageListHeight)
 
 Template.messages.rendered = ->
     setMessageListHeight()
-    scrollToBottom()
+    scrollToTop()
     hideSpinner()
 
-Template.newMessageBox.created = =>
+Template.newMessageBox.created = ->
     console.log("newMessageBox created")
 
-Template.newMessageBox.rendered = =>
+Template.newMessageBox.rendered = ->
     console.log("newMessageBox rendered")
 
-Template.newMessageBox.destroyed = =>
+Template.newMessageBox.destroyed = ->
     console.log("newMessageBox destroyed")
  
 Template.newMessageBox.events
@@ -78,10 +86,25 @@ Template.newMessageBox.events
                 # Display error to the user
                 alert(error.reason)
             else
-                scrollToBottomOK = true
-                scrollToBottom()
+                scrollToTopOk = true
+                scrollToTop()
                 $(e.target).find("[name=message]").val("")
-                
+
+
+    "click #hash-input": (e) -> 
+        console.log("hash-input click")
+        e.preventDefault()
+        $("[name=message]").val($("[name=message]").val()+ '#')
+        $("[name=message]").focus()
+
+    ###
+    "focusin #new-message-group": (e) ->
+        if not $(".navbar").hasClass("zero-height")
+            $(".navbar").slideUp 200, ->
+                $(".navbar").addClass("zero-height")
+                $(document.body).addClass("zero-padding")
+                setMessageListHeight()
+    ###
 
     "keypress #new-message": (e) ->
         if e.keyCode is 32 # Got a space
@@ -98,7 +121,7 @@ Template.newMessageBox.events
 
 Template.messagesList.created = ->
     console.log("created template messagesList")
-    scrollToBottomOK = true
+    scrollToTopOK = true
     messageFilter = {}
     if Session.get('messageTagFilter')?
             messageFilter = tags:
@@ -111,9 +134,7 @@ Template.messagesList.created = ->
 
 Template.messagesList.rendered = ->
     console.log("render template messagesList")
-    # Note: messages.rendered should be called after this...
-    #scrollToBottom()
-    #hideSpinner()
+    setMessageListHeight()
     
 
 Template.messagesList.destroyed = ->
@@ -132,11 +153,14 @@ Template.messagesList.helpers
                 timestamp: -1
             limit: MessagesHandle.limit()
         #
+        #   INVERT LIST
+        #
         # I am afraid this rerenders all the cells on one cell change
         # BUT, cannot find a way to reverse the order on the cursor and
         # use #each, Probably have to use the observe on the cursor
         #
-        messages = cursor.fetch().reverse() # TODO: Find a better way 
+        #messages = cursor.fetch().reverse() # TODO: Find a better way 
+        cursor
 
     messagesReady: ->
         MessagesHandle.ready()
@@ -148,14 +172,22 @@ Template.messagesList.events
     'scroll .messages-list-box': (e) ->
         if MessagesHandle.ready() and Messages.find(messageFilter).count() > MessagesHandle.loaded()
             #console.log("scroll:" + $('.messages-list-box').scrollTop())
-            if $('.messages-list-box').scrollTop() == 0
+            if $('.messages-list-box').scrollTop() == $('.messages-list-box').prop("scrollHeight")
                 $('#small-spinner').fadeTo(100, 1)
                 Meteor.defer ->
-                    $('.messages-list-box').scrollTop(5)
+                    $('.messages-list-box').scrollTop($('.messages-list-box').prop("scrollHeight") - 5)
                     console.log("Fetch Older messages")
-                    scrollToBottomOK = false
+                    scrollToTopOK = false
                     Meteor.defer ->
                         MessagesHandle.loadNextPage()
+
+    "click .messages-list-box": (e) ->
+        if $(".navbar").hasClass("zero-height")
+            console.log("click", )
+            $(".navbar").removeClass("zero-height")
+            $(document.body).removeClass("zero-padding")
+            $(".navbar").slideDown 200, ->
+                setMessageListHeight()
 
 Template.message.created = ->
     #console.log("message created")
@@ -163,14 +195,6 @@ Template.message.created = ->
 
 Template.message.rendered = ->
     #console.log("message rendered", @data)
-
-
-    ###
-    # Commenting out for they should get called above 
-    # when the outer template is rendered
-    ###
-    #scrollToBottom()
-    #hideSpinner()
 
 Template.message.helpers
     submittedText: ->

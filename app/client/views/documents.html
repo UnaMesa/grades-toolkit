@@ -1,9 +1,14 @@
 
+<template name="googleAuth">
+    {{> docs}}
+</template>
+
 <template name="docs">
     {{#if authorized}}
       {{> gDrive}}
     {{else}}
       <div class="containter text-center">
+        <div class="alert alert-info">You need to have Google Drive access to use this application.</div>
         {{#if authorizing}}
             <button class="btn btn-warning" id="authorize">
                 <i class="fa fa-google-plus-square"></i> Restart Authorization

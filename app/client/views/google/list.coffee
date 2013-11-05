@@ -1,7 +1,9 @@
 
 Template.googleDocs.created = ->
     console.log("googleDocs created")
+    gDrive.reset()
     gDrive.init()
+
       
 Template.googleDocs.rendered = ->
     console.log("googleDocs renderd")
@@ -25,6 +27,13 @@ Template.googleDocs.events
     "click #authorize": (e) ->
         gDrive.userInitiatedAuth()
         gDrive.call(gDrive.getFileList)
+        false
+
+    "click #new-folder-test": (e) ->
+        gDrive.createDirectory("Test Folder", "root")
+        Meteor.defer ->
+            window.scroll(0,0)
+        false
 
 
 Template.gDrive.helpers

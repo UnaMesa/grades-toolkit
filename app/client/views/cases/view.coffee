@@ -1,10 +1,10 @@
 
-messagesIn = ""
-detailsIn = "in"
+messagesIn = "in"
+detailsIn = ""
 
 Template.viewCase.created = ->
-    messagesIn = ""
-    detailsIn = "in"
+    messagesIn = "in"
+    detailsIn = ""
 
 Template.viewCase.rendered = ->
     $("#collapseMessages").on "hidden.bs.collapse", ->

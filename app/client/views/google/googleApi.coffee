@@ -8,6 +8,7 @@
     _authorized: false
     _authorizing: false
     _userInitiatedAuth: false
+    _immediate: true
 
     _loading: false
     
@@ -31,6 +32,8 @@
     topDirectory: null
     deleteOk: false
 
+    userDeclined: false
+
     init: ->
         console.log("gDrive.init")
         if not gDrive._currentFileListListeners?
@@ -38,6 +41,15 @@
         if not gDrive._currentStateListeners?
             gDrive._currentStateListeners = new Deps.Dependency()
         gDrive.load()
+
+    reset: ->
+        gDrive.topDirectory = null
+        gDrive.deleteOk = false;
+        gDrive._path = [
+            id:    "root"
+            title: "My Drive"
+            last:  true
+        ]
 
     load: ->
         console.log("gDrive.load")
@@ -59,10 +71,14 @@
             gDrive.checkAuth()
 
     authorized: ->
+        if not gDrive._currentStateListeners?.depend?
+            gDrive.init()
         gDrive._currentStateListeners.depend()
         gDrive._authorized
 
     authorizing: ->
+        if not gDrive._currentStateListeners?.depend?
+            gDrive.init()
         gDrive._currentStateListeners.depend()
         gDrive._authorizing && gDrive._userInitiatedAuth
 
@@ -75,22 +91,29 @@
         gDrive._userInitiatedAuth = true
         gDrive._currentStateListeners.changed()
 
+    #
+    # See: https://developers.google.com/drive/auth/web-client
+    #
     checkAuth: ->
-        console.log("checkAuth called")
+        console.log("checkAuth called", gDrive._immediate)
         if not gDrive._authorized and not gDrive._authorizing
             #
             #  TODO: Check for popup blocking for this causes havoc!!!
             #
-            console.log("checkAuth")
+            console.log("checkAuth", gDrive._immediate)
             gDrive._authorizing = true
             gDrive._currentStateListeners.changed()
-            gDrive._currentFileListListeners.changed()
+            #gDrive._currentFileListListeners.changed()
             gapi.auth.authorize
                 'client_id': "543454987250.apps.googleusercontent.com"
                 #'scope': "https://www.googleapis.com/auth/drive"
                 'scope': googleScopes
-                'immediate': false
+                'immediate': gDrive._immediate # Setting the immediate parameter to true in the call to 
+                                               # gapi.auth.authorize() ensures the user only sees a 
+                                               # permissions dialog if they have not previously authorized 
+                                               # your application.
             , (authResult) ->
+                console.log("Google Auth Callback", authResult, gDrive.immediate)
                 gDrive._authorizing = false
                 gDrive._userInitiatedAuth = false
                 if authResult and not authResult.error
@@ -98,8 +121,10 @@
                     console.log("Google Auth", authResult)
                     if gDrive._callBack
                         gDrive._callBack()
-
-                else
+                else if (gDrive._immediate)
+                    gDrive._immediate = false
+                    return gDrive.checkAuth(false)
+                else 
                     if authResult?.error?
                         console.log("Google Auth Error", authResult.error)
                     else
@@ -116,6 +141,7 @@
             console.log("gapi.client.drive is not loaded", gapi.client)
             gDrive.load()
         else
+            console.log("Call:checkAuth")
             gDrive.checkAuth()
     
     path: ->
@@ -192,7 +218,6 @@
                 gDrive.fileListLoaded = true
                 gDrive._currentStateListeners.changed()
 
-
     setTopDirectory: ->
         gDrive._path = [
             id:    null
@@ -260,7 +285,56 @@
                 isRoot: false
                 kind: "drive#parentReference"
 
+    findDirectory: (title, parentId) ->
+        if not parentId?
+            parentId = 'root'
+        for file in gDrive._fileList  # non-reactive
+            if file.mimeType is 'application/vnd.google-apps.folder' and file.title is title
+                if parentId is 'root' and file.parents?[0]?.isRoot
+                    return file
+                else if file.parents?[0]?.id is parentId
+                    return file
 
+    createDirectory: (title, parentId) ->
+        if not parentId?
+            parentId = 'root'
+        if gDrive.findDirectory(title, parentId)
+            CoffeeAlerts.warning("Folder exists")
+        else
+            metadata =
+                'title': title
+                "parents": [{"id": parentId}]
+                'mimeType': 'application/vnd.google-apps.folder'
+            request = gapi.client.request        
+                'path': '/drive/v2/files'
+                'method': 'POST'
+                'headers':
+                    'Content-Type': 'application/json'
+                'body': JSON.stringify(metadata)
+            request.execute (newFolder) ->
+                if newFolder.error
+                    console.log("createDirectory Error",newFolder.error)
+                    CoffeeAlerts.error("Could not create folder")
+                else
+                    console.log("new folder", newFolder, gDrive)
+                    gDrive._fileList.unshift(newFolder)
+                    gDrive._currentFileListListeners.changed()
+                    console.log("change")
+
+
+
+    findOrCreateDirectory: (dirPath) ->
+        pathParts = _.difference(dirPath.split('/'), [""])
+        parentId = 'root'
+        for path in pathParts
+            if dir = findDirectory(path, parentId)
+                parentId = dir.id
+            else
+                # Create it ??
+                return false
+        return true
+
+        
     
         
 

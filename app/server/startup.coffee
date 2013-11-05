@@ -6,6 +6,12 @@ Meteor.startup ->
     console.log("tp1", tagToTagObject("tp1"))
     console.log("nn1", tagToTagObject("nn1"))
 
+    # Update cases with no tag
+    Cases.find(
+        "tag":
+            "$exists" : false
+    ).forEach (rec) ->
+        tag = createTag(rec.name)
 
     #
     #  Redefine the callback
