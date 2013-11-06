@@ -36,6 +36,7 @@ Template.bid.helpers
              if @reasonsForChange and val in @reasonsForChange
                  data.selected = "selected"
              vals.push(data)
+        console.log("reasonsForChange", vals)
         vals
 
     documentsUsedSelect: ->
@@ -115,7 +116,7 @@ Template.bid.events
             else
                 CoffeeAlerts.success("Created Bid")
                 # TODO: Go to the Document            
-                #Router.go("viewCase", {_id: Session.get('currentRecordId')})
+                Router.go("viewCase", {_id: Session.get('currentRecordId')})
 
         # Write it to Google Docs
         
