@@ -1,9 +1,9 @@
 <template name="viewCase">
     <div class="container">
         <div class="well record-view">
-            {{#if isUrgent}}<a href="#"><span class="urgent badge">URGENT</span></a>{{/if}}
-            {{#if tag}}<a href="#"><span class="tag tag-case badge">{{tag}}</span></a>{{/if}}
-            <h3>{{name}}</h3>
+            {{#if isUrgent}}<span class="urgent badge">URGENT</span>{{/if}}
+            {{#if tag}}<span class="tag tag-case badge">{{tag}}</span>{{/if}}
+            <h4>{{name}}</h4>
             <a class="btn btn-primary btn-sm pull-right" href={{pathFor 'mou'}}>MOU</a>
             <a class="btn btn-primary btn-sm pull-right" href={{pathFor 'bid'}}>BID</a>
         </div>

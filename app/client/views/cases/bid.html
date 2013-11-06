@@ -1,36 +1,69 @@
 <template name="bid">
     <div class="container">
     <form role="form">
+
         <div class="form-group">
-            <label for="name">Something</label>
-            <input type="text" class="form-control" name="something" placeholder="Some suggestion" required />
+            <label for="childId">Child ID</label>
+            <input type="text" class="form-control" name="childId" value="{{childId}}" placeholder="{{tag}}" required />
             <span class="help-block">Required Field</span>
         </div>
 
-        <div class="form-group">
-              <label for="urgent">Urgent</label>
-              <div>
-                <span class="make-switch" data-on-label="Yes" data-off-label="No">
-                  <input name="urgent" type="radio">
-                </span>
-              </div>
-        </div>
+        {{{remainInSchool}}}
 
+        <div class="form-group">
+            <label for="bidDate">BID Meeting Date</label>
+            <input type="text" class="form-control" name="bidDate" placeholder="01/23/2013 12:00 AM" value="{{bidDate}}" />
+        </div>
     
         <div class="form-group">
-            <label for="contactName">Contact</label>
-            <input type="text" class="form-control" name="contactName" placeholder="Primary Contact's name for this child" />
+              <label for="grade">Current Grade</label>
+              <input type="number" name="grade" class="age-control form-control" min="1" max="12" value="{{grade}}">
         </div>
+
         <div class="form-group">
-            <label for="contactNumber">Contact Number</label>
-            <input type="tel" class="form-control" name="contactNumber" placeholder="(555) 555-5555" />
+            <label for="currentSchool">Current School</label>
+            <input type="text" class="form-control" name="currentSchool" placeholder="Name of current school" value="{{currentSchool}}" />
         </div>
+
         <div class="form-group">
-            <label for="location">Location</label>
-            <textarea class="form-control" rows="3" name="location" placeholder="Enter current address of Child"></textarea>
+            <label for="reasonsForChange">Reasons for Change</label>
+            <select name="reasonsForChange" class="form-control" multiple>
+               <option value="plan">Child's permanency plan</option>
+               <option value="custodians">Parents/Custodians recommend change</option>
+               <option value="commute">Commute too long</option>
+               <option value="neg">Negative environment at current school</option>
+               <option value="commute">Short time at current school</option>
+               <option value="safety">Safety Issues</option>
+               <option value="pos">New school has positive factors (social, emotional, academic, special needs)</option>
+           </select>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <button id="cancel" class="btn btn-default">Cancel</button>
+
+        <div class="form-group">
+            <label for="reasonsForChangeComments">Document any of the above selected reasons</label>
+            <textarea class="form-control" value="{{reasonsForChangeComments}}" name="reasonsForChangeComments" placeholder="documentation of reasons for change" />
+        </div>
+
+        {{#each boolValues}}
+            {{> slider}}
+        {{/each}}
+
+        <button type="submit" class="btn btn-primary"><i class="fa fa-print"></i> Generate</button>
+        <!-- <button type="reset" id="reset" class="btn btn-default">Reset</button> -->
     </form>
 </div>
 </template>
+
+
+<template name="slider">
+    <div class="form-group">
+        <label for="{{varName}}">{{description}}</label>
+        <div>
+            <span class="make-switch" data-on-label="Yes" data-off-label="No">
+                <input name="{{varName}}" type="radio" {{value}}>
+            </span>
+        </div>
+    </div>
+</template>
+
+
+

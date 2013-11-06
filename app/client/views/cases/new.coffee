@@ -16,20 +16,20 @@ Template.newCase.events
         # Must check for false checkboxes
         for elm in ['isMale', 'urgent']
             if not newCase[elm]?
-                newCase[elm] = 'off'
+                newCase[elm] = false
 
-        console.log("new case", newCase)
-
-        if not newCase.name
-            CoffeeAlerts.error("You need fill in the name!")
-            $("[name=name]").parent().addClass('has-error')
-            window.scrollTo(0, 1)
-            return
-
-        Meteor.call "newCase", newCase, (error, id) ->
+        Meteor.call "newCase", newCase, (error, result) ->
             if error
                 # Display error to the user
                 CoffeeAlerts.error(error.reason)
+            else if result?.error?
+                if result.error.invalidKeys.length > 0
+                    for invalidKey in result.error.invalidKeys
+                        CoffeeAlerts.error(invalidKey.message)
+                        $("[name=#{invalidKey.name}]").parent().addClass('has-error')
+                else
+                    CoffeeAlerts.error(error.reason)
+                window.scrollTo(0, 0)
             else
                 CoffeeAlerts.success("Created Case")
                 # TODO: Go to the Document            

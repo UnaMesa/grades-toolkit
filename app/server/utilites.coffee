@@ -49,44 +49,53 @@
             tag: tag
             name: tagObject.name
 
+
 @fillOutTagFromId = (tag) ->
-    if tag.type is 'user'
-        if rec = Meteor.users.findOne(_id: tag._id)
-            tag.name = rec.profile.name
-    else if tag.type is 'case'
-        if rec = Cases.findOne(_id: tag._id)
-            tag.name = rec.name       
-    else if tag.type is 'family'
-        if rec = Families.findOne(_id: tag._id)
-            tag.name = rec.name
-    tag.tag = rec.tag
+    switch tag.type
+        when 'user'
+            if rec = Meteor.users.findOne(_id: tag._id)
+                tag.name = rec.profile.name
+        when 'case'
+            if rec = Cases.findOne(_id: tag._id)
+                tag.name = rec.name
+        when 'family'  
+            if rec = Families.findOne(_id: tag._id)
+                tag.name = rec.name
+    tag.tag = rec?.tag
     tag
+
 
 @fillOutTagFromTag = (tag) ->
-    if tag.type is 'user'
-        if rec = Meteor.users.findOne(tag: tag.tag)
-            tag.name = rec.profile.name
-    else if tag.type is 'case'
-        if rec = Cases.findOne(tag: tag.tag)
-            tag.name = rec.name       
-    else if tag.type is 'family'
-        if rec = Families.findOne(tag: tag.tag)
-            tag.name = rec.name
-    tag._id = rec._id
+    switch tag.type
+        when 'user'
+            if rec = Meteor.users.findOne(tag: tag.tag)
+                tag.name = rec.profile.name
+        when 'case'
+            if rec = Cases.findOne(tag: tag.tag)
+                tag.name = rec.name
+        when 'family'
+            if rec = Families.findOne(tag: tag.tag)
+                tag.name = rec.name
+    tag._id = rec?._id
     tag
 
-@updateCommentsCount = (tag) ->
-    if tag.type is 'user'
-        collectionToUpdate = Meteor.users
-    else if tag.type is 'case'
-        collectionToUpdate = Cases
-    else if tag.type is 'family'
-        collectionToUpdate = Families
 
-    collectionToUpdate.update
-        _id: tag._id
-    ,
+@updateCommentsCount = (tag) ->
+    switch tag.type
+        when 'user'
+            collectionToUpdate = Meteor.users
+        when 'case'
+            collectionToUpdate = Cases
+        when 'family'
+            collectionToUpdate = Families
+        else
+            return false
+
+    collectionToUpdate.update tag._id,
         $inc:
             commentsCount: 1
-
+    , (error, result) ->
+        if error
+            console.log("updateCommentsCount error", tag, error)
+    true
 

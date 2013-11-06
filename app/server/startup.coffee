@@ -2,16 +2,21 @@
 Meteor.startup ->
     console.log("Server Startup")
 
-    console.log("tp", tagToTagObject("tp"))
-    console.log("tp1", tagToTagObject("tp1"))
-    console.log("nn1", tagToTagObject("nn1"))
-
     # Update cases with no tag
     Cases.find(
         "tag":
             "$exists" : false
     ).forEach (rec) ->
         tag = createTag(rec.name)
+        console.log("Adding tag for case #{rec.name} -> #{tag}")
+        Cases.update rec._id,
+            $set:
+                tag: tag
+        , (error, result) ->
+            if error
+                console.log("Error adding tag", error)
+            else
+                console.log("Adding Tag successful")
 
     #
     #  Redefine the callback
