@@ -53,3 +53,4 @@ Grades Toolkit Change Log
 11/6/13 - TEP
 
 	BID form now updates into Cases collection on "submit"
+	

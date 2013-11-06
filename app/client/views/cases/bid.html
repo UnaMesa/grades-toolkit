@@ -24,17 +24,13 @@
             <label for="currentSchool">Current School</label>
             <input type="text" class="form-control" name="currentSchool" placeholder="Name of current school" value="{{currentSchool}}" />
         </div>
-
+        
         <div class="form-group">
             <label for="reasonsForChange">Reasons for Change</label>
             <select name="reasonsForChange" class="form-control" multiple>
-               <option value="plan">Child's permanency plan</option>
-               <option value="custodians">Parents/Custodians recommend change</option>
-               <option value="commute">Commute too long</option>
-               <option value="neg">Negative environment at current school</option>
-               <option value="commute">Short time at current school</option>
-               <option value="safety">Safety Issues</option>
-               <option value="pos">New school has positive factors (social, emotional, academic, special needs)</option>
+               {{#each reasonsForChangeSelect}}
+                    {{> selectOption}}
+               {{/each}}
            </select>
         </div>
 
@@ -47,12 +43,35 @@
             {{> slider}}
         {{/each}}
 
+        <div class="form-group">
+            <label for="documentsUsed">Documents used for BID</label>
+            <select name="documentsUsed" class="form-control" multiple>
+               {{#each documentsUsedSelect}}
+                    {{> selectOption}}
+               {{/each}}
+           </select>
+        </div>
+
+        <div class="form-group">
+            <label for="otherDocumentsUsed">Other documents used for BID</label>
+            <textarea class="form-control" value="{{otherDocumentsUsed}}" name="otherDocumentsUsed" placeholder="List other documents used for the BID" />
+        </div>
+
+        <div class="form-group">
+            <label for="newSchool">Name of New School</label>
+            <textarea class="form-control" value="{{newSchool}}" name="newSchool" placeholder="Name of new school if applicable" />
+        </div>
+
         <button type="submit" class="btn btn-primary"><i class="fa fa-print"></i> Generate</button>
         <!-- <button type="reset" id="reset" class="btn btn-default">Reset</button> -->
     </form>
 </div>
 </template>
 
+
+<template name="selectOption">
+    <option value="{{key}}" {{selected}}>{{key}}</option>
+</template>
 
 <template name="slider">
     <div class="form-group">

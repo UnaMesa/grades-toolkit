@@ -1,6 +1,8 @@
 # Make sure collection is global with '@'
 
-@BIDSchema =
+@BID = {}
+
+@BID.schema =
     childId:
         type: String
         #unique: true
@@ -56,8 +58,41 @@
         type: String
         optional: true
         label: "Other documents used for BID"
+    newSchool:
+        type: String
+        optional: true
+        label: "Name of New School"
+
+###
+@BID.reasonsForChange = [
+    "plan":         "Child's permanency plan"
+    "custodians":   "Parents/Custodians recommend change"
+    "commute":      "Commute too long"
+    "neg":          "Negative environment at current school"
+    "commute":      "Short time at current school"
+    "safety":       "Safety Issues"
+    "pos":          "New school has positive factors (social, emotional, academic, special needs)"
+]
+###
+
+@BID.reasonsForChange = [
+    "Child's permanency plan"
+    "Parents/Custodians recommend change"
+    "Commute too long"
+    "Negative environment at current school"
+    "Short time at current school"
+    "Safety Issues"
+    "New school has positive factors (social, emotional, academic, special needs)"
+]
 
 
+@BID.documentsUsed = [
+    "Report Card"
+    "Progress Reports"
+    "Achievement Data"
+    "IEP"
+    "Other"
+]
 
 @CaseSchema =
     name:
@@ -98,7 +133,7 @@
         unique: true
         optional: true
 
-@CaseSchema = _.extend(@CaseSchema, @BIDSchema)
+@CaseSchema = _.extend(@CaseSchema, @BID.schema)
 
 
 @Cases = new Meteor.Collection2 'cases', 
