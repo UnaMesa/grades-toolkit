@@ -45,8 +45,11 @@ Grades Toolkit Change Log
 	 Message box sizing on case page
 	 Collapse on case page
 
-11/5/12 - TEP
+11/5/13 - TEP
 
 	Major UI redesign.  Twitter like with blocking dialog for new messages
 	Scrolling now in window and not subframe.  iOS Safari behaves better
 	
+11/6/13 - TEP
+
+	BID form now updates into Cases collection on "submit"
