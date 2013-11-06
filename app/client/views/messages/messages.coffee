@@ -68,7 +68,8 @@ scrollToBottomOk = false
 $(window).resize(setMessageBodyWidth)
 
 @scrollWatch = (e) ->
-    if  $(window).scrollTop() + $(window).height() > $(document).height() + 5
+    console.log("scrollWatch", $(window).scrollTop() + $(window).height(), $(document).height())
+    if  $(window).scrollTop() + $(window).height() >= $(document).height()
         if MessagesHandle.ready() and Messages.find(messageFilter()).count() > MessagesHandle.loaded()
             $('#small-spinner').fadeTo(100, 1)
             Meteor.defer ->
