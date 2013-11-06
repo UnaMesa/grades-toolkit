@@ -9,6 +9,16 @@ Meteor.methods
     createTag: (tagFromString) ->
         createTag(tagFromString)
 
+    getFullTag: (tag) ->
+        if tag.type? and tag._id?
+            fillOutTagFromId(tag)
+        else if tag.type? and tag.tag?
+            fillOutTagFromTag(tag)
+        else if tag.tag?
+            tagToTagObject(tag.tag)
+        else
+            tagToTagObject(tag)
+
     addUserTag: ->
         user = Meteor.user()
         # ensure the user is logged in

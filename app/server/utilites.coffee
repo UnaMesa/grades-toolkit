@@ -62,8 +62,20 @@
     tag.tag = rec.tag
     tag
 
+@fillOutTagFromTag = (tag) ->
+    if tag.type is 'user'
+        if rec = Meteor.users.findOne(tag: tag.tag)
+            tag.name = rec.profile.name
+    else if tag.type is 'case'
+        if rec = Cases.findOne(tag: tag.tag)
+            tag.name = rec.name       
+    else if tag.type is 'family'
+        if rec = Families.findOne(tag: tag.tag)
+            tag.name = rec.name
+    tag._id = rec._id
+    tag
+
 @updateCommentsCount = (tag) ->
-    console.log("update comments count", tag)
     if tag.type is 'user'
         collectionToUpdate = Meteor.users
     else if tag.type is 'case'

@@ -38,7 +38,6 @@ Router.map ->
       waitOn: ->
         Meteor.subscribe('singleCase', @params._id)
       data: ->
-        console.log(Cases.findOne(@params._id))
         data = Cases.findOne(@params._id)
         data.title = "Case"
         data.goBackPath = "cases"
@@ -69,6 +68,10 @@ Router.map ->
         data.goBackPath = "cases"
         data
 
+    @route 'families',
+      data:
+        title: "Families"
+
     @route 'bid',
       path: "cases/bid/:_id"
       before: ->
@@ -79,7 +82,6 @@ Router.map ->
         data = Cases.findOne(@params._id)
         data.title = "BID for #{data.name}"
         data.goBackPath = "viewCase"
-        console.log("data", data)
         data
 
     @route 'mou',
@@ -137,22 +139,49 @@ mustBeSignedIn = ->
     else
       @render("accessDenied")
     @stop()
+  
+setTags = ->
+  if user = Meteor.user()
+    tags = {}
+    tags[user.tag] =
+      type: 'user'
+      _id: user._id
+      tag: user.tag
+      name: user.profile.name
+    Session.set("tags", tags)
 
 googleDriveAuthorize = ->
-  console.log("Check google auth", gDrive)
+  #console.log("Check google auth", gDrive)
   if Meteor.user()
     if not gDrive.userDeclined and not gDrive.authorized() and not gDrive.authorizing()
       @render("googleAuth")
       @stop()
 
+addPageTag = ->
+  if Session.get('messageTagFilter')? and Session.get('currentRecordId')?
+    #tags = Session.get("tags")
+    #for tag in tags
+    #  if tag._id is Session.get('currentRecordId')
+    #    return
+    tag =
+      type: Session.get('messageTagFilter')
+      _id: Session.get('currentRecordId')
+    Meteor.call "getFullTag", tag, (error, tag) ->
+      if not error? and tag?
+        tags = Session.get("tags")
+        tags[tag.tag] = tag
+        Session.set("tags", tags)
 
 
 # this hook will run on almost all routes
 Router.before mustBeSignedIn, except: ['home']
 
+Router.before setTags, except: []
+
 # this hook will run on almost all routes
 Router.after googleDriveAuthorize, except: []
 
+Router.after addPageTag, except: ['home']
 
 # this hook will run on all routes
 Router.before ->
@@ -160,7 +189,10 @@ Router.before ->
   Session.set('messageTagFilter', null)
   Session.set('currentRecordId', null)
   
+
 Router.after ->
+  addPageTag()
+### 
   if /mobile/i.test(navigator.userAgent)
     #
     # Trying to hide browers bar on iOS.  TODO: Get this to work
@@ -170,6 +202,7 @@ Router.after ->
       window.scrollTo(0, 1)
       console.log("Scroll to top?", window)
     , 500
+###
 
 Router.after  ->
   Session.set('path', location.pathname)

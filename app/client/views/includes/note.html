@@ -1,0 +1,46 @@
+
+<template name="newNote">
+    <span class="new-note-span">
+        <button class="btn btn-default btn-xs" id="new-note-link" >
+            <i class="fa fa-pencil fa-lg"></i>
+        </button>
+    </span>
+    {{#if showNewNoteDialog}}
+        {{> newNoteDialog}}
+    {{/if}}
+</template>
+
+<template name="newNoteDialog">
+    <div class="mask"> </div>
+     <!-- Modal -->
+    <div id="newNoteModal">
+        <div class="container"> 
+            <form>
+                <div class="dialog-header center-block">
+                    <button type="button" class="btn btn-default btn-sm" id="cancel">Cancel</button>
+                    <h5 class="text-center">{{title}}</h5>
+                    <button type="submit" id="submit" class="btn btn-primary btn-sm">Submit</button>
+                </div>
+                <div class="dialog-body">    
+                    <div class="form-group">
+                        <textarea id="messageTextArea" name="message" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button id="tag-input" class="btn btn-default btn-sm">#</button>
+                        <button id="at-input" class="btn btn-default btn-sm">@</button>
+                        <label class="control-label">Tags : </label>
+                        <span class="form-control-static">
+                            {{#each tags}}
+                                {{> noteTag}}
+                            {{/each}}
+                        </span> 
+                    </div>      
+                </div>
+            </form>
+        </div>
+     </div>
+</template>
+
+<template name="noteTag">
+    <span class='badge tag-{{type}}'>{{name}}</span>
+</template>

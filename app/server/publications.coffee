@@ -37,6 +37,12 @@ Meteor.publish "messages", (limit) ->
             timestamp: -1
         limit: limit
 
+Meteor.publish "families", (limit) ->
+    Families.find {},
+        sort: 
+            name: 1
+        limit: limit
+
 # TODO: Limit this to the ones a user can see 
 Meteor.publish "cases", (limit) ->
     Cases.find {},
@@ -47,3 +53,6 @@ Meteor.publish "cases", (limit) ->
 Meteor.publish "singleCase", (id) ->
     if id
         Cases.find(id)
+
+
+

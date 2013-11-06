@@ -7,42 +7,52 @@
             <a class="btn btn-primary btn-sm pull-right" href={{pathFor 'mou'}}>MOU</a>
             <a class="btn btn-primary btn-sm pull-right" href={{pathFor 'bid'}}>BID</a>
         </div>
-        <div class="well record-details">
-            <div class="">
-                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseDetails">
-                    Details
-                </button>
-            </div>
-            
 
-            <div id="collapseDetails" class="panel-collapse collapse {{detailsIn}}">
-                <table class="table table-striped table-condensed">
-                    <tbody>
-                    {{#each case}}  
-                    <tr class="">
-                        <td class="td-key"><strong>{{key}} :</strong></td>
-                        <td class="td-val">
-                            <strong>{{value}}</strong>
-                        </td>
-                    </tr>
-                    {{/each}}
-                    </tbody>
-                </table>
+        <div class="panel-group" id="accordion">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <button class="btn btn-link" data-toggle="collapse" data-parent="#accordion" data-target="#collapseDetails">
+                            Case Details
+                        </button>
+                    </h4>
+                </div>
+
+                <div id="collapseDetails" class="panel-collapse collapse {{detailsIn}}">
+                    <div class="panel-body">
+                    <table class="table table-striped table-condensed">
+                        <tbody>
+                        {{#each case}}  
+                        <tr class="">
+                            <td class="td-key"><strong>{{key}} :</strong></td>
+                            <td class="td-val">
+                                <strong>{{value}}</strong>
+                            </td>
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
             </div>
 
-        </div>
-        
-        <div class="well record-comments">
-            <div class="">
-                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseMessages">
-                    Messages 
-                </button>
-                <div class="badge">{{commentsCount}}</div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseMessages">
+                            Messages 
+                        </button>
+                    </h4>
+                </div>
+
+                <div id="collapseMessages" class="panel-collapse collapse {{messagesIn}}">
+                    <div class="panel-body">
+                        {{> messages}}
+                    </div>
+                </div>
             </div>
-            
-            <div id="collapseMessages" class="panel-collapse collapse {{messagesIn}}">
-                {{> messages}}
-            </div>
+
         </div>
 
     </div>

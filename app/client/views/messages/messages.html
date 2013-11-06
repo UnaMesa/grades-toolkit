@@ -3,20 +3,9 @@
 <template name="messages">
     <div class="message-center clearfix">
       {{> messagesList}}
-      {{> newMessageBox}}
     </div>
 </template>
 
-<template name="newMessageBox">
-    <form role="form">
-        <div id="new-message-group" class="input-group">
-            <span class="input-group-btn">
-                <button href="#" id="hash-input" class="btn btn-primary" type="button">#</button>
-            </span>
-            <input type="text" class="form-control" name="message" id="new-message" placeholder="Type your Message" />
-        </div>
-    </form>
-</template>
 
 <template name="messagesList">
     {{#unless haveMessages}}
@@ -24,7 +13,7 @@
             <h4 class="alert alert-warning text-center">No messages !</h4>
         {{/if}}
     {{else}}
-        <div class="messages-list-box">
+        <div class="messages-list-box2">
             {{#each currentMessages}}
                 {{> message}}
             {{/each}}
@@ -68,7 +57,9 @@
 </template>
 
 <template name="tag">
+    {{#constant}}
     <a href='{{pathFor path}}'><span class='badge tag-{{type}}'>{{name}}</span></a>
+    {{/constant}}
 </template>
 
 

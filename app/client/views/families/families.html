@@ -1,0 +1,36 @@
+
+<template name="families"> 
+    <div class="contacts">
+        {{#unless haveFamiles}}
+        {{#if familiesReady}}
+            <h4 class="alert alert-warning text-center">No Records</h4>
+        {{/if}}
+        {{else}}
+
+        {{#each sortedFamilies}} 
+            {{> family}}
+        {{/each}}
+
+        {{#if familiesReady}}
+            {{#unless allFamiliesLoaded}}
+                <a class="load-more" href="#">Load more</a>
+            {{/unless}}
+        {{else}}
+            <div>{{> spinner}}</div>
+        {{/if}}
+        {{/unless}}
+    </div> 
+</template>
+
+<template name="family">
+    <div class="well well-sm contact">
+        {{#if picture}}
+          <img class="img-rounded contact-picture" src="{{picture}}" />
+        {{else}}
+           <i class="fa fa-user fa-3x"></i>
+        {{/if}}
+        {{name}}
+        {{#if tag}}<a href="#"><span class="tag tag-{{type}} badge">{{tag}}</span></a>{{/if}}
+        {{#if commentsCount}}<span class="badge comments-count-badge">{{commentsCount}}</span>{{/if}}
+    </div>
+</template>

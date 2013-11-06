@@ -35,7 +35,7 @@
     userDeclined: false
 
     init: ->
-        console.log("gDrive.init")
+        #console.log("gDrive.init")
         if not gDrive._currentFileListListeners?
             gDrive._currentFileListListeners = new Deps.Dependency()
         if not gDrive._currentStateListeners?
@@ -95,7 +95,7 @@
     # See: https://developers.google.com/drive/auth/web-client
     #
     checkAuth: ->
-        console.log("checkAuth called", gDrive._immediate)
+        #console.log("checkAuth called", gDrive._immediate)
         if not gDrive._authorized and not gDrive._authorizing
             #
             #  TODO: Check for popup blocking for this causes havoc!!!
@@ -118,7 +118,6 @@
                 gDrive._userInitiatedAuth = false
                 if authResult and not authResult.error
                     gDrive._authorized = true
-                    console.log("Google Auth", authResult)
                     if gDrive._callBack
                         gDrive._callBack()
                 else if (gDrive._immediate)
@@ -141,7 +140,6 @@
             console.log("gapi.client.drive is not loaded", gapi.client)
             gDrive.load()
         else
-            console.log("Call:checkAuth")
             gDrive.checkAuth()
     
     path: ->
@@ -319,8 +317,6 @@
                     console.log("new folder", newFolder, gDrive)
                     gDrive._fileList.unshift(newFolder)
                     gDrive._currentFileListListeners.changed()
-                    console.log("change")
-
 
 
     findOrCreateDirectory: (dirPath) ->

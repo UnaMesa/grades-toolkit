@@ -4,9 +4,12 @@
 
 
 Meteor.methods 
-    submitMessage: (messageAttributes, tag) ->
+    submitMessage: (messageAttributes, tags) ->
         user = Meteor.user()
         
+        if tags? and not typeIsArray tags
+            tags = [tags]
+
         # ensure the user is logged in
         throw new Meteor.Error(401, "You need to login to post new stories") unless user
   
@@ -24,10 +27,13 @@ Meteor.methods
         # Only available on the server
         if not @isSimulation
             message.tags = []
-            if tag?
-                tagObj = fillOutTagFromId(tag)
-                updateCommentsCount(tagObj)
-                message.tags.push(tagObj)
+            if tags?
+                tags = uniqueTags(tags)
+                for tag in tags
+                    if not tags.name?
+                        tagObj = fillOutTagFromId(tag)
+                    updateCommentsCount(tagObj)
+                    message.tags.push(tagObj)
             # Pull out tags and tag this message
             tagStrings = message.message.match(/\#[^ ]+/g)
             if tagStrings?
@@ -37,6 +43,9 @@ Meteor.methods
                         message.tags.push(tagObj)
                     else
                         throw new Meteor.Error(422, "Invalid tag #{tagString} in message")
-                console.log('adding tags to message', message)
-
+            message.tags = uniqueTags(message.tags)
+            console.log("submitMessage", message)
         Messages.insert(message)
+
+
+

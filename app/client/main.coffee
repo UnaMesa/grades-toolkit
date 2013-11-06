@@ -17,7 +17,10 @@ Meteor.subscribe "userData"
     ,
         10
 
-
+@FamiliesHandle = Meteor.subscribeWithPagination "families", 
+        'name': 1
+    , 
+        10
 
 Meteor.startup ->
     console.log("Meteor Start on Client")
@@ -27,3 +30,4 @@ Meteor.startup ->
     else
         console.log("Not a mobile device", window)
         #window.open(Meteor.absoluteUrl(), 'Grades Demo', "height=600,width=400")
+

@@ -1,0 +1,36 @@
+
+<template name="headline">
+    <nav class="titlebar navbar navbar-default navbar-fixed-top">
+        {{#if goBackPath}}
+            <span class="back-button">
+                <a class="btn btn-default btn-xs" href={{pathFor goBackPath}}><i class="fa fa-arrow-left fa-lg"></i></a>
+            </span>
+        {{/if}}
+        <h3 class="text-center navtitle">
+            {{#if currentUser}}
+                {{title}}
+            {{else}}
+                Grades
+            {{/if}}
+        </h3>
+        {{#if newRecordPath}}
+            <span class="new-record">
+                <a class="btn btn-default btn-xs" href={{pathFor newRecordPath}}><i class="fa fa-plus-circle fa-lg"></i></a>
+            </span>
+        {{/if}}
+    </nav>
+</template>
+
+
+<template name="userImage">
+     {{#if currentUser}}
+        <span>
+            {{#if currentUser.services.google.picture}}
+                <img class="img-rounded profile-picture navbar-btn" src="{{currentUser.services.google.picture}}" /> 
+            {{else}}
+                <i class="fa fa-user fa-2x"></i>
+            {{/if}}
+        </span>
+    {{/if}}
+</template>
+
