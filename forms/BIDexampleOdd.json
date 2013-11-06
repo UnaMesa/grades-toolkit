@@ -1,0 +1,41 @@
+{ "fdf_fields" : {
+	"formType" : "BID",
+	"caseID" : "oddFields",
+	"field" : [
+		{ "key" : "ChildsName", "value" : "ChildsName", "type" : "textString" },
+		{ "key" : "StudentIdentifier", "value" : "StudentIdentifier", "type" : "textString" },
+		{ "key" : "CurrentSchool", "value" : "CurrentSchool", "type" : "textString" },
+		{ "key" : "PreviousSchools", "value" : "PreviousSchools", "type" : "textString" },
+		{ "key" : "CurrentGrade", "value" : "CurrentGrade", "type" : "textString" },
+		{ "key" : "BIDMeetingDate", "value" : "BIDMeetingDate", "type" : "textString" },
+		
+		{ "key" : "Q1", "value" : true, "type" : "checkbox" },
+		{ "key" : "Q3", "value" : true, "type" : "checkbox" },
+		{ "key" : "Q5", "value" : true, "type" : "checkbox" },
+		{ "key" : "Q7", "value" : true, "type" : "checkbox" },
+		
+		{ "key" : "Q9", "value" : true, "type" : "checkbox" },
+		{ "key" : "Q11", "value" : true, "type" : "checkbox" },
+		{ "key" : "Q13", "value" : true, "type" : "checkbox" },
+		
+		{ "key" : "ReportCards", "value" : true, "type" : "checkbox" },
+		{ "key" : "Emails", "value" : true, "type" : "checkbox" },
+		{ "key" : "504Plan", "value" : true, "type" : "checkbox" },
+		{ "key" : "AttendanceData", "value" : true, "type" : "checkbox" },
+		{ "key" : "Other", "value" : true, "type" : "checkbox" },
+		{ "key" : "OtherNote", "value" : "OtherNote", "type" : "textString" },
+		
+		{ "key" : "SchoolRemain", "value" : true, "type" : "checkbox" },
+		{ "key" : "SchoolSame", "value" : "SchoolSame", "type" : "textString" },
+		{ "key" : "SUSDSame", "value" : "SUSDSame", "type" : "textString" },
+		{ "key" : "TransBy", "value" : "TransBy", "type" : "textString" },
+		{ "key" : "TransPaid", "value" : "TransPaid", "type" : "textString" },
+		
+		{ "key" : "SchoolPlacement", "value" : true, "type" : "checkbox" },
+		{ "key" : "SchoolChange", "value" : "SchoolChange", "type" : "textString" },
+		{ "key" : "SUSDChange", "value" : "SUSDChange", "type" : "textString" },
+		{ "key" : "Responsible", "value" : "Responsible", "type" : "textString" }
+	]
+}}
+	
+	
