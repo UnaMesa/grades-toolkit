@@ -1,0 +1,39 @@
+{ "fdf_fields" : {
+	"formType" : "BID",
+	"caseID" : "evenFields",
+	"field" : [
+		{ "key" : "ChildsName", "value" : "ChildsName", "type" : "textString" },
+		{ "key" : "StudentIdentifier", "value" : "StudentIdentifier", "type" : "textString" },
+		{ "key" : "CurrentSchool", "value" : "CurrentSchool", "type" : "textString" },
+		{ "key" : "PreviousSchools", "value" : "PreviousSchools", "type" : "textString" },
+		{ "key" : "CurrentGrade", "value" : "CurrentGrade", "type" : "textString" },
+		{ "key" : "BIDMeetingDate", "value" : "BIDMeetingDate", "type" : "textString" },
+		
+		{ "key" : "Q2", "value" : true, "type" : "checkbox" },
+		{ "key" : "Q4", "value" : true, "type" : "checkbox" },
+		{ "key" : "Q6", "value" : true, "type" : "checkbox" },
+		{ "key" : "Q8", "value" : true, "type" : "checkbox" },
+		
+		{ "key" : "Q10", "value" : true, "type" : "checkbox" },
+		{ "key" : "Q12", "value" : true, "type" : "checkbox" },
+		
+		{ "key" : "IEP", "value" : true, "type" : "checkbox" },
+		{ "key" : "ProgressReports", "value" : true, "type" : "checkbox" },
+		{ "key" : "AchievementData", "value" : true, "type" : "checkbox" },
+		{ "key" : "CServicePlan", "value" : true, "type" : "checkbox" },
+		{ "key" : "OtherNote", "value" : "OtherNote", "type" : "textString" },
+		
+		{ "key" : "SchoolRemain", "value" : true, "type" : "checkbox" },
+		{ "key" : "SchoolSame", "value" : "SchoolSame", "type" : "textString" },
+		{ "key" : "SUSDSame", "value" : "SUSDSame", "type" : "textString" },
+		{ "key" : "TransBy", "value" : "TransBy", "type" : "textString" },
+		{ "key" : "TransPaid", "value" : "TransPaid", "type" : "textString" },
+		
+		{ "key" : "SchoolPlacement", "value" : true, "type" : "checkbox" },
+		{ "key" : "SchoolChange", "value" : "SchoolChange", "type" : "textString" },
+		{ "key" : "SUSDChange", "value" : "SUSDChange", "type" : "textString" },
+		{ "key" : "Responsible", "value" : "Responsible", "type" : "textString" }
+	]
+}}
+	
+	
