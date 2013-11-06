@@ -1,7 +1,16 @@
-Grades Toolkit TODO
-===================
+Grades Toolkit Change Log
+=========================
 
-10/29/2013
+
+10/27/2013 - TEP
+    
+    Changed look and feel targeting iPhone.  
+    Google Authentication
+    Generic message page.  Look like iMessages
+    Contacts page
+    Other page stubs
+    
+10/29/2013 - TEP
 
     Added in Cases and hooks for notes
     Added back link
@@ -10,7 +19,7 @@ Grades Toolkit TODO
     A bunch of other stuff
     
 
-10/30/2013
+10/30/2013 - TEP
 	
 	Turned alert package into an atmosphere package
 	Added names on chats
@@ -18,16 +27,16 @@ Grades Toolkit TODO
 	Bubble arrow
 	
 
-11/1/2013-11/2/2013
+11/1/2013-11/2/2013 - TEP
 	
 	See commit log
 	
 	
-11/2/2013
+11/2/2013 - TEP
 	
 	Links to MOU and BID forms.
 
-11/2/2013
+11/2/2013 - TEP
 	
 	 Unique Tag creation for users
 	 Bad tag detection on message stream
@@ -36,4 +45,8 @@ Grades Toolkit TODO
 	 Message box sizing on case page
 	 Collapse on case page
 
+11/5/12 - TEP
 
+	Major UI redesign.  Twitter like with blocking dialog for new messages
+	Scrolling now in window and not subframe.  iOS Safari behaves better
+	
