@@ -35,7 +35,9 @@ Meteor.methods
                     updateCommentsCount(tagObj)
                     message.tags.push(tagObj)
             # Pull out tags and tag this message
-            tagStrings = message.message.match(/\#[^ ]+/g)
+            caseStrings = message.message.match(/\#[^ ]+/g)
+            otherStrings = message.message.match(/\@[^ ]+/g)
+            tagStrings = _.union(caseStrings, otherStrings)
             if tagStrings?
                 for tagString in tagStrings
                     if tagObj = tagToTagObject(tagString)

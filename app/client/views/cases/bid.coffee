@@ -78,7 +78,6 @@ Template.bid.events
                     else
                         theBid[key] = false
                 when Date 
-                    console.log("#{key} is a Date")
                     if theBid[key] is ''
                         delete theBid[key]
                     else

@@ -141,6 +141,14 @@ Template.message.created = ->
 Template.message.rendered = ->
     #console.log("message rendered", @data)
 
+
+tagToUrl = (tag) ->
+    switch tag.type
+        when 'case'
+            Router.routes['viewCase'].path(tag)
+        else
+            Router.routes['contacts'].path() # TODO: Change this
+
 Template.message.helpers
     submittedText: ->
         new moment(@timestamp).format("llll")
@@ -151,14 +159,16 @@ Template.message.helpers
     displayMessage: ->
         if @tags?
             for tag in @tags
-                if tag.type is 'case'
-                    url = Router.routes['viewCase'].path(tag) #Router.routes['postShow'].path({_id: 1})
-                else 
-                    url = Router.routes['contacts'].path()
+                url = tagToUrl(tag)
                 link = "<a href='#{url}'><span class='badge tag-#{tag.type}'>#{tag.name}</span></a>"
                 @message = @message.replace(new RegExp(tag.tag,"g"), link) 
                 # Template.tag(tag)) # Using a reactive template blew chow
         @message
+
+    displayTags: ->
+        for tag in @tags
+            tag.url = tagToUrl(tag)
+        @tags
 
 
 Template.author.helpers

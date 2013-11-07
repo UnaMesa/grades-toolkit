@@ -6,8 +6,11 @@
 
 Meteor.methods
 
-    createTag: (tagFromString) ->
-        createTag(tagFromString)
+    createUserTag: (tagFromString) ->
+        createUserTag(tagFromString)
+
+    createCaseTag: (tagFromString) ->
+        createCaseTag(tagFromString)
 
     getFullTag: (tag) ->
         if tag.type? and tag._id?
@@ -25,7 +28,7 @@ Meteor.methods
         throw new Meteor.Error(401, "Error on Login")  unless user
   
         name = user.profile.name
-        tag = createTag(name)
+        tag = createUserTag(name)
         console.log("Add tag to user record", user.profile.name, tag, user)
         Meteor.users.update 
             _id: user._id

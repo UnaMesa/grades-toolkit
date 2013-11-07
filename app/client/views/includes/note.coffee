@@ -95,8 +95,8 @@ Template.newNoteDialog.events
     "keypress #messageTextArea": (e) ->
         if e.keyCode is 32 # Got a space
             message = $("[name=message]").val()
-            if tag = message.match(/\#[^ ]+$/)
-                console.log("Tag", tag)
+            if tag = message.match(/\#[^ ]+$/) or message.match(/\@[^ ]+$/)
+                console.log("Tag", tag, tag[0])
                 Meteor.call "tagIsValid", tag[0], (error, result) ->
                     if error or not result
                         alert("Tag #{tag[0]} is not valid")

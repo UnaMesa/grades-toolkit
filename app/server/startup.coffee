@@ -7,7 +7,7 @@ Meteor.startup ->
         "tag":
             "$exists" : false
     ).forEach (rec) ->
-        tag = createTag(rec.name)
+        tag = createCaseTag(rec.name)
         console.log("Adding tag for case #{rec.name} -> #{tag}")
         Cases.update rec._id,
             $set:
@@ -17,6 +17,21 @@ Meteor.startup ->
                 console.log("Error adding tag", error)
             else
                 console.log("Adding Tag successful")
+
+
+    Meteor.users.find().forEach (rec) ->
+        console.log('user', rec.profile.name, rec.tag)
+        if rec.tag?[0] is '#'
+            tag = createUserTag(rec.profile.name)
+            Meteor.users.update rec._id,
+                $set:
+                    tag: tag
+            , (error, result) ->
+                if error
+                    console.log("Error changing user tag", error)
+                else
+                    console.log("Adding user tag successful")
+
 
     #
     #  Redefine the callback

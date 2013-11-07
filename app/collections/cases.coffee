@@ -173,7 +173,7 @@ Meteor.methods
 
         # Only available on the server
         if not @isSimulation
-            theCase.tag = createTag(caseAttributes.name)
+            theCase.tag = createCaseTag(caseAttributes.name)
 
         try   
             Cases.insert theCase

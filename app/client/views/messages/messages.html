@@ -1,5 +1,6 @@
 
 
+
 <template name="messages">
     <div class="message-center clearfix">
       {{> messagesList}}
@@ -34,6 +35,11 @@
             <span class="well well-sm pull-right text-center message-body my-message-body">
                 {{{displayMessage}}}
                 <div class="my-message-bubble-arrow"></div>
+                <div class="tags">
+                    {{#each displayTags}}
+                        {{> tag}}
+                    {{/each}}
+                </div>
             </span>
           </div>
         {{else}}
@@ -42,6 +48,11 @@
                 <span class="message-author pull-left">{{> author}}</span>
                 <span class="well well-sm pull-left text-center message-body">{{{displayMessage}}}
                     <div class="message-bubble-arrow"></div>
+                    <div class="tags">
+                        {{#each displayTags}}
+                            {{> tag}}
+                        {{/each}}
+                    </div>
                 </span> 
             </div>       
         {{/if}}

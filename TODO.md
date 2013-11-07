@@ -2,7 +2,7 @@ Grades Toolkit TODO
 ===================
 
 
-- [x] Google Docs API working
+- [ ] Show all Tags in message
 
 - [-] Create and Display Cases
  	* Fill out the hooks
@@ -11,7 +11,7 @@ Grades Toolkit TODO
 - [x] Message streams for Cases
 
 - [ ] BID and MOU Forms
-	* Fill out
+	* BID ready, MOU todo
 	* Submit writes to google doc and generates a message with a href link to the form
 	* HTML to PDF [jsPDF](https://github.com/MrRio/jsPDF)
 
