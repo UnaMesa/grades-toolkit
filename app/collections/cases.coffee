@@ -197,7 +197,7 @@ Meteor.methods
         ###
 
 
-    updateCase: (caseId, caseAttributes) ->
+    updateCase: (caseId, caseAttributes, type) ->
         user = Meteor.user()
         
         # ensure the user is logged in
@@ -206,6 +206,7 @@ Meteor.methods
         theCase = _.omit(caseAttributes, ["author", "userId", "submitted", "commentsCount"])
         
         theCase.modified = new Date().getTime()
+        theCase.lastModifierId = user._id
         
         console.log("Update Case", caseId, theCase)
         try
@@ -217,6 +218,45 @@ Meteor.methods
                 error: 
                     reason: "Error on case update"
                     invalidKeys: Cases.namedContext("default").invalidKeys()
-                
+         
+
+        # Only available on the server
+        if not @isSimulation
+        
+            # Generate Message
+            message = 
+                userId: user._id
+                author: user.profile.name
+                timestamp: new Date().getTime()
+                tags: []
+
+            message.tags.push 
+                type: 'user'
+                _id: user._id
+                tag: user.tag
+                name: user.profile.name
+
+            caseTag = fillOutTagFromId
+                type: 'case'
+                _id: caseId
+
+            if caseTag?
+                message.tags.push caseTag
+
+            switch type
+                when 'BID'
+                    message.message = "BID saved for #{caseTag.tag} by #{user.tag}"
+                when 'MOU'
+                    message.message = "MOU saved for #{caseTag.tag} by #{user.tag}"
+                else
+                    type = 'case'
+                    message.message = "Case #{caseTag.tag} updated by #{user.tag}"
+
+            Messages.insert message, (error, id) ->
+                if error
+                    console.log("Error creating tag for #{type} update")
+
+
+
 
 

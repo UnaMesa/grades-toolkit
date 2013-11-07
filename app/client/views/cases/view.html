@@ -1,11 +1,17 @@
 <template name="viewCase">
-    <div class="container">
+    <div class="case-view">
         <div class="well record-view">
             {{#if isUrgent}}<span class="urgent badge">URGENT</span>{{/if}}
             {{#if tag}}<span class="tag tag-case badge">{{tag}}</span>{{/if}}
             <h4>{{name}}</h4>
-            <a class="btn btn-primary btn-sm pull-right" href={{pathFor 'mou'}}>MOU</a>
-            <a class="btn btn-primary btn-sm pull-right" href={{pathFor 'bid'}}>BID</a>
+            <a class="btn btn-primary btn-sm pull-right check-btn" href={{pathFor 'mou'}}>
+                MOU
+                {{#if MOU}}<span class="check"><i class="fa fa-check-square"></i></span>{{/if}}
+            </a>
+            <a class="btn btn-primary btn-sm pull-right check-btn" href={{pathFor 'bid'}}>
+                BID
+                {{#if BID}}<span class="check"><i class="fa fa-check-square"></i></span>{{/if}}
+            </a>
         </div>
 
         <div class="panel-group" id="accordion">
@@ -43,11 +49,13 @@
                         <button class="btn btn-link" data-toggle="collapse" data-target="#collapseMessages">
                             Messages 
                         </button>
+                        <button id="new-note-link" class="btn btn-default btn-xs pull-right"><i class="fa fa-pencil fa-lg"></i></button>
                     </h4>
+
                 </div>
 
                 <div id="collapseMessages" class="panel-collapse collapse {{messagesIn}}">
-                    <div class="panel-body">
+                    <div class="panel-body case-message-list">
                         {{> messages}}
                     </div>
                 </div>

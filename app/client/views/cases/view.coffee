@@ -57,3 +57,7 @@ Template.viewCase.events
         console.log("shown.bs.collapse")
         setMessageListHeight()
         scrollToBottom()
+
+    "click #new-note-link": (e) ->
+        console.log('click')
+        Session.set("showNewNoteDialog", true)

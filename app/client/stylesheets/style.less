@@ -14,9 +14,9 @@
 @my-message-color: @brand-primary;
 @my-message-text-color: #fff;
 
-@user-color: #44d;
-@case-color: #4b1;
-@family-color: #f73;
+@user-color: #999;
+@case-color: @brand-success; //#8a4;
+@family-color: @brand-warning;
 
 // Do not let navbars collapse
 @grid-float-breakpoint: 100px;
@@ -53,6 +53,10 @@ body {
     z-index: 2010;
 }
 
+.table {
+    margin-bottom: 0px;
+}
+
 #newNoteModal {
     position: absolute;
     width: 100%;
@@ -60,43 +64,55 @@ body {
     left: 0px;
     display: block;
     z-index: 3020;
-    padding: 10px;
+    padding: 5px;
     margin: 0px;
     background-color: #eee;
     //opacity: 0.1;
+
+    .container {
+        padding-right: 3px;
+        padding-left: 3px;
+    }
+
+    .dialog-header h5 {
+        margin: 5px;
+        //text-align: center;
+        //display: inline-block;
+    }
+
+    .dialog-header #submit {
+        position: absolute;
+        right: 9px;
+        top: 5px;
+    }
+
+    .dialog-header #cancel {
+        position: absolute;
+        left: 9px;
+        top: 5px;
+    }
+
+    .dialog-body {
+        margin-top: 5px;
+    }
+
+    .dialog-body .form-group {
+        margin-bottom: 0;
+        margin-top: 3px;
+    }
+
+    .label {
+        font-size: 9px;
+    }
+
+    .tag-btn {
+        font-size: 14px;
+        font-weight: bold;
+    }
 }
 
-#newNoteModal .container {
-    padding-right: 3px;
-    padding-left: 3px;
-}
 
-.dialog-header h5 {
-    margin-bottom: 15px;
-    //text-align: center;
-    //display: inline-block;
-}
 
-.dialog-header #submit {
-    position: absolute;
-    left: 14px;
-    top: 15px;
-}
-
-.dialog-header #cancel {
-    position: absolute;
-    right: 14px;
-    top: 15px;
-}
-
-.dialog-body {
-    margin-top: 5px;
-}
-
-.dialog-body .form-group {
-    margin-bottom: 0;
-    margin-top: 3px;
-}
 
 .zero-padding {
     padding: 0
@@ -162,6 +178,39 @@ body {
     position: relative;
     opacity: 1;
     margin-bottom: 10px;
+
+    .contact-content { 
+        float: left;
+
+        h3 {
+            margin: 0; 
+            line-height: 1.4; 
+            font-size: 18px;
+
+            a {
+                display: inline-block;
+                margin-right: 5px; 
+            }
+
+            span { 
+                font-weight: normal; 
+                font-size: 14px;
+                display: inline-block; 
+                color: #aaaaaa;
+            }
+        }
+
+        p { 
+            margin: 0; 
+        }
+
+        discuss {
+            display: block; 
+            float: right; 
+            margin-top: 7px;
+        }
+    } 
+
 }
 
 .contact:before, .contact:after {
@@ -173,12 +222,13 @@ body {
 
 .contact.invisible { opacity: 0 } 
 
-.contact .contact-content { float: left } 
-
-.contact .contact-content h3 {
-    margin: 0; line-height: 1.4; font-size: 18px;
+.contact-picture {
+    height:32px;
+    vertical-align: baseline;
+    margin-right: 5px;
 }
 
+/*
 .contact .contact-content h3 a {
     display: inline-block;
     margin-right: 5px; 
@@ -197,12 +247,9 @@ body {
     float: right; 
     margin-top: 7px;
 }
+*/
 
-.contact-picture {
-    height:32px;
-    vertical-align: baseline;
-    margin-right: 5px;
-}
+
 
 #login {
     margin-right: 10px;
@@ -280,30 +327,40 @@ body {
 }
 
 
-.messages-list-box {
-    padding-left: 2px;
-    padding-right: 2px;
-    margin: 0px;
-    max-height: 80px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    border-radius: 5px;
-    //border-top-right-radius: 5px;
-    background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.121569) 0px 2px 3px 0px inset;
+.message-center {
+    height: 100%;
+
+    li {
+        padding: 5px;
+    }
 }
 
 .message {
+    font-size: 12px;
+    margin-left: 45px;
+
+    .header {
+        font-size: 10px;
+
+        .author-picture {
+            width: 36px;
+            margin-left: -45px;
+            float: left;
+        }
+
+    }
+
+    .body {
+
+    }
+
+    .footer {
+        font-size: 10px;
+    }
 
 }
 
-.message-sub {
-}
-
-.message-author {
- 
-}
-
+/*
 .message-author-picture {
     width:32px;
     margin: 0px;
@@ -367,6 +424,11 @@ body {
   //z-index: 10;
 }
 
+.message-sub .badge {
+    font-size: 8px;
+}
+*/
+
 .tags {
     padding: 2px;
     margin: 0px;
@@ -374,16 +436,14 @@ body {
     border-radius: 5px;
     background-color: #fff;
     line-height: 0;
+
+    a {
+        padding: 0px;
+        margin: 0px; 
+    }
 }
 
-.tags a {
-    padding: 0px;
-    margin: 0px;
-}
 
-.message-center {
-    height: 100%;
-}
 
 #new-message-group {
     //position: fixed;
@@ -427,9 +487,26 @@ body {
     width: 60px;
 }
 
+.check-btn {
+    position: relative;
+
+    .check {
+        position: absolute;
+        top: -4px;
+        right: -1px;
+        color: black; //@brand-success;
+    }
+}
+
 .cases {
     padding: 0;
     margin: 0;
+}
+
+.case-view {
+    padding: 0;
+    margin: 0;
+
 }
 
 .case {
@@ -446,6 +523,72 @@ body {
     margin-bottom: 10px;
     background-color: #f9f9f9;
     cursor: pointer;
+
+    .upvote {
+        display: block; 
+        margin: 7px 12px 0 0; 
+        float: left;
+    }
+
+    .btn {
+        font-size: 10px;
+    }
+
+    .case-content { 
+        
+        float: left;
+
+        h3 {
+            margin: 0; 
+            line-height: 1.4; 
+            font-size: 18px;
+            display: inline-block;
+        }
+
+        .case-age {
+            margin: 0; 
+            font-size: 11px;
+        }
+
+        .tag {
+            position: absolute; 
+            top: 0px;
+            left: 0px;
+        }
+    } 
+
+    .comments-count-badge {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        background-color: blue;
+        font-size: 9px;
+        opacity: 0.6;
+    }
+
+    .case-content h3 a {
+        display: inline-block;
+        margin-right: 5px; 
+    }
+
+    .case-content h3 span { 
+        font-weight: normal; 
+        font-size: 14px;
+        display: inline-block; 
+        color: #aaaaaa;
+    }
+
+    .case-content p { 
+        margin: 0;
+        margin-left: 5px; 
+        font-size: 10px; 
+}
+
+    .discuss {
+        display: block; 
+        float: right; 
+        margin-top: 7px;
+    }
 }
 
 .case:before, .case:after {
@@ -457,38 +600,9 @@ body {
 
 .case.invisible { opacity: 0 } 
 
-.case .upvote {
-    display: block; 
-    margin: 7px 12px 0 0; 
-    float: left;
+.case-message-list {
+    padding: 0px;
 }
-
-.case .case-content { 
-    float: left 
-} 
-
-.case .case-content h3 {
-    margin: 0; 
-    line-height: 1.4; 
-    font-size: 18px;
-    display: inline-block;
-}
-
-.case .case-content .case-age {
-    margin: 0; 
-    font-size: 11px;
-}
-
-.case .case-content .tag {
-    position: absolute; 
-    top: 0px;
-    left: 0px;
-}
-
-.case .btn {
-    font-size: 10px;
-}
-
 
 .comments-count-badge {
     position: absolute;
@@ -499,42 +613,6 @@ body {
     opacity: 0.6;
 }
 
-.case .comments-count-badge {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    background-color: blue;
-    font-size: 9px;
-    opacity: 0.6;
-}
-
-.case .case-content h3 a {
-    display: inline-block;
-    margin-right: 5px; 
-}
-
-.case .case-content h3 span { 
-    font-weight: normal; 
-    font-size: 14px;
-    display: inline-block; 
-    color: #aaaaaa;
-}
-
-.case .case-content p { 
-    margin: 0;
-    margin-left: 5px; 
-    font-size: 10px; 
-}
-
-.case .discuss {
-    display: block; 
-    float: right; 
-    margin-top: 7px;
-}
-
-.message-sub .badge {
-    font-size: 8px;
-}
 
 .tag {
     padding: 3px;

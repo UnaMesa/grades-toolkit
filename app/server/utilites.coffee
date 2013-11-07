@@ -64,18 +64,19 @@
 
 
 @fillOutTagFromId = (tag) ->
-    switch tag?.type
-        when 'user'
-            if rec = Meteor.users.findOne(_id: tag._id)
-                tag.name = rec.profile.name
-        when 'case'
-            if rec = Cases.findOne(_id: tag._id)
-                tag.name = rec.name
-        when 'family'  
-            if rec = Families.findOne(_id: tag._id)
-                tag.name = rec.name
-    tag.tag = rec?.tag
-    tag
+    if tag?
+        switch tag?.type
+            when 'user'
+                if rec = Meteor.users.findOne(_id: tag._id)
+                    tag.name = rec.profile.name
+            when 'case'
+                if rec = Cases.findOne(_id: tag._id)
+                    tag.name = rec.name
+            when 'family'  
+                if rec = Families.findOne(_id: tag._id)
+                    tag.name = rec.name
+        tag.tag = rec?.tag
+        tag
 
 
 @fillOutTagFromTag = (tag) ->

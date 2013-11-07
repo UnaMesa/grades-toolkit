@@ -107,7 +107,7 @@ Template.bid.events
             BID: theBid
 
         console.log("UpdateCase", Session.get('currentRecordId'), updatedCase)
-        Meteor.call "updateCase", Session.get('currentRecordId'), updatedCase, (error, result) ->
+        Meteor.call "updateCase", Session.get('currentRecordId'), updatedCase, 'BID', (error, result) ->
             if error
                 # Display error to the user
                 CoffeeAlerts.error(error.reason)
@@ -121,6 +121,7 @@ Template.bid.events
                 window.scrollTo(0, 0)
             else
                 CoffeeAlerts.success("Created Bid")
+
                 # TODO: Go to the Document            
                 Router.go("viewCase", {_id: Session.get('currentRecordId')})
 

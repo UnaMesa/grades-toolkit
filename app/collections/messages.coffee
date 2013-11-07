@@ -27,6 +27,13 @@ Meteor.methods
         # Only available on the server
         if not @isSimulation
             message.tags = []
+
+            message.tags.push
+                type: 'user'
+                _id: user._id
+                tag: user.tag
+                name: user.profile.name
+
             if tags?
                 tags = uniqueTags(tags)
                 for tag in tags

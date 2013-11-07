@@ -14,62 +14,51 @@
             <h4 class="alert alert-warning text-center">No messages !</h4>
         {{/if}}
     {{else}}
-        <div class="messages-list-box2">
+        <ol class="list-group">
             {{#each currentMessages}}
                 {{> message}}
             {{/each}}
             {{#unless allMessagesLoaded}}
                 {{> smallSpinner}}
             {{/unless}}
-        </div>
+        </ol>
     {{/unless}}
 </template>  
 
 
 <template name="message">
-    <div class="message clearfix">
-        <div class="message-date text-center text-muted">{{submittedText}}</div>
-        {{#if myMessage}}
-          <div class="message-sub pull-right">
-            <span class="message-author pull-right">{{> author}}</span>
-            <span class="well well-sm pull-right text-center message-body my-message-body">
+    <li class="list-group-item clearfix">
+        <div class="message">
+            <div class="header">
+                <span class="author">{{> author}}</span>
+                <span class="date text-muted pull-right">{{submittedText}}</span>
+            </div>
+            <p class="body">
                 {{{displayMessage}}}
-                <div class="my-message-bubble-arrow"></div>
-                <div class="tags">
-                    {{#each displayTags}}
-                        {{> tag}}
-                    {{/each}}
-                </div>
-            </span>
-          </div>
-        {{else}}
-            <div class="message-author-name text-muted">{{author}}</div>
-            <div class="message-sub pull-left">
-                <span class="message-author pull-left">{{> author}}</span>
-                <span class="well well-sm pull-left text-center message-body">{{{displayMessage}}}
-                    <div class="message-bubble-arrow"></div>
-                    <div class="tags">
-                        {{#each displayTags}}
-                            {{> tag}}
-                        {{/each}}
-                    </div>
-                </span> 
-            </div>       
-        {{/if}}
-    </div>
+            </p>
+            <div class="footer">
+            {{#each displayTags}}
+                {{> tag}}
+            {{/each}}
+            </div>
+        </div>
+    </li>
 </template>
 
 <template name="author">
     {{#if authorUrl}}
-        <img class="img-circle message-author-picture" src="{{authorUrl}}" />
+        <img class="img-rounded author-picture" src="{{authorUrl}}" />
     {{else}}
         <i class="fa fa-user fa-2x"></i>
     {{/if}}
+    <strong>{{author}}</strong> <span class="flat-tag text-muted"><em>{{authorTag}}</em></muted>
 </template>
 
 <template name="tag">
     {{#constant}}
-    <a href='{{pathFor path}}'><span class='badge tag-{{type}}'>{{name}}</span></a>
+    <a href='{{pathFor path}}'>
+        <span class='label label-default tag-{{type}}'>{{name}} <em>{{tag}}</em></span>
+    </a>
     {{/constant}}
 </template>
 

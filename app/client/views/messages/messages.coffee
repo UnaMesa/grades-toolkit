@@ -68,7 +68,7 @@ scrollToBottomOk = false
 $(window).resize(setMessageBodyWidth)
 
 @scrollWatch = (e) ->
-    console.log("scrollWatch", $(window).scrollTop() + $(window).height(), $(document).height())
+    #console.log("scrollWatch", $(window).scrollTop() + $(window).height(), $(document).height())
     if  $(window).scrollTop() + $(window).height() >= $(document).height()
         if MessagesHandle.ready() and Messages.find(messageFilter()).count() > MessagesHandle.loaded()
             $('#small-spinner').fadeTo(100, 1)
@@ -143,7 +143,7 @@ Template.message.rendered = ->
 
 
 tagToUrl = (tag) ->
-    switch tag.type
+    switch tag?.type
         when 'case'
             Router.routes['viewCase'].path(tag)
         else
@@ -151,7 +151,13 @@ tagToUrl = (tag) ->
 
 Template.message.helpers
     submittedText: ->
-        new moment(@timestamp).format("llll")
+        now = moment()
+        postDate = moment(@timestamp)
+        diff = now.diff(postDate, 'hours')
+        if diff > 36
+            new moment(@timestamp).format("D MMM")
+        else
+            moment.duration(now.diff(postDate)).humanize()
 
     myMessage: ->
         @userId is Meteor.userId()
@@ -159,23 +165,30 @@ Template.message.helpers
     displayMessage: ->
         if @tags?.length?
             for tag in @tags
-                url = tagToUrl(tag)
-                link = "<a href='#{url}'><span class='badge tag-#{tag.type}'>#{tag.name}</span></a>"
-                @message = @message.replace(new RegExp(tag.tag,"g"), link) 
-                # Template.tag(tag)) # Using a reactive template blew chow
+                if tag?
+                    url = tagToUrl(tag)
+                    #link = "<a href='#{url}'><span class='label label-default tag-#{tag.type}'>#{tag.name} <i>#{tag.tag}</i></span></a>"
+                    link = "<a href='#{url}'>#{tag.name}<small><i>(#{tag.tag})</i></small></a>"
+                    @message = @message.replace(new RegExp(tag.tag,"g"), link) 
+                    # Template.tag(tag)) # Using a reactive template blew chow
         @message
 
     displayTags: ->
         if @tags?.length?
             for tag in @tags
-                tag.url = tagToUrl(tag)
+                if tag?
+                    tag.url = tagToUrl(tag)
             @tags
 
 
 Template.author.helpers
     authorUrl: ->
-        theAuther = Meteor.users.findOne(@userId)
-        theAuther?.services?.google?.picture
+        theAuthor = Meteor.users.findOne(@userId)
+        theAuthor?.services?.google?.picture
+
+    authorTag: ->
+        theAuthor = Meteor.users.findOne(@userId)
+        theAuthor?.tag
 
 Template.tag.helpers
     path: ->

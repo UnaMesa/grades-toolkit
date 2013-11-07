@@ -57,3 +57,10 @@ Grades Toolkit Change Log
 	Families are currently also set up to be @
 	All tags for a message now display below the message with links
 	
+11/7/13 - TEP
+	
+	On BID or Case update generate a new message for the stream
+	More UI tweaks to make it look like twitter and not iChat
+	Bug fixes and some bullet proofing
+	
+
