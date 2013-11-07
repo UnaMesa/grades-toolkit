@@ -13,6 +13,7 @@ Template.newNote.events
     "click #new-note-link": (e) ->
         console.log('click')
         Session.set("showNewNoteDialog", true)
+        
         #$("#newNoteModal").animate
         #    opacity: 1
         #, 200, ->
@@ -28,7 +29,9 @@ Template.newNote.helpers
 
 Template.newNoteDialog.rendered = ->
     console.log("newNoteDialog rendered")
-    $("[name=message]").focus()
+    Meteor.defer ->
+        $("[name=message]").focus()
+        #$("#tag-input").click()
 
 
 Template.newNoteDialog.helpers
@@ -44,8 +47,6 @@ Template.newNoteDialog.helpers
         objectToArray(Session.get("tags"))
         
 
-
-
 Template.newNoteDialog.events
     "click #dismiss": (e) ->
         console.log("dismiss")
@@ -53,6 +54,10 @@ Template.newNoteDialog.events
         #    opacity: 0.1
         #, 200, ->
         #    $("#newNoteModal").addClass("fade")
+        Session.set("showNewNoteDialog", false)
+
+    "click .mask": (e) ->
+        console.log("mask click")
         Session.set("showNewNoteDialog", false)
 
     "click #cancel": (e) ->

@@ -1,7 +1,7 @@
 
 <template name="newNote">
     <span class="new-note-span">
-        <button class="btn btn-default btn-xs" id="new-note-link" >
+        <button class="btn btn-default btn-sm" id="new-note-link" >
             <i class="fa fa-pencil fa-lg"></i>
         </button>
     </span>
@@ -11,23 +11,25 @@
 </template>
 
 <template name="newNoteDialog">
-    <div class="mask"> </div>
+    <div class="mask"></div>
      <!-- Modal -->
     <div id="newNoteModal">
         <div class="container"> 
             <form>
                 <div class="dialog-header center-block">
-                    <button type="button" class="btn btn-default btn-xs" id="cancel">Cancel</button>
+                    <button type="button" class="btn btn-default btn-sm" id="cancel">Cancel</button>
                     <h5 class="text-center">{{title}}</h5>
-                    <button type="submit" id="submit" class="btn btn-primary btn-xs">Submit</button>
+                    <button type="submit" id="submit" class="btn btn-primary btn-sm">Submit</button>
                 </div>
                 <div class="dialog-body">    
                     <div class="form-group">
-                        <textarea id="messageTextArea" name="message" class="form-control" rows="4"></textarea>
+                        <textarea id="messageTextArea" name="message" 
+                        placeholder="Type a new message"
+                        class="form-control" rows="3"></textarea>
                     </div>
                     <div class="form-group">
-                        <button id="tag-input" class="btn btn-default btn-xs tag-btn">#</button>
-                        <button id="at-input" class="btn btn-default btn-xs tag-btn">@</button>
+                        <button id="tag-input" class="btn btn-default btn-sm tag-btn"> # </button>
+                        <button id="at-input" class="btn btn-default btn-sm tag-btn"> @ </button>
                         <!-- <label class="control-label">Tags : </label> -->
                         <span class="form-control-static">
                             {{#each tags}}
