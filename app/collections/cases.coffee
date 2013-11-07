@@ -6,13 +6,12 @@
     childId:
         type: String
         #unique: true
-        optional: true
         label: 'Child ID'
     stayInCurrentSchool:
         type: Boolean
         optional: true
         label: 'Remain in current school'
-    bidDate:
+    date:
         type: Date
         optional: true
         label: 'BID Meeting Date'
@@ -20,7 +19,6 @@
         type: Number
         min: 0
         max: 12
-        optional: true
         label: "Current Grade"
     currentSchool:
         type: String
@@ -63,17 +61,6 @@
         optional: true
         label: "Name of New School"
 
-###
-@BID.reasonsForChange = [
-    "plan":         "Child's permanency plan"
-    "custodians":   "Parents/Custodians recommend change"
-    "commute":      "Commute too long"
-    "neg":          "Negative environment at current school"
-    "commute":      "Short time at current school"
-    "safety":       "Safety Issues"
-    "pos":          "New school has positive factors (social, emotional, academic, special needs)"
-]
-###
 
 @BID.reasonsForChange = [
     "Child's permanency plan"
@@ -93,6 +80,19 @@
     "IEP"
     "Other"
 ]
+
+@BID.simpleSchema = new SimpleSchema(BID.schema)
+
+
+# MOU
+@MOU = {}
+
+@MOU.schema =
+    placeholder:
+        type: String
+        optional: true
+
+@MOU.simpleSchema = new SimpleSchema(@MOU.schema)
 
 @CaseSchema =
     name:
@@ -127,13 +127,13 @@
         type: String
         unique: true
         optional: true
-    # BID
-    childId:
-        type: String
-        unique: true
+    BID:
+        type: @BID.simpleSchema
+        optional: true
+    MOU:
+        type: @MOU.simpleSchema
         optional: true
 
-@CaseSchema = _.extend(@CaseSchema, @BID.schema)
 
 
 @Cases = new Meteor.Collection2 'cases', 

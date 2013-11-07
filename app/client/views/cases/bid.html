@@ -4,25 +4,27 @@
 
         <div class="form-group">
             <label for="childId">Child ID</label>
-            <input type="text" class="form-control" name="childId" value="{{childId}}" placeholder="{{tag}}" required />
+            <input type="text" class="form-control" name="childId" value="{{BID.childId}}" placeholder="{{tag}}" required />
             <span class="help-block">Required Field</span>
         </div>
 
-        {{{remainInSchool}}}
+        {{#with remainInSchool}}
+            {{> slider}}
+        {{/with}}
 
         <div class="form-group">
-            <label for="bidDate">BID Meeting Date</label>
-            <input type="text" class="form-control" name="bidDate" placeholder="01/23/2013 12:00 AM" value="{{bidDate}}" />
+            <label for="date">BID Meeting Date</label>
+            <input type="date" class="form-control" name="date" placeholder="01/23/2013" value="{{bidDate}}" />
         </div>
     
         <div class="form-group">
               <label for="grade">Current Grade</label>
-              <input type="number" name="grade" class="age-control form-control" min="1" max="12" value="{{grade}}">
+              <input type="number" name="grade" class="age-control form-control" min="1" max="12" value="{{BID.grade}}">
         </div>
 
         <div class="form-group">
             <label for="currentSchool">Current School</label>
-            <input type="text" class="form-control" name="currentSchool" placeholder="Name of current school" value="{{currentSchool}}" />
+            <input type="text" class="form-control" name="currentSchool" placeholder="Name of current school" value="{{BID.currentSchool}}" />
         </div>
         
         <div class="form-group">
@@ -36,7 +38,8 @@
 
         <div class="form-group">
             <label for="reasonsForChangeComments">Document any of the above selected reasons</label>
-            <textarea class="form-control" value="{{reasonsForChangeComments}}" name="reasonsForChangeComments" placeholder="documentation of reasons for change" />
+            <textarea class="form-control" name="reasonsForChangeComments" 
+            placeholder="documentation of reasons for change">{{BID.reasonsForChangeComments}}</textarea>
         </div>
 
         {{#each boolValues}}
@@ -54,12 +57,13 @@
 
         <div class="form-group">
             <label for="otherDocumentsUsed">Other documents used for BID</label>
-            <textarea class="form-control" value="{{otherDocumentsUsed}}" name="otherDocumentsUsed" placeholder="List other documents used for the BID" />
+            <textarea class="form-control" name="otherDocumentsUsed" 
+            placeholder="List other documents used for the BID">{{BID.otherDocumentsUsed}}</textarea>
         </div>
 
         <div class="form-group">
             <label for="newSchool">Name of New School</label>
-            <textarea class="form-control" value="{{newSchool}}" name="newSchool" placeholder="Name of new school if applicable" />
+            <input type="text" class="form-control" value="{{BID.newSchool}}" name="newSchool" placeholder="Name of new school if applicable" />
         </div>
 
         <button type="submit" class="btn btn-primary"><i class="fa fa-print"></i> Generate</button>

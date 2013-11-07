@@ -79,7 +79,6 @@ $(window).resize(setMessageBodyWidth)
                     MessagesHandle.loadNextPage()
 
 Template.messages.created = ->
-    console.log("do on scroll", scrollWatch)
     $(window).on("scroll", scrollWatch)
 
 Template.messages.destroyed = ->

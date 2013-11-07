@@ -1,19 +1,22 @@
 
-@yesNoAttribures = []
-
 Template.bid.rendered = ->
     $(".make-switch")["bootstrapSwitch"]()
-    console.log("Schema", Cases.simpleSchema(), BID.schema)
+    console.log("Schema", BID.schema, @BID)
 
 
 Template.bid.helpers
-    "remainInSchool": ->
+    remainInSchool: ->
         data = 
             'varName': 'stayInCurrentSchool'
             'description': "Remain in current school"
-        if @[data.varName]
+        if @BID?[data.varName]
             data.value = "checked"
-        Template.slider(data)
+        data
+
+    bidDate: ->
+        console.log("bidDate", @BID)
+        if @BID?.date?
+            moment(@BID.date).format('LL')
 
     boolValues: ->
         vals = []
@@ -22,21 +25,19 @@ Template.bid.helpers
                 data =
                     'varName': key
                     'description': val.label
-                if @[data.varName]
+                if @BID?[data.varName]
                     data.value = "checked"
                 vals.push(data)
         vals
 
     reasonsForChangeSelect: ->
-        console.log("reasonsForChange", @reasonsForChange)
         vals = []
         for val in BID.reasonsForChange
              data =
                  key: val
-             if @reasonsForChange and val in @reasonsForChange
+             if @BID?.reasonsForChange and val in @BID.reasonsForChange
                  data.selected = "selected"
              vals.push(data)
-        console.log("reasonsForChange", vals)
         vals
 
     documentsUsedSelect: ->
@@ -44,7 +45,7 @@ Template.bid.helpers
         for val in BID.documentsUsed
              data =
                  key: val
-             if @documentsUsed and val in @documentsUsed
+             if @BID?.documentsUsed and val in @BID.documentsUsed
                  data.selected = "selected"
              vals.push(data)
         vals
@@ -70,8 +71,6 @@ Template.bid.events
         for key, val of BID.schema
             #if typeOf(val.type) is 'function'
 
-
-
             switch val.type
                 when Boolean
                     if theBid[key] is 'on'
@@ -79,8 +78,14 @@ Template.bid.events
                     else
                         theBid[key] = false
                 when Date 
+                    console.log("#{key} is a Date")
                     if theBid[key] is ''
                         delete theBid[key]
+                    else
+                        m = moment(theBid[key])
+                        if m.isValid()
+                            theBid[key] = m.toDate()
+
                 #when [String]
                 #    if not typeIsArray theBid[key]
                 #        theBid[key] = [theBid[key]]
@@ -96,12 +101,14 @@ Template.bid.events
 
         #newBid.submitter = user.profile.name # ?
 
-        console.log("new BID", theBid, user)
-
         if not theBid.childId or theBid.childId is ''
             theBid.childId = @tag
 
-        Meteor.call "updateCase", Session.get('currentRecordId'), theBid, (error, result) ->
+        updatedCase =
+            BID: theBid
+
+        console.log("UpdateCase", Session.get('currentRecordId'), updatedCase)
+        Meteor.call "updateCase", Session.get('currentRecordId'), updatedCase, (error, result) ->
             if error
                 # Display error to the user
                 CoffeeAlerts.error(error.reason)
