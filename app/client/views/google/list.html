@@ -88,20 +88,23 @@
         {{#if isaFolder}}
             <a class="folder" href="#">
         {{else}}
+            {{#if testingOk}}
+            <button class="btn btn-link btn-xs read-file"><i class="fa fa-stethoscope"></i></button>
+            {{/if}}
             <a target="_blank" href="{{alternateLink}}">
         {{/if}}
         <img src="{{iconLink}}"/>
         <span>{{title}}</span>
         </a>
         <span class="pull-right">
-            <a target="_blank" href="{{webContactLink}}">
-                <i class="fa fa-download fa-lg"></i>
-            </a>
             {{#if deleteOk}}
             <a class="delete-file" href="#">
                 <i class="fa fa-trash-o fa-lg"></i>
             </a>
             {{/if}}
+            <a target="_blank" href="{{webContactLink}}">
+                <i class="fa fa-download fa-lg"></i>
+            </a>
         </span>
         <div class="text-muted file-date-string"><small>{{dateString}}</small></div>
     </li>

@@ -10,6 +10,7 @@ Template.googleDocs.rendered = ->
     if gDrive.fileList().length is 0 or not gDrive.fileListLoaded
         gDrive.topDirectory = null
         gDrive.deleteOk = true;
+        gDrive.testingOk = true;
         gDrive.call(gDrive.getFileList)
     
 Template.googleDocs.destroyed = ->
@@ -66,14 +67,19 @@ Template.gDriveItem.helpers
         @mimeType is 'application/vnd.google-apps.folder'
 
     deleteOk: ->
-        gDrive.deleteOk
+        gDrive.deleteOk and @editable
+
+    testingOk: ->
+        gDrive.testingOk
+
 
 Template.gDriveItem.events
     "click .delete-file": (e) ->
         if confirm("Are you sure you want to delete '#{@title}'")
             console.log("Deleting", @title)
             theId = @id
-            gapi.client.drive.files.delete(
+            # change trash to delete to really delete it
+            gapi.client.drive.files.trash(
                 'fileId': @id
             ).execute (response) ->
                 console.log(response, theId)
@@ -85,6 +91,10 @@ Template.gDriveItem.events
     "click .folder": (e) ->
         console.log("Get Directory", @title, @)
         gDrive.gotoDirectory(@)
+
+
+    "click .read-file": (e) ->
+        console.log("Read File", @downloadUrl)
 
 
 

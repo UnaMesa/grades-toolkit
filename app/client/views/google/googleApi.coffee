@@ -31,6 +31,7 @@
 
     topDirectory: null
     deleteOk: false
+    testingOk: false
 
     userDeclined: false
 
@@ -45,6 +46,7 @@
     reset: ->
         gDrive.topDirectory = null
         gDrive.deleteOk = false;
+        gDrive.testingOk = false;
         gDrive._path = [
             id:    "root"
             title: "My Drive"
@@ -206,8 +208,8 @@
                 gDrive._retrievePageOfFiles(request)
             else
                 # Done
-                console.log("List Complete", gDrive._fileList.length)
-                #console.log("List Complete", gDrive._fileList)
+                console.log("List Complete, count:", gDrive._fileList.length)
+                console.log("List Complete", gDrive._fileList)
                 
                 if gDrive.topDirectory?
                     gDrive.setTopDirectory()
@@ -258,7 +260,7 @@
                 gDrive._retrievePageOfFiles(folderId, request)
             else
                 # Done
-                console.log("List Complete", gDrive._fileList.length)
+                console.log("List Complete, count:", gDrive._fileList.length)
                 #console.log(gDrive._fileList)
                 gDrive._gettingFileList = false
                 gDrive.fileListLoaded = true
@@ -331,6 +333,26 @@
         return true
 
         
-    
+    ###
+    Download a file's content.
+
+    @param {File} file Drive File instance.
+    @param {Function} callback Function to call when the request is complete.
+    ###
+    downloadFile: (file, callback) ->
+        if file.downloadUrl
+            accessToken = gapi.auth.getToken().access_token
+            xhr = new XMLHttpRequest()
+            xhr.open "GET", file.downloadUrl
+            xhr.setRequestHeader "Authorization", "Bearer " + accessToken
+            xhr.onload = ->
+                callback xhr.responseText
+
+            xhr.onerror = ->
+                callback null
+
+            xhr.send()
+        else
+            callback null
         
 
