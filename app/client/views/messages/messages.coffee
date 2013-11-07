@@ -157,7 +157,7 @@ Template.message.helpers
         @userId is Meteor.userId()
 
     displayMessage: ->
-        if @tags?
+        if @tags?.length?
             for tag in @tags
                 url = tagToUrl(tag)
                 link = "<a href='#{url}'><span class='badge tag-#{tag.type}'>#{tag.name}</span></a>"
@@ -166,9 +166,10 @@ Template.message.helpers
         @message
 
     displayTags: ->
-        for tag in @tags
-            tag.url = tagToUrl(tag)
-        @tags
+        if @tags?.length?
+            for tag in @tags
+                tag.url = tagToUrl(tag)
+            @tags
 
 
 Template.author.helpers

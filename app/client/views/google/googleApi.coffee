@@ -209,7 +209,7 @@
             else
                 # Done
                 console.log("List Complete, count:", gDrive._fileList.length)
-                console.log("List Complete", gDrive._fileList)
+                #console.log("List Complete", gDrive._fileList)
                 
                 if gDrive.topDirectory?
                     gDrive.setTopDirectory()

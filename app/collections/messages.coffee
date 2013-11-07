@@ -38,13 +38,15 @@ Meteor.methods
             caseStrings = message.message.match(/\#[^ ]+/g)
             otherStrings = message.message.match(/\@[^ ]+/g)
             tagStrings = _.union(caseStrings, otherStrings)
+            console.log(tagStrings, otherStrings, tagStrings)
             if tagStrings?
-                for tagString in tagStrings
-                    if tagObj = tagToTagObject(tagString)
-                        updateCommentsCount(tagObj)
-                        message.tags.push(tagObj)
-                    else
-                        throw new Meteor.Error(422, "Invalid tag #{tagString} in message")
+                if tagString?
+                    for tagString in tagStrings
+                        if tagObj = tagToTagObject(tagString)
+                            updateCommentsCount(tagObj)
+                            message.tags.push(tagObj)
+                        else
+                            throw new Meteor.Error(422, "Invalid tag #{tagString} in message")
             message.tags = uniqueTags(message.tags)
             console.log("submitMessage", message)
         Messages.insert(message)

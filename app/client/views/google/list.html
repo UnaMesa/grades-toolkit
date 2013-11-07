@@ -102,9 +102,11 @@
                 <i class="fa fa-trash-o fa-lg"></i>
             </a>
             {{/if}}
-            <a target="_blank" href="{{webContactLink}}">
+            {{#if getDownLoadUrl}}
+            <a target="_blank" href="{{getDownLoadUrl}}">
                 <i class="fa fa-download fa-lg"></i>
             </a>
+            {{/if}}
         </span>
         <div class="text-muted file-date-string"><small>{{dateString}}</small></div>
     </li>

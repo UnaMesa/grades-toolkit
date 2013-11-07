@@ -72,6 +72,13 @@ Template.gDriveItem.helpers
     testingOk: ->
         gDrive.testingOk
 
+    getDownLoadUrl: ->
+        if @downloadUrl
+            @downloadUrl
+        else if @exportLinks?["application/pdf"]
+            @exportLinks?["application/pdf"]
+        else if @exportLinks?["text/html"]
+            @exportLinks?["text/html"]
 
 Template.gDriveItem.events
     "click .delete-file": (e) ->
@@ -94,7 +101,7 @@ Template.gDriveItem.events
 
 
     "click .read-file": (e) ->
-        console.log("Read File", @downloadUrl)
+        console.log("Read File", @)
 
 
 

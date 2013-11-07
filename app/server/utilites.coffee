@@ -41,7 +41,7 @@
 
 
 @tagToTagObject = (tag) ->
-    if tag[0] is '@'
+    if tag?[0] is '@'
         if tagObject = Meteor.users.findOne(tag: tag)
             tagObject =
                 type: 'user'
@@ -54,7 +54,7 @@
                 _id: tagObject._id
                 tag: tag
                 name: tagObject.name
-    else if tag[0] is '#'
+    else if tag?[0] is '#'
         if tagObject = Cases.findOne(tag: tag)
             tagObject =
                 type: 'case'
@@ -64,7 +64,7 @@
 
 
 @fillOutTagFromId = (tag) ->
-    switch tag.type
+    switch tag?.type
         when 'user'
             if rec = Meteor.users.findOne(_id: tag._id)
                 tag.name = rec.profile.name
@@ -79,7 +79,7 @@
 
 
 @fillOutTagFromTag = (tag) ->
-    switch tag.type
+    switch tag?.type
         when 'user'
             if rec = Meteor.users.findOne(tag: tag.tag)
                 tag.name = rec.profile.name
@@ -94,7 +94,7 @@
 
 
 @updateCommentsCount = (tag) ->
-    switch tag.type
+    switch tag?.type
         when 'user'
             collectionToUpdate = Meteor.users
         when 'case'

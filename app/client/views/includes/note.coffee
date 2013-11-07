@@ -99,10 +99,10 @@ Template.newNoteDialog.events
                 console.log("Tag", tag, tag[0])
                 Meteor.call "tagIsValid", tag[0], (error, result) ->
                     if error or not result
-                        alert("Tag #{tag[0]} is not valid")
-                        revertString = message[0..message.length - tag[0].length]
-                        console.log("revert string", message.length, tag[0].length, tag, revertString)
-                        $("[name=message]").val(revertString)
+                        if not confirm("Tag #{tag[0]} is not valid")
+                            revertString = message[0..message.length - tag[0].length]
+                            console.log("revert string", message.length, tag[0].length, tag, revertString)
+                            $("[name=message]").val(revertString)
                     else if result
                         tag =
                             tag: result.tag
