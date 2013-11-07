@@ -53,4 +53,7 @@ Grades Toolkit Change Log
 11/6/13 - TEP
 
 	BID form now updates into Cases collection on "submit"
+	Changed tags so that users are @ and cases are still #
+	Families are currently also set up to be @
+	All tags for a message now display below the message with links
 	
