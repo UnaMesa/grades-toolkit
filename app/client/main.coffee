@@ -27,6 +27,8 @@ Meteor.startup ->
     #console.log("URL:",document.URL)
     if /mobile/i.test(navigator.userAgent)
         console.log('Mobile Device')
+        $ ->
+            FastClick.attach document.body
     else
         console.log("Not a mobile device", window)
         #window.open(Meteor.absoluteUrl(), 'Grades Demo', "height=600,width=400")

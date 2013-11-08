@@ -9,7 +9,8 @@
       "bootstrap3-less": {},
       "font-awesome-4": {},
       "coffee-alerts": {},
-      "collection2": {}
+      "collection2": {},
+      "fastclick": {}
     },
     "packages": {
       "spin": {
@@ -52,10 +53,15 @@
         "tag": "v0.2.11",
         "commit": "34ea61718c8826dfa9236222cec6c097bd41ae6b"
       },
+      "fastclick": {
+        "git": "https://github.com/percolatestudio/meteor-fastclick",
+        "tag": "v0.6.7",
+        "commit": "fcb3bfd34d9f6874e626b4e24e8f54107938db41"
+      },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.2.15",
-        "commit": "ac0f904de1b8161c17ae9e2eef1fbb4d2a74c4a9"
+        "tag": "v0.2.16",
+        "commit": "fae2b014ffc26dfccd3aab38e45d60dda34fd03c"
       }
     }
   }

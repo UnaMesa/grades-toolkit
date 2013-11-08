@@ -10,6 +10,8 @@ Template.navbar.helpers
 
 Template.navbar.events
     "click #logout": (e, tmpl) ->
+        e.stopPropagation();
+        e.preventDefault();
         Meteor.logout (error) ->
             if error
                 alert("Logout Error")

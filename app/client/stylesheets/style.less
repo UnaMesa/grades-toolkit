@@ -57,64 +57,140 @@ body {
     margin-bottom: 0px;
 }
 
-#newNoteModal {
-    position: absolute;
-    width: 100%;
-    top: 0px;
-    left: 0px;
-    display: block;
-    z-index: 3020;
-    padding: 5px;
-    margin: 0px;
-    background-color: #eee;
-    //opacity: 0.1;
-
-    .container {
-        padding-top: 15px;
-        padding-right: 3px;
-        padding-left: 3px;
-        padding-bottom: 4px;
-    }
-
-    .dialog-header h5 {
-        margin: 5px;
-        //text-align: center;
-        //display: inline-block;
-    }
-
-    .dialog-header #submit {
+@media screen and (orientation:portrait) {
+    #newNoteModal {
         position: absolute;
-        right: 9px;
-        top: 9px;
-    }
+        width: 100%;
+        top: 0px;
+        left: 0px;
+        display: block;
+        z-index: 3020;
+        padding: 5px;
+        margin: 0px;
+        background-color: #eee;
+        //opacity: 0.1;
 
-    .dialog-header #cancel {
-        position: absolute;
-        left: 9px;
-        top: 9px;
-    }
+        .container {
+            padding-top: 15px;
+            padding-right: 3px;
+            padding-left: 3px;
+            padding-bottom: 4px;
+        }
 
-    .dialog-body {
-        margin-top: 5px;
-    }
+        .dialog-header h5 {
+            margin: 5px;
+            //text-align: center;
+            //display: inline-block;
+        }
 
-    .dialog-body .form-group {
-        margin-bottom: 0;
-        margin-top: 5px;
-    }
+        .dialog-header #submit {
+            position: absolute;
+            right: 9px;
+            top: 9px;
+        }
 
-    .label {
-        font-size: 9px;
-    }
+        .dialog-header #cancel {
+            position: absolute;
+            left: 9px;
+            top: 9px;
+        }
 
-    .tag-btn {
-        font-size: 14px;
-        font-weight: bold;
-        padding: 2px 20px;
+        .dialog-body {
+            margin-top: 5px;
+        }
+
+        .dialog-body .form-group {
+            margin-bottom: 0;
+            margin-top: 5px;
+        }
+
+        .label {
+            font-size: 9px;
+        }
+
+        .tag-btn {
+            font-size: 14px;
+            font-weight: bold;
+            padding: 2px 20px;
+        }
     }
 }
 
 
+@media screen and (orientation:landscape) {
+    
+    #newNoteModal {
+        position: absolute;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+        display: block;
+        z-index: 3020;
+        padding: 5px;
+        margin: 0px;
+        background-color: #eee;
+        //opacity: 0.1;
+
+        .container {
+            padding-top: 6px;
+            padding-right: 3px;
+            padding-left: 3px;
+            padding-bottom: 4px;
+        }
+
+        .dialog-header h5 {
+            margin: 5px;
+            //text-align: center;
+            //display: inline-block;
+        }
+
+        .dialog-header #submit {
+            position: absolute;
+            right: 9px;
+            top: 3px;
+        }
+
+        .dialog-header #cancel {
+            position: absolute;
+            left: 9px;
+            top: 3px;
+        }
+
+        .dialog-body {
+            margin-top: 5px;
+        }
+
+        .dialog-body .form-group {
+            margin-bottom: 0;
+            margin-top: 5px;
+        }
+
+        .label {
+            font-size: 9px;
+        }
+
+        .tag-btn {
+            font-size: 14px;
+            font-weight: bold;
+            padding: 2px 20px;
+        }
+
+        
+        #tag-input {
+            position: absolute;
+            top: 7px;
+            left: 80px;
+        }
+
+        #at-input {
+            position: absolute;
+            top: 7px;
+            left: 140px;
+        }
+        
+    }
+    
+}
 
 
 .zero-padding {
@@ -315,7 +391,7 @@ body {
     right: 45px;
 }
 
-.new-note-span {
+.new-note-button-span {
     position: fixed;
     top:   3px;
     right: 5px;
