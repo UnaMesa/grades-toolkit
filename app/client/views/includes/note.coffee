@@ -11,10 +11,13 @@ Template.newNote.rendered = ->
     
 Template.newNote.events
     "click #new-note-link": (e) ->
+        window.scrollTo(0, 0)
         e.stopPropagation();
         e.preventDefault();
         console.log('click')
         Session.set("showNewNoteDialog", true)
+        Meteor.defer ->
+            window.scrollTo(0, 0)
         #$("#newNoteModal").animate
         #    opacity: 1
         #, 200, ->
@@ -47,6 +50,12 @@ Template.newNoteDialog.helpers
         console.log("tags")
         objectToArray(Session.get("tags"))
         
+    numberOfRows: ->
+        console.log("numberOfRows", Session.get("landscape"))
+        if Session.get("landscape")
+            2
+        else
+            3
 
 Template.newNoteDialog.events
     "click #dismiss": (e) ->

@@ -29,6 +29,21 @@ Meteor.startup ->
         console.log('Mobile Device')
         $ ->
             FastClick.attach document.body
+
+            # Window hide scroll hack.  Does not work on iOS 7
+            window.scrollTo(0, 0)
+            Meteor.setTimeout ->
+                window.scrollTo(0, 1)
+            , 200
+
+            landscape = window.orientation is 90 or window.orientation is -90
+            Session.set("landscape", landscape)
+
+            $(window).on "orientationchange", ->
+                landscape = window.orientation is 90 or window.orientation is -90
+                console.log("orientationchange", window.orientation, landscape)
+                Session.set("landscape", landscape)
+                
     else
         console.log("Not a mobile device", window)
         #window.open(Meteor.absoluteUrl(), 'Grades Demo', "height=600,width=400")
