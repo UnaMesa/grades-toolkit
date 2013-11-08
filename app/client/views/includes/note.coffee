@@ -13,10 +13,8 @@ Template.newNote.events
     "click #new-note-link": (e) ->
         e.stopPropagation();
         e.preventDefault();
-        if e.handled isnt true
-            console.log('click')
-            Session.set("showNewNoteDialog", true)
-            e.handled = true
+        console.log('click')
+        Session.set("showNewNoteDialog", true)
         #$("#newNoteModal").animate
         #    opacity: 1
         #, 200, ->
@@ -76,19 +74,17 @@ Template.newNoteDialog.events
         console.log("hash-input click")
         e.stopPropagation()
         e.preventDefault()
-        if e.handled isnt true
-            $("[name=message]").val($("[name=message]").val()+ '#')
-            $("[name=message]").focus()
-            e.handled = true
+        $("[name=message]").val($("[name=message]").val()+ '#')
+        $("[name=message]").focus()
+
 
     "click #at-input": (e) -> 
         console.log("hash-input click")
         e.stopPropagation()
         e.preventDefault()
-        if e.handled isnt true
-            $("[name=message]").val($("[name=message]").val()+ '@')
-            $("[name=message]").focus()
-            e.handled = true
+        $("[name=message]").val($("[name=message]").val()+ '@')
+        $("[name=message]").focus()
+    
 
     "submit form": (e) ->
         e.preventDefault()
@@ -113,7 +109,6 @@ Template.newNoteDialog.events
         el.selectionStart = el.selectionEnd = el.value.length
 
     "keypress #messageTextArea": (e) ->
-        window.scroll(0,0)
         if e.keyCode is 32 # Got a space
             message = $("[name=message]").val()
             if tag = message.match(/\#[^ ]+$/) or message.match(/\@[^ ]+$/)
