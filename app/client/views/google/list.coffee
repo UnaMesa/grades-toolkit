@@ -36,6 +36,14 @@ Template.googleDocs.events
             window.scroll(0,0)
         false
 
+    "click #test": (e) ->
+        console.log('Run Test', gapi.auth.getToken())
+        user = Meteor.user()
+        if user
+            gapi.auth.setToken
+                access_token: user.services.google.accessToken
+                expires_at: services.google.expiresAt
+
 
 Template.gDrive.helpers
     path: ->

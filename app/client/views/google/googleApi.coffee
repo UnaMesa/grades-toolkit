@@ -69,8 +69,9 @@
         console.log("gapi.client.drive loaded", gapi.client.drive)
         gDrive._loading = false
         gDrive._currentStateListeners.changed()
-        if Meteor.user()
+        if user = Meteor.user()
             gDrive.checkAuth()
+
 
     authorized: ->
         if not gDrive._currentStateListeners?.depend?
@@ -97,8 +98,21 @@
     # See: https://developers.google.com/drive/auth/web-client
     #
     checkAuth: ->
-        #console.log("checkAuth called", gDrive._immediate)
+        console.log("checkAuth called", gDrive._immediate)
         if not gDrive._authorized and not gDrive._authorizing
+            if user = Meteor.user()
+                console.log("checkAuth", user)
+                if user.services?.google?.accessToken?
+                    console.log("Doing authorization transfer", user, user.services?.google?.accessToken)
+                    gapi.auth.setToken
+                        access_token: user.services.google.accessToken
+                        expires_at: user.services.google.expiresAt
+                    gDrive._authorized = true
+                    gDrive._currentStateListeners.changed()
+                    if gDrive._callBack?
+                        gDrive._callBack()
+
+            return
             #
             #  TODO: Check for popup blocking for this causes havoc!!!
             #

@@ -10,6 +10,9 @@ Meteor.publish "userData", ->
             'services.google.picture': 1
             'services.google.given_name': 1
             'services.google.family_name': 1
+            'services.google.email': 1
+            'services.google.accessToken': 1
+            'services.google.expiresAt': 1
 
 
 Meteor.publish "contacts", (limit) ->

@@ -10,6 +10,10 @@ Grades Toolkit TODO
 
 - [x] Message streams for Cases
 
+- [ ] Comments on Messages
+
+- [ ] User summary page
+
 - [ ] BID and MOU Forms
 	* BID ready, MOU todo
 	* Submit writes to google doc and generates a message with a href link to the form
