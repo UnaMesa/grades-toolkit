@@ -1,6 +1,12 @@
 Grades Toolkit Change Log
 =========================
 
+11/8/13 - TEP
+
+	Passing google auth token around so that we only have to authenticate once. Needs more testing
+	Created sub-dirs in the server dir.
+	Working on getting the google node api to work.  So we can pull file from google drive when user is offline.
+
 
 11/7/13 - TEP
 	

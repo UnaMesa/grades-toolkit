@@ -1,9 +1,6 @@
 Grades Toolkit TODO
 ===================
 
-
-- [ ] Show all Tags in message
-
 - [-] Create and Display Cases
  	* Fill out the hooks
  	* Case editing

@@ -28,7 +28,9 @@ Template.login.events
                             console.log("Error on creating tag", error)
                         else
                             console.log("New Tag", tag)
-
+                Meteor.call 'userLoggedIn', (error) ->
+                    if error
+                        console.log("Error on userLoggedIn", error)
                 console.log("Go Home")
                 Router.go('home')
 

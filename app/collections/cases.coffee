@@ -226,7 +226,7 @@ Meteor.methods
             # Generate Message
             message = 
                 userId: user._id
-                author: user.profile.name
+                author: user.profile.name # Change to bot....
                 timestamp: new Date().getTime()
                 tags: []
 
