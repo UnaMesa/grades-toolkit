@@ -64,10 +64,7 @@ gDrive.fileList = ->
     gDrive._fileList
 
 gDrive.baseUrl = (spreadsheetId, worksheetId) ->
-    console.log("baseUrl", spreadsheetId, worksheetId)
-    url = 'https://spreadsheets.google.com/feeds/cells/' + spreadsheetId + '/' + worksheetId + '/private/full'
-    console.log('url', url)
-    url
+    'https://spreadsheets.google.com/feeds/cells/' + spreadsheetId + '/' + worksheetId + '/private/full'
 
 gDrive.getAndUpdateFamilyList = ->
     gDrive.init()
@@ -104,8 +101,9 @@ gDrive._updateFamilyList = (err, res, body) ->
         for key, val of rawData
             gDrive._families.push val
 
+        console.log("Updating family list from spreadsheet", gDrive._families)
         for family in gDrive._families 
-            console.log("Update", family)
+            #console.log("Update", family)
 
             # TODO: We should generate tags not the spreadsheet and update
             family.tag = family.tag.toLowerCase()
@@ -123,8 +121,6 @@ gDrive._updateFamilyList = (err, res, body) ->
         gDrive._familyListUpdated = moment()
 
 gDrive.checkFamilyList = ->
-    console.log("Check Family List for changes")
-
     gDrive.init()
     gDrive._request
         url: "https://www.googleapis.com/drive/v2/files/" + GoogleFamilySpreadsheetId 
@@ -133,9 +129,8 @@ gDrive.checkFamilyList = ->
         if err
             throw err
         body = JSON.parse(body)
-        #console.log("Family Check modified", body.modifiedDate)
         if moment(body.modifiedDate).isAfter(gDrive._familyListUpdated)
-            console.log("Family data is stale!")
+            console.log("Family data is stale!  Updating")
             gDrive.getAndUpdateFamilyList()
 
 
