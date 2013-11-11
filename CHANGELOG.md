@@ -1,6 +1,16 @@
 Grades Toolkit Change Log
 =========================
 
+11/11/13 - TEP
+	
+	Have family records updating from spreadsheet
+	Family details view with hooks for family tags in messages
+	Google drive from server to server working.  This requests docs that
+	have been shared with the server app id.  The email address that google
+	assigns.  The files with the credentials are in the private directory 
+	and not in github.
+
+
 11/8/13 - TEP
 
 	Passing google auth token around so that we only have to authenticate once. Needs more testing
