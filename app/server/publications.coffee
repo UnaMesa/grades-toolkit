@@ -46,6 +46,11 @@ Meteor.publish "families", (limit) ->
             name: 1
         limit: limit
 
+Meteor.publish "singleFamily", (id) ->
+    if id
+        Families.find(id)
+
+
 # TODO: Limit this to the ones a user can see 
 Meteor.publish "cases", (limit) ->
     Cases.find {},

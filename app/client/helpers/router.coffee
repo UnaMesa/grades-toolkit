@@ -72,6 +72,19 @@ Router.map ->
       data:
         title: "Families"
 
+    @route 'viewFamily',
+      path: 'families/:_id'
+      before: ->
+        Session.set('currentRecordId', @params._id)
+        Session.set('messageTagFilter', 'family')
+      waitOn: ->
+        Meteor.subscribe('singleFamily', @params._id)
+      data: ->
+        data = Families.findOne(@params._id)
+        data.title = "Family"
+        data.goBackPath = "families"
+        data
+
     @route 'bid',
       path: "cases/bid/:_id"
       before: ->

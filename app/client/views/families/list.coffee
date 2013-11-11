@@ -3,6 +3,7 @@
 Template.families.helpers
 
     haveFamilies: ->
+        console.log("!!!HaveFamilies", Families.find().count())
         Families.find().count() > 0
 
     sortedFamilies: ->
@@ -23,10 +24,14 @@ Template.families.events
         e.preventDefault()
         FamiliesHandle.loadNextPage()
 
+    "click .family": (e) ->
+        Router.go 'viewFamily',
+            _id: @_id 
 
-Template.contact.helpers
-    me: ->
-        Meteor.userId() is @_id
+
+Template.family.helpers
+    name: ->
+        @["firstname"] + " " + @["lastname"]
 
     type: ->
-        'user'
+        'family'

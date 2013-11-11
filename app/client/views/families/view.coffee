@@ -2,11 +2,12 @@
 messagesIn = "in"
 detailsIn = ""
 
-Template.viewCase.created = ->
+Template.viewFamily.created = ->
     messagesIn = "in"
     detailsIn = ""
 
-Template.viewCase.rendered = ->
+Template.viewFamily.rendered = ->
+    console.log('Tags', Session.get("tags"))
     $("#collapseMessages").on "hidden.bs.collapse", ->
         messagesIn = ""
     $("#collapseDetails").on "shown.bs.collapse", ->
@@ -25,22 +26,22 @@ Template.viewCase.rendered = ->
             height = setMessageListHeight()
             $("#collapseMessages").css("height", height + "px")
 
-Template.viewCase.helpers
-    case: ->
-        theCase = Cases.findOne(Session.get('currentRecordId'))
-        caseAsArray = []
-        for key, value of theCase
+Template.viewFamily.helpers
+    fields: ->
+        theRecord = Families.findOne(Session.get('currentRecordId'))
+        recordAsArray = []
+        for key, value of theRecord
             if key in ['submitted', 'modified']
-                caseAsArray.push
+                recordAsArray.push
                     key: key
                     value: moment(value).format('lll')
             else if key not in  ['_id','contact', 'userId', 'name', 'commentsCount', 'tag', 'urgent']
-                caseAsArray.push
+                recordAsArray.push
                     key: key
                     value: value
-        caseAsArray
+        recordAsArray
 
-    caseId: ->
+    recordId: ->
         Session.get('currentRecordId')
 
     isUrgent: ->
@@ -52,7 +53,7 @@ Template.viewCase.helpers
     detailsIn: ->
         detailsIn
 
-Template.viewCase.events
+Template.viewFamily.events
     "shown.bs.collapse #collapseMessages": (e)  ->
         console.log("shown.bs.collapse")
         setMessageListHeight()

@@ -1,4 +1,6 @@
 
+@familyCheckIntervalId = null
+
 Meteor.startup ->
     console.log("Server Startup")
 
@@ -32,9 +34,14 @@ Meteor.startup ->
                 else
                     console.log("Adding user tag successful")
 
-    gDrive.authTest()
+    #gDrive.getFileList()
+    #console.log(gDrive.fileList())  # Will be null till callback
 
-    gDrive.getFamilyList()
+    gDrive.getAndUpdateFamilyList()
+
+    # Check the spreadsheet every N seconds 
+    familyCheckIntervalId = Meteor.setInterval(gDrive.checkFamilyList, 10000)
+
 
     #
     #  Redefine the callback

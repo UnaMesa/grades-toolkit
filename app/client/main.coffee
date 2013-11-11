@@ -18,7 +18,8 @@ Meteor.subscribe "userData"
         10
 
 @FamiliesHandle = Meteor.subscribeWithPagination "families", 
-        'name': 1
+        'Last Name': 1
+        'First Name': 1
     , 
         10
 

@@ -74,7 +74,7 @@
                     tag.name = rec.name
             when 'family'  
                 if rec = Families.findOne(_id: tag._id)
-                    tag.name = rec.name
+                    tag.name = "#{rec.firstname} #{rec.lastname}"
         tag.tag = rec?.tag
         tag
 

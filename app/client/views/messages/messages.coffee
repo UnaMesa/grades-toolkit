@@ -18,7 +18,7 @@ scrollToBottomOk = false
     if Session.get('messageTagFilter')?
             filter = tags:
                 $elemMatch:
-                    type: 'case'
+                    type: Session.get('messageTagFilter')
             if Session.get('currentRecordId')?
                 filter.tags.$elemMatch._id = Session.get('currentRecordId')
     filter
@@ -146,6 +146,8 @@ tagToUrl = (tag) ->
     switch tag?.type
         when 'case'
             Router.routes['viewCase'].path(tag)
+        when 'family'
+            Router.routes['viewFamily'].path(tag)
         else
             Router.routes['contacts'].path() # TODO: Change this
 
