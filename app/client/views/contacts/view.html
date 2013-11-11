@@ -1,0 +1,59 @@
+<template name="viewContact">
+    <div class="case-view">
+        <div class="well record-view">
+            {{#if tag}}<span class="tag tag-case badge">{{tag}}</span>{{/if}}
+            <h4>{{firstname}} {{lastname}}</h4>
+        </div>
+
+        <div class="panel-group" id="accordion">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <button class="btn btn-link" data-toggle="collapse" data-parent="#accordion" data-target="#collapseDetails">
+                            Details
+                        </button>
+                    </h4>
+                </div>
+
+                <div id="collapseDetails" class="panel-collapse collapse {{detailsIn}}">
+                    <div class="panel-body">
+                    <table class="table table-striped table-condensed">
+                        <tbody>
+                        {{#each fields}}  
+                        <tr class="">
+                            <td class="td-key"><strong>{{key}} :</strong></td>
+                            <td class="td-val">
+                                <strong>{{value}}</strong>
+                            </td>
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseMessages">
+                            Messages 
+                        </button>
+                        <button id="new-note-link" class="btn btn-default btn-sm pull-right"><i class="fa fa-pencil fa-lg"></i></button>
+                    </h4>
+
+                </div>
+
+                <div id="collapseMessages" class="panel-collapse collapse {{messagesIn}}">
+                    <div class="panel-body case-message-list">
+                        {{> messages}}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</template>

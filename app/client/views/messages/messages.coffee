@@ -143,6 +143,7 @@ Template.message.rendered = ->
 
 
 tagToUrl = (tag) ->
+    console.log('tagToUrl', tag, tag?.type)
     switch tag?.type
         when 'case'
             Router.routes['viewCase'].path(tag)
@@ -194,10 +195,14 @@ Template.author.helpers
 
 Template.tag.helpers
     path: ->
-        if @type is 'case'
-            'viewCase'
-        else 
-            'contacts'
-
+        switch @type
+            when 'case'
+                'viewCase'
+            when 'family'
+                'viewFamily'
+            when 'case'
+                'contacts' #viewContacts'
+            else
+                'contacts'
 
 
