@@ -21,3 +21,6 @@ jsencrypt
 collection2
 fastclick
 ionicons
+http
+google-server-auth
+google-spreadsheet

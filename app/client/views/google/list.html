@@ -79,7 +79,12 @@
             <div class="text-muted">No files in this directory</div>
         {{/if}}
     {{else}}
-        <div>No files.  <small>You may need to authorize.</small></div>
+        <div>No files.
+            <small>
+                You may need to
+                <a href="#" id="authorize">authorize</a>.
+            </small>
+        </div>
     {{/if}}
   {{/if}}
 </template>

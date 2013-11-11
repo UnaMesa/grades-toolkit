@@ -45,13 +45,27 @@
 
     reset: ->
         gDrive.topDirectory = null
-        gDrive.deleteOk = false;
-        gDrive.testingOk = false;
+        gDrive.deleteOk = false
+        gDrive.testingOk = false
         gDrive._path = [
             id:    "root"
             title: "My Drive"
             last:  true
         ]
+
+    reAuthorize: ->
+        gDrive._authorized = false
+        gDrive._authorizing = false
+        gDrive._immediate = true
+
+    fullReset: ->
+        gDrive.reAuthorize()        
+        gDrive.reset()
+
+    userInitiatedAuth: ->
+        gDrive.reAuthorize()
+        gDrive._userInitiatedAuth = true
+        gDrive._currentStateListeners.changed()
 
     load: ->
         console.log("gDrive.load")
@@ -88,11 +102,6 @@
     loading: ->
         gDrive._currentStateListeners.depend()
         gDrive._loading
-
-    userInitiatedAuth: ->
-        gDrive._authorizing = false
-        gDrive._userInitiatedAuth = true
-        gDrive._currentStateListeners.changed()
 
     #
     # See: https://developers.google.com/drive/auth/web-client
@@ -239,7 +248,7 @@
             last:  true
         ]
         for file in gDrive._fileList
-            if file.mimeType is 'application/vnd.google-apps.folder'
+            if file?.mimeType is 'application/vnd.google-apps.folder'
                 if file.title is gDrive.topDirectory
                     gDrive._path = [
                         id:    file.id
@@ -282,15 +291,17 @@
 
 
     getFilesInCurrentFolder: ->
-        console.log("Get files in ", gDrive.currentDirectory().title)
-        theFiles = []
-        for file in gDrive.fileList()
-            if gDrive.currentDirectory().id is 'root'
-                if file.parents?[0]?.isRoot
-                    theFiles.push file
-            else if file.parents?[0]?.id is gDrive.currentDirectory().id
-                theFiles.push file
-        theFiles
+        if gDrive._authorized and not gDrive._gettingFileList and gDrive.fileListLoaded
+            console.log("Get files in ", gDrive?.currentDirectory?().title)
+            theFiles = []
+            for file in gDrive._fileList
+                if file?
+                    if gDrive.currentDirectory().id is 'root'
+                        if file.parents?[0]?.isRoot
+                            theFiles.push file
+                    else if file.parents?[0]?.id is gDrive.currentDirectory().id
+                        theFiles.push file
+            theFiles
 
     currentParent: ->
         if gDrive.currentDirectory().id isnt 'root'
@@ -304,6 +315,16 @@
             parentId = 'root'
         for file in gDrive._fileList  # non-reactive
             if file.mimeType is 'application/vnd.google-apps.folder' and file.title is title
+                if parentId is 'root' and file.parents?[0]?.isRoot
+                    return file
+                else if file.parents?[0]?.id is parentId
+                    return file
+
+    findFile: (title, parentId, type) ->
+        if not parentId?
+            parentId = 'root'
+        for file in gDrive._fileList  # non-reactive
+            if file.title is title and (not type? or file.mimeType is type) and file.mimeType isnt 'application/vnd.google-apps.folder'
                 if parentId is 'root' and file.parents?[0]?.isRoot
                     return file
                 else if file.parents?[0]?.id is parentId

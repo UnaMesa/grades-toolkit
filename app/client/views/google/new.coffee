@@ -24,7 +24,8 @@ Template.newGoogleDoc.events
             CoffeeAlerts.error("Please fill in a document title")
             return
 
-        method = "server" # "client"
+        #method = "server" 
+        method = "client"
 
         if method is "client"
 

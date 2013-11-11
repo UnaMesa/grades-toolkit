@@ -32,6 +32,9 @@ Meteor.startup ->
                 else
                     console.log("Adding user tag successful")
 
+    gDrive.authTest()
+
+    gDrive.getFamilyList()
 
     #
     #  Redefine the callback

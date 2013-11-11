@@ -26,23 +26,27 @@ Template.googleDocs.helpers
 
 Template.googleDocs.events
     "click #authorize": (e) ->
+        e.preventDefault()
         gDrive.userInitiatedAuth()
         gDrive.call(gDrive.getFileList)
         false
 
     "click #new-folder-test": (e) ->
+        e.preventDefault()
         gDrive.createDirectory("Test Folder", "root")
         Meteor.defer ->
             window.scroll(0,0)
         false
 
     "click #test": (e) ->
-        console.log('Run Test', gapi.auth.getToken())
-        user = Meteor.user()
-        if user
-            gapi.auth.setToken
-                access_token: user.services.google.accessToken
-                expires_at: services.google.expiresAt
+        e.preventDefault()
+        console.log('Run Google Test', gapi.auth.getToken())
+
+        # Find File we want
+
+        Meteor.call "googleDocTest", fileId, (error, result) ->
+            if error
+                CoffeeAlerts.error("Google Test Error #{error.message}")
 
 
 Template.gDrive.helpers
@@ -54,13 +58,22 @@ Template.gDriveFileList.helpers
         gDrive.gettingFileList()
 
     haveFiles: ->
-        gDrive.fileList?().length > 0
+        console.log('haveFiles', gDrive.fileList?(), gDrive.fileList?()[0]?)
+        console.log(gDrive.fileList?().length > 0 and gDrive.fileList?()[0]?)
+        gDrive.fileList?().length > 0 and gDrive.fileList?()[0]?
 
     files: ->
         gDrive.getFilesInCurrentFolder()
 
     haveFilesInCurrentDirectory: ->
         gDrive.getFilesInCurrentFolder().length > 0
+
+Template.gDriveFileList.events
+    "click #authorize": (e) ->
+        e.preventDefault()
+        gDrive.userInitiatedAuth()
+        gDrive.call(gDrive.getFileList)
+        false
 
 Template.gDrive.events
     "click .path-link": (e) ->
@@ -110,6 +123,14 @@ Template.gDriveItem.events
 
     "click .read-file": (e) ->
         console.log("Read File", @)
+        Meteor.call "googleFetchDoc", @, (result) ->
+            console.log(result)
+        , (error, result) ->
+            if error
+                CoffeeAlerts.error("Google Test Error #{error.message}")
+            else
+                console.log("Read OK", result)
+           
 
 
 
