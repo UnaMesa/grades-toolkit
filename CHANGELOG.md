@@ -9,7 +9,7 @@ Grades Toolkit Change Log
 	have been shared with the server app id.  The email address that google
 	assigns.  The files with the credentials are in the private directory 
 	and not in github.
-
+	Add beginning hooks for contact details
 
 11/8/13 - TEP
 

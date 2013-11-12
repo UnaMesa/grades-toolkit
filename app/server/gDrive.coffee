@@ -125,7 +125,11 @@ gDrive.checkFamilyList = ->
     gDrive._request
         url: "https://www.googleapis.com/drive/v2/files/" + GoogleFamilySpreadsheetId 
         jwt: GoogleJWT
-    , (err, res, body) ->
+    , Meteor.bindEnvironment gDrive.staleFamilyListCheck, (err) ->   # This works but need to understand
+        throw err
+
+
+gDrive.staleFamilyListCheck = (err, res, body) ->
         if err
             throw err
         body = JSON.parse(body)
