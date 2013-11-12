@@ -192,7 +192,7 @@ Router.before mustBeSignedIn, except: ['home']
 Router.before setTags, except: []
 
 # this hook will run on almost all routes
-Router.after googleDriveAuthorize, except: []
+#Router.after googleDriveAuthorize, except: []
 
 Router.after addPageTag, except: ['home']
 
