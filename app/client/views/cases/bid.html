@@ -3,7 +3,7 @@
     <form role="form">
 
         <div class="form-group">
-            <label for="childId">Child ID</label>
+            <label for="childId" class="control-label">Child ID</label>
             <input type="text" class="form-control" name="childId" value="{{BID.childId}}" placeholder="{{tag}}" required />
             <span class="help-block">Required Field</span>
         </div>
@@ -13,22 +13,22 @@
         {{/with}}
 
         <div class="form-group">
-            <label for="date">BID Meeting Date</label>
+            <label for="date" class="control-label">BID Meeting Date</label>
             <input type="date" class="form-control" name="date" placeholder="01/23/2013" value="{{bidDate}}" />
         </div>
     
         <div class="form-group">
-              <label for="grade">Current Grade</label>
+              <label for="grade" class="control-label">Current Grade</label>
               <input type="number" name="grade" class="age-control form-control" min="1" max="12" value="{{BID.grade}}">
         </div>
 
         <div class="form-group">
-            <label for="currentSchool">Current School</label>
+            <label for="currentSchool" class="control-label">Current School</label>
             <input type="text" class="form-control" name="currentSchool" placeholder="Name of current school" value="{{BID.currentSchool}}" />
         </div>
         
         <div class="form-group">
-            <label for="reasonsForChange">Reasons for Change</label>
+            <label for="reasonsForChange" class="control-label">Reasons for Change</label>
             <select name="reasonsForChange" class="form-control" multiple>
                {{#each reasonsForChangeSelect}}
                     {{> selectOption}}
@@ -37,7 +37,7 @@
         </div>
 
         <div class="form-group">
-            <label for="reasonsForChangeComments">Document any of the above selected reasons</label>
+            <label for="reasonsForChangeComments" class="control-label">Document any of the above selected reasons</label>
             <textarea class="form-control" name="reasonsForChangeComments" 
             placeholder="documentation of reasons for change">{{BID.reasonsForChangeComments}}</textarea>
         </div>
@@ -47,7 +47,7 @@
         {{/each}}
 
         <div class="form-group">
-            <label for="documentsUsed">Documents used for BID</label>
+            <label for="documentsUsed" class="control-label">Documents used for BID</label>
             <select name="documentsUsed" class="form-control" multiple>
                {{#each documentsUsedSelect}}
                     {{> selectOption}}
@@ -56,13 +56,13 @@
         </div>
 
         <div class="form-group">
-            <label for="otherDocumentsUsed">Other documents used for BID</label>
+            <label for="otherDocumentsUsed" class="control-label">Other documents used for BID</label>
             <textarea class="form-control" name="otherDocumentsUsed" 
             placeholder="List other documents used for the BID">{{BID.otherDocumentsUsed}}</textarea>
         </div>
 
         <div class="form-group">
-            <label for="newSchool">Name of New School</label>
+            <label for="newSchool" class="control-label">Name of New School</label>
             <input type="text" class="form-control" value="{{BID.newSchool}}" name="newSchool" placeholder="Name of new school if applicable" />
         </div>
 
@@ -79,7 +79,7 @@
 
 <template name="slider">
     <div class="form-group">
-        <label for="{{varName}}">{{description}}</label>
+        <label for="{{varName}}" class="control-label">{{description}}</label>
         <div>
             <span class="make-switch" data-on-label="Yes" data-off-label="No">
                 <input name="{{varName}}" type="radio" {{value}}>

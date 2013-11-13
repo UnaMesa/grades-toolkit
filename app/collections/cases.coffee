@@ -7,6 +7,7 @@
         type: String
         #unique: true
         label: 'Child ID'
+        optional: true  #  Have to check independent of Collection2
     stayInCurrentSchool:
         type: Boolean
         optional: true
@@ -20,6 +21,7 @@
         min: 0
         max: 12
         label: "Current Grade"
+        optional: true  #  Have to check independent of Collection2
     currentSchool:
         type: String
         optional: true
@@ -99,7 +101,7 @@
         type: String
         unique: true
     age:
-        type: Number,
+        type: Number
         min: 0
     urgent:
         type: Boolean
@@ -140,10 +142,6 @@
     schema: CaseSchema
 
 
-#
-#  Add more permission stuff....
-#
-
 Meteor.methods 
     newCase: (caseAttributes) ->
         user = Meteor.user()
@@ -152,7 +150,7 @@ Meteor.methods
         throw new Meteor.Error(401, "You need to login to post new stories") unless user
   
         # ensure the post has a Name
-        throw new Meteor.Error(422, "Please fill in the name") unless caseAttributes.name
+        #throw new Meteor.Error(422, "Please fill in the name") unless caseAttributes.name
   
         caseWithSameName = Cases.findOne(name: caseAttributes.name)
 
@@ -175,6 +173,11 @@ Meteor.methods
         if not @isSimulation
             theCase.tag = createCaseTag(caseAttributes.name)
 
+        
+        theCase = massageFormData(theCase, CaseSchema)
+
+        console.log("Case", theCase)
+
         try   
             Cases.insert theCase
         catch error
@@ -183,18 +186,6 @@ Meteor.methods
                 error: 
                     reason: "Error on new case insert"
                     invalidKeys: Cases.namedContext("default").invalidKeys()
-                
-        ###
-        , (error, result) ->
-            if error
-                console.log("Error on new Case insert", error, Cases.namedContext?("default").invalidKeys?())
-                if Meteor.isClient
-                    if Cases.namedContext?("default").invalidKeys?().length > 0
-                        firstInvalidKey = Cases.namedContext("default").invalidKeys()[0]
-                        CoffeeAlerts.error("New Case Failed: "+ firstInvalidKey.message)
-                        $("[name=#{firstInvalidKey.name}]").parent().addClass('has-error')
-                #throw new Meteor.Error(600, "Insert Failed")
-        ###
 
 
     updateCase: (caseId, caseAttributes, type) ->
@@ -208,9 +199,29 @@ Meteor.methods
         theCase.modified = new Date().getTime()
         theCase.lastModifierId = user._id
         
-        console.log("Update Case", caseId, theCase)
+        if theCase.BID?
+            invalidKeys = []
+            for key in ["childId", "grade"]
+                console.log("Check", key, BID.schema[key])
+                if not theCase.BID[key] or theCase.BID[key] is ''
+                    invalidKeys.push
+                        message: "#{BID.schema[key].label} is required"
+                        name: key
+
+            if invalidKeys.length > 0
+                result =
+                    error:
+                        reason: "Error on BID update"
+                        invalidKeys: invalidKeys
+                return result
+
+            theCase.BID = massageFormData(theCase.BID, BID.schema)
+
+        console.log("Update Case", theCase)
         try
-            Cases.update caseId,
+            rtn = Cases.update 
+                _id: caseId
+            ,
                 $set: theCase
         catch error
             console.log("Error on new case update", error, Cases.namedContext?("default").invalidKeys?())
@@ -218,7 +229,7 @@ Meteor.methods
                 error: 
                     reason: "Error on case update"
                     invalidKeys: Cases.namedContext("default").invalidKeys()
-         
+            return result
 
         # Only available on the server
         if not @isSimulation

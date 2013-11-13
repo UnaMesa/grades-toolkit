@@ -111,11 +111,14 @@
         if not gDrive._authorized and not gDrive._authorizing
             if user = Meteor.user()
                 console.log("checkAuth", user)
+                # TODO: Add checks to keep the token in sync!!!
                 if user.services?.google?.accessToken?
                     console.log("Doing authorization transfer", user, user.services?.google?.accessToken)
+                    expiresAt = moment(user.services.google.expiresAt)
+                    expiresIn = expiresAt.diff(moment(), 'seconds')
                     gapi.auth.setToken
                         access_token: user.services.google.accessToken
-                        expires_at: user.services.google.expiresAt
+                        expires_in: expiresIn
                     gDrive._authorized = true
                     gDrive._currentStateListeners.changed()
                     if gDrive._callBack?
@@ -224,19 +227,27 @@
 
     _retrievePageOfFiles: (request) ->
         request.execute (resp) ->
-            gDrive._appendToFileList(resp.items)
-            nextPageToken = resp.nextPageToken
-            if nextPageToken
-                request = gapi.client.drive.files.list(pageToken: nextPageToken)
-                gDrive._retrievePageOfFiles(request)
-            else
-                # Done
-                console.log("List Complete, count:", gDrive._fileList.length)
-                #console.log("List Complete", gDrive._fileList)
-                
-                if gDrive.topDirectory?
-                    gDrive.setTopDirectory()
+            if not resp.error
+                gDrive._appendToFileList(resp.items)
+                nextPageToken = resp.nextPageToken
+                if nextPageToken
+                    request = gapi.client.drive.files.list(pageToken: nextPageToken)
+                    gDrive._retrievePageOfFiles(request)
+                else
+                    # Done
+                    console.log("List Complete, count:", gDrive._fileList.length)
+                    #console.log("List Complete", gDrive._fileList)
+                    
+                    if gDrive.topDirectory?
+                        gDrive.setTopDirectory()
 
+                    gDrive._gettingFileList = false
+                    gDrive.fileListLoaded = true
+                    gDrive._currentStateListeners.changed()
+            else
+                # TODO:  Check for 401 and reauthorize/refresh tokens
+                console.log('_retrievePageOfFiles Error', resp.error)
+                gDrive._appendToFileList(null)
                 gDrive._gettingFileList = false
                 gDrive.fileListLoaded = true
                 gDrive._currentStateListeners.changed()
@@ -291,9 +302,9 @@
 
 
     getFilesInCurrentFolder: ->
+        theFiles = []
         if gDrive._authorized and not gDrive._gettingFileList and gDrive.fileListLoaded
             console.log("Get files in ", gDrive?.currentDirectory?().title)
-            theFiles = []
             for file in gDrive._fileList
                 if file?
                     if gDrive.currentDirectory().id is 'root'
@@ -301,7 +312,8 @@
                             theFiles.push file
                     else if file.parents?[0]?.id is gDrive.currentDirectory().id
                         theFiles.push file
-            theFiles
+        theFiles
+        
 
     currentParent: ->
         if gDrive.currentDirectory().id isnt 'root'

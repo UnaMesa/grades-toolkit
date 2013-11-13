@@ -2,11 +2,11 @@
 messagesIn = "in"
 detailsIn = ""
 
-Template.viewFamily.created = ->
+Template.viewContact.created = ->
     messagesIn = "in"
     detailsIn = ""
 
-Template.viewFamily.rendered = ->
+Template.viewContact.rendered = ->
     console.log('Tags', Session.get("tags"))
     $("#collapseMessages").on "hidden.bs.collapse", ->
         messagesIn = ""
@@ -26,9 +26,9 @@ Template.viewFamily.rendered = ->
             height = setMessageListHeight()
             $("#collapseMessages").css("height", height + "px")
 
-Template.viewFamily.helpers
+Template.viewContact.helpers
     fields: ->
-        theRecord = Families.findOne(Session.get('currentRecordId'))
+        theRecord = Meteor.users.findOne(Session.get('currentRecordId'))
         recordAsArray = []
         for key, value of theRecord
             if key in ['submitted', 'modified']
@@ -53,7 +53,7 @@ Template.viewFamily.helpers
     detailsIn: ->
         detailsIn
 
-Template.viewFamily.events
+Template.viewContact.events
     "shown.bs.collapse #collapseMessages": (e)  ->
         console.log("shown.bs.collapse")
         setMessageListHeight()

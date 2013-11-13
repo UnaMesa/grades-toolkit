@@ -12,7 +12,7 @@ Template.login.events
         Meteor.loginWithGoogle
             requestPermissions: googleScopes
             forceApprovalPrompt: false
-            requestOfflineToken: false
+            requestOfflineToken: true
         ,
             (error) ->
                 if error
@@ -33,6 +33,7 @@ Template.login.events
                         console.log("Error on userLoggedIn", error)
                 console.log("Go Home")
                 Router.go('home')
+        gDrive.reAuthorize()
 
     "click #demo": (e, tmpl) ->
         console.log("Launch Demo")

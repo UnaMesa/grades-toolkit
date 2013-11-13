@@ -61,6 +61,9 @@ Template.bid.events
     "submit form": (e) ->
         e.preventDefault()
 
+        CoffeeAlerts.clearSeen()
+        $(".has-error").removeClass('has-error')
+
         if not user = Meteor.user()
             @render("accessDenied")
             return
@@ -68,31 +71,13 @@ Template.bid.events
         theBid = $('form').serializeObject()
 
         # Must check for false checkboxes
+        
+        ###
         for key, val of BID.schema
-            #if typeOf(val.type) is 'function'
-
-            switch val.type
-                when Boolean
-                    if theBid[key] is 'on'
-                        theBid[key] = true
-                    else
-                        theBid[key] = false
-                when Date 
-                    if theBid[key] is ''
-                        delete theBid[key]
-                    else
-                        m = moment(theBid[key])
-                        if m.isValid()
-                            theBid[key] = m.toDate()
-
-                #when [String]
-                #    if not typeIsArray theBid[key]
-                #        theBid[key] = [theBid[key]]
-
             if key in ['documentsUsed', 'reasonsForChange']
                 if not typeIsArray theBid[key]
-                    theBid[key] = [theBid[key]] 
-
+                    theBid[key] = [theBid[key]]
+        ###
 
         # Since we are writing to the Case record these are already there
         #for elm in ['name', 'age', 'location']

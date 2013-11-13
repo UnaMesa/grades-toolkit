@@ -1,6 +1,18 @@
 Grades Toolkit Change Log
 =========================
 
+11/13/13 - TEP
+
+	Worked on making form validation work better and fixing the schema so it would work with the validation package.  Probably need to write my own validation since the packages leave something to be desired.
+	
+11/12/13 - TEP
+
+	Fixed a freeze bug that would happen if no google drive records available
+	Fixed tag links not showing up in messages.  
+	Fixed Family tags wanting to be @ instead of #.
+	Deleted old case record with BID embedded in case instead of sub doc.
+	
+
 11/11/13 - TEP
 	
 	Have family records updating from spreadsheet

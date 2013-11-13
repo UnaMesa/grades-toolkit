@@ -1,15 +1,17 @@
 Grades Toolkit TODO
 ===================
 
-- [-] Create and Display Cases
- 	* Fill out the hooks
- 	* Case editing
+- [ ] Edit Cases
 
-- [x] Message streams for Cases
+- [ ] Write a validation package
 
 - [ ] Comments on Messages
 
 - [ ] User summary page
+
+- [ ] Refresh google tokens
+
+- [ ] Use callbacks for google drive spreadsheet changes
 
 - [ ] BID and MOU Forms
 	* BID ready, MOU todo

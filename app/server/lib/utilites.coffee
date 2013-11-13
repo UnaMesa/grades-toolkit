@@ -19,7 +19,6 @@
     while Cases.findOne(tag: tag)
         counter++
         tag = baseTag + counter
-    console.log("createCaseTag", tag)
     tag
 
 
@@ -36,7 +35,6 @@
     while Meteor.users.findOne(tag: tag) or Families.findOne(tag: tag)
         counter++
         tag = baseTag + counter
-    console.log("createUserTag", tag)
     tag
 
 
@@ -48,12 +46,6 @@
                 _id: tagObject._id
                 tag: tag
                 name: tagObject.profile.name
-        else if tagObject = Families.findOne(tag: tag)
-            tagObject =
-                type: 'family'
-                _id: tagObject._id
-                tag: tag
-                name: tagObject.name
     else if tag?[0] is '#'
         if tagObject = Cases.findOne(tag: tag)
             tagObject =
@@ -61,6 +53,12 @@
                 _id: tagObject._id
                 tag: tag
                 name: tagObject.name
+        else if tagObject = Families.findOne(tag: tag)
+            tagObject =
+                type: 'family'
+                _id: tagObject._id
+                tag: tag
+                name: "#{tagObject.firstname} #{tagObject.lastname}"
 
 
 @fillOutTagFromId = (tag) ->

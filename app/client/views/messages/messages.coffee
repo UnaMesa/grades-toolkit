@@ -143,7 +143,6 @@ Template.message.rendered = ->
 
 
 tagToUrl = (tag) ->
-    console.log('tagToUrl', tag, tag?.type)
     switch tag?.type
         when 'case'
             Router.routes['viewCase'].path(tag)

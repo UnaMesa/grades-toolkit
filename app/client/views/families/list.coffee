@@ -3,7 +3,6 @@
 Template.families.helpers
 
     haveFamilies: ->
-        console.log("!!!HaveFamilies", Families.find().count())
         Families.find().count() > 0
 
     sortedFamilies: ->

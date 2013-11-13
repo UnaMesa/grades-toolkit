@@ -27,7 +27,6 @@ Meteor.methods
   
         name = user.profile.name
         tag = createUserTag(name)
-        console.log("Add tag to user record", user.profile.name, tag, user)
         Meteor.users.update 
             _id: user._id
         ,
@@ -35,7 +34,6 @@ Meteor.methods
                 tag: tag
 
     tagIsValid: (tag) ->
-        console.log("tagIsValid", tag, Meteor.users.findOne(tag: tag))
         Meteor.users.findOne(tag: tag) or Cases.findOne(tag: tag) or Families.findOne(tag: tag)
 
  

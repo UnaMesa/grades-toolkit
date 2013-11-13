@@ -1,7 +1,7 @@
 <template name="viewCase">
     <div class="case-view">
         <div class="well record-view">
-            {{#if isUrgent}}<span class="urgent badge">URGENT</span>{{/if}}
+            {{#if urgent}}<span class="urgent badge">URGENT</span>{{/if}}
             {{#if tag}}<span class="tag tag-case badge">{{tag}}</span>{{/if}}
             <h4>{{name}}</h4>
             <a class="btn btn-primary btn-sm pull-right check-btn" href={{pathFor 'mou'}}>

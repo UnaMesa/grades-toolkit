@@ -146,12 +146,16 @@ Router.map ->
 
 
 mustBeSignedIn = ->
-  if not Meteor.user()
+  if not user = Meteor.user()
     if Meteor.loggingIn()
       @render("loading")
     else
       @render("accessDenied")
     @stop()
+  else
+    # Token Testing  REMOVE FOR FLIGHT
+    console.log('clientToken expires_in', gapi?.auth?.getToken?()?.expires_in)
+    console.log('loginToken expires', moment(user.services?.google?.expiresAt).format('llll'))
   
 setTags = ->
   if user = Meteor.user()

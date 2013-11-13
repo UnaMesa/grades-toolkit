@@ -10,17 +10,21 @@ Template.newCase.events
 
     "submit form": (e) ->
         e.preventDefault()
+        
+        CoffeeAlerts.clearSeen()
+        $(".has-error").removeClass('has-error')
 
         newCase = $('form').serializeObject()
     
         # Must check for false checkboxes
-        for elm in ['isMale', 'urgent']
-            if not newCase[elm]?
-                newCase[elm] = false
+        #for elm in ['isMale', 'urgent']
+        #    if not newCase[elm]?
+        #        newCase[elm] = false
 
         Meteor.call "newCase", newCase, (error, result) ->
             if error
                 # Display error to the user
+                #console.log("Call CoffeeAlerts", error)
                 CoffeeAlerts.error(error.reason)
             else if result?.error?
                 if result.error.invalidKeys.length > 0
@@ -32,6 +36,8 @@ Template.newCase.events
                 window.scrollTo(0, 0)
             else
                 CoffeeAlerts.success("Created Case")
-                # TODO: Go to the Document            
-                Router.go("cases")
+                # TODO: Go to the Document
+                console.log("New Case", result)            
+                Router.go "viewCase",
+                    _id: result
                 

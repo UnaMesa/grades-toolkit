@@ -9,8 +9,8 @@ Template.googleDocs.rendered = ->
     console.log("googleDocs renderd")
     if gDrive.fileList().length is 0 or not gDrive.fileListLoaded
         gDrive.topDirectory = null
-        gDrive.deleteOk = true;
-        gDrive.testingOk = true;
+        gDrive.deleteOk = true
+        gDrive.testingOk = true
         gDrive.call(gDrive.getFileList)
     
 Template.googleDocs.destroyed = ->
@@ -58,15 +58,15 @@ Template.gDriveFileList.helpers
         gDrive.gettingFileList()
 
     haveFiles: ->
-        console.log('haveFiles', gDrive.fileList?(), gDrive.fileList?()[0]?)
-        console.log(gDrive.fileList?().length > 0 and gDrive.fileList?()[0]?)
+        #console.log('haveFiles', gDrive.fileList?(), gDrive.fileList?()[0]?)
+        #console.log(gDrive.fileList?().length > 0 and gDrive.fileList?()[0]?)
         gDrive.fileList?().length > 0 and gDrive.fileList?()[0]?
 
     files: ->
-        gDrive.getFilesInCurrentFolder()
+        gDrive?.getFilesInCurrentFolder?()
 
     haveFilesInCurrentDirectory: ->
-        gDrive.getFilesInCurrentFolder().length > 0
+        gDrive?.getFilesInCurrentFolder?().length > 0
 
 Template.gDriveFileList.events
     "click #authorize": (e) ->
