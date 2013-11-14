@@ -1,6 +1,6 @@
 
 <template name="contacts"> 
-    <div class="contacts">
+    <div class="records">
         {{#each sortedContacts}} 
             {{> contact}}
         {{/each}}
@@ -16,15 +16,7 @@
 </template>
 
 <template name="contact">
-    <div class="well well-sm contact">
-        {{#if me}}<span class="is-me badge">Me</span>{{/if}}
-        {{#if services.google.picture}}
-          <img class="img-rounded contact-picture" src="{{services.google.picture}}" />
-        {{else}}
-           <i class="fa fa-user fa-3x"></i>
-        {{/if}}
-        {{profile.name}}
-        {{#if tag}}<span class="label label-default tag tag-{{type}}">{{tag}}</span>{{/if}}
-        {{#if commentsCount}}<span class="badge comments-count-badge">{{commentsCount}}</span>{{/if}}
+    <div class="record well well-sm">
+        {{> contactSummary}}
     </div>
 </template>

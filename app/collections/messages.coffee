@@ -28,34 +28,37 @@ Meteor.methods
         if not @isSimulation
             message.tags = []
 
+            # Current User Tag
             message.tags.push
                 type: 'user'
                 _id: user._id
                 tag: user.tag
                 name: user.profile.name
 
+            # Tags in the message
             if tags?
                 tags = uniqueTags(tags)
                 for tag in tags
-                    if not tags.name?
-                        tagObj = fillOutTagFromId(tag)
-                    updateCommentsCount(tagObj)
-                    message.tags.push(tagObj)
-            # Pull out tags and tag this message
+                    message.tags.push(fillOutTagFromId(tag))
+                    
+            # Pull out tags in this message
             caseStrings = message.message.match(/\#[^ ]+/g)
             otherStrings = message.message.match(/\@[^ ]+/g)
             tagStrings = _.union(caseStrings, otherStrings)
             console.log(tagStrings, otherStrings, tagStrings)
             if tagStrings?
-                if tagString?
-                    for tagString in tagStrings
+                for tagString in tagStrings
+                    if tagString?
                         if tagObj = tagToTagObject(tagString)
-                            updateCommentsCount(tagObj)
                             message.tags.push(tagObj)
                         else
                             throw new Meteor.Error(422, "Invalid tag #{tagString} in message")
             message.tags = uniqueTags(message.tags)
             console.log("submitMessage", message)
+
+            for tag in message.tags
+                updateCommentsCount(tag)
+
         Messages.insert(message)
 
 

@@ -44,15 +44,13 @@ scrollToBottomOk = false
             #        $('.messages-list-box').scrollTop($('.messages-list-box').prop("scrollHeight") - $('#small-spinner').height() - 10)
       
 @setMessageListHeight = ->
-    if $(".messages-list-box")?.offset? and $(".bottom-navbar")?.offset? and $("#new-message-group")?.height?
+    if $(".bottom-navbar")?.offset? and $("#new-message-group")?.height?  # and $(".messages-list-box")?.offset?
         if $(".navbar").hasClass("zero-height")
             maxHeight = $(window).height()
-            #maxHeight -= $("#new-message-group").height()
             maxHeight -= 1
         else
             maxHeight = $(".bottom-navbar").offset().top 
-            maxHeight -= $(".messages-list-box").offset().top 
-            #maxHeight -= $("#new-message-group").height()
+            #maxHeight -= $(".messages-list-box").offset().top 
             maxHeight -= 1
 
         $(".messages-list-box").css("max-height", maxHeight + "px")

@@ -1,6 +1,14 @@
 Grades Toolkit Change Log
 =========================
 
+11/14/13 - TEP
+
+	Cleaned up CSS so that records look the same.
+	Fixed some issues with male/female
+	Fixed issues with message counts
+	Add a message on case insert
+	
+
 11/13/13 - TEP
 
 	Worked on making form validation work better and fixing the schema so it would work with the validation package.  Probably need to write my own validation since the packages leave something to be desired.

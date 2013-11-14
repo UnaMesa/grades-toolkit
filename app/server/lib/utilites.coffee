@@ -111,3 +111,9 @@
             console.log("updateCommentsCount error", tag, error)
     true
 
+@updateCommentsCounts = (message) ->
+    for tag in message.tags
+        updateCommentsCount(tag)
+
+
+

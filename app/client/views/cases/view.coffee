@@ -38,6 +38,13 @@ Template.viewCase.helpers
                 caseAsArray.push
                     key: key
                     value: value
+            else if key is 'contact'
+                caseAsArray.push
+                    key: 'Contact'
+                    value: value.name
+                caseAsArray.push
+                    key: 'Contact Number'
+                    value: value.number
         caseAsArray
 
     caseId: ->

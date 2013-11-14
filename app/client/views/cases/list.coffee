@@ -27,7 +27,7 @@ Template.cases.events
 
 
 Template.case.events
-    "click .case": (e) ->
-        console.log("case click", @_id)
+    "click .record": (e) ->
+        console.log("record click", @_id)
         Router.go 'viewCase',
             _id: @_id 

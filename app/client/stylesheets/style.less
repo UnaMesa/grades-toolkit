@@ -250,89 +250,6 @@ body {
 
 }
 
-.contact {
-    zoom: 1; /*   was *zoom */
-    -webkit-transition: all 300ms 0ms; 
-    -webkit-transition-delay: ease-in; 
-    -moz-transition: all 300ms 0ms ease-in; 
-    -o-transition: all 300ms 0ms ease-in; 
-    transition: all 300ms 0ms ease-in; 
-    position: relative;
-    opacity: 1;
-    margin-bottom: 10px;
-
-    .contact-content { 
-        float: left;
-
-        h3 {
-            margin: 0; 
-            line-height: 1.4; 
-            font-size: 18px;
-
-            a {
-                display: inline-block;
-                margin-right: 5px; 
-            }
-
-            span { 
-                font-weight: normal; 
-                font-size: 14px;
-                display: inline-block; 
-                color: #aaaaaa;
-            }
-        }
-
-        p { 
-            margin: 0; 
-        }
-
-        discuss {
-            display: block; 
-            float: right; 
-            margin-top: 7px;
-        }
-    } 
-
-}
-
-.contact:before, .contact:after {
-    content: "";
-    display: table; 
-}
-
-.contact:after { clear: both } 
-
-.contact.invisible { opacity: 0 } 
-
-.contact-picture {
-    height:32px;
-    vertical-align: baseline;
-    margin-right: 5px;
-}
-
-/*
-.contact .contact-content h3 a {
-    display: inline-block;
-    margin-right: 5px; 
-}
-
-.contact .contact-content h3 span { 
-    font-weight: normal; 
-    font-size: 14px;
-    display: inline-block; color: #aaaaaa;
-}
-
-.contact .contact-content p { margin: 0 }
-
-.contact .discuss {
-    display: block; 
-    float: right; 
-    margin-top: 7px;
-}
-*/
-
-
-
 #login {
     margin-right: 10px;
 }
@@ -412,6 +329,10 @@ body {
 .message-center {
     height: 100%;
 
+    ol {
+        margin-bottom: 0px;
+    }
+
     li {
         padding: 5px;
     }
@@ -447,74 +368,7 @@ body {
 
 }
 
-/*
-.message-author-picture {
-    width:32px;
-    margin: 0px;
-}
 
-.message-author-name {
-    font-size: 8px;
-    margin:0;
-    margin-top: 0px;
-    padding: 0;
-    position: relative;
-    left: 46px;
-    //color: #eee;
-}
-
-.message-date {
-    font-size: 10px;
-    //color: #fff
-}
-
-.message-body {
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    margin-right: 6px;
-    margin-left: 6px;
-    margin-bottom: 6px;
-    border-radius: 10px;
-    position: relative;
-    //border-style: none;
-    background-color: @message-color;
-}
-
-.message-bubble-arrow {
-  border-color: transparent @message-color transparent transparent;
-  border-style: solid;
-  border-width: 10px;
-  height:0;
-  width:0;
-  position:absolute;
-  top: 2px;
-  left: -15px;
-  //background-color: @message-color;
-}
-
-.my-message-body {
-    background-color: @my-message-color;
-    color: @my-message-text-color;
-}
-
-.my-message-bubble-arrow {
-  border-color: transparent transparent transparent @my-message-color;
-  border-style: solid;
-  border-width: 10px;
-  height:0;
-  width:0;
-  position:absolute;
-  top: 2px;
-  right: -15px;
-  //z-index: 10;
-}
-
-.message-sub .badge {
-    font-size: 8px;
-}
-*/
 
 .tags {
     padding: 2px;
@@ -528,6 +382,24 @@ body {
         padding: 0px;
         margin: 0px; 
     }
+}
+
+
+.tag {
+    padding: 3px;
+    font-size: 8px; 
+}
+
+.tag-case {   
+    background-color: @case-color;
+}
+
+.tag-family {
+    background-color: @family-color;
+}
+
+.tag-user {
+    background-color: @user-color;
 }
 
 
@@ -576,10 +448,10 @@ body {
 
 .check-btn {
     position: relative;
-    top: -2px;
+    //top: -2px;
     font-weight: bold;
-    padding: 20px 8px;
-    line-height: 2;
+    //padding: 20px 8px;
+    //line-height: 2;
 
     .check {
         position: absolute;
@@ -589,18 +461,20 @@ body {
     }
 }
 
-.cases {
-    padding: 0;
-    margin: 0;
+
+.contact-picture {
+    height:32px;
+    vertical-align: baseline;
+    margin-right: 5px;
 }
 
-.case-view {
-    padding: 0;
-    margin: 0;
 
+.records {
+    padding: 0px;
+    margin: 0px;
 }
 
-.case {
+.record {
     zoom: 1; /*   was *zoom */
     -webkit-transition: all 300ms 0ms; 
     -webkit-transition-delay: ease-in; 
@@ -625,18 +499,31 @@ body {
         font-size: 10px;
     }
 
-    .case-content { 
+    .record-content { 
         
         float: left;
 
         h3 {
             margin: 0; 
+            margin-top: 2px;
             line-height: 1.4; 
             font-size: 18px;
             display: inline-block;
+
+            span { 
+                font-weight: normal; 
+                font-size: 14px;
+                display: inline-block; 
+                color: #aaaaaa;
+            }
+
+            a {
+                display: inline-block;
+                margin-right: 5px; 
+            }
         }
 
-        .case-age {
+        .age {
             margin: 0; 
             font-size: 11px;
         }
@@ -658,6 +545,31 @@ body {
             opacity: 0.7;
         }
 
+
+        p { 
+            margin: 0;
+            margin-left: 5px; 
+            font-size: 10px; 
+        }
+
+        .btns {
+           a {
+                display: inline-block;
+                margin-right: 5px; 
+            } 
+        }
+
+        .is-me {
+            font-size: 8px;
+            background-color: #f00;
+            opacity: 0.9;
+            position: absolute;
+            top: 1px;
+            left: 35px;
+            padding: 3px;
+            margin: 0px;
+        }
+
     } 
 
     .comments-count-badge {
@@ -669,43 +581,39 @@ body {
         opacity: 0.6;
     }
 
-    .case-content h3 a {
-        display: inline-block;
-        margin-right: 5px; 
-    }
-
-    .case-content h3 span { 
-        font-weight: normal; 
-        font-size: 14px;
-        display: inline-block; 
-        color: #aaaaaa;
-    }
-
-    .case-content p { 
-        margin: 0;
-        margin-left: 5px; 
-        font-size: 10px; 
-    }
-
     .discuss {
         display: block; 
         float: right; 
         margin-top: 7px;
     }
+
+    .invisible { 
+        opacity: 0; 
+    } 
+
 }
 
-.case:before, .case:after {
+.record:before, .record:after {
     content: "";
     display: table; 
 }
 
-.case:after { clear: both } 
+.record:after { clear: both } 
 
-.case.invisible { opacity: 0 } 
 
-.case-message-list {
+.panel-message-list {
+    margin: 0px;
+    margin-top: 2px;
     padding: 0px;
 }
+
+.record-view {
+    .table {
+        margin-bottom: 0px;
+        font-size: 12px;
+    }
+}
+
 
 .comments-count-badge {
     position: absolute;
@@ -714,26 +622,6 @@ body {
     background-color: blue;
     font-size: 9px;
     opacity: 0.6;
-}
-
-
-
-
-.tag {
-    padding: 3px;
-    font-size: 8px; 
-}
-
-.tag-case {   
-    background-color: @case-color;
-}
-
-.tag-family {
-    background-color: @family-color;
-}
-
-.tag-user {
-    background-color: @user-color;
 }
 
 
@@ -751,81 +639,12 @@ body {
     margin-bottom:  20px;
 }
 
-.record-view {
-    margin-top: 5px;
-    margin-bottom: 10px;
-    //padding-left: 5px;
-    padding: 5px;
-    //background-color: white;
-    //text-align: center;
-    position: relative;
-
-    h3 {
-        margin-top: 0px;
-        margin-bottom: 0px;
-        margin-left: 0px;
-        text-align: left;
-        display: inline-block;
-    }
-
-    h4 {
-        margin-top: 0px;
-        margin-bottom: 0px;
-        margin-left: 0px;
-        text-align: left;
-        display: inline-block;
-    }
-
-
-    a {
-        margin-right: 2px;
-        margin-left: 2px;
-        padding-top: 0px;
-        padding-bottom: 0px;
-    }
-
-    .tag {
-        //position: absolute;
-        //top: 53px;
-        //left: 23px;
-        font-size: 12px;
-        padding: 5px;
-    }
-
-    .urgent {
-        position: absolute;
-        top: -14px;
-        left: 50px;
-        //font-size: 12px;
-        //padding: 5px;
-        background-color: red;
-        z-index: 2000;
-        opacity: 0.7;
-    }
-
-    .table {
-        margin-bottom: 0px;
-        font-size: 10px;
-    }
-}
-
-.record-details {
-    background-color: white;
-    padding: 0px;
-    margin: 0px;
-}
-
-.record-comments {
-    background-color: white;
-    padding: 0px;
-    margin: 0px;
-}
-
 
 .td-key {
     text-align: right;
     text-transform: capitalize;
 }
+
 .td-val {
     text-align: left;
 }
@@ -835,16 +654,6 @@ body {
     padding: 0;
 }
 
-.contact .is-me {
-    font-size: 8px;
-    background-color: #f00;
-    opacity: 0.9;
-    position: absolute;
-    top: 1px;
-    left: 0px;
-    padding: 3px;
-    margin: 0px;
-}
 
 
 

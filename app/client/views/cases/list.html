@@ -1,6 +1,6 @@
 
-<Template name="cases">
-    <div class="cases">
+<template name="cases">
+    <div class="records">
         {{#if haveCases}}
             {{#each sortedCases}} 
                 {{> case}}
@@ -14,39 +14,37 @@
                 <div>{{> spinner}}</div>
             {{/if}}
         {{else}}
-            <div class="well">
-                <div class="text-center"><strong>No Cases ... </strong> <i class="fa fa-frown-o fa-lg"></i></div>
-            </div>
+            {{#if casesReady}}
+                <div class="well">
+                    <div class="text-center">
+                        <strong>No Cases ... </strong> <i class="fa fa-frown-o fa-lg"></i>
+                    </div>
+                </div>
+            {{else}}
+                <div>{{> spinner}}</div>
+            {{/if}}
         {{/if}}
     </div> 
-</Template>
+</template>
 
 
-<Template name="case">
-    <div class="case well well-sm">
-        <div class="case-content">
-            {{#if urgent}}<span class="urgent badge">URGENT</span>{{/if}}
-            <h3 class="case-name">{{name}}</h3> 
-            {{#if tag}}<a href="#"><span class="label label-default tag tag-case">{{tag}}</span></a>{{/if}}
-            <span class="case-age text-muted">Age {{age}}</span>
+<template name="case">
+    <div class="record well well-sm">
 
-            <p class="case-author text-muted">
-                <em>submitted by {{author}}</em>
-            </p>
-        </div>
-        <div class="case-btns pull-right">
-            
-            <a class="case-edit-btn btn btn-default btn-xs" 
-                href="{{pathFor 'editCase' this}}">
-                <i class="fa fa-pencil-square-o"></i>
-            </a>
+        {{> caseSummary}}
 
+        <div class="btns pull-right">
+            <!-- 
             <a class="case-notes-btn btn btn-xs btn-link"
                 href="{{pathFor 'caseNotes' this}}" >
-                <!-- <i class="fa fa-file-text-o"></i> 
-                Notes -->
-                <span class="badge comments-count-badge">{{commentsCount}}</span>
+                <i class="fa fa-file-text-o"></i> 
+                Notes
             </a>
+             -->
+             <span class="badge comments-count-badge">{{commentsCount}}</span>
         </div> 
+
     </div>
-</Template>
+</template>
+
+

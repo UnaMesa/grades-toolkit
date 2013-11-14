@@ -1,8 +1,18 @@
 
-<Template name="editCase">
-    <div class="jumbotron">
-      <div class="container">
-        <h1>TODO!</h1>
+
+<template name="editCase">
+  <div class="well well-sm">
+    <div class="media">
+      <span class="pull-left">
+        <i class="media-object fa fa-user fa-3x"></i>
+      </span>
+      <div class="media-body">
+        <h4 class="media-heading">{{name}}</h4>
+        Edit case for {{name}}
       </div>
+    </div>
   </div>
-</Template>
+  <div class="container">
+    {{> caseForm}}
+  </div>
+</template>

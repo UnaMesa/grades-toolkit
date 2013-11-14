@@ -1,8 +1,8 @@
 <template name="viewContact">
-    <div class="case-view">
-        <div class="well record-view">
-            {{#if tag}}<span class="tag tag-case badge">{{tag}}</span>{{/if}}
-            <h4>{{firstname}} {{lastname}}</h4>
+    <div class="record-view">
+
+        <div class="record well well-sm">
+            {{> contactSummary}}
         </div>
 
         <div class="panel-group" id="accordion">
@@ -40,13 +40,13 @@
                         <button class="btn btn-link" data-toggle="collapse" data-target="#collapseMessages">
                             Messages 
                         </button>
-                        <button id="new-note-link" class="btn btn-default btn-sm pull-right"><i class="fa fa-pencil fa-lg"></i></button>
+                        <button id="new-note-link" class="btn btn-link btn-xs pull-right"><i class="fa fa-comments-o fa-2x"></i></button>
                     </h4>
 
                 </div>
 
                 <div id="collapseMessages" class="panel-collapse collapse {{messagesIn}}">
-                    <div class="panel-body case-message-list">
+                    <div class="panel-message-list">
                         {{> messages}}
                     </div>
                 </div>
@@ -57,3 +57,20 @@
     </div>
 
 </template>
+
+
+<template name="contactSummary">
+    <div class="record-content">
+        {{#if me}}<span class="is-me badge">Me</span>{{/if}}
+        {{#if services.google.picture}}
+          <img class="img-rounded contact-picture" src="{{services.google.picture}}" />
+        {{else}}
+           <i class="fa fa-user fa-3x"></i>
+        {{/if}}
+         <h3 class="record-name">{{profile.name}}</h3> 
+        {{#if tag}}<span class="label label-default tag tag-{{type}}">{{tag}}</span>{{/if}}
+        {{#if commentsCount}}<span class="badge comments-count-badge">{{commentsCount}}</span>{{/if}}
+    </div>
+</template>
+
+

@@ -23,12 +23,12 @@ Template.families.events
         e.preventDefault()
         FamiliesHandle.loadNextPage()
 
-    "click .family": (e) ->
+    "click .record": (e) ->
         Router.go 'viewFamily',
             _id: @_id 
 
 
-Template.family.helpers
+Template.familySummary.helpers
     name: ->
         @["firstname"] + " " + @["lastname"]
 

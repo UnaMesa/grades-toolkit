@@ -19,9 +19,8 @@ Template.contacts.events
         e.preventDefault()
         ContactsHandle.loadNextPage()
 
-Template.contact.helpers
-    me: ->
-        Meteor.userId() is @_id
-
-    type: ->
-        'user'
+Template.contact.events
+    "click .record": (e) ->
+        console.log("record click", @_id)
+        Router.go 'viewContact',
+            _id: @_id 

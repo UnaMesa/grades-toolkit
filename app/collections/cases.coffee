@@ -103,6 +103,9 @@
     age:
         type: Number
         min: 0
+    sex:
+        type: String
+        allowedValues: ["male", "female"]
     urgent:
         type: Boolean
     location:
@@ -160,6 +163,7 @@ Meteor.methods
         # pick out the whitelisted keys
         theCase = _.extend(_.pick(caseAttributes, "name", "sex", "age", "urgent", "location"),
             userId: user._id
+            lastModifierId: user._id
             author: user.profile.name
             submitted: new Date().getTime()
             modified: new Date().getTime()
@@ -173,49 +177,101 @@ Meteor.methods
         if not @isSimulation
             theCase.tag = createCaseTag(caseAttributes.name)
 
-        
         theCase = massageFormData(theCase, CaseSchema)
 
         console.log("Case", theCase)
 
         try   
-            Cases.insert theCase
+            caseId = Cases.insert(theCase)
         catch error
             console.log("Error on new case insert", error, Cases.namedContext?("default").invalidKeys?())
             result =
                 error: 
                     reason: "Error on new case insert"
                     invalidKeys: Cases.namedContext("default").invalidKeys()
+            return result
 
+        # Only available on the server
+        if not @isSimulation
+        
+            # Generate Message
+            message = 
+                userId: user._id
+                author: user.profile.name # Change to bot....
+                timestamp: new Date().getTime()
+                tags: []
 
+            message.tags.push 
+                type: 'user'
+                _id: user._id
+                tag: user.tag
+                name: user.profile.name
+
+            caseTag = fillOutTagFromId
+                type: 'case'
+                _id: caseId
+
+            if caseTag?
+                message.tags.push caseTag
+
+            message.message = "Case #{caseTag.tag} created by #{user.tag}"
+
+            try
+                Messages.insert(message)
+                updateCommentsCounts(message)
+            catch error
+                console.log("Error creating message on case insert", error)
+          
+        caseId      
+            
     updateCase: (caseId, caseAttributes, type) ->
         user = Meteor.user()
         
         # ensure the user is logged in
         throw new Meteor.Error(401, "You need to login to create BIDs") unless user
 
-        theCase = _.omit(caseAttributes, ["author", "userId", "submitted", "commentsCount"])
-        
-        theCase.modified = new Date().getTime()
-        theCase.lastModifierId = user._id
-        
-        if theCase.BID?
-            invalidKeys = []
-            for key in ["childId", "grade"]
-                console.log("Check", key, BID.schema[key])
-                if not theCase.BID[key] or theCase.BID[key] is ''
-                    invalidKeys.push
-                        message: "#{BID.schema[key].label} is required"
-                        name: key
+        omits = ["author", "userId", "submitted", "commentsCount", "_id", "contactName", "contactNumber"]
+        theCase = _.extend(_.omit(caseAttributes, omits),
+            modified: new Date().getTime()
+            lastModifierId: user._id
+        )
 
-            if invalidKeys.length > 0
-                result =
-                    error:
-                        reason: "Error on BID update"
-                        invalidKeys: invalidKeys
-                return result
+        if not theCase.contact
+            theCase.contact = {}
 
-            theCase.BID = massageFormData(theCase.BID, BID.schema)
+        if caseAttributes.contactName?
+            theCase.contact.name = caseAttributes.contactName
+
+        if caseAttributes.contactNumber?
+            theCase.contact.number = caseAttributes.contactNumber
+        
+        switch type
+                when 'BID'
+                    if theCase.BID?
+                        invalidKeys = []
+                        for key in ["childId", "grade"]
+                            console.log("Check", key, BID.schema[key])
+                            if not theCase.BID[key] or theCase.BID[key] is ''
+                                invalidKeys.push
+                                    message: "#{BID.schema[key].label} is required"
+                                    name: key
+
+                        if invalidKeys.length > 0
+                            result =
+                                error:
+                                    reason: "Error on BID update"
+                                    invalidKeys: invalidKeys
+                            return result
+
+                        theCase.BID = massageFormData(theCase.BID, BID.schema)
+
+                when "MOU"
+                    if theCase.MOU?
+                        console.log("MOU NOT DONE")
+
+                else
+                    type = 'case'
+                    theCase = massageFormData(theCase, CaseSchema)
 
         console.log("Update Case", theCase)
         try
@@ -263,11 +319,11 @@ Meteor.methods
                     type = 'case'
                     message.message = "Case #{caseTag.tag} updated by #{user.tag}"
 
-            Messages.insert message, (error, id) ->
-                if error
-                    console.log("Error creating tag for #{type} update")
-
-
+            try
+                Messages.insert(message)
+                updateCommentsCounts(message)
+            catch error
+                console.log("Error creating message on case update", error)
 
 
 

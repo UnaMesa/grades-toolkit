@@ -1,8 +1,9 @@
 
-Template.newCase.events
+Template.editCase.events
     "click #cancel": (e) ->
         e.preventDefault()
-        Router.go("cases")
+        Router.go "viewCase",
+            _id: Session.get('currentRecordId')
 
     "submit form": (e) ->
         e.preventDefault()
@@ -10,17 +11,17 @@ Template.newCase.events
         CoffeeAlerts.clearSeen()
         $(".has-error").removeClass('has-error')
 
-        newCase = $('form').serializeObject()
+        updatedCase = $('form').serializeObject()
     
-        if not newCase.sex?
-            newCase.sex = "female"
-
+        if not updatedCase.sex?
+            updatedCase.sex = "female"
+    
         # Must check for false checkboxes
         #for elm in ['isMale', 'urgent']
         #    if not newCase[elm]?
         #        newCase[elm] = false
 
-        Meteor.call "newCase", newCase, (error, result) ->
+        Meteor.call "updateCase", Session.get('currentRecordId'), updatedCase, (error, result) ->
             if error
                 # Display error to the user
                 #console.log("Call CoffeeAlerts", error)
@@ -34,9 +35,9 @@ Template.newCase.events
                     CoffeeAlerts.error(error.reason)
                 window.scrollTo(0, 0)
             else
-                CoffeeAlerts.success("Created Case")
+                CoffeeAlerts.success("Case Updated")
                 # TODO: Go to the Document
-                console.log("New Case", result)            
+                console.log("Update Case", result)            
                 Router.go "viewCase",
-                    _id: result
+                    _id: Session.get('currentRecordId')
                 

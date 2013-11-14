@@ -1,9 +1,9 @@
 
 <template name="families">
-    <div class="contacts">
+    <div class="records">
         {{#unless haveFamilies}}
             {{#if familiesReady}}
-                <h4 class="alert alert-warning text-center">No Records</h4>
+                <h4 class="alert alert-warning text-center">No Family Records</h4>
             {{/if}}
         {{else}}
 
@@ -23,15 +23,22 @@
 </template>
 
 <template name="family">
-    <div class="family case well well-sm">
+    <div class="record well well-sm">
+        {{> familySummary }}
+    </div>
+</template>
+
+
+<template name="familySummary">
+    <div class="record-content">
         {{#if picture}}
           <img class="img-rounded contact-picture" src="{{picture}}" />
         {{else}}
            <i class="fa fa-user fa-3x"></i>
         {{/if}}
-        {{firstname}} {{lastname}}
+        <h3 class="record-name">{{name}}</h3> 
         {{#if tag}}<span class="label label-default tag tag-{{type}}">{{tag}}</span>{{/if}}
-        Capacity: {{capacity}}
+        <span class="age text-muted">Capacity: {{capacity}}</span>
         {{#if commentsCount}}<span class="badge comments-count-badge">{{commentsCount}}</span>{{/if}}
     </div>
 </template>

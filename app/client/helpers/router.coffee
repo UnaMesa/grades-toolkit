@@ -52,7 +52,7 @@ Router.map ->
       data: ->
         data = Cases.findOne(@params._id)
         data.title = "Edit Case #{data.name}"
-        data.goBackPath = "cases"
+        data.goBackPath = "viewCase"
         data
 
     @route 'caseNotes',
@@ -66,23 +66,6 @@ Router.map ->
         data = Cases.findOne(@params._id)
         data.title = "#{data.name} Case Notes"
         data.goBackPath = "cases"
-        data
-
-    @route 'families',
-      data:
-        title: "Families"
-
-    @route 'viewFamily',
-      path: 'families/:_id'
-      before: ->
-        Session.set('currentRecordId', @params._id)
-        Session.set('messageTagFilter', 'family')
-      waitOn: ->
-        Meteor.subscribe('singleFamily', @params._id)
-      data: ->
-        data = Families.findOne(@params._id)
-        data.title = "Family"
-        data.goBackPath = "families"
         data
 
     @route 'bid',
@@ -109,25 +92,69 @@ Router.map ->
         data.goBackPath = "viewCase"
         data
 
-    @route 'docs',
+    @route 'families',
       data:
-        title: 'Documents'
+        title: "Families"
 
-    @route 'googleAuth',
-      data:
-        title: "Google Drive"
+    @route 'viewFamily',
+      path: 'families/:_id'
+      before: ->
+        Session.set('currentRecordId', @params._id)
+        Session.set('messageTagFilter', 'family')
+      waitOn: ->
+        Meteor.subscribe('singleFamily', @params._id)
+      data: ->
+        data = Families.findOne(@params._id)
+        data.title = "Family"
+        data.goBackPath = "families"
+        data
+
+    @route 'editFamily',
+      path: 'families/edit/:_id'
+      before: ->
+        Session.set('currentRecordId', @params._id)
+      waitOn: ->
+        Meteor.subscribe('singleCase', @params._id)
+      data: ->
+        data = Families.findOne(@params._id)
+        data.title = "Edit Family #{data.firstname} #{data.lastname}"
+        data.goBackPath = "viewFamily"
+        data
 
     @route 'contacts',
       data:
         title: 'Contacts'
 
+    @route 'viewContact',
+      path: 'contacts/:_id'
+      before: ->
+        Session.set('currentRecordId', @params._id)
+        Session.set('messageTagFilter', 'user')
+      #waitOn: ->
+      #  Meteor.subscribe('singleUser', @params._id)
+      data: ->
+        data = Meteor.users.findOne(@params._id)
+        data.title = data.profile.name
+        data.goBackPath = "contacts"
+        data
+
     @route 'messages',
       data:
         title: 'Messages'
 
+    @route 'docs',
+      data:
+        title: 'Documents'
+
+
     @route 'settings',
       data:
         title: 'Settings'
+
+
+    @route 'googleAuth',
+      data:
+        title: "Google Drive"
 
     @route 'googleDocs',
       path: '/googledocs'

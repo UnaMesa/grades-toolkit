@@ -7,7 +7,6 @@ Template.viewContact.created = ->
     detailsIn = ""
 
 Template.viewContact.rendered = ->
-    console.log('Tags', Session.get("tags"))
     $("#collapseMessages").on "hidden.bs.collapse", ->
         messagesIn = ""
     $("#collapseDetails").on "shown.bs.collapse", ->
@@ -29,16 +28,20 @@ Template.viewContact.rendered = ->
 Template.viewContact.helpers
     fields: ->
         theRecord = Meteor.users.findOne(Session.get('currentRecordId'))
-        recordAsArray = []
+        console.log('userRecord', theRecord)
+        recordAsArray = [
+            key: "Email" 
+            value: theRecord.services.google.email
+        ]
         for key, value of theRecord
             if key in ['submitted', 'modified']
                 recordAsArray.push
                     key: key
                     value: moment(value).format('lll')
-            else if key not in  ['_id','contact', 'userId', 'name', 'commentsCount', 'tag', 'urgent']
+            else if key is 'lastLoginAt'
                 recordAsArray.push
-                    key: key
-                    value: value
+                    key: 'Last Login'
+                    value: moment(value).format('lll')
         recordAsArray
 
     recordId: ->
@@ -64,4 +67,10 @@ Template.viewContact.events
         Session.set("showNewNoteDialog", true)
 
 
+Template.contactSummary.helpers
+    me: ->
+        Meteor.userId() is @_id
+
+    type: ->
+        'user'
 
