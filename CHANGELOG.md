@@ -1,6 +1,10 @@
 Grades Toolkit Change Log
 =========================
 
+11/15/13 - TEP
+
+	Added code to use the Google Oauth refresh token to retrieve a new one.
+
 11/14/13 - TEP
 
 	Cleaned up CSS so that records look the same.

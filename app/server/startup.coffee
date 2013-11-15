@@ -39,9 +39,9 @@ Meteor.startup ->
 
     gDrive.getAndUpdateFamilyList()
 
-    # Do with a push notification from Google
+    # Do with a push notification from Google but requires a valie SSL cert!!!
     # Check the spreadsheet every N seconds 
-    #familyCheckIntervalId = Meteor.setInterval(gDrive.checkFamilyList, 10000)
+    familyCheckIntervalId = Meteor.setInterval(gDrive.checkFamilyList, 10000)
 
 
     #

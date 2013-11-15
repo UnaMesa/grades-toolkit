@@ -1,7 +1,7 @@
 
 Template.googleDocs.created = ->
     console.log("googleDocs created")
-    gDrive.reset()
+    gDrive.fullReset()
     gDrive.init()
 
       

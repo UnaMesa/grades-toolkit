@@ -9,6 +9,7 @@
     _authorizing: false
     _userInitiatedAuth: false
     _immediate: true
+    _refreshingToken: false
 
     _loading: false
     
@@ -57,6 +58,7 @@
         gDrive._authorized = false
         gDrive._authorizing = false
         gDrive._immediate = true
+        gDrive._refreshingToken = false
 
     fullReset: ->
         gDrive.reAuthorize()        
@@ -251,6 +253,22 @@
                 gDrive._gettingFileList = false
                 gDrive.fileListLoaded = true
                 gDrive._currentStateListeners.changed()
+                if resp.error.code is 401
+                    console.log("Google Token may be stale")
+                    gDrive._callBack = gDrive.getFileList
+                    gDrive._refreshToken()
+
+    _refreshToken: ->
+        console.log("ReFresh Token!!!")
+        gDrive.reAuthorize()
+        gDrive._refreshToken = true
+        Meteor.call "refreshGoogleAccessToken", (error, result) ->
+            if error
+                console.log("Error getting new token", error, result)
+            else if result
+                gDrive._refreshingToken = false
+                gDrive.checkAuth()
+
 
     setTopDirectory: ->
         gDrive._path = [

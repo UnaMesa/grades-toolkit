@@ -2,8 +2,9 @@
 
 Router.map ->
 
+    # Hook for Google Push Notifications once we have a valid SSL cert
     @route "googleCallback",
-        path: "/callbacks/:id"
+        path: "/notifications/:id"
         where: 'server'
 
         action: ->

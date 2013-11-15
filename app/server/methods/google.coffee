@@ -45,8 +45,46 @@ getAuth = ->
     auth
 
 
+refreshGoogleAccessToken = ->
+    console.log("refreshGoogleAccessToken")
+    user = Meteor.user()
+        
+    throw Meteor.Error(401, "You need to be logged in to have access")  unless user
+
+    throw Meteor.Error(401, "No Refresh Token") unless user.services?.google?.refreshToken?
+
+    loginServiceConfig = Accounts.loginServiceConfiguration.findOne
+        service: "google"
+
+    url = 'https://accounts.google.com/o/oauth2/token'
+    
+    requestBody = 
+        "refresh_token=#{user.services.google.refreshToken}" +
+        "&client_id=#{loginServiceConfig.clientId}" +
+        "&client_secret=#{loginServiceConfig.secret}" +
+        "&grant_type=refresh_token"
+
+    result = Meteor.http.post url,
+        headers:
+            'Content-Type': 'application/x-www-form-urlencoded'
+        content:  requestBody
+    
+    if result.data?.access_token?
+        console.log("Update Token")
+        Meteor.users.update Meteor.userId(),
+            $set: 
+                "services.google.accessToken": result.data.access_token
+        return result.data.access_token
+    else
+        console.log("Google refresh token failed", result)
+        throw Meteor.Error(401, "No New Token")
+
+
 Meteor.methods
 
+    refreshGoogleAccessToken: ->
+        refreshGoogleAccessToken()
+        
     #
     #  Server based New doc create
     #    Not working!!!  Using the client side instead (sync issues?)
