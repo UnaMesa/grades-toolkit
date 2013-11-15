@@ -39,8 +39,9 @@ Meteor.startup ->
 
     gDrive.getAndUpdateFamilyList()
 
+    # Do with a push notification from Google
     # Check the spreadsheet every N seconds 
-    familyCheckIntervalId = Meteor.setInterval(gDrive.checkFamilyList, 10000)
+    #familyCheckIntervalId = Meteor.setInterval(gDrive.checkFamilyList, 10000)
 
 
     #
