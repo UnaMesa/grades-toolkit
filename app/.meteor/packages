@@ -10,10 +10,8 @@ paginated-subscription
 iron-router
 less
 moment
-bootstrap3-less
 coffeescript
 accounts-google
-font-awesome-4
 google-api
 bootstrap-switch
 coffee-alerts
@@ -23,3 +21,6 @@ fastclick
 ionicons
 http
 google-server-auth
+font-awesome
+bootstrap-less-3
+photo-uploader

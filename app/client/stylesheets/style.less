@@ -3,7 +3,8 @@
 //
 
 
-@import "/packages/bootstrap3-less/bootstrap.lessimport";
+//@import "/packages/bootstrap3-less/bootstrap.lessimport";
+@import "packages/bootstrap-less-3/lib/less/bootstrap.lessimport";
 
 // Adding in support for bootstrap-switch
 @import "/packages/bootstrap-switch/lib/less/bootstrap-switch.lessimport";
@@ -472,7 +473,13 @@ body {
 .records {
     padding: 0px;
     margin: 0px;
+
+    .record {
+        cursor: pointer;
+    }
 }
+
+
 
 .record {
     zoom: 1; /*   was *zoom */
@@ -487,7 +494,6 @@ body {
     margin-top: 10px;
     margin-bottom: 10px;
     background-color: #f9f9f9;
-    cursor: pointer;
 
     .upvote {
         display: block; 

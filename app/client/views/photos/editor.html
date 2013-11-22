@@ -1,0 +1,17 @@
+
+<template name="photoEditor">
+    <div class="container">
+        <div class="record well well-sm">
+            {{#if isCase}}
+                {{> caseSummary}}
+            {{else}} {{#if isFamily}}
+                {{> familySummary}}
+            {{else}}
+
+            {{/if}} {{/if}}
+        </div>
+        <p>
+            {{> photoUpload}}
+        </p>
+    </div>
+</template>

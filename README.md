@@ -4,12 +4,12 @@ Grades Toolkit
 Prototype mobile web app for social workers.
 
 ##Table of Contents
- - [About] (#about)
+ - [About](#about)
  - [History](#history)
  - [Installation](#installation)
  - [Quick Start](#quick-start)
- - [Message Streams] (#streams)
- - [External Tools] (#external-tools)
+ - [Message Streams](#streams)
+ - [External Tools](#external-tools)
  - [License](#license)
 
 ## About
@@ -24,7 +24,7 @@ versions.
 
 ## Installation
 
-Install [Meteorite](https://github.com/oortcloud/meteorite) and [Atmosphere](https://atmosphere.meteor.com)
+Install [Meteorite](https://github.com/oortcloud/meteorite) and use [Atmosphere](https://atmosphere.meteor.com)
 
 
   ```sh
@@ -51,10 +51,12 @@ The message streams will interpret a few "hash tag" like symbols.
 
 
 ## External Tools
-* [Meteor] (http://www.meteor.com)
-* [Bootstrap] (http://http://getbootstrap.com)
-* [Google Drive] (https://developers.google.com/drive/)
+* [Meteor](http://www.meteor.com)
+* [Bootstrap](http://http://getbootstrap.com)
+* [Google Drive](https://developers.google.com/drive/)
 * HTML to PDF? [jsPDF](https://github.com/MrRio/jsPDF)
+* [JavaScript-Load-Image](https://github.com/blueimp/JavaScript-Load-Image)
+
 
 ## License
 

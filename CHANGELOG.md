@@ -1,6 +1,10 @@
 Grades Toolkit Change Log
 =========================
 
+11/22/13 - TEP
+
+	Added the photo-uploader package so we can now upload or take photos and crop for using with cases and families.  Currently only does the profile picture.
+
 11/15/13 - TEP
 
 	Added code to use the Google Oauth refresh token to retrieve a new one.

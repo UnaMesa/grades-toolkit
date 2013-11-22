@@ -23,7 +23,7 @@ Meteor.methods
     addUserTag: ->
         user = Meteor.user()
         # ensure the user is logged in
-        throw new Meteor.Error(401, "Error on Login")  unless user
+        throw new Meteor.Error(401, "Error not Logged In!") unless user
   
         name = user.profile.name
         tag = createUserTag(name)

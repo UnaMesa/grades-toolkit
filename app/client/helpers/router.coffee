@@ -47,12 +47,27 @@ Router.map ->
       path: 'cases/edit/:_id'
       before: ->
         Session.set('currentRecordId', @params._id)
+        Session.set('messageTagFilter', 'case')
       waitOn: ->
         Meteor.subscribe('singleCase', @params._id)
       data: ->
         data = Cases.findOne(@params._id)
         data.title = "Edit Case #{data.name}"
         data.goBackPath = "viewCase"
+        data
+
+    @route 'editCasePhoto',
+      path: 'cases/photo/edit/:_id'
+      template: 'photoEditor'
+      before: ->
+        Session.set('currentRecordId', @params._id)
+        Session.set('messageTagFilter', 'case')
+      waitOn: ->
+        Meteor.subscribe('singleCase', @params._id)
+      data: ->
+        data = Cases.findOne(@params._id)
+        data.title = "Edit Photo"
+        data.goBackPath = "editCase"
         data
 
     @route 'caseNotes',
@@ -113,12 +128,27 @@ Router.map ->
       path: 'families/edit/:_id'
       before: ->
         Session.set('currentRecordId', @params._id)
+        Session.set('messageTagFilter', 'family')
       waitOn: ->
-        Meteor.subscribe('singleCase', @params._id)
+        Meteor.subscribe('singleFamily', @params._id)
       data: ->
         data = Families.findOne(@params._id)
-        data.title = "Edit Family #{data.firstname} #{data.lastname}"
+        data.title = "Edit Family"
         data.goBackPath = "viewFamily"
+        data
+
+    @route 'editFamilyPhoto',
+      path: 'families/photo/edit/:_id'
+      template: 'photoEditor'
+      before: ->
+        Session.set('currentRecordId', @params._id)
+        Session.set('messageTagFilter', 'family')
+      waitOn: ->
+        Meteor.subscribe('singleFamily', @params._id)
+      data: ->
+        data = Families.findOne(@params._id)
+        data.title = "Edit Photo"
+        data.goBackPath = "editFamily"
         data
 
     @route 'contacts',

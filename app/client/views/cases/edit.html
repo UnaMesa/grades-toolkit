@@ -4,7 +4,13 @@
   <div class="well well-sm">
     <div class="media">
       <span class="pull-left">
-        <i class="media-object fa fa-user fa-3x"></i>
+        <a href="{{pathFor 'editCasePhoto' this}}">
+        {{#if picture.src}}
+          <img class="img-rounded contact-picture" src="{{picture.src}}" />
+        {{else}}
+          <i class="media-object fa fa-user fa-3x"></i>
+        {{/if}}
+      </a>
       </span>
       <div class="media-body">
         <h4 class="media-heading">{{name}}</h4>

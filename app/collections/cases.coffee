@@ -138,7 +138,9 @@
     MOU:
         type: @MOU.simpleSchema
         optional: true
-
+    picture:
+        type: Object    # Does not work...  seems to get yanked by collection2
+        optional: true
 
 
 @Cases = new Meteor.Collection2 'cases', 

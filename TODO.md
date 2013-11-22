@@ -10,6 +10,8 @@ Grades Toolkit TODO
 	* Submit writes to google doc and generates a message with a href link to the form
 	* HTML to PDF [jsPDF](https://github.com/MrRio/jsPDF)
 
+- [ ] Multiple Picture uploads for a family
+
 - [ ] Add testing
 
 - [ ] Comments on Messages
@@ -34,7 +36,7 @@ Grades Toolkit TODO
 
 - [ ] Get this working as an iOS Web App
 	* Need Meteor Oauth without popup 
-	* [iOS Web App] (https://developer.apple.com/library/safari/referencelibrary/GettingStarted/GS_iPhoneWebApp/_index.html)
+	* [iOS Web App](https://developer.apple.com/library/safari/referencelibrary/GettingStarted/GS_iPhoneWebApp/_index.html)
 
 
 

@@ -1,14 +1,19 @@
 {
   "packages": {
+    "bootstrap-less-3": {
+        "git": "https://github.com/ianserlin/meteor-bootstrap-less"
+    },
     "spin": {},
     "paginated-subscription": {},
     "iron-router": {},
     "moment": {},
-    "bootstrap3-less": {},
-    "font-awesome-4": {},
     "coffee-alerts": {},
     "collection2": {},
     "fastclick": {},
-    "ionicons": {}
+    "ionicons": {},
+    "font-awesome": {},
+    "photo-uploader": {
+        "git": "https://github.com/pfafman/meteor-photo-uploader.git"
+    }
   }
 }

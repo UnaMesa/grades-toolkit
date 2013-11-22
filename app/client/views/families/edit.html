@@ -1,8 +1,27 @@
 
 <Template name="editFamily">
-    <div class="jumbotron">
-      <div class="container">
-        <h1>TODO!</h1>
-      </div>
-  </div>
+
+    <div class="well well-sm">
+        <div class="media">
+          <span class="pull-left">
+            <a href="{{pathFor 'editFamilyPhoto' this}}">
+            {{#if picture.src}}
+              <img class="img-rounded contact-picture" src="{{picture.src}}" />
+            {{else}}
+              <i class="media-object fa fa-user fa-3x"></i>
+            {{/if}}
+          </a>
+          </span>
+          <div class="media-body">
+            <h4 class="media-heading">{{firstname}} {{lastname}}</h4>
+            Edit family
+          </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h3>TODO!</h3>
+        <p>Currently you can only change the main profile picture</p>
+    </div>
+
 </Template>
