@@ -52,7 +52,7 @@ Router.map ->
         Meteor.subscribe('singleCase', @params._id)
       data: ->
         data = Cases.findOne(@params._id)
-        data.title = "Edit Case #{data.name}"
+        data.title = "Edit Case"
         data.goBackPath = "viewCase"
         data
 

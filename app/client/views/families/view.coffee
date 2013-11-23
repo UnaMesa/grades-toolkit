@@ -35,7 +35,7 @@ Template.viewFamily.helpers
                 recordAsArray.push
                     key: key
                     value: moment(value).format('lll')
-            else if key not in  ['_id','contact', 'userId', 'name', 'commentsCount', 'tag', 'urgent']
+            else if key not in  ['_id','contact', 'userId', 'name', 'commentsCount', 'tag', 'urgent', 'picture']
                 recordAsArray.push
                     key: key
                     value: value

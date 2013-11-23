@@ -34,7 +34,7 @@ Template.viewCase.helpers
                 caseAsArray.push
                     key: key
                     value: moment(value).format('lll')
-            else if key not in  ['_id','contact', 'userId', 'name', 'commentsCount', 'tag', 'urgent', 'BID']
+            else if key not in  ['_id','contact', 'userId', 'name', 'commentsCount', 'tag', 'urgent', 'BID', 'picture']
                 caseAsArray.push
                     key: key
                     value: value

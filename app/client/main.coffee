@@ -23,13 +23,17 @@ Meteor.subscribe "userData"
     , 
         10
 
+Template.layout.rendered = ->
+    if /mobile/i.test(navigator.userAgent)
+        FastClick.attach document.body
+
 Meteor.startup ->
     console.log("Meteor Start on Client")
     #console.log("URL:",document.URL)
     if /mobile/i.test(navigator.userAgent)
         console.log('Mobile Device')
         $ ->
-            FastClick.attach document.body
+            #FastClick.attach document.body
 
             # Window hide scroll hack.  Does not work on iOS 7
             window.scrollTo(0, 0)

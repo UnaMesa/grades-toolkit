@@ -1,24 +1,31 @@
 
 
 <template name="editCase">
-  <div class="well well-sm">
-    <div class="media">
-      <span class="pull-left">
-        <a href="{{pathFor 'editCasePhoto' this}}">
-        {{#if picture.src}}
-          <img class="img-rounded contact-picture" src="{{picture.src}}" />
-        {{else}}
-          <i class="media-object fa fa-user fa-3x"></i>
-        {{/if}}
-      </a>
-      </span>
-      <div class="media-body">
-        <h4 class="media-heading">{{name}}</h4>
-        Edit case for {{name}}
-      </div>
-    </div>
+  <div class="record well well-sm">
+    {{> caseSummaryEdit}}
   </div>
   <div class="container">
     {{> caseForm}}
   </div>
+</template>
+
+
+<template name="caseSummaryEdit">
+    <div class="record-content">
+      <a href="{{pathFor 'editCasePhoto' this}}" class="edit-picture-link">
+        {{#if picture}}
+          <img class="edit-picture img-rounded contact-picture" src="{{picture.src}}" />
+        {{else}}
+           <i class="fa fa-user fa-3x"></i>
+        {{/if}}
+        <div class="edit-picture-notice label label-danger">edit</div>
+      </a>
+      {{#if urgent}}<span class="urgent badge">URGENT</span>{{/if}}
+      <h3 class="record-name">{{name}}</h3> 
+      {{#if tag}}<span class="label label-default tag tag-case">{{tag}}</span>{{/if}}
+      <span class="age text-muted">{{sex}} age {{age}}</span>
+      <p class="record-author text-muted">
+          <em>submitted by {{author}}</em>
+      </p>
+    </div>
 </template>

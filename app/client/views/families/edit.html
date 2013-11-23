@@ -1,22 +1,8 @@
 
 <Template name="editFamily">
 
-    <div class="well well-sm">
-        <div class="media">
-          <span class="pull-left">
-            <a href="{{pathFor 'editFamilyPhoto' this}}">
-            {{#if picture.src}}
-              <img class="img-rounded contact-picture" src="{{picture.src}}" />
-            {{else}}
-              <i class="media-object fa fa-user fa-3x"></i>
-            {{/if}}
-          </a>
-          </span>
-          <div class="media-body">
-            <h4 class="media-heading">{{firstname}} {{lastname}}</h4>
-            Edit family
-          </div>
-        </div>
+    <div class="record well well-sm">
+       {{> familySummaryEdit}}
     </div>
     
     <div class="container">
@@ -25,3 +11,20 @@
     </div>
 
 </Template>
+
+<template name="familySummaryEdit">
+    <div class="record-content">
+      <a href="{{pathFor 'editFamilyPhoto' this}}" class="edit-picture-link">
+        {{#if picture}}
+          <img class="edit-picture img-rounded contact-picture" src="{{picture.src}}" />
+        {{else}}
+           <i class="fa fa-user fa-3x"></i>
+        {{/if}}
+        <div class="edit-picture-notice label label-danger">edit</div>
+      </a>
+      <h3 class="record-name">{{name}}</h3> 
+      {{#if tag}}<span class="label label-default tag tag-{{type}}">{{tag}}</span>{{/if}}
+      <span class="age text-muted">Capacity: {{capacity}}</span>
+      {{#if commentsCount}}<span class="badge comments-count-badge">{{commentsCount}}</span>{{/if}}
+    </div>
+</template>
