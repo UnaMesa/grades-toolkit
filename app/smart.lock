@@ -74,17 +74,12 @@
       "photo-uploader": {
         "git": "https://github.com/pfafman/meteor-photo-uploader.git",
         "branch": "master",
-        "commit": "78caa8fc4d1a57a7ce7f03a1761acc927e021dd1"
+        "commit": "8f7863ef91d5d842e871741e6dfef4a70a7c4083"
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
         "tag": "v0.2.17",
         "commit": "a9d51089becf1142482519ed7f99ef84772d06a3"
-      },
-      "jquery-jcrop": {
-        "git": "https://github.com/waltyuyu/meteor-jquery-jcrop.git",
-        "tag": "v0.0.3",
-        "commit": "45a62562f3d13cbc72a7710472a76cf9c3c589cd"
       }
     }
   }
