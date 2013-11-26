@@ -18,7 +18,7 @@ Template.login.events
                 if error
                     # This is returning something regardless
                     console.log("Login Error", error)
-                    CoffeeAlerts.error(Google Login Failed)
+                    #CoffeeAlerts.error(Google Login Failed)
                     #throw new Meteor.Error(Accounts.LoginCancelledError.numericError, "Error")
                 else if not Meteor.user()?.tag 
                     # Need a Tag
@@ -28,9 +28,11 @@ Template.login.events
                             console.log("Error on creating tag", error)
                         else
                             console.log("New Tag", tag)
+                
                 Meteor.call 'userLoggedIn', (error) ->
                     if error
                         console.log("Error on userLoggedIn", error)
+
                 console.log("Go Home")
                 Router.go('home')
         gDrive.reAuthorize()

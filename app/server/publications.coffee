@@ -7,6 +7,7 @@ Meteor.publish "userData", ->
         fields:
             'tag': 1
             'commentsCount': 1
+            'createdAt': 1
             'services.google.picture': 1
             'services.google.given_name': 1
             'services.google.family_name': 1

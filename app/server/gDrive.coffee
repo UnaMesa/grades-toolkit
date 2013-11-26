@@ -133,9 +133,12 @@ gDrive.staleFamilyListCheck = (err, res, body) ->
         if err
             throw err
         body = JSON.parse(body)
-        if moment(body.modifiedDate).isAfter(gDrive._familyListUpdated)
-            console.log("Family data is stale!  Updating")
-            gDrive.getAndUpdateFamilyList()
+        if not body?.modifiedDate?
+            console.log("Error no body modifiedDate on staleFamilyListCheck", body)
+        else
+            if moment(body.modifiedDate).isAfter(gDrive._familyListUpdated)
+                console.log("Family data is stale!  Updating")
+                gDrive.getAndUpdateFamilyList()
 
 
 
