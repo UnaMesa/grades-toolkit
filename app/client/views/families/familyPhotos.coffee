@@ -18,6 +18,8 @@ Template.familyPhotos.created = ->
 
 
 Template.familyPhotos.rendered = ->
+    $('body').addClass("photoBody")
+    
     familyPhotoUploader.setOptions
         serverUploadOptions: 
             familyId: Session.get('currentRecordId')
@@ -32,7 +34,7 @@ Template.familyPhotos.rendered = ->
         #autoPlay: 5000
         #rewindNav: false
         #rewindSpeed: 200
-    $('body').addClass("photoBody")
+    
 
 Template.familyPhotos.destroyed = ->
     $('body').removeClass("photoBody")
@@ -52,4 +54,3 @@ Template.familyPhotos.helpers
             sort:
                 submitted: -1
 
-                

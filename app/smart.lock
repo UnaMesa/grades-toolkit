@@ -78,7 +78,7 @@
       "photo-uploader": {
         "git": "https://github.com/pfafman/meteor-photo-uploader.git",
         "branch": "master",
-        "commit": "08feefe623ef6dd84712fd792fb1f5f7b503f93b"
+        "commit": "c5015ea038ff718357196406224b20e8098f6ae3"
       },
       "owl-carousel": {
         "git": "https://github.com/pfafman/meteor-owl-carousel.git",
