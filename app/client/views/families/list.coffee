@@ -24,6 +24,7 @@ Template.families.events
         FamiliesHandle.loadNextPage()
 
     "click .record": (e) ->
+        #e.preventDefault()
         Router.go 'viewFamily',
             _id: @_id 
 

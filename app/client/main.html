@@ -28,3 +28,19 @@
     </div>
 </template>
 
+
+<template name="layoutInverse">
+    <div class="main-container-inverse">
+        {{#if currentUser}}
+            {{> headline}}
+            {{> newNote}}
+        {{/if}}
+        {{> coffeeAlerts}}
+        <div id="main" class="main">
+            {{yield}}
+        </div>
+        {{#if currentUser}}
+          {{> navbar}}
+        {{/if}} 
+    </div> 
+</template>

@@ -55,6 +55,11 @@ Meteor.publish "singleFamily", (id) ->
         Families.find(id)
 
 
+Meteor.publish "familyPhotos", (family_id) ->
+    if family_id
+        FamilyPhotos.find(family_id: family_id)
+
+
 # TODO: Limit this to the ones a user can see 
 Meteor.publish "cases", (limit) ->
     Cases.find {},

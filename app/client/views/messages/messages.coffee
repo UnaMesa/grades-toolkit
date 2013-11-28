@@ -90,18 +90,18 @@ Template.messages.rendered = ->
 
 
 Template.messagesList.created = ->
-    console.log("created template messagesList")
+    #console.log("created template messagesList")
     scrollToTopOK = true
 
 
 Template.messagesList.rendered = ->
-    console.log("render template messagesList")
+    #console.log("render template messagesList")
     #setMessageListHeight()
     setMessageBodyWidth()
     
 
 Template.messagesList.destroyed = ->
-    console.log("messasgeList destroyed")
+#    console.log("messasgeList destroyed")
 
 
 Template.messagesList.helpers

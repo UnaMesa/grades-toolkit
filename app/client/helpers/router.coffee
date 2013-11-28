@@ -151,6 +151,22 @@ Router.map ->
         data.goBackPath = "editFamily"
         data
 
+    @route 'familyPhotos',
+      path: 'family/:_id/photos'
+      layoutTemplate: 'layoutInverse'
+      before: ->
+        Session.set('currentRecordId', @params._id)
+        Session.set('messageTagFilter', 'family')
+      waitOn: ->
+        Meteor.subscribe('singleFamily', @params._id)
+        Meteor.subscribe('familyPhotos', @params._id)
+      data: ->
+        data = Families.findOne(@params._id)
+        data.title = "Family Photos"
+        data.goBackPath = "viewFamily"  # Got to get _id into this....
+        data
+      
+
     @route 'contacts',
       data:
         title: 'Contacts'

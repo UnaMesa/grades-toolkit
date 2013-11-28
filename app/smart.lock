@@ -18,6 +18,10 @@
       "photo-uploader": {
         "git": "https://github.com/pfafman/meteor-photo-uploader.git",
         "branch": "master"
+      },
+      "owl-carousel": {
+        "git": "https://github.com/pfafman/meteor-owl-carousel.git",
+        "branch": "master"
       }
     },
     "packages": {
@@ -53,8 +57,8 @@
       },
       "collection2": {
         "git": "https://github.com/aldeed/meteor-collection2.git",
-        "tag": "v0.2.12",
-        "commit": "103b43bb534cedcb3f9a7283dc91e3c69df16511"
+        "tag": "v0.2.14",
+        "commit": "46eeef2c8786f55e3ff3368c99ac0672600bc734"
       },
       "fastclick": {
         "git": "https://github.com/percolatestudio/meteor-fastclick",
@@ -74,12 +78,17 @@
       "photo-uploader": {
         "git": "https://github.com/pfafman/meteor-photo-uploader.git",
         "branch": "master",
-        "commit": "8f7863ef91d5d842e871741e6dfef4a70a7c4083"
+        "commit": "08feefe623ef6dd84712fd792fb1f5f7b503f93b"
+      },
+      "owl-carousel": {
+        "git": "https://github.com/pfafman/meteor-owl-carousel.git",
+        "branch": "master",
+        "commit": "0c0cd647d53b4454567e400a357cb661f0fe1a34"
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.2.17",
-        "commit": "a9d51089becf1142482519ed7f99ef84772d06a3"
+        "tag": "v0.2.18",
+        "commit": "53d0bbf77275ae2035643af4a268b7649af42b28"
       }
     }
   }

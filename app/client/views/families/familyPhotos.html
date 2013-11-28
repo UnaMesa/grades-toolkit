@@ -1,0 +1,28 @@
+
+<template name="familyPhotos">
+        {{#if haveImages}}
+            <div class="owl-carousel">
+                {{#each images}}
+                    {{> familyPhoto}}
+                {{/each}}
+            </div>
+        {{/if}}
+
+        <p class="photo-upload">
+            {{> photoUpload}}
+        </p>
+</template>
+
+
+<template name="familyPhoto">
+    <div class="family-image-holder">
+        <span class="image-container">
+            <div class="image-title">{{title}}</div>
+            <img name="{{name}}" filesize="filesize" orientation="{{orientation}}" 
+                class="carousel-image" src="{{src}}" />
+            {{#if caption}}
+                <div class="image-caption">{{caption}}</div>
+            {{/if}}
+        </span>
+    </div>
+</template>

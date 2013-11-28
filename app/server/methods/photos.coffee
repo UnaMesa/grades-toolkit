@@ -37,10 +37,11 @@ Meteor.methods
                 $set: modifier
 
         catch error
-            console.log("Error on new case update", error, collectionToUpdate.namedContext?("default").invalidKeys?())
+            console.log("Error on submitPhoto", error, collectionToUpdate.namedContext?("default").invalidKeys?())
             result =
                 error: 
-                    reason: "Error on updating photo"
+                    reason: "Error on submitting photo"
                     invalidKeys: collectionToUpdate.namedContext?("default").invalidKeys?()
             return result
+
 

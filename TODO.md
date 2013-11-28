@@ -10,8 +10,6 @@ Grades Toolkit TODO
 	* Submit writes to google doc and generates a message with a href link to the form
 	* HTML to PDF [jsPDF](https://github.com/MrRio/jsPDF)
 
-- [ ] Multiple Picture uploads for a family
-
 - [ ] Add testing
 
 - [ ] Comments on Messages

@@ -40,5 +40,8 @@
         {{#if tag}}<span class="label label-default tag tag-{{type}}">{{tag}}</span>{{/if}}
         <span class="age text-muted">Capacity: {{capacity}}</span>
         {{#if commentsCount}}<span class="badge comments-count-badge">{{commentsCount}}</span>{{/if}}
+        <a class="photos-link" href="{{pathFor 'familyPhotos'}}">
+            <i class="fa fa-picture-o fa-2x"></i>
+        </a>
     </div>
 </template>
