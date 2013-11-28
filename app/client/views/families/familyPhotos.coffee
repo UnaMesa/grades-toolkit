@@ -2,6 +2,7 @@
 familyPhotoUploader = null
 
 Template.familyPhotos.created = ->
+    $('body').addClass("photoBody")
     if not familyPhotoUploader?
         familyPhotoUploader = new PhotoUploadHandler
             serverUploadMethod: "insertFamilyPhoto"
@@ -19,7 +20,7 @@ Template.familyPhotos.created = ->
 
 Template.familyPhotos.rendered = ->
     $('body').addClass("photoBody")
-    
+
     familyPhotoUploader.setOptions
         serverUploadOptions: 
             familyId: Session.get('currentRecordId')
