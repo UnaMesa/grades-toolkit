@@ -155,6 +155,7 @@ Router.map ->
       path: 'family/:_id/photos'
       layoutTemplate: 'layoutInverse'
       before: ->
+        $('body').addClass("photoBody")
         Session.set('currentRecordId', @params._id)
         Session.set('messageTagFilter', 'family')
       waitOn: ->
@@ -275,6 +276,7 @@ Router.after addPageTag, except: ['home']
 
 # this hook will run on all routes
 Router.before ->
+  $('body').removeClass("photoBody")
   CoffeeAlerts.clearSeen()
   Session.set('messageTagFilter', null)
   Session.set('currentRecordId', null)
