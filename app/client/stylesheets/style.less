@@ -79,16 +79,49 @@ body {
 .main-container {
     height: 100%;
     //width:  100%;
+    background-color: #fff;
+    //margin-top: 5px;
+    //margin-left: 5px;
+    //margin-right: 5px;
 }
 
 .main-container-inverse {
-    height: 100%;
     width:  100%;
     background-color: black;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+#xmain-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    //overflow: hidden;
+    //background-color: @navbar-inverse-bg;
+    white-space:nowrap;
+    //box-shadow: 0 0 5px rgba(0,0,0,.5);
+    
+    webkit-transition: all 250ms ease-out;
+    -moz-transition: all 250ms ease-out;
+    -o-transition: all 250ms ease-out;
+    -ms-transition: all 250ms ease-out;
+    transition: all 250ms ease-out;
+    -webkit-transform: translate3d(0,0,0);
+    -moz-transform: translate3d(0,0,0);
+    -o-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
 }
 
 .main {
-
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .table {
@@ -242,11 +275,6 @@ body {
     height: 0px;
 }
 
-.main-container {
-    margin-top: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-}
 
 .photo-main {
     background-color: #22;
@@ -297,7 +325,7 @@ body {
     margin-right: 10px;
 }
 
-#login-dropdown {
+#more-button {
     padding-left: 10px;
 }
 
@@ -313,7 +341,18 @@ body {
     color: white;
     //border-bottom: 1px solid #e3e3e3;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+
+    .btn-link {
+        color: #fff;
+    }
+
+    .btn-link:hover {
+        color: #ddd;
+    }
+
 }
+
+
 
 .navtitle {
     margin-top: 5px;
@@ -359,6 +398,14 @@ body {
     top:   3px;
     right: 5px;
     z-index: 2000;
+
+    .btn-link {
+        color: #fff;
+    }
+
+    .btn-link:hover {
+        color: #ddd;
+    }
 }
 
 .back-button {
@@ -806,9 +853,9 @@ body {
 
 // Something is off.  Cannot See
 #iron-router-progress.spinner:before {
-    //border-color : black;
-    z-index          : 20000;
-    //right: 200px;
+    border-color : black;
+    z-index : 20000;
+    right: auto;
     top: 200px;
 }
 

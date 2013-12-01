@@ -40,38 +40,45 @@
     <ul class="nav navbar-nav navbar-right">
      {{#unless loggingIn}}
       <li class="dropdown">
-        <a id="login-dropdown" href="#" class="dropdown-toggle" data-toggle="dropdown">
-          <i class="fa fa-gear fa-2x fa-fw"></i><div class="nav-button-text">Settings</div>
+        <a id="more-button" href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="fa fa-bars fa-2x fa-fw"></i><div class="nav-button-text">More</div>
         </a>
-        <ul class="dropdown-menu">
-          <li>
-            {{#constant}}
-            <a id="Intercom" href="mailto:6b4e12edd77380cb4b223fc8d76dd7f75f33259a@incoming.intercom.io">
-               <i class="fa fa-question-circle fa-2x"></i> Support
-            </a>
-            {{/constant}}
-          </li>
-          <li class="{{activeRouteClass 'cryptoTest'}}">
-            <a href="{{pathFor 'cryptoTest'}}">
-              <i class="fa fa-key fa-2x"></i> Encryption Tests
-            </a>
-          </li>
-          <li class="{{activeRouteClass 'googleDocs'}}">
-            <a href="{{pathFor 'googleDocs'}}">
-              <i class="fa fa-google-plus-square fa-2x"></i> Google Tests
-            </a>
-          </li>
-          <li class="{{activeRouteClass 'settings'}}">
-            <a href="{{pathFor 'settings'}}">
-              <i class="fa fa-wrench fa-2x"></i> Settings
-            </a>
-          </li>
-          <li class="divider"></li>
-          <li><a id="logout" href="#"><i class="fa fa-sign-out fa-2x"></i> Logout</a></li>
-        </ul>
+        
+        {{> moreNav}}
+
       </li>
      {{/unless}}
     </ul>
   </nav> 
+</template>
+
+
+<template name="moreNav">
+  <ul class="dropdown-menu">
+    <li>
+      {{#constant}}
+      <a id="Intercom" href="mailto:6b4e12edd77380cb4b223fc8d76dd7f75f33259a@incoming.intercom.io">
+         <i class="fa fa-question-circle fa-2x"></i> Support
+      </a>
+      {{/constant}}
+    </li>
+    <li class="{{activeRouteClass 'cryptoTest'}}">
+      <a href="{{pathFor 'cryptoTest'}}">
+        <i class="fa fa-key fa-2x"></i> Encryption Tests
+      </a>
+    </li>
+    <li class="{{activeRouteClass 'googleDocs'}}">
+      <a href="{{pathFor 'googleDocs'}}">
+        <i class="fa fa-google-plus-square fa-2x"></i> Google Tests
+      </a>
+    </li>
+    <li class="{{activeRouteClass 'settings'}}">
+      <a href="{{pathFor 'settings'}}">
+        <i class="fa fa-wrench fa-2x"></i> Settings
+      </a>
+    </li>
+    <li class="divider"></li>
+    <li><a id="logout" href="#"><i class="fa fa-sign-out fa-2x"></i> Logout</a></li>
+  </ul>
 </template>
 

@@ -13,34 +13,17 @@
 </head>
 
 <template name="layout">
-    <div class="main-container">
+    <div id="main-container" class="main-container">
         {{#if currentUser}}
             {{> headline}}
             {{> newNote}}
         {{/if}}
-        {{> coffeeAlerts}}
         <div id="main" class="main">
+            {{> coffeeAlerts}}
             {{yield}}
         </div>
         {{#if currentUser}}
           {{> navbar}}
         {{/if}}
     </div>
-</template>
-
-
-<template name="layoutInverse">
-    <div class="main-container-inverse">
-        {{#if currentUser}}
-            {{> headline}}
-            {{> newNote}}
-        {{/if}}
-        {{> coffeeAlerts}}
-        <div id="main" class="main">
-            {{yield}}
-        </div>
-        {{#if currentUser}}
-          {{> navbar}}
-        {{/if}} 
-    </div> 
 </template>

@@ -23,7 +23,7 @@ getAuth = ->
   
     # Make sure we have a valid access token
     if not user.services?.google?.accessToken?
-        throw new Meteor.Error(452, "Could not get tokens")
+        throw new Meteor.Error(500, "Could not get tokens")
 
     # Create auth object
     gCreds = Accounts.loginServiceConfiguration.findOne({"service" : "google"})
@@ -65,19 +65,23 @@ refreshGoogleAccessToken = ->
         "&grant_type=refresh_token"
 
     result = Meteor.http.post url,
-        headers:
-            'Content-Type': 'application/x-www-form-urlencoded'
-        content:  requestBody
-    
-    if result.data?.access_token?
+        params:
+          'client_id': loginServiceConfig.clientId
+          'client_secret': loginServiceConfig.secret
+          'refresh_token': user.services.google.refreshToken
+          'grant_type': 'refresh_token'
+        
+    if result.statusCode is 200 and result.data?.access_token?
         console.log("Update Token")
         Meteor.users.update Meteor.userId(),
             $set: 
                 "services.google.accessToken": result.data.access_token
-        return result.data.access_token
+                'services.google.expiresAt': (+new Date) + (1000 * result.data.expires_in)
+        
+        result.data.access_token
     else
         console.log("Google refresh token failed", result)
-        throw Meteor.Error(401, "No New Token")
+        throw Meteor.Error(500, "No New Token")
 
 
 Meteor.methods

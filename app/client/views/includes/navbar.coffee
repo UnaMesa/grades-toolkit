@@ -8,7 +8,7 @@ Template.navbar.helpers
         )
         active and 'active'
 
-Template.navbar.events
+Template.moreNav.events
     "click #logout": (e, tmpl) ->
         e.stopPropagation();
         e.preventDefault();

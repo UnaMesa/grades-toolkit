@@ -4,6 +4,7 @@ familyPhotoUploader = null
 FamilyPhotosHandle = null
 
 Template.familyPhotos.created = ->
+    $('#main-container').addClass('main-container-inverse')
     $('body').addClass("photoBody")
     if not familyPhotoUploader?
         familyPhotoUploader = new PhotoUploadHandler
@@ -23,9 +24,11 @@ Template.familyPhotos.created = ->
 Template.familyPhotos.destroyed = ->
     console.log("destroy")
     $('body').removeClass("photoBody")
+    $('#main-container').removeClass('main-container-inverse')
     console.log(FamilyPhotosHandle)
 
 Template.familyPhotos.rendered = ->
+    $('#main-container').addClass('main-container-inverse')
     $('body').addClass("photoBody")
     #FamilyPhotosHandle = Meteor.subscribeWithPagination('familyPhotos', Session.get('currentRecordId'), 20)
 

@@ -261,7 +261,7 @@
     _refreshToken: ->
         console.log("ReFresh Token!!!")
         gDrive.reAuthorize()
-        gDrive._refreshToken = true
+        gDrive._refreshingToken = true
         Meteor.call "refreshGoogleAccessToken", (error, result) ->
             if error
                 console.log("Error getting new token", error, result)

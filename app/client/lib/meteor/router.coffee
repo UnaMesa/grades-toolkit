@@ -3,7 +3,8 @@ Router.configure
     layoutTemplate: 'layout'
     loadingTemplate: 'loading'
     notFoundTemplate: 'notFound'
-    disableProgressTick : true
+    #disableProgressTick : true
+    disableProgressSpinner : true
 
 Router.map ->
     @route 'home',
@@ -154,7 +155,7 @@ Router.map ->
 
     @route 'familyPhotos',
       path: 'family/:_id/photos'
-      layoutTemplate: 'layoutInverse'
+      #layoutTemplate: 'layoutInverse'
       before: ->
         $('body')?.addClass("photoBody")
         Session.set('currentRecordId', @params._id)
