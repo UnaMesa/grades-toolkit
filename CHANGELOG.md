@@ -1,6 +1,10 @@
 Grades Toolkit Change Log
 =========================
 
+11/30/13 - TEP
+
+	Get carousel to load nicer.
+
 11/28/13 - TEP
 	
 	Family photos with carousel.

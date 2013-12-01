@@ -3,6 +3,7 @@ Router.configure
     layoutTemplate: 'layout'
     loadingTemplate: 'loading'
     notFoundTemplate: 'notFound'
+    disableProgressTick : true
 
 Router.map ->
     @route 'home',
@@ -155,12 +156,12 @@ Router.map ->
       path: 'family/:_id/photos'
       layoutTemplate: 'layoutInverse'
       before: ->
-        $('body').addClass("photoBody")
+        $('body')?.addClass("photoBody")
         Session.set('currentRecordId', @params._id)
         Session.set('messageTagFilter', 'family')
       waitOn: ->
         Meteor.subscribe('singleFamily', @params._id)
-        Meteor.subscribe('familyPhotos', @params._id)
+        #@FamilyPhotosHandle = Meteor.subscribeWithPagination('familyPhotos', @params._id, 20)
       data: ->
         data = Families.findOne(@params._id)
         data.title = "Family Photos"

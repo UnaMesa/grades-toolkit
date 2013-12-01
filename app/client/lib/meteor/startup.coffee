@@ -5,11 +5,11 @@ Deps.autorun ->
     
     console.log("Set up Intercom")
     Meteor.call "getHash", Meteor.user().services?.google?.email, (error, result) ->
-      Session.set "userEmailHash", result
+        Session.set "userEmailHash", result
 
     if Meteor.user() and Session.get("userEmailHash")
         intercomSettings =
-            email: Meteor.user().services?.google?.email
+            email: Meteor.user?().services?.google?.email
             created_at: Math.round(Meteor.user().createdAt / 1000)
             name: Meteor.user().services.google.given_name + ' ' + Meteor.user().services.google.family_name
             user_hash: Session.get("userEmailHash")

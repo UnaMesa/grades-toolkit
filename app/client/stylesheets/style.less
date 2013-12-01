@@ -50,7 +50,7 @@ html {
 body {
     padding-top: 36px; 
     padding-bottom: 55px;
-    background-color: #fff; //#ddd; 
+    background-color: #fff; 
     //height: 100%;
     //width: 100%;
 }
@@ -70,6 +70,10 @@ body {
     background-color: #000;
     opacity: .5;
     z-index: 2010;
+}
+
+.hide {
+    display: none;
 }
 
 .main-container {
@@ -793,6 +797,41 @@ body {
     padding: 0;
 }
 
+// Iron Progress
+
+#iron-router-progress {
+    background-color : black;
+    box-shadow       : 0 0 3px black;
+}
+
+// Something is off.  Cannot See
+#iron-router-progress.spinner:before {
+    //border-color : black;
+    z-index          : 20000;
+    //right: 200px;
+    top: 200px;
+}
+
+// Iron Transitioner
+
+.transitioner-panes, .current-page, .next-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-transition: all 500ms ease-in;
+}
+
+.next-page {
+  -webkit-transform: translate3d(100%, 0, 0);
+}
+
+.transitioner-panes.transitioning {
+  -webkit-transform: translate3d(-100%, 0, 0);
+}
 
 
 

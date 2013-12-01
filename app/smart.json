@@ -1,7 +1,7 @@
 {
   "packages": {
     "bootstrap-less-3": {
-        "git": "https://github.com/ianserlin/meteor-bootstrap-less"
+      "git": "https://github.com/ianserlin/meteor-bootstrap-less"
     },
     "spin": {},
     "paginated-subscription": {},
@@ -13,10 +13,11 @@
     "ionicons": {},
     "font-awesome": {},
     "photo-uploader": {
-        "git": "https://github.com/pfafman/meteor-photo-uploader.git"
+      "git": "https://github.com/pfafman/meteor-photo-uploader.git"
     },
     "owl-carousel": {
-        "git": "https://github.com/pfafman/meteor-owl-carousel.git"
-    }
+      "git": "https://github.com/pfafman/meteor-owl-carousel.git"
+    },
+    "iron-router-progress": {}
   }
 }

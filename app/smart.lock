@@ -22,7 +22,8 @@
       "owl-carousel": {
         "git": "https://github.com/pfafman/meteor-owl-carousel.git",
         "branch": "master"
-      }
+      },
+      "iron-router-progress": {}
     },
     "packages": {
       "bootstrap-less-3": {
@@ -83,7 +84,12 @@
       "owl-carousel": {
         "git": "https://github.com/pfafman/meteor-owl-carousel.git",
         "branch": "master",
-        "commit": "0c0cd647d53b4454567e400a357cb661f0fe1a34"
+        "commit": "3f24d79c4b1bed29a9b0094829e0335ae1ee897e"
+      },
+      "iron-router-progress": {
+        "git": "https://github.com/Multiply/iron-router-progress.git",
+        "tag": "v0.2.0",
+        "commit": "ce730d1d26feadb7c75ea25f22c5bfdb0c549a8b"
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
