@@ -3,7 +3,7 @@ Grades Toolkit TODO
 
 #### High Priority
 
-- [ ] Refresh google tokens
+- [ ] Refresh google tokens. Needs work.
 
 - [ ] BID and MOU Forms
 	* BID ready, MOU todo
@@ -32,8 +32,8 @@ Grades Toolkit TODO
 
 #### Low Priority 
 
-- [ ] Get this working as an iOS Web App
-	* Need Meteor Oauth without popup 
+- [ ] Get this working as an iOS Web App, Phonegap
+	* Need Meteor Oauth without popup!!!   
 	* [iOS Web App](https://developer.apple.com/library/safari/referencelibrary/GettingStarted/GS_iPhoneWebApp/_index.html)
 
 

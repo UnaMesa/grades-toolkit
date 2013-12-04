@@ -93,8 +93,8 @@
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.2.18",
-        "commit": "53d0bbf77275ae2035643af4a268b7649af42b28"
+        "tag": "v0.2.19",
+        "commit": "99f975da6276e352ab9208eaaad907a2f0a8851f"
       }
     }
   }

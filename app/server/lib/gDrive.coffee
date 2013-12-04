@@ -80,8 +80,7 @@ gDrive._updateFamilyList = (err, res, body) ->
         if err
             throw err
         result = JSON.parse(body)
-        #console.log(result)
-
+        
         entries = result.feed?.entry || []
         
         rawData = {}
@@ -101,10 +100,9 @@ gDrive._updateFamilyList = (err, res, body) ->
         for key, val of rawData
             gDrive._families.push val
 
-        console.log("Updating family list from spreadsheet", gDrive._families)
+        #console.log("Updating family list from spreadsheet", gDrive._families)
         for family in gDrive._families 
-            #console.log("Update", family)
-
+            
             # TODO: We should generate tags not the spreadsheet and update
             family.tag = family.tag.toLowerCase()
 
