@@ -1,7 +1,6 @@
 
 /*
     See: https://github.com/extrabacon/google-oauth-jwt
-
 */
 
 Package.describe({
@@ -16,5 +15,5 @@ Package.on_use(function (api) {
     api.add_files('google-server-auth.coffee', 'server');
     
     if(api.export)
-        api.export('GoogleServerAuth');
+        api.export('GoogleServerAuth', 'server');
 });
