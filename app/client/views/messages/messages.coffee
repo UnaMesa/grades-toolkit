@@ -111,20 +111,14 @@ Template.messagesList.helpers
 
     currentMessages: ->
         filter = messageFilter()
-        cursor = Messages.find filter,
+        @messages = Messages.find filter,
             sort:
                 timestamp: -1
             limit: MessagesHandle.limit()
-        #
-        #   INVERT LIST
-        #
-        # I am afraid this rerenders all the cells on one cell change
-        # BUT, cannot find a way to reverse the order on the cursor and
-        # use #each, Probably have to use the observe on the cursor
-        #
-        #messages = cursor.fetch().reverse() # TODO: Find a better way 
-        #console.log("return cursor")
-        cursor
+
+        @messages.map (message, index, cursor) ->
+            message._rank = index
+            message
 
     messagesReady: ->
         MessagesHandle.ready()
@@ -132,13 +126,36 @@ Template.messagesList.helpers
     allMessagesLoaded: ->
         MessagesHandle.ready() and Messages.find(messageFilter()).count() < MessagesHandle.loaded()
 
+
 Template.message.created = ->
     #console.log("message created")
 
 
 Template.message.rendered = ->
-    #console.log("message rendered", @data)
-
+    console.log('messsage', @)
+    instance = @
+    rank = instance.data._rank
+    $this = $(@firstNode)
+    messageHeight = 67
+    newPosition = rank * messageHeight
+    console.log("message rendered", $this, rank)
+    # If element has a currentPosition (i.e. it is not the first ever render)
+    if typeof(instance.currentPosition) isnt 'undefined'
+        previousPosition = instance.currentPosition
+        # Calculate difference between old position and new position and send element there
+        delta = previousPosition - newPosition
+        $this.css("top", delta + "px");
+    else
+        $this.addClass("invisible")
+        #$this.css('opacity', 0)
+    
+    # Let it draw in the old position, then..
+    Meteor.defer ->
+        instance.currentPosition = newPosition
+        # Bring element back to its new original position
+        $this.css("top",  "0px").removeClass("invisible")
+        #$this.removeClass("invisible")
+        #$this.css('opacity', 1)
 
 tagToUrl = (tag) ->
     switch tag?.type

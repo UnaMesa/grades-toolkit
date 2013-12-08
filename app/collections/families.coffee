@@ -32,7 +32,7 @@ Meteor.methods
             rtn = FamilyPhotos.insert(thePhoto)
 
         catch error
-            console.log("Error on submitting phot", error)
+            console.log("Error on submitting photo", error)
             result =
                 error: 
                     reason: "Error on submitting photo"

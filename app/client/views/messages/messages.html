@@ -14,20 +14,20 @@
             <h4 class="alert alert-warning text-center">No messages !</h4>
         {{/if}}
     {{else}}
-        <ol class="list-group">
+        <div class="list-group">
             {{#each currentMessages}}
                 {{> message}}
             {{/each}}
             {{#unless allMessagesLoaded}}
                 {{> smallSpinner}}
             {{/unless}}
-        </ol>
+        </div>
     {{/unless}}
 </template>  
 
 
 <template name="message">
-    <li class="list-group-item clearfix">
+    <div class="message-item list-group-item clearfix">
         <div class="message">
             <div class="header">
                 <span class="author">{{> author}}</span>
@@ -42,7 +42,7 @@
             {{/each}}
             </div>
         </div>
-    </li>
+    </div>
 </template>
 
 <template name="author">

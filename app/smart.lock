@@ -3,7 +3,7 @@
   "dependencies": {
     "basePackages": {
       "bootstrap-less-3": {
-        "git": "https://github.com/ianserlin/meteor-bootstrap-less",
+        "git": "https://github.com/pfafman/meteor-bootstrap-less.git",
         "branch": "master"
       },
       "spin": {},
@@ -27,9 +27,9 @@
     },
     "packages": {
       "bootstrap-less-3": {
-        "git": "https://github.com/ianserlin/meteor-bootstrap-less",
+        "git": "https://github.com/pfafman/meteor-bootstrap-less.git",
         "branch": "master",
-        "commit": "c4f047b24a84fe71ff9347b6a19b4d23e92b501d"
+        "commit": "67787eb4ee1075df4bf42bb0ad8ec51e3d09e718"
       },
       "spin": {
         "git": "https://github.com/SachaG/meteor-spin.git",
@@ -58,8 +58,8 @@
       },
       "collection2": {
         "git": "https://github.com/aldeed/meteor-collection2.git",
-        "tag": "v0.2.14",
-        "commit": "46eeef2c8786f55e3ff3368c99ac0672600bc734"
+        "tag": "v0.2.15",
+        "commit": "0fe469aa0c01eda0563c8802e17914307960de79"
       },
       "fastclick": {
         "git": "https://github.com/percolatestudio/meteor-fastclick",
@@ -93,8 +93,8 @@
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.2.20",
-        "commit": "c1169941f8395f03f31dfa8b26834363e3a83c29"
+        "tag": "v0.2.22",
+        "commit": "153222be6718e1104bcfae6af71cdc48abf92de0"
       }
     }
   }
