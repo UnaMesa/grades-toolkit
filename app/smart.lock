@@ -29,7 +29,7 @@
       "bootstrap-less-3": {
         "git": "https://github.com/pfafman/meteor-bootstrap-less.git",
         "branch": "master",
-        "commit": "67787eb4ee1075df4bf42bb0ad8ec51e3d09e718"
+        "commit": "474692c066a265dc7d8e1f935f5d254909551e4a"
       },
       "spin": {
         "git": "https://github.com/SachaG/meteor-spin.git",
@@ -93,8 +93,8 @@
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.2.22",
-        "commit": "153222be6718e1104bcfae6af71cdc48abf92de0"
+        "tag": "v0.2.23",
+        "commit": "ccdb1244ae3a38c70f53e04a2d68879ca89a4f9f"
       }
     }
   }
