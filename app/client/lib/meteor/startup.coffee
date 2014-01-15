@@ -3,7 +3,6 @@
 Deps.autorun ->
   if Meteor.user() and not Meteor.loggingIn()
     
-    console.log("Set up Intercom")
     Meteor.call "getHash", Meteor.user().services?.google?.email, (error, result) ->
         Session.set "userEmailHash", result
 
@@ -18,7 +17,6 @@ Deps.autorun ->
                 use_counter: true
             app_id: "6b4e12edd77380cb4b223fc8d76dd7f75f33259a"
 
-        console.log("Intercom boot", intercomSettings)
         Intercom("boot", intercomSettings)
 
 Meteor.startup ->

@@ -168,6 +168,22 @@ Router.map ->
         data.title = "Family Photos"
         data.goBackPath = "viewFamily"  # Got to get _id into this....
         data
+
+    @route 'casePhotos',
+      path: 'case/:_id/photos'
+      #layoutTemplate: 'layoutInverse'
+      before: ->
+        $('body')?.addClass("photoBody")
+        Session.set('currentRecordId', @params._id)
+        Session.set('messageTagFilter', 'case')
+      waitOn: ->
+        Meteor.subscribe('singleCase', @params._id)
+        #@CasePhotosHandle = Meteor.subscribeWithPagination('casePhotos', @params._id, 20)
+      data: ->
+        data = Cases.findOne(@params._id)
+        data.title = "Case Photos"
+        data.goBackPath = "viewCase"  # Got to get _id into this....
+        data
       
 
     @route 'contacts',

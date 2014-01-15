@@ -58,9 +58,11 @@ Template.casePhotos.rendered = ->
 Template.casePhotos.helpers
 
     imagesReady: ->
+        console.log("imagesReady", CasePhotosHandle, CasePhotos)
         CasePhotosHandle?.ready()
 
     haveImages: ->
+        console.log("haveImages")
         CasePhotos.find(
             case_id: Session.get('currentRecordId')
         ).count() > 0

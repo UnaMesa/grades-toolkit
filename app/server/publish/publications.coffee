@@ -74,5 +74,10 @@ Meteor.publish "singleCase", (id) ->
     if id
         Cases.find(id)
 
-
+Meteor.publish "casePhotos", (case_id, limit) ->
+    if case_id
+        CasePhotos.find   
+            case_id: case_id
+        ,
+            limit: limit
 

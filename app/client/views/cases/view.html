@@ -88,6 +88,10 @@
         {{#if tag}}<span class="label label-default tag tag-case">{{tag}}</span>{{/if}}
         <span class="age text-muted">{{sex}} age {{age}}</span>
 
+        <a class="photos-link" href="{{pathFor 'casePhotos'}}">
+            <i class="fa fa-picture-o fa-2x"></i>
+        </a>
+
         <p class="record-author text-muted">
             <em>submitted by {{author}}</em>
         </p>

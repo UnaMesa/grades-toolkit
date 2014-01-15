@@ -132,13 +132,11 @@ Template.message.created = ->
 
 
 Template.message.rendered = ->
-    console.log('messsage', @)
     instance = @
     rank = instance.data._rank
     $this = $(@firstNode)
     messageHeight = 67
     newPosition = rank * messageHeight
-    console.log("message rendered", $this, rank)
     # If element has a currentPosition (i.e. it is not the first ever render)
     if typeof(instance.currentPosition) isnt 'undefined'
         previousPosition = instance.currentPosition
