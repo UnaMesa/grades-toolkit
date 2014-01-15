@@ -37,11 +37,11 @@ Meteor.methods
                 $set: modifier
 
         catch error
-            console.log("Error on submitPhoto", error, collectionToUpdate.namedContext?("default").invalidKeys?())
+            console.log("Error on submitPhoto", error, collectionToUpdate.simpleSchema?().namedContext?("default").invalidKeys?())
             result =
                 error: 
                     reason: "Error on submitting photo"
-                    invalidKeys: collectionToUpdate.namedContext?("default").invalidKeys?()
+                    invalidKeys: collectionToUpdate.simpleSchema?().namedContext?("default").invalidKeys?()
             return result
 
 

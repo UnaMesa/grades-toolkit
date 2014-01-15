@@ -5,12 +5,12 @@
 
             {{> caseSummary}}
             
-            <div class="btns pull-right">
-                <a class="btn btn-primary btn-sm check-btn" href={{pathFor 'mou'}}>
+            <div class="mou-bid-btns">
+                <a class="btn btn-primary btn-xs check-btn" href={{pathFor 'mou'}}>
                     MOU
                     {{#if MOU}}<span class="check"><i class="fa fa-check-square"></i></span>{{/if}}
                 </a>
-                <a class="btn btn-primary btn-sm check-btn" href={{pathFor 'bid'}}>
+                <a class="btn btn-primary btn-xs check-btn" href={{pathFor 'bid'}}>
                     BID
                     {{#if BID}}<span class="check"><i class="fa fa-check-square"></i></span>{{/if}}
                 </a>

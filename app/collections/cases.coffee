@@ -186,11 +186,11 @@ Meteor.methods
         try   
             caseId = Cases.insert(theCase)
         catch error
-            console.log("Error on new case insert", error, Cases.namedContext?("default").invalidKeys?())
+            console.log("Error on new case insert", error, Cases, Cases.simpleSchema().namedContext?().invalidKeys?())
             result =
                 error: 
                     reason: "Error on new case insert"
-                    invalidKeys: Cases.namedContext("default").invalidKeys()
+                    invalidKeys: Cases.simpleSchema().namedContext().invalidKeys()
             return result
 
         # Only available on the server
@@ -282,11 +282,11 @@ Meteor.methods
             ,
                 $set: theCase
         catch error
-            console.log("Error on new case update", error, Cases.namedContext?("default").invalidKeys?())
+            console.log("Error on new case update", error, Cases.simpleSchema().namedContext?().invalidKeys?())
             result =
                 error: 
                     reason: "Error on case update"
-                    invalidKeys: Cases.namedContext("default").invalidKeys()
+                    invalidKeys: Cases.simpleSchema().namedContext().invalidKeys()
             return result
 
         # Only available on the server
