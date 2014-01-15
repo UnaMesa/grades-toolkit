@@ -1,6 +1,6 @@
 
 Template.bid.rendered = ->
-    $(".make-switch")["bootstrapSwitch"]()
+    $(".make-switch").bootstrapSwitch()
     console.log("Schema", BID.schema, @BID)
 
 

@@ -3,6 +3,7 @@
     "bootstrap-less-3": {
       "git": "https://github.com/pfafman/meteor-bootstrap-less.git"
     },
+
     "spin": {},
     "paginated-subscription": {},
     "iron-router": {},
@@ -12,6 +13,9 @@
     "fastclick": {},
     "ionicons": {},
     "font-awesome": {},
+    "bootstrap-3-switch-less": {
+      "git": "https://github.com/pfafman/meteor-bootstrap-3-switch-less.git"
+    },
     "photo-uploader": {
       "git": "https://github.com/pfafman/meteor-photo-uploader.git"
     },

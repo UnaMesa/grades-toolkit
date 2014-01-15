@@ -29,10 +29,44 @@ Meteor.methods
         )
 
         try
-            rtn = FamilyPhotos.insert(thePhoto)
+            photoId = FamilyPhotos.insert(thePhoto)
+
+             # Only available on the server
+            if not @isSimulation
+            
+                # Generate Message
+                message = 
+                    userId: user._id
+                    author: user.profile.name # Change to bot....
+                    timestamp: new Date().getTime()
+                    tags: []
+
+                message.tags.push 
+                    type: 'user'
+                    _id: user._id
+                    tag: user.tag
+                    name: user.profile.name
+
+                familyTag = fillOutTagFromId
+                    type: 'family'
+                    _id: options.familyId
+
+                if familyTag?
+                    message.tags.push familyTag
+
+                message.message = "Family #{familyTag.tag} photo added by #{user.tag}"
+
+                try
+                    Messages.insert(message)
+                    updateCommentsCounts(message)
+                catch error
+                    console.log("Error creating message on photo insert", error)
+
+            photoId
 
         catch error
             console.log("Error on submitting photo", error)
             result =
                 error: 
                     reason: "Error on submitting photo"
+

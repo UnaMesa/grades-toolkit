@@ -15,6 +15,10 @@
       "fastclick": {},
       "ionicons": {},
       "font-awesome": {},
+      "bootstrap-3-switch-less": {
+        "git": "https://github.com/pfafman/meteor-bootstrap-3-switch-less.git",
+        "branch": "master"
+      },
       "photo-uploader": {
         "git": "https://github.com/pfafman/meteor-photo-uploader.git",
         "branch": "master"
@@ -29,12 +33,12 @@
       "bootstrap-less-3": {
         "git": "https://github.com/pfafman/meteor-bootstrap-less.git",
         "branch": "master",
-        "commit": "474692c066a265dc7d8e1f935f5d254909551e4a"
+        "commit": "669752f8be8d834cbe9b842c0eebd3b62c26d295"
       },
       "spin": {
         "git": "https://github.com/SachaG/meteor-spin.git",
-        "tag": "v0.2.0",
-        "commit": "fd3a2871a69442848b4b4e74f5e1ae28fa4a95a4"
+        "tag": "v0.2.2",
+        "commit": "3f655f0016228e4195acc784c45d3e3a247dc39f"
       },
       "paginated-subscription": {
         "git": "https://github.com/tmeasday/meteor-paginated-subscription.git",
@@ -43,8 +47,8 @@
       },
       "iron-router": {
         "git": "https://github.com/EventedMind/iron-router.git",
-        "tag": "v0.6.1",
-        "commit": "4e1ee0581d68bff422a915dacb0bd30eae10fe08"
+        "tag": "v0.6.2",
+        "commit": "ce56e58b45624dce992490f3a1c10f10d3948bae"
       },
       "moment": {
         "git": "https://github.com/acreeger/meteor-moment.git",
@@ -58,8 +62,8 @@
       },
       "collection2": {
         "git": "https://github.com/aldeed/meteor-collection2.git",
-        "tag": "v0.2.15",
-        "commit": "0fe469aa0c01eda0563c8802e17914307960de79"
+        "tag": "v0.3.3",
+        "commit": "d5c99b1c0fe30778e683175ecb0dd36529e6271e"
       },
       "fastclick": {
         "git": "https://github.com/percolatestudio/meteor-fastclick",
@@ -75,6 +79,11 @@
         "git": "https://github.com/nate-strauser/meteor-font-awesome.git",
         "tag": "v4.0.3",
         "commit": "61e9361384347547ae144f8228faa4deffda23db"
+      },
+      "bootstrap-3-switch-less": {
+        "git": "https://github.com/pfafman/meteor-bootstrap-3-switch-less.git",
+        "branch": "master",
+        "commit": "86dad236e495b37e1b80c2df98e7da1e3e004ba2"
       },
       "photo-uploader": {
         "git": "https://github.com/pfafman/meteor-photo-uploader.git",
@@ -93,8 +102,8 @@
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.2.23",
-        "commit": "ccdb1244ae3a38c70f53e04a2d68879ca89a4f9f"
+        "tag": "v0.2.28",
+        "commit": "29f3a54be67e9b988ad59994ffa152d9559e4695"
       }
     }
   }

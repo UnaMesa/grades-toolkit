@@ -1,6 +1,6 @@
 
 Template.caseForm.rendered = ->
-    $(".make-switch")["bootstrapSwitch"]()
+    $(".make-switch").bootstrapSwitch()
 
 
 Template.caseForm.helpers
