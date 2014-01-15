@@ -1,14 +1,14 @@
 
-familyPhotoUploader = null
+casePhotoUploader = null
 
-FamilyPhotosHandle = null
+CasePhotosHandle = null
 
-Template.familyPhotos.created = ->
+Template.casePhotos.created = ->
     $('#main-container').addClass('main-container-inverse')
     $('body').addClass("photoBody")
-    if not familyPhotoUploader?
-        familyPhotoUploader = new PhotoUploadHandler
-            serverUploadMethod: "insertFamilyPhoto"
+    if not casePhotoUploader?
+        casePhotoUploader = new PhotoUploadHandler
+            serverUploadMethod: "insertCasePhoto"
             takePhotoButtonLabel: "Add a Photo"
             uploadButtonLabel: "Save Photo"
             #resizeMaxHeight: 300
@@ -16,28 +16,28 @@ Template.familyPhotos.created = ->
             editTitle: true
             editCaption: true
             serverUploadOptions: 
-                familyId: Session.get('currentRecordId')
+                caseId: Session.get('currentRecordId')
             callback: (error, result) ->
                 console.log("Photo Upload", error, result)
-    FamilyPhotosHandle = Meteor.subscribeWithPagination('familyPhotos', Session.get('currentRecordId'), 20)
+    CasePhotosHandle = Meteor.subscribeWithPagination('casePhotos', Session.get('currentRecordId'), 20)
 
-Template.familyPhotos.destroyed = ->
+Template.casePhotos.destroyed = ->
     console.log("destroy")
     $('body').removeClass("photoBody")
     $('#main-container').removeClass('main-container-inverse')
-    console.log(FamilyPhotosHandle)
+    console.log(CasePhotosHandle)
 
-Template.familyPhotos.rendered = ->
+Template.casePhotos.rendered = ->
     $('#main-container').addClass('main-container-inverse')
     $('body').addClass("photoBody")
-    #FamilyPhotosHandle = Meteor.subscribeWithPagination('familyPhotos', Session.get('currentRecordId'), 20)
+    #CasePhotosHandle = Meteor.subscribeWithPagination('casePhotos', Session.get('currentRecordId'), 20)
 
 
-    familyPhotoUploader.setOptions
+    casePhotoUploader.setOptions
         serverUploadOptions: 
-            familyId: Session.get('currentRecordId')
+            caseId: Session.get('currentRecordId')
 
-    if FamilyPhotosHandle?.ready()
+    if CasePhotosHandle?.ready()
         $(".owl-carousel").owlCarousel
             #navigation : true # Show next and prev buttons
             slideSpeed : 300
@@ -50,29 +50,29 @@ Template.familyPhotos.rendered = ->
             lazyFollow: true
             lazyLoadCallback: (img) ->
                 if img
-                    FamilyPhotos.findOne(img.data("src"))?.src
+                    CasePhotos.findOne(img.data("src"))?.src
             afterLazyLoad: (base, elm) ->
                 if elm
                     elm.find(".hide").removeClass("hide")
 
-Template.familyPhotos.helpers
+Template.casePhotos.helpers
 
     imagesReady: ->
-        FamilyPhotosHandle?.ready()
+        CasePhotosHandle?.ready()
 
     haveImages: ->
-        FamilyPhotos.find(
-            family_id: Session.get('currentRecordId')
+        CasePhotos.find(
+            case_id: Session.get('currentRecordId')
         ).count() > 0
 
     imageCount: ->
-        FamilyPhotos.find(
-            family_id: Session.get('currentRecordId')
+        CasePhotos.find(
+            case_id: Session.get('currentRecordId')
         ).count()
 
     images: ->
-        FamilyPhotos.find
-            family_id: Session.get('currentRecordId')
+        CasePhotos.find
+            case_id: Session.get('currentRecordId')
         ,
             fields:
                 src: 0
