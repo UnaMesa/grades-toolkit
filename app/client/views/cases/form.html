@@ -9,6 +9,13 @@
       </div>
 
       <div class="form-group">
+          <label for="dcfId" class="control-label">DCF Family/Child#</label>
+          <input type="text" class="form-control" name="dcfId" value="{{dcfId}}"
+            placeholder="Enter the unique DCF Family/Child Number" required />
+          <span class="help-block">A unique DCF Number for the Child.</span>
+      </div>
+
+      <div class="form-group">
         <label for="urgent" class="control-label">Urgent</label>
         <div>
           <input name="urgent" class="make-switch" type="radio" {{#if urgent}}checked{{/if}}

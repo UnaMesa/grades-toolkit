@@ -34,6 +34,10 @@ Template.viewCase.helpers
                 caseAsArray.push
                     key: key
                     value: moment(value).format('lll')
+            else if key is 'dcfId'
+                caseAsArray.push
+                    key: "DCF Family/Child#"
+                    value: value
             else if key not in  ['_id','contact', 'userId', 'name', 'commentsCount', 'tag', 'urgent', 'BID', 'picture']
                 caseAsArray.push
                     key: key

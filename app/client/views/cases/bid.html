@@ -1,75 +1,174 @@
 <template name="bid">
     <div class="container">
-    <form role="form">
-
-        <div class="form-group">
-            <label for="childId" class="control-label">Child ID</label>
-            <input type="text" class="form-control" name="childId" value="{{BID.childId}}" placeholder="{{tag}}" required />
-            <span class="help-block">Required Field</span>
-        </div>
-
-        {{#with remainInSchool}}
-            {{> slider}}
-        {{/with}}
-
-        <div class="form-group">
-            <label for="date" class="control-label">BID Meeting Date</label>
-            <input type="date" class="form-control" name="date" placeholder="01/23/2013" value="{{bidDate}}" />
-        </div>
-    
-        <div class="form-group">
-              <label for="grade" class="control-label">Current Grade</label>
-              <input type="number" name="grade" class="age-control form-control" min="1" max="12" value="{{BID.grade}}">
-        </div>
-
-        <div class="form-group">
-            <label for="currentSchool" class="control-label">Current School</label>
-            <input type="text" class="form-control" name="currentSchool" placeholder="Name of current school" value="{{BID.currentSchool}}" />
-        </div>
         
-        <div class="form-group">
-            <label for="reasonsForChange" class="control-label">Reasons for Change</label>
-            <select name="reasonsForChange" class="form-control" multiple>
-               {{#each reasonsForChangeSelect}}
-                    {{> selectOption}}
-               {{/each}}
-           </select>
-        </div>
+        <form role="form">
 
-        <div class="form-group">
-            <label for="reasonsForChangeComments" class="control-label">Document any of the above selected reasons</label>
-            <textarea class="form-control" name="reasonsForChangeComments" 
-            placeholder="documentation of reasons for change">{{BID.reasonsForChangeComments}}</textarea>
-        </div>
+            <div class="panel-group bid-accordion" id="accordion">
+                
+                <div class="panel panel-default">
+                    <div class="panel-heading-small panel-heading">
+                        <h4 class="panel-title">
+                            <button class="btn btn-link" data-toggle="collapse" 
+                                data-parent="#accordion" data-target="#collapseDocumentation">
+                                Documentation
+                            </button>
+                        </h4>
+                    </div>
 
-        {{#each boolValues}}
-            {{> slider}}
-        {{/each}}
+                    <div id="collapseDocumentation" class="panel-collapse">
+                        <div class="panel-body">
+                            {{>bidDocumentation}}
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="panel panel-default">
+                    <div class="panel-heading-small panel-heading">
+                        <h4 class="panel-title">
+                            <button class="btn btn-link" data-toggle="collapse" 
+                                data-parent="#accordion" data-target="#collapseConsiderations">
+                                Considerations
+                            </button>
+                        </h4>
+                    </div>
 
-        <div class="form-group">
-            <label for="documentsUsed" class="control-label">Documents used for BID</label>
-            <select name="documentsUsed" class="form-control" multiple>
-               {{#each documentsUsedSelect}}
-                    {{> selectOption}}
-               {{/each}}
-           </select>
-        </div>
+                    <div id="collapseConsiderations" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            {{>bidConsiderations}}
+                        </div>
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <label for="otherDocumentsUsed" class="control-label">Other documents used for BID</label>
-            <textarea class="form-control" name="otherDocumentsUsed" 
-            placeholder="List other documents used for the BID">{{BID.otherDocumentsUsed}}</textarea>
-        </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading-small panel-heading">
+                        <h4 class="panel-title">
+                            <button class="btn btn-link" data-toggle="collapse" 
+                                data-parent="#accordion" data-target="#collapseSummary">
+                                Summary
+                            </button>
+                        </h4>
+                    </div>
 
-        <div class="form-group">
-            <label for="newSchool" class="control-label">Name of New School</label>
-            <input type="text" class="form-control" value="{{BID.newSchool}}" name="newSchool" placeholder="Name of new school if applicable" />
-        </div>
+                    <div id="collapseSummary" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            {{>bidSummary}}
+                        </div>
+                    </div>
+                </div>
 
-        <button type="submit" class="btn btn-primary"><i class="fa fa-print"></i> Generate</button>
-        <!-- <button type="reset" id="reset" class="btn btn-default">Reset</button> -->
-    </form>
-</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary"><i class="fa fa-print"></i> Generate</button>
+
+            <!-- <button type="reset" id="reset" class="btn btn-default">Reset</button> -->
+        </form>
+    
+    </div>
+</template>
+
+<template name="bidDocumentation">
+    <div class="form-group">
+        <label for="dcfId" class="control-label">DCF Family/Child #</label>
+        <input type="text" class="form-control" value="{{dcfId}}" disabled />
+    </div>
+
+    <div class="form-group">
+        <label for="childId" class="control-label">Child's Education ID</label>
+        <input type="text" class="form-control" name="childId" value="{{BID.childId}}" placeholder="Education ID" required />
+        <span class="help-block">Identifier used by school system for Child</span>
+    </div>
+
+    <div class="form-group">
+        <label for="currentSchool" class="control-label">Current School and District</label>
+        <input type="text" class="form-control" name="currentSchool" placeholder="Name of current school" value="{{BID.currentSchool}}" />
+        <span class="help-block">Current School and Supervisory Union/School District</span>
+    </div>
+
+    <div class="form-group">
+        <label for="previousSchools" class="control-label">Previous School(s)</label>
+        <input type="text" class="form-control" name="previousSchools" placeholder="List of previous schools the child has attended" value="{{BID.previousSchools}}" />
+    </div>
+
+    <div class="form-group">
+          <label for="grade" class="control-label">Current Grade</label>
+          <input type="number" name="grade" class="age-control form-control" min="1" max="12" value="{{BID.grade}}">
+    </div>
+
+
+    {{#with remainInSchool}}
+        {{> slider}}
+    {{/with}}
+
+    <div class="form-group">
+        <label for="date" class="control-label">BID Meeting Date</label>
+        <input type="date" class="form-control" name="date" placeholder="01/23/2013" value="{{bidDate}}" />
+    </div>   
+    
+    <div class="form-group">
+        <label for="reasonsForChange" class="control-label">Reasons for Change</label>
+        <select name="reasonsForChange" class="form-control" multiple>
+           {{#each reasonsForChangeSelect}}
+                {{> selectOption}}
+           {{/each}}
+       </select>
+    </div>
+
+    <div class="form-group">
+        <label for="reasonsForChangeComments" class="control-label">Document any of the above selected reasons</label>
+        <textarea class="form-control" name="reasonsForChangeComments" 
+        placeholder="documentation of reasons for change">{{BID.reasonsForChangeComments}}</textarea>
+    </div>
+
+    {{#each boolValues}}
+        {{> slider}}
+    {{/each}}
+
+    <div class="form-group">
+        <label for="documentsUsed" class="control-label">Documents used for BID</label>
+        <select name="documentsUsed" class="form-control" multiple>
+           {{#each documentsUsedSelect}}
+                {{> selectOption}}
+           {{/each}}
+       </select>
+    </div>
+
+    <div class="form-group">
+        <label for="otherDocumentsUsed" class="control-label">Other documents used for BID</label>
+        <textarea class="form-control" name="otherDocumentsUsed" 
+        placeholder="List other documents used for the BID">{{BID.otherDocumentsUsed}}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="newSchool" class="control-label">Name of New School</label>
+        <input type="text" class="form-control" value="{{BID.newSchool}}" name="newSchool" placeholder="Name of new school if applicable" />
+    </div>
+
+</template>
+
+
+<template name="bidConsiderations">
+
+     <div class="form-group">
+        <label for="childBeliefs" class="control-label">
+            The child believes that remaining in their current school is in their best interest
+        </label>
+        <textarea class="form-control" name="childBeliefs" 
+        placeholder="Key factors in decision">{{BID.childBeliefs}}</textarea>
+         <span class="help-block">Consider social interactions,bullying, privacy issues, academics, extracurricular activities.</span>
+    </div>
+
+</template>
+
+<template name="bidSummary">
+
+    <div class="form-group">
+        <label for="bidSummary" class="control-label">
+            BID Summary
+        </label>
+        <textarea class="form-control" name="bidSummary" 
+        placeholder="Please summarize the key factors influencing the decision of the team">{{BID.bidSummary}}</textarea>
+    </div>
+
 </template>
 
 

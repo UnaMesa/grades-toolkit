@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
+
+    <title>Template BID form</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/jumbotron-narrow.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="vtfutures.css" rel="stylesheet">
+
+
+
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <ul class="nav nav-pills pull-right">
+          
+        </ul>
+        <h3 class="text-muted">Education Best Interest Determination Evaluation Form</h3>
+      </div>
+
+    
+    <div class="row">
+        <div class="col-lg-6">
+          
+          <p>
+	    <span class="field">Child’s Name:</span> 
+	    <span class="value">{{BID.name}}</span>
+	  </p>
+	  <p>
+	    <span class="field">DCF Family / Child #:</span> 
+	    <span class="value">{{BID.dcfID}}</span>
+	    <span class="field">Child’s Education ID#:</span> 
+	    <span class="value">{{BID.edID}}</span>
+	  </p>
+      
+
+<TABLE WIDTH=610 BORDER=1 BORDERCOLOR="#00000a" CELLPADDING=7 CELLSPACING=0>
+	<COL WIDTH=594>
+	<TR>
+		<TD WIDTH=594 VALIGN=TOP>
+			<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=4><B>Instructions:
+			 </B></FONT></FONT></FONT>
+			</P>
+			<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>This
+			process is based on the assumption that a student should remain in
+			their current school</FONT></FONT></FONT><FONT COLOR="#000000"><SUP><FONT FACE="Times New Roman, serif"><FONT SIZE=3>*</FONT></FONT></SUP></FONT><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>
+			</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><I><U>unless</U></I></FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>
+			the considerations on the following pages indicate that </FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>a
+			change of school placement is in the child’s best interest</I></FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>.
+			</FONT></FONT></FONT>
+			</P>
+			<UL>
+				<LI><P STYLE="margin-bottom: 0in"><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>This
+				form is to be filled out at the child’s date of placement and
+				each time there is a change in living arrangement.</FONT></FONT></FONT></P>
+				<LI><P STYLE="margin-bottom: 0in"><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>Individuals
+				with insight into the child’s educational best interest are
+				encouraged to participate in a BID meeting or conversation.  </FONT></FONT></FONT>
+				</P>
+				<LI><P STYLE="margin-bottom: 0in"><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>You
+				may use relevant information from recent meetings (i.e., EST,
+				CSP, IEP or 504).</FONT></FONT></FONT></P>
+			</UL>
+			<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+			</P>
+			<P CLASS="western"><FONT COLOR="#000000"><SUP><FONT FACE="Times New Roman, serif"><FONT SIZE=3><B>*</B></FONT></FONT></SUP></FONT><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><I><B>Current
+			school</B></I></FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><B>
+			</B></FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>is</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><B>
+			</B></FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>defined
+			as the school the child is attending </FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>prior</I></FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>
+			to a change in living arrangement.</FONT></FONT></FONT></P>
+		</TD>
+	</TR>
+</TABLE>
+
+	  <p>
+	    <b>Please list who was consulted and/or who attended a meeting about BID.</b>
+	  </p>
+	    <table>
+	      <tr>
+		<th width="40%"> Name </th>
+		<th width="30%"> Title / Role </th>
+		<th width="30%"> Contact Info </th>
+	      </tr>
+	      <tr>
+		<td>{{AttendeeName}}</td>
+		<td>{{AttendeeRole}}</td>
+		<td>{{AttendeeContact}}</td>
+	      </tr>
+
+	    </table>
+
+	    <h3> Documentation and Records</h3>
+	    <p>Which of these were used for BID? <i>Check all that apply and include in chart: </i>
+	    </p>
+	    
+	    <div class="row">
+	      <div class="col-md-4">
+		<div class="checkbox">
+		  <label>
+		    <input type="checkbox" value="">
+		    Report cards
+		  </label>
+		</div>
+		<div class="checkbox">
+		  <label>
+		    <input type="checkbox" value="">
+		    Progress reports 
+		  </label>
+		</div>
+		<div class="checkbox">
+		  <label>
+		    <input type="checkbox" value="">
+		    Achievement data (test scores) 
+
+		  </label>
+		</div>
+		<div class="checkbox">
+		  <label>
+		    <input type="checkbox" value="">
+		    Attendance data 
+
+		  </label>
+		</div>		
+
+
+		
+	      </div>
+	      <div class="col-md-4">
+		<div class="checkbox">
+		  <label>
+		    <input type="checkbox" value="">
+		    IEP 
+		  </label>
+		</div>
+		<div class="checkbox">
+		  <label>
+		    <input type="checkbox" value="">
+		    540 Plan
+		  </label>
+		</div>
+<div class="checkbox">
+		  <label>
+		    <input type="checkbox" value="">
+		    Coordinated Services Plan (or Act 264 Plan)
+
+		  </label>
+		</div>
+	      </div>
+	      <div class="col-md-4">
+		<div class="checkbox">
+		  <label>
+		    <input type="checkbox" value="">
+		    Emails or correspondence from individuals consulted 
+
+		  </label>
+		</div>
+	      </div>
+	    </div>
+	    <div class="checkbox">
+		  <label>
+		    <input type="checkbox" value="">
+		    Other {{OTHER DOCUMENTATION}}
+		  </label>
+		  
+		</div>
+
+<TABLE WIDTH=655 BORDER=1 BORDERCOLOR="#00000a" CELLPADDING=7 CELLSPACING=0 STYLE="page-break-before: always">
+	<COL WIDTH=552>
+	<COL WIDTH=30>
+	<COL WIDTH=29>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=552 BGCOLOR="#808080">
+				<P CLASS="western"><FONT COLOR="#ffffff"><FONT FACE="Times New Roman, serif"><FONT SIZE=4><B>Considerations
+				</B></FONT></FONT></FONT>
+				</P>
+			</TD>
+			<TD WIDTH=30 BGCOLOR="#808080">
+				<P CLASS="western" ALIGN=CENTER><FONT COLOR="#ffffff"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><B>Yes</B></FONT></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=29 BGCOLOR="#808080">
+				<P CLASS="western" ALIGN=CENTER><FONT COLOR="#ffffff"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><B>No</B></FONT></FONT></FONT></P>
+			</TD>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR VALIGN=TOP>
+			<TD WIDTH=552>
+				<OL>
+					<LI><P STYLE="margin-bottom: 0in"><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><B>The
+					child believes that remaining in their current school is in
+					their best interest. </B></FONT></FONT></FONT>
+					</P>
+				</OL>
+				<UL>
+					<LI><P STYLE="margin-bottom: 0in"><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>Consider
+					social interactions, bullying, privacy issues, academics,
+					extracurricular activities.  </FONT></FONT></FONT>
+					</P>
+				</UL>
+				<P STYLE="margin-bottom: 0in"><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>Key
+				factors in decision:</I></FONT></FONT></FONT></P>
+				<P STYLE="margin-left: 0.25in; margin-bottom: 0in"><FONT COLOR="#000000">
+				 </FONT>
+				</P>
+				<P STYLE="margin-left: 0.25in"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=30>
+				<P CLASS="western" ALIGN=CENTER><FONT COLOR="#000000">☐</FONT></P>
+			</TD>
+			<TD WIDTH=29>
+				<P CLASS="western" ALIGN=CENTER><FONT COLOR="#000000">☐</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=552>
+				<OL START=2>
+					<LI><P STYLE="margin-bottom: 0in"><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><B>The
+					parents/prior custodians believe that remaining in the current
+					school is in the child’s best interest.  </B></FONT></FONT></FONT>
+					</P>
+				</OL>
+				<P STYLE="margin-bottom: 0in"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>Key
+				factors in decision:</I></FONT></FONT></P>
+				<P STYLE="margin-left: 0.25in; margin-bottom: 0in"><FONT COLOR="#000000">
+				 </FONT>
+				</P>
+				<P CLASS="western"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=30>
+				<P CLASS="western" ALIGN=CENTER><FONT COLOR="#000000">☐</FONT></P>
+			</TD>
+			<TD WIDTH=29>
+				<P CLASS="western" ALIGN=CENTER><FONT COLOR="#000000">☐</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=552>
+				<OL START=3>
+					<LI><P STYLE="margin-bottom: 0in"><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><B>The
+					distance to their current school will be appropriate for a daily
+					commute.</B></FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>
+					</I></FONT></FONT></FONT>
+					</P>
+				</OL>
+				<P STYLE="margin-bottom: 0in"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>Key
+				factors in decision:</I></FONT></FONT></P>
+				<P STYLE="margin-bottom: 0in"><BR>
+				</P>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=30>
+				<P CLASS="western" ALIGN=CENTER><FONT COLOR="#000000">☐</FONT></P>
+			</TD>
+			<TD WIDTH=29>
+				<P CLASS="western" ALIGN=CENTER><FONT COLOR="#000000">☐</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=552>
+				<OL START=4>
+					<LI><P STYLE="margin-bottom: 0in"><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><B>The
+					child has attended the current school for a long time or is
+					attached to the school</B></FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>.
+					 </FONT></FONT></FONT>
+					</P>
+				</OL>
+				<UL>
+					<LI><P STYLE="margin-bottom: 0in"><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>Consider</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>
+					incudes the child’s ties to his or her current school,
+					including significant relationships and involvement in
+					extracurricular activities. </FONT></FONT></FONT>
+					</P>
+				</UL>
+				<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>Key
+				factors in decision:</I></FONT></FONT></P>
+				<P STYLE="margin-left: 0.25in; margin-bottom: 0in"><BR>
+				</P>
+				<P CLASS="western"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=30>
+				<P CLASS="western" ALIGN=CENTER><FONT COLOR="#000000">☐</FONT></P>
+			</TD>
+			<TD WIDTH=29>
+				<P CLASS="western" ALIGN=CENTER><FONT COLOR="#000000">☐</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=552>
+				<OL START=5>
+					<LI><P STYLE="margin-bottom: 0in"><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><B>Safety
+					considerations favor remaining in the current school.</B></FONT></FONT></FONT></P>
+				</OL>
+				<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>Key
+				factors in decision:</I></FONT></FONT></P>
+				<P CLASS="western" STYLE="margin-left: 0.25in; margin-bottom: 0in">
+				<BR>
+				</P>
+				<P CLASS="western" STYLE="margin-left: 0.25in; margin-bottom: 0in">
+				<BR>
+				</P>
+				<P CLASS="western"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=30>
+				<P CLASS="western" ALIGN=CENTER><FONT COLOR="#000000">☐</FONT></P>
+			</TD>
+			<TD WIDTH=29>
+				<P CLASS="western" ALIGN=CENTER><FONT COLOR="#000000">☐</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=552>
+				<OL START=6>
+					<LI><P STYLE="margin-bottom: 0in"><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><B>Remaining
+					in the same school will positively impact the child’s social,
+					emotional, and/or behavioral well-being.  </B></FONT></FONT></FONT>
+					</P>
+				</OL>
+				<UL>
+					<LI><P STYLE="margin-bottom: 0in"><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>The
+					effects of tra</FONT></FONT></FONT><FONT FACE="Times New Roman, serif"><FONT SIZE=3>uma
+					on learning including attention, concentration, mood,
+					interpersonal trust, and communication. A child who has
+					experienced trauma can benefit immensely from remaining in their
+					same classroom and school, even when they move to a new home or
+					a new part of town.</FONT></FONT></P>
+					<LI><P STYLE="margin-bottom: 0in"><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>Where
+					do the child’s siblings attend school?</FONT></FONT></FONT></P>
+				</UL>
+				<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>Key
+				factors in decision:</I></FONT></FONT></P>
+				<P STYLE="margin-left: 0.25in; margin-bottom: 0in"><BR>
+				</P>
+				<P STYLE="margin-left: 0.25in; margin-bottom: 0in"><BR>
+				</P>
+				<P CLASS="western" STYLE="margin-left: 0.25in"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=30>
+				<P CLASS="western" ALIGN=CENTER><FONT COLOR="#000000">☐</FONT></P>
+			</TD>
+			<TD WIDTH=29>
+				<P CLASS="western" ALIGN=CENTER><FONT COLOR="#000000">☐</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=552>
+				<OL START=7>
+					<LI><P STYLE="margin-bottom: 0in"><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><B>Remaining
+					in the same school will positively impact the child’s
+					academics. </B></FONT></FONT></FONT>
+					</P>
+				</OL>
+				<UL>
+					<LI><P STYLE="margin-bottom: 0in"><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>Consider
+					h</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>ow
+					the child is performing academically in the current school and
+					the child’s academic/career goals. Also, students on average
+					lose 6 months of academic progress for each school change.</FONT></FONT></FONT></P>
+				</UL>
+				<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>Key
+				factors in decision:</I></FONT></FONT></P>
+				<P STYLE="margin-left: 0.25in; margin-bottom: 0in"><BR>
+				</P>
+				<P STYLE="margin-left: 0.25in; margin-bottom: 0in"><BR>
+				</P>
+				<P STYLE="margin-left: 0.25in"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=30>
+				<P CLASS="western" ALIGN=CENTER><FONT COLOR="#000000">☐</FONT></P>
+			</TD>
+			<TD WIDTH=29>
+				<P CLASS="western" ALIGN=CENTER><FONT COLOR="#000000">☐</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=552>
+				<OL START=8>
+					<LI><P STYLE="margin-bottom: 0in"><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><B>The
+					child’s permanency goal, plan and expected date for achieving
+					the permanency (reunification, guardianship, or adoption)
+					support remaining in their current school placement.</B></FONT></FONT></FONT></P>
+				</OL>
+				<UL>
+					<LI><P STYLE="margin-bottom: 0in"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>DCF
+					is required to place a child with a relative when appropriate.
+					This factor may override a child remaining in their current
+					school.  </FONT></FONT>
+					</P>
+					<LI><P STYLE="margin-bottom: 0in"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>The
+					initial permanency goal for most children is to be reunited with
+					their primary parents.  </FONT></FONT>
+					</P>
+				</UL>
+				<P CLASS="western" STYLE="margin-bottom: 0in"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>Key
+				factors in decision:</I></FONT></FONT></P>
+				<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+				</P>
+				<P CLASS="western"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=30>
+				<P CLASS="western" ALIGN=CENTER><FONT COLOR="#000000">☐</FONT></P>
+			</TD>
+			<TD WIDTH=29>
+				<P CLASS="western" ALIGN=CENTER><FONT COLOR="#000000">☐</FONT></P>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<P CLASS="western" STYLE="margin-bottom: 0in; line-height: 100%"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=4><B>Best
+Interest Determination Summary</B></FONT></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>Please
+summarize the key factors influencing the decision of the team below:</FONT></FONT></P>
+<TABLE WIDTH=610 BORDER=1 BORDERCOLOR="#00000a" CELLPADDING=7 CELLSPACING=0>
+	<COL WIDTH=594>
+	<TR>
+		<TD WIDTH=594 VALIGN=TOP>
+			<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+			</P>
+			<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+			</P>
+			<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+			</P>
+			<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+			</P>
+			<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+			</P>
+			<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+			</P>
+			<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+			</P>
+			<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+			</P>
+			<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+			</P>
+			<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+			</P>
+			<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+			</P>
+			<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+			</P>
+			<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+			</P>
+			<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+			</P>
+			<P CLASS="western"><BR>
+			</P>
+		</TD>
+	</TR>
+</TABLE>
+
+
+  <h4> Education Best Interest Determination Recommendation of the Team</h4>
+
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="">
+      <i>The student shall remain in the same school where the child is currently enrolled.</i>
+    </label>
+  </div>
+<P STYLE="margin-left: 0.25in; margin-top: 0.04in; margin-bottom: 0.04in; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=3>School:
+_______________________________ 	SU / SD:
+____________________________</FONT></FONT></P>
+<P STYLE="margin-left: 0.25in; margin-top: 0.04in; margin-bottom: 0.04in; line-height: 100%">
+<BR><BR>
+</P>
+<P STYLE="margin-left: 0.25in; margin-top: 0.04in; margin-bottom: 0.04in; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=3>Transportation will
+be provided by: ______________________________________________</FONT></FONT></P>
+<P STYLE="margin-left: 0.25in; margin-top: 0.04in; margin-bottom: 0.04in; line-height: 100%">
+<BR><BR>
+</P>
+<P STYLE="margin-left: 0.25in; margin-top: 0.04in; margin-bottom: 0.04in; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=3>Transportation will
+be paid for by what agency? ____________________________________</FONT></FONT></P>
+
+
+
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="">
+      <i>Based on the
+	best interest determination, a change in school placement is needed
+	(see below)</i>
+    </label>
+  </div>
+
+
+<P STYLE="margin-left: 0.25in; margin-top: 0.04in; margin-bottom: 0.04in; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=3>School:
+_______________________________ 	SU / SD:
+____________________________</FONT></FONT></P>
+<P STYLE="margin-left: 0.25in; margin-top: 0.04in; margin-bottom: 0.04in; line-height: 100%">
+<BR><BR>
+</P>
+<P STYLE="margin-left: 0.25in; margin-top: 0.04in; margin-bottom: 0.04in; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=3>Individual
+responsible for enrolling child in school:
+_________________________________</FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-left: 0.25in; margin-top: 0.04in; margin-bottom: 0.04in; line-height: 100%">
+<BR><BR>
+</P>
+<P STYLE="margin-left: 0.25in; margin-top: 0.04in; margin-bottom: 0.04in; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=4><B>If a change in
+educational placement is needed:</B></FONT></FONT></P>
+<OL>
+	<LI><P STYLE="margin-bottom: 0in; line-height: 100%"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>The
+	child’s school transfer date should be determined by the child’s
+	best interest.  Does it coincide with a logical juncture in the
+	child’s academic or personal progress (e.g., after an event that
+	is significant to the child or end of the school year)?</FONT></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-bottom: 0in; line-height: 100%"><BR>
+</P>
+<OL START=2>
+	<LI><P STYLE="margin-top: 0.04in; margin-bottom: 0.04in; line-height: 100%">
+	<FONT FACE="Times New Roman, serif"><FONT SIZE=3>Enrollment in the
+	new school should take place without interruption of the child’s
+	education, with all education records provided to the new school.</FONT></FONT><FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>
+	(See interagency guidelines).</I></FONT></FONT></P>
+</OL>
+
+
+<div class="checkbox">
+    <label>
+      <input type="checkbox" value="">
+      <i>The team
+	disagrees on the best interest determination for the child. If so,
+	next steps are:</i>
+    </label>
+  </div>
+
+	<UL>
+		<LI><P STYLE="margin-bottom: 0in; line-height: 100%"><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>DCF
+		Social Worker sends supervisor and District Director all materials
+		shared with local school authorities including the case plan and
+		reasons for denial. DCF District Director shall forward this
+		information to DCF Child Protection and Field Operations Director.</FONT></FONT></FONT></P>
+		<LI><P STYLE="margin-bottom: 0in; line-height: 100%"><FONT COLOR="#000000"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>The
+		school district shall contact the AOE State Interagency
+		Coordinator, send the same documentation and reasons for denial.</FONT></FONT></FONT></P>
+	</UL>
+
+
+
+
+      <hr>
+
+      <footer>
+        <p>&copy; VTFutures 2014</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -100,6 +100,8 @@
     name:
         type: String
         unique: true
+    dcfId:
+        type:String
     age:
         type: Number
         min: 0
@@ -163,7 +165,7 @@ Meteor.methods
         throw new Meteor.Error(302, "There is already a case with this name", caseWithSameName._id)  if caseWithSameName
   
         # pick out the whitelisted keys
-        theCase = _.extend(_.pick(caseAttributes, "name", "sex", "age", "urgent", "location"),
+        theCase = _.extend(_.pick(caseAttributes, "name", "sex", "age", "urgent", "location", "dcfId"),
             userId: user._id
             lastModifierId: user._id
             author: user.profile.name
@@ -180,8 +182,6 @@ Meteor.methods
             theCase.tag = createCaseTag(caseAttributes.name)
 
         theCase = massageFormData(theCase, CaseSchema)
-
-        console.log("Case", theCase)
 
         try   
             caseId = Cases.insert(theCase)
