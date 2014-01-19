@@ -56,10 +56,16 @@ Template.bid.events
         e.preventDefault()
         Router.go("viewCase")
 
-    # TODO Add in writing to database on a field update (switch focus)
-
     "submit form": (e) ->
         e.preventDefault()
+        e.stopPropagation()
+        console.log("submit")
+        false
+
+
+    # TODO Add in writing to database on a field update (switch focus)
+
+    "click #generate-bid": (e) ->
 
         CoffeeAlerts.clearSeen()
         $(".has-error").removeClass('has-error')
