@@ -86,7 +86,7 @@
 
     <div class="form-group">
         <label for="previousSchools" class="control-label">Previous School(s)</label>
-        <input type="text" class="form-control" name="previousSchools" placeholder="List of previous schools the child has attended" value="{{BID.previousSchools}}" />
+        <textarea class="form-control" name="previousSchools" placeholder="List of previous schools the child has attended">{{BID.previousSchools}}</textarea>
     </div>
 
     <div class="form-group">
@@ -209,15 +209,21 @@
         </label>
         <textarea class="form-control" name="bidSummary" 
         placeholder="Please summarize the key factors influencing the decision of the team">{{BID.bidSummary}}</textarea>
+        <span class="help-block">Please summarize the key factors influencing the decision of the team above.</span>
     </div>
 
-    {{#with remainInSchool}}
+    {{#with remainInSchoolSlider}}
         {{> slider}}
     {{/with}}
 
     <div class="form-group">
-        <label for="newSchool" class="control-label">Name of New School</label>
+        <label for="newSchool" class="control-label">Name of School</label>
         <input type="text" class="form-control" value="{{BID.newSchool}}" name="newSchool" placeholder="Name of new school if applicable" />
+    </div>
+
+    <div class="form-group">
+        <label for="susd" class="control-label">SU/SD</label>
+        <input type="text" class="form-control" value="{{BID.su_sd}}" name="susd" placeholder="Student ID" />
     </div>
 
 </template>

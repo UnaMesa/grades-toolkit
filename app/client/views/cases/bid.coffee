@@ -215,10 +215,16 @@ Template.bidConsiderations.helpers
         
 
 Template.bidSummary.helpers
-    remainInSchool: ->
+    remainInSchoolSlider: ->
         data = 
             'varName': 'stayInCurrentSchool'
             'description': "Remain in current school"
         if @BID?[data.varName]
             data.value = "checked"
         data
+
+    remainInSchool: ->
+        Session.setDefault("bidRemainInCurrentSchool", @BID?.stayInCurrentSchool)
+        Session.get("bidRemainInCurrentSchool")
+
+
