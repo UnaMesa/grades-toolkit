@@ -130,16 +130,17 @@ Template.bidDocumentation.helpers
 
 Template.bidMeetingAttendees.helpers
     attendees: ->
-        if not @BID.bidAttendees
-            @BID.bidAttendees = []
-        Session.set("bidAttendees", @BID.bidAttendees)
-        theAttendees = @BID.bidAttendees #Session.get("bidAttendees")
-        index = 0
-        if theAttendees?
-            for attendee in theAttendees
-                attendee.index = index
-                index++
-        theAttendees
+        if @BID?
+            if not @BID.bidAttendees
+                @BID.bidAttendees = []
+            Session.set("bidAttendees", @BID.bidAttendees)
+            theAttendees = @BID.bidAttendees #Session.get("bidAttendees")
+            index = 0
+            if theAttendees?
+                for attendee in theAttendees
+                    attendee.index = index
+                    index++
+            theAttendees
 
 Template.bidMeetingAttendees.events
     "click #addAttendee": (e) ->
@@ -149,9 +150,10 @@ Template.bidMeetingAttendees.events
                 CoffeeAlerts.error("Select a Role for the Attendee")
                 $("#newAttendeeRole").parent().addClass('has-error')
             else
-                if not @BID.bidAttendees
-                    @BID.bidAttendees = []
-                @BID.bidAttendees.push
+                bidAttendees = Session.get("bidAttendees")
+                if not bidAttendees
+                    bidAttendees = []
+                bidAttendees.push
                     name: $("#newAttendeeName").val()
                     role: $("#newAttendeeRole").val()
                     contactInfo: $("#newAttendeeContactInfo").val()
@@ -160,7 +162,7 @@ Template.bidMeetingAttendees.events
                 $("#newAttendeeContactInfo").val('')
                 $("#newAttendeeRole").val('Role')
                 saveBid false,
-                    bidAttendees: @BID.bidAttendees
+                    bidAttendees: bidAttendees
 
     "click .removeAttendee": (e) ->
         e.preventDefault()
