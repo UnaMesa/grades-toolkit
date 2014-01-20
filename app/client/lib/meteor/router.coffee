@@ -89,6 +89,7 @@ Router.map ->
       path: "cases/bid/:_id"
       before: ->
         Session.set('currentRecordId', @params._id)
+        Session.set("bidAttendees", null)
       waitOn: ->
         Meteor.subscribe('singleCase', @params._id)
       data: ->

@@ -27,6 +27,7 @@
         if not val.optional or data[key]?
 
             if _.isArray(val.type) and not _.isArray(data[key])
+                console.log("Make into an array", key, data[key])
                 data[key] = [data[key]] # A single item should also count as an array
             else
                 switch val.type

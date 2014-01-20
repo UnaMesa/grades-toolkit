@@ -15,7 +15,7 @@
                         </h4>
                     </div>
 
-                    <div id="collapseDocumentation" class="panel-collapse collapse">
+                    <div id="collapseDocumentation" class="panel-collapse collapse in">
                         <div class="panel-body">
                             {{>bidDocumentation}}
                         </div>
@@ -94,16 +94,18 @@
           <input type="number" name="grade" class="age-control form-control" min="1" max="12" value="{{BID.grade}}">
     </div>
 
-
-    {{#with remainInSchool}}
-        {{> slider}}
-    {{/with}}
-
     <div class="form-group">
         <label for="date" class="control-label">BID Meeting Date</label>
         <input type="date" class="form-control" name="date" placeholder="01/23/2013" value="{{bidDate}}" />
+        <span class="help-block">Date of Best Interest Determination Meeting</span>
     </div>   
     
+    <div class="form-group">
+        <label for="date" class="control-label">BID Meeting who Attended or was Consulted</label>
+        {{> bidMeetingAttendees}}
+        <span class="help-block">Please list who was consulted and/or who attended a meeting about BID.</span>
+    </div>
+
     <div class="form-group">
         <label for="reasonsForChange" class="control-label">Reasons for Change</label>
         <select name="reasonsForChange" class="form-control" multiple>
@@ -146,6 +148,55 @@
 </template>
 
 
+<template name="bidMeetingAttendees">
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>Name</th><th>Role</th><th>Contact Info</th><th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each attendees}}
+                <tr>
+                    <td>{{name}}</td>
+                    <td>{{role}}</td>
+                    <td>{{contactInfo}}</td>
+                    <td>
+                        <button class="removeAttendee btn btn-link"><i class="fa fa-minus-circle"></i></button>
+                    </td>
+                </tr>
+            {{/each}}
+            <tr>
+                <td>
+                    <input type="text" class="form-control" id="newAttendeeName" placeholder="Name" />
+                </td>
+                <td>
+                    <select id="newAttendeeRole" class="form-control">
+                        <option>Role</option>
+                        <option>Child</option>
+                        <option>Child's Primary Parents</option>
+                        <option>Child's Extended Family</option>
+                        <option>Kin/Foster Family</option>
+                        <option>DCF</option>
+                        <option>Educator</option>
+                        <option>GAL</option>
+                        <option>Service Provider</option>
+                        <option>Educational Surrogate</option>
+                        <option>Other</option>
+                    </select>
+                </td>
+                <td style="white-space:nowrap;">
+                    <input type="text" class="form-control" id="newAttendeeContactInfo" placeholder="Contact Info" />
+                </td>
+                <td>
+                    <button id="addAttendee" class="btn btn-link"><i class="fa fa-plus-circle"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</template>
+
+
 <template name="bidConsiderations">
 
      <div class="form-group">
@@ -168,6 +219,10 @@
         <textarea class="form-control" name="bidSummary" 
         placeholder="Please summarize the key factors influencing the decision of the team">{{BID.bidSummary}}</textarea>
     </div>
+
+    {{#with remainInSchool}}
+        {{> slider}}
+    {{/with}}
 
 </template>
 

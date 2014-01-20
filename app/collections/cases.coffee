@@ -62,6 +62,18 @@
         type: String
         optional: true
         label: "Name of New School"
+    "bidAttendees.$.name":
+        type: String
+        optional: true
+        label: "Name of person who attended/consulted for the BID meeting"
+    "bidAttendees.$.role":
+        type: String
+        optional: true
+        label: "Role of person who attended/consulted for the BID meeting"
+    "bidAttendees.$.contactInfo":
+        type: String
+        optional: true
+        label: "Contact for person who attended/consulted for the BID meeting"
 
 
 @BID.reasonsForChange = [
@@ -275,7 +287,7 @@ Meteor.methods
                     type = 'case'
                     theCase = massageFormData(theCase, CaseSchema)
 
-        console.log("Update Case", theCase)
+        console.log("Update Case", caseId, theCase)
         try
             rtn = Cases.update 
                 _id: caseId

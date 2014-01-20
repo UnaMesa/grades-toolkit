@@ -1,22 +1,100 @@
 
+saveBid = (generateBid = false, bidOverrides = {}) ->
+    CoffeeAlerts.clearSeen()
+    $(".has-error").removeClass('has-error')
+
+    if not user = Meteor.user()
+        @render("accessDenied")
+        return
+
+    theBid = $('form').serializeObject()
+
+    theBid.bidAttendees = Session.get("bidAttendees")
+    _.extend(theBid, bidOverrides) 
+    
+    # Must check for false checkboxes
+    
+    ###
+    for key, val of BID.schema
+        if key in ['documentsUsed', 'reasonsForChange']
+            if not typeIsArray theBid[key]
+                theBid[key] = [theBid[key]]
+    ###
+
+    # Since we are writing to the Case record these are already there
+    #for elm in ['name', 'age', 'location']
+    #    newBid[elm] = @[elm]
+
+    #newBid.submitter = user.profile.name # ?
+
+    if not theBid.childId or theBid.childId is ''
+        theBid.childId = @tag
+
+    updatedCase =
+        BID: theBid
+
+    console.log("UpdateCase", Session.get('currentRecordId'), updatedCase)
+    
+    Meteor.call "updateCase", Session.get('currentRecordId'), updatedCase, 'BID', (error, result) ->
+        if error
+            # Display error to the user
+            CoffeeAlerts.error(error.reason)
+        else if result?.error?
+            if result.error.invalidKeys.length > 0
+                for invalidKey in result.error.invalidKeys
+                    CoffeeAlerts.error(invalidKey.message)
+                    $("[name=#{invalidKey.name}]").parent().addClass('has-error')
+            else
+                CoffeeAlerts.error(error.reason)
+            window.scrollTo(0, 0)
+        else
+            if (generateBid)
+                CoffeeAlerts.success("Created Bid")
+            
+                # TODO: Go to the Document            
+                Router.go("viewCase", {_id: Session.get('currentRecordId')})
+
+                # Write it to Google Docs
+                # Cases/Name/BID.txt
+
+
+#Template.bid.created = ->
+    
+
 Template.bid.rendered = ->
-    $(".make-switch").bootstrapSwitch()
-    console.log("Schema", BID.schema, @BID)
+    #$(".make-switch").bootstrapSwitch()
+    console.log("Bid Rendered: Schema", BID.schema)
 
 
 Template.bid.helpers
-    remainInSchool: ->
-        data = 
-            'varName': 'stayInCurrentSchool'
-            'description': "Remain in current school"
-        if @BID?[data.varName]
-            data.value = "checked"
-        data
-
     bidDate: ->
-        console.log("bidDate", @BID)
         if @BID?.date?
             moment(@BID.date).format('LL')
+
+    
+Template.bid.events
+    "click #cancel": (e) ->
+        e.preventDefault()
+        Router.go("viewCase")
+
+    "submit form": (e) ->
+        e.preventDefault()
+        e.stopPropagation()
+        console.log("submit")
+        false
+
+
+    # TODO Add in writing to database on a field update (switch focus)
+
+    "click #generate-bid": (e) ->
+        e.preventDefault()
+        saveBid(true)
+
+    
+Template.bidDocumentation.rendered = ->
+    $(".make-switch").bootstrapSwitch()
+
+Template.bidDocumentation.helpers 
 
     boolValues: ->
         vals = []
@@ -50,76 +128,54 @@ Template.bid.helpers
              vals.push(data)
         vals
 
+Template.bidMeetingAttendees.helpers
+    attendees: ->
+        if not @BID.bidAttendees
+            @BID.bidAttendees = []
+        Session.set("bidAttendees", @BID.bidAttendees)
+        theAttendees = @BID.bidAttendees #Session.get("bidAttendees")
+        index = 0
+        if theAttendees?
+            for attendee in theAttendees
+                attendee.index = index
+                index++
+        theAttendees
 
-Template.bid.events
-    "click #cancel": (e) ->
+Template.bidMeetingAttendees.events
+    "click #addAttendee": (e) ->
         e.preventDefault()
-        Router.go("viewCase")
-
-    "submit form": (e) ->
-        e.preventDefault()
-        e.stopPropagation()
-        console.log("submit")
-        false
-
-
-    # TODO Add in writing to database on a field update (switch focus)
-
-    "click #generate-bid": (e) ->
-
-        CoffeeAlerts.clearSeen()
-        $(".has-error").removeClass('has-error')
-
-        if not user = Meteor.user()
-            @render("accessDenied")
-            return
-
-        theBid = $('form').serializeObject()
-
-        # Must check for false checkboxes
-        
-        ###
-        for key, val of BID.schema
-            if key in ['documentsUsed', 'reasonsForChange']
-                if not typeIsArray theBid[key]
-                    theBid[key] = [theBid[key]]
-        ###
-
-        # Since we are writing to the Case record these are already there
-        #for elm in ['name', 'age', 'location']
-        #    newBid[elm] = @[elm]
-
-        #newBid.submitter = user.profile.name # ?
-
-        if not theBid.childId or theBid.childId is ''
-            theBid.childId = @tag
-
-        updatedCase =
-            BID: theBid
-
-        console.log("UpdateCase", Session.get('currentRecordId'), updatedCase)
-        Meteor.call "updateCase", Session.get('currentRecordId'), updatedCase, 'BID', (error, result) ->
-            if error
-                # Display error to the user
-                CoffeeAlerts.error(error.reason)
-            else if result?.error?
-                if result.error.invalidKeys.length > 0
-                    for invalidKey in result.error.invalidKeys
-                        CoffeeAlerts.error(invalidKey.message)
-                        $("[name=#{invalidKey.name}]").parent().addClass('has-error')
-                else
-                    CoffeeAlerts.error(error.reason)
-                window.scrollTo(0, 0)
+        if $("#newAttendeeName").val()
+            if $("#newAttendeeRole").val() is 'Role'
+                CoffeeAlerts.error("Select a Role for the Attendee")
+                $("#newAttendeeRole").parent().addClass('has-error')
             else
-                CoffeeAlerts.success("Created Bid")
+                if not @BID.bidAttendees
+                    @BID.bidAttendees = []
+                @BID.bidAttendees.push
+                    name: $("#newAttendeeName").val()
+                    role: $("#newAttendeeRole").val()
+                    contactInfo: $("#newAttendeeContactInfo").val()
+                #Session.set("bidAttendees", theAttendees)
+                $("#newAttendeeName").val('')
+                $("#newAttendeeContactInfo").val('')
+                $("#newAttendeeRole").val('Role')
+                saveBid false,
+                    bidAttendees: @BID.bidAttendees
 
-                # TODO: Go to the Document            
-                Router.go("viewCase", {_id: Session.get('currentRecordId')})
+    "click .removeAttendee": (e) ->
+        e.preventDefault()
+        console.log("remove Attendee", @)
+        bidAttendees = Session.get("bidAttendees")
+        bidAttendees.splice(@index, 1)
+        saveBid false,
+            bidAttendees: bidAttendees
 
-        # Write it to Google Docs
-        
-        # Cases/Name/BID.txt
 
-
-        # Add messsage to stream
-                
+Template.bidSummary.helpers
+    remainInSchool: ->
+        data = 
+            'varName': 'stayInCurrentSchool'
+            'description': "Remain in current school"
+        if @BID?[data.varName]
+            data.value = "checked"
+        data
