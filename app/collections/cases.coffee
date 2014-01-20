@@ -74,6 +74,15 @@
         type: String
         optional: true
         label: "Contact for person who attended/consulted for the BID meeting"
+    "considerations.$.key":
+        type: String
+        optional: true
+    "considerations.$.yesNo":
+        type: Boolean
+        optional: true
+    "considerations.$.factors":
+        type: String
+        optional: true
 
 
 @BID.reasonsForChange = [
@@ -84,6 +93,45 @@
     "Short time at current school"
     "Safety Issues"
     "New school has positive factors (social, emotional, academic, special needs)"
+]
+
+@BID.considerations = [
+        key: "childBelief"
+        label: "The child believes that remaining in their current school is in their best interest." 
+        helpBlock: """&bull; Consider social interactions,bullying, privacy issues, academics, extracurricular activities."""
+    ,
+        key: "parentsBelief"
+        label: "The parents/prior custodians believe that remaining in the current school is in the child’s best interest."
+    ,
+        key: "distance"
+        label: "The distance to their current school will be appropriate for a daily commute."
+    ,
+        key: "longTime"
+        label: "The child has attended the current school for a long time or is attached to the school."
+        helpBlock: """&bull; Consider incudes the child’s ties to his or her current school, including 
+            significant relationships and involvement in extracurricular activities."""
+    ,
+        key: "saftey"
+        label: "Safety considerations favor remaining in the current school."
+    ,
+        key: "remainInSchoolSocial"
+        label: "Remaining in the same school will positively impact the child’s social, emotional, and/or behavioral well-being."
+        helpBlock: """&bull; The effects of trauma on learning including attention, concentration, mood, interpersonal trust, 
+            and communication. A child who has experienced trauma can benefit immensely from remaining in their same classroom and school, 
+            even when they move to a new home or a new part of town.<br/>
+            &bull; Where do the child’s siblings attend school?"""
+    ,
+        key: "remainInSchoolAcademics"
+        label: "Remaining in the same school will positively impact the child’s academics."
+        helpBlock: """&bull; Consider how the child is performing academically in the current school and the child’s 
+            academic/career goals. Also, students on average lose 6 months of academic progress for each school change."""
+    ,
+        key: "permanency"
+        label: """The child’s permanency goal, plan and expected date for achieving the permanency 
+            (reunification, guardianship, or adoption) support remaining in their current school placement."""
+        helpBlock: """&bull; DCF is required to place a child with a relative when appropriate. 
+            This factor may override a child remaining in their current school.</br>
+            &bull; The initial permanency goal for most children is to be reunited with their primary parents."""
 ]
 
 

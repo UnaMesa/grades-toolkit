@@ -17,6 +17,17 @@ saveBid = (generateBid = false, bidOverrides = {}) ->
             theBid.documentsUsed.push($(documentUsedForBid).attr('key'))
 
     theBid.bidAttendees = Session.get("bidAttendees")
+    
+    considerations = []
+    for consideration in BID.considerations
+        console.log("consideration", consideration.key, "##{consideration.key}_yesNo", $("##{consideration.key}_yesNo").val())
+        considerations.push
+            key: consideration.key
+            yesNo: ($("##{consideration.key}_yesNo").attr("checked") is 'checked')
+            factors: $("##{consideration.key}_factors").val()
+
+    theBid.considerations = considerations
+
     _.extend(theBid, bidOverrides) 
     
     # Must check for false checkboxes
@@ -179,6 +190,29 @@ Template.bidMeetingAttendees.events
         saveBid false,
             bidAttendees: bidAttendees
 
+
+Template.bidConsiderations.rendered = ->
+    $('[rel="popover"]').popover()
+
+Template.bidConsiderations.helpers
+    considerations: ->
+        considerations = []
+        for consideration in BID.considerations
+            data = _.clone(consideration)
+            if @BID?.considerations
+                for theCons in @BID.considerations
+                    if theCons.key is data.key
+                        data.factors = theCons.factors
+                        if theCons.yesNo
+                            data.value = "checked=checked"
+                        else 
+                            data.value = ''
+                        break
+            considerations.push(data)
+        console.log("considerations", considerations)
+        considerations
+
+        
 
 Template.bidSummary.helpers
     remainInSchool: ->

@@ -175,29 +175,25 @@
 
 <template name="bidConsiderations">
 
+    {{#each considerations}}
      <div class="form-group">
         <label for="childBeliefs" class="control-label">
-            The child believes that remaining in their current school is in their best interest
+            {{label}}
+            {{#if helpBlock}} 
+                <button class="btn btn-link" data-toggle="popover" data-content="{{helpBlock}}" data-html="true"
+                    data-placement="bottom auto" data-container='form' rel="popover" role="button">
+                    <i class="fa fa-question-circle"></i>
+                </button> 
+            {{/if}}
+            <div class="consideration-switch pull-right">
+                <input id="{{key}}_yesNo" class="make-switch switch-mini" type="radio" {{value}}
+                    data-on-label="Yes" data-off-label="No">
+            </div>
         </label>
-        <textarea class="form-control" name="childBeliefs" 
-        placeholder="Key factors in decision">{{BID.childBeliefs}}</textarea>
-         <span class="help-block">Consider social interactions,bullying, privacy issues, academics, extracurricular activities.</span>
+        <i>Key factors in decision:</i>
+        <textarea class="form-control" id="{{key}}_factors" placeholder="{{placeholder}}">{{factors}}</textarea>
     </div>
-
-     <div class="form-group">
-        <label for="reasonsForChange" class="control-label">Reasons for Change</label>
-        <select name="reasonsForChange" class="form-control" multiple>
-           {{#each reasonsForChangeSelect}}
-                {{> selectOption}}
-           {{/each}}
-       </select>
-    </div>
-
-    <div class="form-group">
-        <label for="reasonsForChangeComments" class="control-label">Document any of the above selected reasons</label>
-        <textarea class="form-control" name="reasonsForChangeComments" 
-        placeholder="documentation of reasons for change">{{BID.reasonsForChangeComments}}</textarea>
-    </div>
+    {{/each}}
 
     {{#each boolValues}}
         {{> slider}}
