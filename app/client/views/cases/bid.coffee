@@ -9,6 +9,13 @@ saveBid = (generateBid = false, bidOverrides = {}) ->
 
     theBid = $('form').serializeObject()
 
+    theBid.documentsUsed = []
+    # Get Checkboxes
+    documentsUsedForBid = $(".documentsUsedForBid")
+    for documentUsedForBid in documentsUsedForBid
+        if $(documentUsedForBid).is(':checked')
+            theBid.documentsUsed.push($(documentUsedForBid).attr('key'))
+
     theBid.bidAttendees = Session.get("bidAttendees")
     _.extend(theBid, bidOverrides) 
     
@@ -118,13 +125,13 @@ Template.bidDocumentation.helpers
              vals.push(data)
         vals
 
-    documentsUsedSelect: ->
+    documentsUsedForBid: ->
         vals = []
         for val in BID.documentsUsed
              data =
                  key: val
              if @BID?.documentsUsed and val in @BID.documentsUsed
-                 data.selected = "selected"
+                 data.checked = "checked"
              vals.push(data)
         vals
 

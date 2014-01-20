@@ -107,42 +107,18 @@
     </div>
 
     <div class="form-group">
-        <label for="reasonsForChange" class="control-label">Reasons for Change</label>
-        <select name="reasonsForChange" class="form-control" multiple>
-           {{#each reasonsForChangeSelect}}
-                {{> selectOption}}
-           {{/each}}
-       </select>
-    </div>
-
-    <div class="form-group">
-        <label for="reasonsForChangeComments" class="control-label">Document any of the above selected reasons</label>
-        <textarea class="form-control" name="reasonsForChangeComments" 
-        placeholder="documentation of reasons for change">{{BID.reasonsForChangeComments}}</textarea>
-    </div>
-
-    {{#each boolValues}}
-        {{> slider}}
-    {{/each}}
-
-    <div class="form-group">
         <label for="documentsUsed" class="control-label">Documents used for BID</label>
-        <select name="documentsUsed" class="form-control" multiple>
-           {{#each documentsUsedSelect}}
-                {{> selectOption}}
-           {{/each}}
-       </select>
+       {{#each documentsUsedForBid}}
+            <div id="documentsUsedForBid">
+                <input class="documentsUsedForBid" type="checkbox" key="{{key}}" {{checked}} /> {{key}}
+            </div>
+       {{/each}}
     </div>
 
     <div class="form-group">
         <label for="otherDocumentsUsed" class="control-label">Other documents used for BID</label>
         <textarea class="form-control" name="otherDocumentsUsed" 
         placeholder="List other documents used for the BID">{{BID.otherDocumentsUsed}}</textarea>
-    </div>
-
-    <div class="form-group">
-        <label for="newSchool" class="control-label">Name of New School</label>
-        <input type="text" class="form-control" value="{{BID.newSchool}}" name="newSchool" placeholder="Name of new school if applicable" />
     </div>
 
 </template>
@@ -208,6 +184,25 @@
          <span class="help-block">Consider social interactions,bullying, privacy issues, academics, extracurricular activities.</span>
     </div>
 
+     <div class="form-group">
+        <label for="reasonsForChange" class="control-label">Reasons for Change</label>
+        <select name="reasonsForChange" class="form-control" multiple>
+           {{#each reasonsForChangeSelect}}
+                {{> selectOption}}
+           {{/each}}
+       </select>
+    </div>
+
+    <div class="form-group">
+        <label for="reasonsForChangeComments" class="control-label">Document any of the above selected reasons</label>
+        <textarea class="form-control" name="reasonsForChangeComments" 
+        placeholder="documentation of reasons for change">{{BID.reasonsForChangeComments}}</textarea>
+    </div>
+
+    {{#each boolValues}}
+        {{> slider}}
+    {{/each}}
+
 </template>
 
 <template name="bidSummary">
@@ -223,6 +218,11 @@
     {{#with remainInSchool}}
         {{> slider}}
     {{/with}}
+
+    <div class="form-group">
+        <label for="newSchool" class="control-label">Name of New School</label>
+        <input type="text" class="form-control" value="{{BID.newSchool}}" name="newSchool" placeholder="Name of new school if applicable" />
+    </div>
 
 </template>
 

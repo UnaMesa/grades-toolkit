@@ -90,8 +90,12 @@
 @BID.documentsUsed = [
     "Report Card"
     "Progress Reports"
-    "Achievement Data"
+    "Achievement Data  (test scores)"
+    "Attendance Data" 
     "IEP"
+    "504 Plan" 
+    "Coordinated Services Plan (or Act 264 Plan)"
+    "Emails or Correspondences from Individuals"
     "Other"
 ]
 
