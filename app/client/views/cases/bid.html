@@ -185,18 +185,16 @@
                     <i class="fa fa-question-circle"></i>
                 </button> 
             {{/if}}
+
             <div class="consideration-switch pull-right">
-                <input id="{{key}}_yesNo" class="make-switch switch-mini" type="radio" {{value}}
-                    data-on-label="Yes" data-off-label="No">
+                <input type="radio" name="{{key}}_yesNo" value="yes" {{yes}}> Yes
+                <input type="radio" name="{{key}}_yesNo" value="no" {{no}}> No
             </div>
+
         </label>
         <i>Key factors in decision:</i>
         <textarea class="form-control" id="{{key}}_factors" placeholder="{{placeholder}}">{{factors}}</textarea>
     </div>
-    {{/each}}
-
-    {{#each boolValues}}
-        {{> slider}}
     {{/each}}
 
 </template>

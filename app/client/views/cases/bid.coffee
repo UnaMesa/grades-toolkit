@@ -23,7 +23,7 @@ saveBid = (generateBid = false, bidOverrides = {}) ->
     for consideration in BID.considerations
         considerations.push
             key: consideration.key
-            yesNo: ($("##{consideration.key}_yesNo").attr("checked") is 'checked')
+            yesNo: $("[name=#{consideration.key}_yesNo]:checked").val()
             factors: $("##{consideration.key}_factors").val()
 
     theBid.considerations = considerations
@@ -205,10 +205,11 @@ Template.bidConsiderations.helpers
                 for theCons in @BID.considerations
                     if theCons.key is data.key
                         data.factors = theCons.factors
-                        if theCons.yesNo
-                            data.value = "checked=checked"
-                        else 
-                            data.value = ''
+                        switch theCons.yesNo
+                            when 'yes'
+                                data.yes = "checked=checked"
+                            when 'no'
+                                data.no = "checked=checked"
                         break
             considerations.push(data)
         console.log("considerations", considerations)

@@ -60,7 +60,7 @@
         type: String
         optional: true
     "considerations.$.yesNo":
-        type: Boolean
+        type: String
         optional: true
     "considerations.$.factors":
         type: String
