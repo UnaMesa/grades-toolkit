@@ -1,5 +1,5 @@
 
-saveBid = (generateBid = false, bidOverrides = {}) ->
+saveBid = (generateForm = false, bidOverrides = {}) ->
     CoffeeAlerts.clearSeen()
     $(".has-error").removeClass('has-error')
 
@@ -51,11 +51,11 @@ saveBid = (generateBid = false, bidOverrides = {}) ->
                 CoffeeAlerts.error(error.reason)
             window.scrollTo(0, 0)
         else
-            if (generateBid)
+            if generateForm
                 #CoffeeAlerts.success("Created Bid")
             
                 # TODO: Go to the Document            
-                Router.go("generatedBid", {_id: Session.get('currentRecordId')})
+                Router.go(generateForm, {_id: Session.get('currentRecordId')})
 
                 # Write it to Google Docs
                 # Cases/Name/BID.txt
@@ -74,6 +74,9 @@ Template.bid.helpers
         if @BID?.date?
             moment(@BID.date).format('LL')
 
+    stayAtCurrentSchool: ->
+        @BID.teamRecommendation is 'stayAtCurrentSchool'
+
     
 Template.bid.events
     "click #cancel": (e) ->
@@ -86,12 +89,18 @@ Template.bid.events
         console.log("submit")
         false
 
-
     # TODO Add in writing to database on a field update (switch focus)
+    "click #save-bid": (e) ->
+        e.preventDefault()
+        saveBid("viewCase")
 
     "click #generate-bid": (e) ->
         e.preventDefault()
-        saveBid(true)
+        saveBid("generatedBid")
+
+    "click #generate-mou": (e) ->
+        e.preventDefault()
+        saveBid("generatedMou")
 
     
 Template.bidDocumentation.rendered = ->
@@ -212,6 +221,7 @@ bidSummarySetUp = ->
             $('#transportationProvidedBy').removeClass("hidden")
             $('#transportationPaidBy').removeClass("hidden")
             $('#teamDisagreeNextSteps').addClass("hidden")
+            $("#generate-mou").removeClass("hidden")
         when 'moveToNewSchool'
             $('[for="schoolToAttend"]').html('Name of New School')
             $('#school-to-attend').removeClass("hidden")
@@ -220,6 +230,7 @@ bidSummarySetUp = ->
             $('#transportationPaidBy').addClass("hidden")
             $('#personEnrollingChild').removeClass("hidden")
             $('#teamDisagreeNextSteps').addClass("hidden")
+            $("#generate-mou").addClass("hidden")
         when 'teamDisagrees'
             $('[for="schoolToAttend"]').html('Name of School')
             $('#school-to-attend').addClass("hidden")
@@ -228,6 +239,7 @@ bidSummarySetUp = ->
             $('#transportationProvidedBy').addClass("hidden")
             $('#transportationPaidBy').addClass("hidden")
             $('#teamDisagreeNextSteps').removeClass("hidden")
+            $("#generate-mou").addClass("hidden")
 
 Template.bidSummary.rendered = ->
     bidSummarySetUp()
