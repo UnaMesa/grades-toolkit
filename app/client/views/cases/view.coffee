@@ -60,6 +60,9 @@ Template.viewCase.helpers
     detailsIn: ->
         detailsIn
 
+    stayAtCurrentSchool: ->
+        @BID?.teamRecommendation is 'stayAtCurrentSchool'
+
 Template.viewCase.events
     "shown.bs.collapse #collapseMessages": (e)  ->
         console.log("shown.bs.collapse")

@@ -100,7 +100,7 @@ Template.bid.events
 
     "click #generate-mou": (e) ->
         e.preventDefault()
-        saveBid("generatedMou")
+        saveBid("mou")
 
     
 Template.bidDocumentation.rendered = ->
