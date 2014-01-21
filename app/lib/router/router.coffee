@@ -98,6 +98,19 @@ Router.map ->
         data.goBackPath = "viewCase"
         data
 
+    @route 'generatedBid',
+      path: "cases/bid/:_id/generate"
+      layoutTemplate: 'empty'
+      before: ->
+        Session.set('currentRecordId', @params._id)
+        Session.set("bidAttendees", null)
+      waitOn: ->
+        Meteor.subscribe('singleCase', @params._id)
+      data: ->
+        data = Cases.findOne(@params._id)
+        data.title = "BID for #{data.name}"
+        data
+
     @route 'mou',
       path: "cases/mou/:_id"
       before: ->
@@ -237,6 +250,19 @@ Router.map ->
       data:
           title: "Key Generation Test"
 
+    #
+    #  Server Side
+    #
+
+    @route 'serverGenerateBID',
+      where: 'server'
+      path: "cases/bid/:_id/server_generate"
+      action: ->
+        @response.writeHead 200, 
+          'Content-Type': 'text/html'
+        @response.write('Show Generated BID')
+        @response.end()
+        console.log("Generated BID for ", @params._id, @userId)
 
 mustBeSignedIn = ->
   if not user = Meteor.user()
@@ -260,6 +286,12 @@ setTags = ->
       name: user.profile.name
     Session.set("tags", tags)
 
+cleanUp = ->
+  $('body').removeClass("photoBody")
+  CoffeeAlerts.clearSeen()
+  Session.set('messageTagFilter', null)
+  Session.set('currentRecordId', null)
+
 googleDriveAuthorize = ->
   #console.log("Check google auth", gDrive)
   if Meteor.user()
@@ -267,6 +299,15 @@ googleDriveAuthorize = ->
       @render("googleAuth")
       @stop()
 
+
+# this hook will run on almost all routes
+Router.before mustBeSignedIn, except: ['home', 'serverGenerateBID']
+
+Router.before setTags, except: ['serverGenerateBID']
+
+# this hook will run on all routes
+Router.before cleanUp, except: ['serverGenerateBID']
+ 
 addPageTag = ->
   if Session.get('messageTagFilter')? and Session.get('currentRecordId')?
     #tags = Session.get("tags")
@@ -282,27 +323,19 @@ addPageTag = ->
         tags[tag.tag] = tag
         Session.set("tags", tags)
 
-
-# this hook will run on almost all routes
-Router.before mustBeSignedIn, except: ['home']
-
-Router.before setTags, except: []
+setPath = ->
+  Session.set('path', location.pathname)
 
 # this hook will run on almost all routes
 #Router.after googleDriveAuthorize, except: []
 
-Router.after addPageTag, except: ['home']
+Router.after addPageTag, except: ['home','serverGenerateBID']
 
-# this hook will run on all routes
-Router.before ->
-  $('body').removeClass("photoBody")
-  CoffeeAlerts.clearSeen()
-  Session.set('messageTagFilter', null)
-  Session.set('currentRecordId', null)
-  
+Router.after  setPath, except: ['serverGenerateBID']
+ 
 
-Router.after ->
-  addPageTag()
+#Router.after ->
+#  addPageTag()
 ### 
   if /mobile/i.test(navigator.userAgent)
     #
@@ -315,8 +348,7 @@ Router.after ->
     , 500
 ###
 
-Router.after  ->
-  Session.set('path', location.pathname)
+
 
 
 

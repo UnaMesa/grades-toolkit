@@ -28,25 +28,8 @@ saveBid = (generateBid = false, bidOverrides = {}) ->
 
     theBid.considerations = considerations
 
-
-
     _.extend(theBid, bidOverrides) 
     
-    # Must check for false checkboxes
-    
-    ###
-    for key, val of BID.schema
-        if key in ['documentsUsed', 'reasonsForChange']
-            if not typeIsArray theBid[key]
-                theBid[key] = [theBid[key]]
-    ###
-
-    # Since we are writing to the Case record these are already there
-    #for elm in ['name', 'age', 'location']
-    #    newBid[elm] = @[elm]
-
-    #newBid.submitter = user.profile.name # ?
-
     if not theBid.childId or theBid.childId is ''
         theBid.childId = @tag
 
@@ -69,10 +52,10 @@ saveBid = (generateBid = false, bidOverrides = {}) ->
             window.scrollTo(0, 0)
         else
             if (generateBid)
-                CoffeeAlerts.success("Created Bid")
+                #CoffeeAlerts.success("Created Bid")
             
                 # TODO: Go to the Document            
-                Router.go("viewCase", {_id: Session.get('currentRecordId')})
+                Router.go("generatedBid", {_id: Session.get('currentRecordId')})
 
                 # Write it to Google Docs
                 # Cases/Name/BID.txt
@@ -112,7 +95,7 @@ Template.bid.events
 
     
 Template.bidDocumentation.rendered = ->
-    $(".make-switch").bootstrapSwitch()
+    #$(".make-switch").bootstrapSwitch()
 
 Template.bidDocumentation.helpers 
 
@@ -201,6 +184,10 @@ Template.bidConsiderations.helpers
         considerations = []
         for consideration in BID.considerations
             data = _.clone(consideration)
+            if data.helpBlock
+                data.helpText = ''
+                for help in data.helpBlock
+                    data.helpText +=  '&bull; ' + help
             if @BID?.considerations
                 for theCons in @BID.considerations
                     if theCons.key is data.key

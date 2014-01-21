@@ -1,6 +1,6 @@
 
 Template.cases.rendered = ->
-    console.log("Cases Rendered")
+    #console.log("Cases Rendered")
     #$("[rel='tooltip']").tooltip()
 
 
