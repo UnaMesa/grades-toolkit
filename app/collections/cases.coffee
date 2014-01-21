@@ -3,65 +3,34 @@
 @BID = {}
 
 @BID.schema =
+
+    #
+    # Documentation
+    #
+
     childId:
         type: String
         #unique: true
         label: 'Child ID'
         optional: true  #  Have to check independent of Collection2
-    stayInCurrentSchool:
-        type: Boolean
+    currentSchool:
+        type: String
         optional: true
-        label: 'Remain in current school'
-    date:
-        type: Date
+        label: "Current School and District"
+    previousSchools:
+        type: String
         optional: true
-        label: 'BID Meeting Date'
+        label: "Previous School(s)"
     grade:
         type: Number
         min: 0
         max: 12
         label: "Current Grade"
         optional: true  #  Have to check independent of Collection2
-    currentSchool:
-        type: String
+    date:
+        type: Date
         optional: true
-        label: "Current School"
-    reasonsForChange:
-        type: [String]
-        optional: true
-        label: 'Reasons for Change'
-    reasonsForChangeComments:
-        type: String
-        optional: true
-        label: 'Document Reasons for Change'
-    changeWillImpactStudent:
-        type: Boolean
-        optional: true
-        label: 'Change will impact student'
-    timingWillImpactGraduation:
-        type: Boolean
-        optional: true
-        label: 'Timing will impact graduation'
-    parentsAndSchoolInformedOfMeeting:
-        type: Boolean
-        optional: true
-        label: "Child's parents and School informed of meeting"
-    childConsulted:
-        type: Boolean
-        optional: true
-        label: "Was Child consulted"
-    documentsUsed:
-        type: [String]
-        optional: true
-        label: "Documents used for BID"
-    otherDocumentsUsed:
-        type: String
-        optional: true
-        label: "Other documents used for BID"
-    newSchool:
-        type: String
-        optional: true
-        label: "Name of New School"
+        label: 'BID Meeting Date'
     "bidAttendees.$.name":
         type: String
         optional: true
@@ -74,6 +43,19 @@
         type: String
         optional: true
         label: "Contact for person who attended/consulted for the BID meeting"
+    documentsUsed:
+        type: [String]
+        optional: true
+        label: "Documents used for BID"
+    otherDocumentsUsed:
+        type: String
+        optional: true
+        label: "Other documents used for BID"
+
+    #
+    # Considerations
+    #
+
     "considerations.$.key":
         type: String
         optional: true
@@ -83,6 +65,49 @@
     "considerations.$.factors":
         type: String
         optional: true
+
+
+    #
+    # Summary
+    #
+
+    bidSummary:
+        type: String
+        optional: true
+        label: "BID Summary"
+    teamRecommendation:
+        type: String
+        optional: true
+        label: 'Team Recommendation'
+    schoolToAttend:
+        type: String
+        optional: true
+        label: "School to Attend"
+    susd:
+        type: String
+        optional: true
+        label: "Student ID"
+
+    transportationProvidedBy:
+        type: String
+        optional: true
+        label: "Transportation will be provided by"
+    transportationPaidBy:
+        type: String
+        optional: true
+        label: "Transportation will be paid for by"
+
+    personEnrollingChild:
+        type: String
+        optional: true
+        label: "Individual responsible for enrolling child in school"
+
+    teamDisagreesWithBID:
+        type: Boolean
+        optional: true
+        label: "Team disagress on the best interest determination for the child"
+    
+    
 
 
 @BID.reasonsForChange = [

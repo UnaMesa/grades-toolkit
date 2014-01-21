@@ -90,7 +90,6 @@ Router.map ->
       before: ->
         Session.set('currentRecordId', @params._id)
         Session.set("bidAttendees", null)
-        Session.set("bidRemainInCurrentSchool", null)
       waitOn: ->
         Meteor.subscribe('singleCase', @params._id)
       data: ->

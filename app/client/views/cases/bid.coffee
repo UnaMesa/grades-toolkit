@@ -9,8 +9,8 @@ saveBid = (generateBid = false, bidOverrides = {}) ->
 
     theBid = $('form').serializeObject()
 
+    # Get Used Documents Checkboxes
     theBid.documentsUsed = []
-    # Get Checkboxes
     documentsUsedForBid = $(".documentsUsedForBid")
     for documentUsedForBid in documentsUsedForBid
         if $(documentUsedForBid).is(':checked')
@@ -18,15 +18,17 @@ saveBid = (generateBid = false, bidOverrides = {}) ->
 
     theBid.bidAttendees = Session.get("bidAttendees")
     
+    # Get the Considerations
     considerations = []
     for consideration in BID.considerations
-        console.log("consideration", consideration.key, "##{consideration.key}_yesNo", $("##{consideration.key}_yesNo").val())
         considerations.push
             key: consideration.key
             yesNo: ($("##{consideration.key}_yesNo").attr("checked") is 'checked')
             factors: $("##{consideration.key}_factors").val()
 
     theBid.considerations = considerations
+
+
 
     _.extend(theBid, bidOverrides) 
     
@@ -212,19 +214,48 @@ Template.bidConsiderations.helpers
         console.log("considerations", considerations)
         considerations
 
-        
+bidSummarySetUp = ->
+   switch $('[name=teamRecommendation]:checked').val()
+        when 'stayAtCurrentSchool'
+            $('[for="schoolToAttend"]').html('Name of Current School')
+            $('#school-to-attend').removeClass("hidden")
+            $('#su-sd').removeClass("hidden")
+            $('#personEnrollingChild').addClass("hidden")
+            $('#transportationProvidedBy').removeClass("hidden")
+            $('#transportationPaidBy').removeClass("hidden")
+            $('#teamDisagreeNextSteps').addClass("hidden")
+        when 'moveToNewSchool'
+            $('[for="schoolToAttend"]').html('Name of New School')
+            $('#school-to-attend').removeClass("hidden")
+            $('#su-sd').removeClass("hidden")
+            $('#transportationProvidedBy').addClass("hidden")
+            $('#transportationPaidBy').addClass("hidden")
+            $('#personEnrollingChild').removeClass("hidden")
+            $('#teamDisagreeNextSteps').addClass("hidden")
+        when 'teamDisagrees'
+            $('[for="schoolToAttend"]').html('Name of School')
+            $('#school-to-attend').addClass("hidden")
+            $('#su-sd').addClass("hidden")
+            $('#personEnrollingChild').addClass("hidden")
+            $('#transportationProvidedBy').addClass("hidden")
+            $('#transportationPaidBy').addClass("hidden")
+            $('#teamDisagreeNextSteps').removeClass("hidden")
+
+Template.bidSummary.rendered = ->
+    bidSummarySetUp()
 
 Template.bidSummary.helpers
-    remainInSchoolSlider: ->
-        data = 
-            'varName': 'stayInCurrentSchool'
-            'description': "Remain in current school"
-        if @BID?[data.varName]
-            data.value = "checked"
-        data
+    
+    stayAtCurrentSchool: ->
+        @BID.teamRecommendation is 'stayAtCurrentSchool'
+        
+    moveToNewSchool: ->
+        @BID.teamRecommendation is 'moveToNewSchool'
 
-    remainInSchool: ->
-        Session.setDefault("bidRemainInCurrentSchool", @BID?.stayInCurrentSchool)
-        Session.get("bidRemainInCurrentSchool")
+    teamDisagrees: ->
+        @BID.teamRecommendation is 'teamDisagrees'
 
-
+Template.bidSummary.events
+    "change [name=teamRecommendation]": (e) ->
+        bidSummarySetUp()
+        

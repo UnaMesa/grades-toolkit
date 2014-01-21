@@ -101,7 +101,7 @@
     </div>   
     
     <div class="form-group">
-        <label for="date" class="control-label">BID Meeting who Attended or was Consulted</label>
+        <label for="bidAttendees" class="control-label">BID Meeting who Attended or was Consulted</label>
         {{> bidMeetingAttendees}}
         <span class="help-block">Please list who was consulted and/or who attended a meeting about BID.</span>
     </div>
@@ -212,18 +212,84 @@
         <span class="help-block">Please summarize the key factors influencing the decision of the team above.</span>
     </div>
 
-    {{#with remainInSchoolSlider}}
-        {{> slider}}
-    {{/with}}
-
     <div class="form-group">
-        <label for="newSchool" class="control-label">Name of School</label>
-        <input type="text" class="form-control" value="{{BID.newSchool}}" name="newSchool" placeholder="Name of new school if applicable" />
+        <label for="teamRecommendation" class="control-label">Team Recommendation</label>
+        
+        <div class="radio">
+          <label>
+            <input type="radio" name="teamRecommendation" value="stayAtCurrentSchool"
+                {{#if stayAtCurrentSchool}}checked=checked{{/if}} >
+            The student shall remain in the same school where the child is currently enrolled.
+          </label>
+        </div>
+        
+        <div class="radio">
+          <label>
+            <input type="radio" name="teamRecommendation" value="moveToNewSchool"
+                {{#if moveToNewSchool}}checked=checked{{/if}} >
+            Based on the best interest determination, a change in school placement is needed.
+          </label>
+        </div>
+
+        <div class="radio">
+          <label>
+            <input type="radio" name="teamRecommendation" value="teamDisagrees"
+                {{#if teamDisagrees}}checked=checked{{/if}} >
+            The team disagrees on the best interest determination for the child. 
+          </label>
+        </div>
+
     </div>
 
-    <div class="form-group">
+    <div id="school-to-attend" class="form-group hidden">
+        <label for="schoolToAttend" class="control-label">Name of School</label>
+        <input type="text" class="form-control" value="{{BID.schoolToAttend}}" 
+            name="schoolToAttend" placeholder="Name of school student will attend" />
+    </div>
+
+    <div id="su-sd" class="form-group hidden">
         <label for="susd" class="control-label">SU/SD</label>
-        <input type="text" class="form-control" value="{{BID.su_sd}}" name="susd" placeholder="Student ID" />
+        <input type="text" class="form-control" value="{{BID.susd}}" 
+            name="susd" placeholder="Student ID" />
+    </div>
+
+    <div id="transportationProvidedBy" class="form-group hidden">
+        <label for="transportationProvidedBy" class="control-label">
+            Transportation will be provided by
+        </label>
+        <input type="text" class="form-control" value="{{BID.transportationProvidedBy}}" 
+            name="transportationProvidedBy" 
+            placeholder="Who will provide transportation for the child to the school" />
+    </div>
+
+    <div id="transportationPaidBy" class="form-group hidden">
+        <label for="transportationPaidBy" class="control-label">
+            Transportation will be paid by
+        </label>
+        <input type="text" class="form-control" value="{{BID.transportationPaidBy}}" 
+            name="transportationPaidBy" 
+            placeholder="Agency that will pay for transportation to the school" />
+    </div>
+
+    <div id="personEnrollingChild" class="form-group hidden">
+        <label for="personEnrollingChild" class="control-label">
+            Individual responsible for enrolling child in school
+        </label>
+        <input type="text" class="form-control" value="{{BID.personEnrollingChild}}" 
+            name="personEnrollingChild" 
+            placeholder="Individual responsible for enrolling child in school" />
+    </div>
+
+    <div id="teamDisagreeNextSteps" class="hidden">
+        The next steps are:
+        <ul>
+            <li>
+                DCF Social Worker sends supervisor and District Director all materials shared with local school authorities including the case plan and reasons for denial. DCF District Director shall forward this information to DCF Child Protection and Field Operations Director.
+            </li>
+            <li>
+                The school district shall contact the AOE State Interagency Coordinator, send the same documentation and reasons for denial.
+            </li>
+        </ul>
     </div>
 
 </template>
