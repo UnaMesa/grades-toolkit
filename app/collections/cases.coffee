@@ -182,11 +182,45 @@
 @MOU = {}
 
 @MOU.schema =
-    placeholder:
+    schoolDistrict:
         type: String
         optional: true
+        label: "Name of School District"
+    superintendentAddress:
+        type: String
+        optional: true
+        label: "Address of Superintendent's Office"
+    dataOfCustody:
+        type: Date
+        optional: true
+        label: "Date of custody"
+    resourceFamilyName:
+        type: String
+        optional: true
+        label: "Name of Resource Family"
+    resourceFamilyAddress:
+        type: String
+        optional: true
+        label: "Resource Family Address"
+    mothersName:
+        type: String
+        optional: true
+        label: "Mother's Name"
+    fathersName:
+        type: String
+        optional: true
+        label: "Father's Name"
+    mothersTown:
+        type: String
+        optional: true
+        label: "Mother's Town"
+    fathersTown:
+        type: String
+        optional: true
+        label: "Father's Town"
 
 @MOU.simpleSchema = new SimpleSchema(@MOU.schema)
+
 
 @CaseSchema =
     name:
@@ -344,7 +378,6 @@ Meteor.methods
                     if theCase.BID?
                         invalidKeys = []
                         for key in ["childId", "grade"]
-                            console.log("Check", key, BID.schema[key])
                             if not theCase.BID[key] or theCase.BID[key] is ''
                                 invalidKeys.push
                                     message: "#{BID.schema[key].label} is required"
@@ -361,7 +394,20 @@ Meteor.methods
 
                 when "MOU"
                     if theCase.MOU?
-                        console.log("MOU NOT DONE")
+                        invalidKeys = []
+                        for key in ["schoolDistrict", "dataOfCustody"]
+                            console.log("Check", key, MOU.schema[key])
+                            if not theCase.MOU[key] or theCase.MOU[key] is ''
+                                invalidKeys.push
+                                    message: "#{MOU.schema[key].label} is required"
+                                    name: key
+
+                        if invalidKeys.length > 0
+                            result =
+                                error:
+                                    reason: "Error on MOU update"
+                                    invalidKeys: invalidKeys
+                            return result
 
                 else
                     type = 'case'
