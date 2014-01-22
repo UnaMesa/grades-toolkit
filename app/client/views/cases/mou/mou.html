@@ -1,7 +1,38 @@
 <template name="mou">
 
-<div class="well">
-    ToDo
-</div>
+    <div class="container">
+            
+        <form role="form">
+
+            <div class="form-group">
+                <label for="dcfId" class="control-label">DCF Family/Child #</label>
+                <input type="text" class="form-control" value="{{dcfId}}" disabled />
+            </div>
+
+            {{#each mouFields}}
+                <div class="form-group">
+                    <label for="{{key}}" class="control-label">{{label}}</label>
+                    {{#if textarea}}
+                        <textarea class="form-control" name="{{key}}" 
+                            placeholder="{{placeholder}}" {{required}}>{{value}}</textarea>
+                    {{else}}
+                        <input type="text" class="form-control" name="{{key}}" value="{{value}}" 
+                            placeholder="{{placeholder}}" {{required}} />
+                    {{/if}}
+                </div>
+            {{/each}}
+
+            <button id="save-mou" type="submit" class="btn btn-primary">
+                <i class="fa fa-floppy-o"></i> Save MOU
+            </button>
+
+            <button id="generate-mou" type="submit" class="btn btn-primary">
+                <i class="fa fa-print"></i> Generate MOU
+            </button>
+
+        </form>
+
+    </div>
 
 </template>
+

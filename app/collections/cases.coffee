@@ -206,14 +206,14 @@
         type: String
         optional: true
         label: "Mother's Name"
-    fathersName:
-        type: String
-        optional: true
-        label: "Father's Name"
     mothersTown:
         type: String
         optional: true
         label: "Mother's Town"
+    fathersName:
+        type: String
+        optional: true
+        label: "Father's Name"
     fathersTown:
         type: String
         optional: true
@@ -395,12 +395,13 @@ Meteor.methods
                 when "MOU"
                     if theCase.MOU?
                         invalidKeys = []
-                        for key in ["schoolDistrict", "dataOfCustody"]
-                            console.log("Check", key, MOU.schema[key])
-                            if not theCase.MOU[key] or theCase.MOU[key] is ''
-                                invalidKeys.push
-                                    message: "#{MOU.schema[key].label} is required"
-                                    name: key
+                        for key, obj of MOU.schema #["schoolDistrict", "dataOfCustody"]
+                            if key not in ['mothersName', 'fathersName', 'mothersTown', 'fathersTown']
+                                console.log("Check", key, MOU.schema[key])
+                                if not theCase.MOU[key] or theCase.MOU[key] is ''
+                                    invalidKeys.push
+                                        message: "#{MOU.schema[key].label} is required"
+                                        name: key
 
                         if invalidKeys.length > 0
                             result =
@@ -408,6 +409,8 @@ Meteor.methods
                                     reason: "Error on MOU update"
                                     invalidKeys: invalidKeys
                             return result
+
+                    theCase.MOU = massageFormData(theCase.MOU, MOU.schema)
 
                 else
                     type = 'case'

@@ -1,5 +1,5 @@
 
-saveBid = (generateForm = false, bidOverrides = {}) ->
+saveBid = (routeOnSave = false, bidOverrides = {}) ->
     CoffeeAlerts.clearSeen()
     $(".has-error").removeClass('has-error')
 
@@ -51,11 +51,12 @@ saveBid = (generateForm = false, bidOverrides = {}) ->
                 CoffeeAlerts.error(error.reason)
             window.scrollTo(0, 0)
         else
-            if generateForm
-                #CoffeeAlerts.success("Created Bid")
-            
+            if routeOnSave
+                if routeOnSave is 'viewCase'
+                    CoffeeAlerts.success("Created Bid")
+                
                 # TODO: Go to the Document            
-                Router.go(generateForm, {_id: Session.get('currentRecordId')})
+                Router.go(routeOnSave, {_id: Session.get('currentRecordId')})
 
                 # Write it to Google Docs
                 # Cases/Name/BID.txt
@@ -98,7 +99,7 @@ Template.bid.events
         e.preventDefault()
         saveBid("generatedBid")
 
-    "click #generate-mou": (e) ->
+    "click #create-mou": (e) ->
         e.preventDefault()
         saveBid("mou")
 

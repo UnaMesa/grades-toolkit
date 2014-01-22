@@ -99,7 +99,7 @@ Router.map ->
         data
 
     @route 'generatedBid',
-      path: "cases/bid/:_id/generate"
+      path: "cases/bid/:_id/generated"
       layoutTemplate: 'empty'
       before: ->
         Session.set('currentRecordId', @params._id)
@@ -119,7 +119,19 @@ Router.map ->
         Meteor.subscribe('singleCase', @params._id)
       data: ->
         data = Cases.findOne(@params._id)
-        data.title = "Create MOU for #{data.name}"
+        data.title = "MOU for #{data.name}"
+        data.goBackPath = "viewCase"
+        data
+
+    @route 'generatedMou',
+      path: "cases/mou/:_id/generated"
+      before: ->
+        Session.set('currentRecordId', @params._id)
+      waitOn: ->
+        Meteor.subscribe('singleCase', @params._id)
+      data: ->
+        data = Cases.findOne(@params._id)
+        data.title = "MOU for #{data.name}"
         data.goBackPath = "viewCase"
         data
 
