@@ -65,18 +65,18 @@ saveBid = (routeOnSave = false, bidOverrides = {}) ->
 #Template.bid.created = ->
     
 
-Template.bid.rendered = ->
+#Template.bid.rendered = ->
     #$(".make-switch").bootstrapSwitch()
-    console.log("Bid Rendered: Schema", BID.schema)
+    #console.log("Bid Rendered: Schema", BID.schema)
 
 
 Template.bid.helpers
     bidDate: ->
         if @BID?.date?
-            moment(@BID.date).format('LL')
+            moment(@BID?.date).format('LL')
 
     stayAtCurrentSchool: ->
-        @BID.teamRecommendation is 'stayAtCurrentSchool'
+        @BID?.teamRecommendation is 'stayAtCurrentSchool'
 
     
 Template.bid.events
@@ -222,7 +222,7 @@ bidSummarySetUp = ->
             $('#transportationProvidedBy').removeClass("hidden")
             $('#transportationPaidBy').removeClass("hidden")
             $('#teamDisagreeNextSteps').addClass("hidden")
-            $("#generate-mou").removeClass("hidden")
+            $("#create-mou").removeClass("hidden")
         when 'moveToNewSchool'
             $('[for="schoolToAttend"]').html('Name of New School')
             $('#school-to-attend').removeClass("hidden")
@@ -231,7 +231,7 @@ bidSummarySetUp = ->
             $('#transportationPaidBy').addClass("hidden")
             $('#personEnrollingChild').removeClass("hidden")
             $('#teamDisagreeNextSteps').addClass("hidden")
-            $("#generate-mou").addClass("hidden")
+            $("#create-mou").addClass("hidden")
         when 'teamDisagrees'
             $('[for="schoolToAttend"]').html('Name of School')
             $('#school-to-attend').addClass("hidden")
@@ -240,7 +240,7 @@ bidSummarySetUp = ->
             $('#transportationProvidedBy').addClass("hidden")
             $('#transportationPaidBy').addClass("hidden")
             $('#teamDisagreeNextSteps').removeClass("hidden")
-            $("#generate-mou").addClass("hidden")
+            $("#create-mou").addClass("hidden")
 
 Template.bidSummary.rendered = ->
     bidSummarySetUp()
@@ -248,13 +248,13 @@ Template.bidSummary.rendered = ->
 Template.bidSummary.helpers
     
     stayAtCurrentSchool: ->
-        @BID.teamRecommendation is 'stayAtCurrentSchool'
+        @BID?.teamRecommendation is 'stayAtCurrentSchool'
         
     moveToNewSchool: ->
-        @BID.teamRecommendation is 'moveToNewSchool'
+        @BID?.teamRecommendation is 'moveToNewSchool'
 
     teamDisagrees: ->
-        @BID.teamRecommendation is 'teamDisagrees'
+        @BID?.teamRecommendation is 'teamDisagrees'
 
 Template.bidSummary.events
     "change [name=teamRecommendation]": (e) ->
