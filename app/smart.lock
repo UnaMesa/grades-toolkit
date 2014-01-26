@@ -52,8 +52,8 @@
       },
       "moment": {
         "git": "https://github.com/acreeger/meteor-moment.git",
-        "tag": "v2.2.1",
-        "commit": "9ee12e714afe56b189f53076447b7b54f3012065"
+        "tag": "v2.5.1",
+        "commit": "8c9bc5d3fc96705057737cb9743d555417f6e551"
       },
       "coffee-alerts": {
         "git": "https://github.com/pfafman/meteor-coffee-alerts.git",
@@ -62,8 +62,8 @@
       },
       "collection2": {
         "git": "https://github.com/aldeed/meteor-collection2.git",
-        "tag": "v0.3.3",
-        "commit": "d5c99b1c0fe30778e683175ecb0dd36529e6271e"
+        "tag": "v0.3.4",
+        "commit": "23ab6f56f9d65eb46c152480a8d8097867a8bb38"
       },
       "fastclick": {
         "git": "https://github.com/percolatestudio/meteor-fastclick",
@@ -102,8 +102,8 @@
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.2.29",
-        "commit": "dc40caf4eaaeb456e1a4e7e227ad326bcd5607b5"
+        "tag": "v0.2.32",
+        "commit": "c67bf1d25b847ff4330f95bbda891c5fad3fb15f"
       }
     }
   }
