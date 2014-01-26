@@ -397,7 +397,6 @@ Meteor.methods
                         invalidKeys = []
                         for key, obj of MOU.schema #["schoolDistrict", "dataOfCustody"]
                             if key not in ['mothersName', 'fathersName', 'mothersTown', 'fathersTown']
-                                console.log("Check", key, MOU.schema[key])
                                 if not theCase.MOU[key] or theCase.MOU[key] is ''
                                     invalidKeys.push
                                         message: "#{MOU.schema[key].label} is required"
@@ -416,7 +415,8 @@ Meteor.methods
                     type = 'case'
                     theCase = massageFormData(theCase, CaseSchema)
 
-        console.log("Update Case", caseId, theCase)
+        #console.log("Update Case", caseId, theCase)
+        
         try
             rtn = Cases.update 
                 _id: caseId

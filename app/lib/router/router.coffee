@@ -1,282 +1,282 @@
 
 Router.configure
-    layoutTemplate: 'layout'
-    loadingTemplate: 'loading'
-    notFoundTemplate: 'notFound'
-    #disableProgressTick : true
-    disableProgressSpinner : true
+  layoutTemplate: 'layout'
+  loadingTemplate: 'loading'
+  notFoundTemplate: 'notFound'
+  #disableProgressTick : true
+  disableProgressSpinner : true
 
 Router.map ->
-    @route: 'accessDenied'
+  @route 'accessDenied'
 
-    @route 'home',
-      path: '/'
-      before: ->
-        if not Meteor.user()
-          @render("login")
-          @stop();
-      data:
-        title: 'Grades'
+  @route 'home',
+    path: '/'
+    before: ->
+      if not Meteor.user()
+        @render("login")
+        @stop();
+    data:
+      title: 'Grades'
 
-    @route 'login',
-      path: '/login',
-      layoutTemplate: 'loginLayout',
+  @route 'login',
+    path: '/login',
+    layoutTemplate: 'loginLayout',
 
-    @route 'cases',
-      data:
-        title: 'Cases'
-        recordName: 'Case'
-        newRecordPath: 'newCase'
+  @route 'cases',
+    data:
+      title: 'Cases'
+      recordName: 'Case'
+      newRecordPath: 'newCase'
 
-    @route 'newCase',
-      path: 'cases/new'
-      data:
-        title: 'New Case'
-        goBackPath: "cases"
+  @route 'newCase',
+    path: 'cases/new'
+    data:
+      title: 'New Case'
+      goBackPath: "cases"
 
-    @route 'viewCase',
-      path: 'cases/:_id'
-      before: ->
-        Session.set('currentRecordId', @params._id)
-        Session.set('messageTagFilter', 'case')
-      waitOn: ->
-        Meteor.subscribe('singleCase', @params._id)
-      data: ->
-        data = Cases.findOne(@params._id)
-        data.title = "Case"
-        data.goBackPath = "cases"
-        data
+  @route 'viewCase',
+    path: 'cases/:_id'
+    before: ->
+      Session.set('currentRecordId', @params._id)
+      Session.set('messageTagFilter', 'case')
+    waitOn: ->
+      Meteor.subscribe('singleCase', @params._id)
+    data: ->
+      data = Cases.findOne(@params._id)
+      data.title = "Case"
+      data.goBackPath = "cases"
+      data
 
-    @route 'editCase',
-      path: 'cases/edit/:_id'
-      before: ->
-        Session.set('currentRecordId', @params._id)
-        Session.set('messageTagFilter', 'case')
-      waitOn: ->
-        Meteor.subscribe('singleCase', @params._id)
-      data: ->
-        data = Cases.findOne(@params._id)
-        data.title = "Edit Case"
-        data.goBackPath = "viewCase"
-        data
+  @route 'editCase',
+    path: 'cases/edit/:_id'
+    before: ->
+      Session.set('currentRecordId', @params._id)
+      Session.set('messageTagFilter', 'case')
+    waitOn: ->
+      Meteor.subscribe('singleCase', @params._id)
+    data: ->
+      data = Cases.findOne(@params._id)
+      data.title = "Edit Case"
+      data.goBackPath = "viewCase"
+      data
 
-    @route 'editCasePhoto',
-      path: 'cases/photo/edit/:_id'
-      template: 'photoEditor'
-      before: ->
-        Session.set('currentRecordId', @params._id)
-        Session.set('messageTagFilter', 'case')
-      waitOn: ->
-        Meteor.subscribe('singleCase', @params._id)
-      data: ->
-        data = Cases.findOne(@params._id)
-        data.title = "Edit Photo"
-        data.goBackPath = "editCase"
-        data
+  @route 'editCasePhoto',
+    path: 'cases/photo/edit/:_id'
+    template: 'photoEditor'
+    before: ->
+      Session.set('currentRecordId', @params._id)
+      Session.set('messageTagFilter', 'case')
+    waitOn: ->
+      Meteor.subscribe('singleCase', @params._id)
+    data: ->
+      data = Cases.findOne(@params._id)
+      data.title = "Edit Photo"
+      data.goBackPath = "editCase"
+      data
 
-    @route 'caseNotes',
-      path: 'cases/notes/:_id'
-      before: ->
-        Session.set('currentRecordId', @params._id)
-        Session.set('messageTagFilter', 'case')
-      waitOn: ->
-        Meteor.subscribe('singleCase', @params._id)
-      data: ->
-        data = Cases.findOne(@params._id)
-        data.title = "#{data.name} Case Notes"
-        data.goBackPath = "cases"
-        data
+  @route 'caseNotes',
+    path: 'cases/notes/:_id'
+    before: ->
+      Session.set('currentRecordId', @params._id)
+      Session.set('messageTagFilter', 'case')
+    waitOn: ->
+      Meteor.subscribe('singleCase', @params._id)
+    data: ->
+      data = Cases.findOne(@params._id)
+      data.title = "#{data.name} Case Notes"
+      data.goBackPath = "cases"
+      data
 
-    @route 'bid',
-      path: "cases/bid/:_id"
-      before: ->
-        Session.set('currentRecordId', @params._id)
-        Session.set("bidAttendees", null)
-      waitOn: ->
-        Meteor.subscribe('singleCase', @params._id)
-      data: ->
-        data = Cases.findOne(@params._id)
-        data.title = "BID for #{data.name}"
-        data.goBackPath = "viewCase"
-        data
+  @route 'bid',
+    path: "cases/bid/:_id"
+    before: ->
+      Session.set('currentRecordId', @params._id)
+      Session.set("bidAttendees", null)
+    waitOn: ->
+      Meteor.subscribe('singleCase', @params._id)
+    data: ->
+      data = Cases.findOne(@params._id)
+      data.title = "BID for #{data.name}"
+      data.goBackPath = "viewCase"
+      data
 
-    @route 'generatedBid',
-      path: "cases/bid/:_id/generated"
-      layoutTemplate: 'empty'
-      before: ->
-        Session.set('currentRecordId', @params._id)
-        Session.set("bidAttendees", null)
-      waitOn: ->
-        Meteor.subscribe('singleCase', @params._id)
-      data: ->
-        data = Cases.findOne(@params._id)
-        data.title = "BID for #{data.name}"
-        data
+  @route 'generatedBid',
+    path: "cases/bid/:_id/generated"
+    layoutTemplate: 'empty'
+    before: ->
+      Session.set('currentRecordId', @params._id)
+      Session.set("bidAttendees", null)
+    waitOn: ->
+      Meteor.subscribe('singleCase', @params._id)
+    data: ->
+      data = Cases.findOne(@params._id)
+      data.title = "BID for #{data.name}"
+      data
 
-    @route 'mou',
-      path: "cases/mou/:_id"
-      before: ->
-        Session.set('currentRecordId', @params._id)
-      waitOn: ->
-        Meteor.subscribe('singleCase', @params._id)
-      data: ->
-        data = Cases.findOne(@params._id)
-        data.title = "MOU for #{data.name}"
-        data.goBackPath = "viewCase"
-        data
+  @route 'mou',
+    path: "cases/mou/:_id"
+    before: ->
+      Session.set('currentRecordId', @params._id)
+    waitOn: ->
+      Meteor.subscribe('singleCase', @params._id)
+    data: ->
+      data = Cases.findOne(@params._id)
+      data.title = "MOU for #{data.name}"
+      data.goBackPath = "viewCase"
+      data
 
-    @route 'generatedMou',
-      path: "cases/mou/:_id/generated"
-      before: ->
-        Session.set('currentRecordId', @params._id)
-      waitOn: ->
-        Meteor.subscribe('singleCase', @params._id)
-      data: ->
-        data = Cases.findOne(@params._id)
-        data.title = "MOU for #{data.name}"
-        data.goBackPath = "viewCase"
-        data
+  @route 'generatedMou',
+    path: "cases/mou/:_id/generated"
+    before: ->
+      Session.set('currentRecordId', @params._id)
+    waitOn: ->
+      Meteor.subscribe('singleCase', @params._id)
+    data: ->
+      data = Cases.findOne(@params._id)
+      data.title = "MOU for #{data.name}"
+      data.goBackPath = "viewCase"
+      data
 
-    @route 'families',
-      data:
-        title: "Families"
+  @route 'families',
+    data:
+      title: "Families"
 
-    @route 'viewFamily',
-      path: 'families/:_id'
-      before: ->
-        Session.set('currentRecordId', @params._id)
-        Session.set('messageTagFilter', 'family')
-      waitOn: ->
-        Meteor.subscribe('singleFamily', @params._id)
-      data: ->
-        data = Families.findOne(@params._id)
-        data.title = "Family"
-        data.goBackPath = "families"
-        data
+  @route 'viewFamily',
+    path: 'families/:_id'
+    before: ->
+      Session.set('currentRecordId', @params._id)
+      Session.set('messageTagFilter', 'family')
+    waitOn: ->
+      Meteor.subscribe('singleFamily', @params._id)
+    data: ->
+      data = Families.findOne(@params._id)
+      data.title = "Family"
+      data.goBackPath = "families"
+      data
 
-    @route 'editFamily',
-      path: 'families/edit/:_id'
-      before: ->
-        Session.set('currentRecordId', @params._id)
-        Session.set('messageTagFilter', 'family')
-      waitOn: ->
-        Meteor.subscribe('singleFamily', @params._id)
-      data: ->
-        data = Families.findOne(@params._id)
-        data.title = "Edit Family"
-        data.goBackPath = "viewFamily"
-        data
+  @route 'editFamily',
+    path: 'families/edit/:_id'
+    before: ->
+      Session.set('currentRecordId', @params._id)
+      Session.set('messageTagFilter', 'family')
+    waitOn: ->
+      Meteor.subscribe('singleFamily', @params._id)
+    data: ->
+      data = Families.findOne(@params._id)
+      data.title = "Edit Family"
+      data.goBackPath = "viewFamily"
+      data
 
-    @route 'editFamilyPhoto',
-      path: 'families/photo/edit/:_id'
-      template: 'photoEditor'
-      before: ->
-        Session.set('currentRecordId', @params._id)
-        Session.set('messageTagFilter', 'family')
-      waitOn: ->
-        Meteor.subscribe('singleFamily', @params._id)
-      data: ->
-        data = Families.findOne(@params._id)
-        data.title = "Edit Photo"
-        data.goBackPath = "editFamily"
-        data
+  @route 'editFamilyPhoto',
+    path: 'families/photo/edit/:_id'
+    template: 'photoEditor'
+    before: ->
+      Session.set('currentRecordId', @params._id)
+      Session.set('messageTagFilter', 'family')
+    waitOn: ->
+      Meteor.subscribe('singleFamily', @params._id)
+    data: ->
+      data = Families.findOne(@params._id)
+      data.title = "Edit Photo"
+      data.goBackPath = "editFamily"
+      data
 
-    @route 'familyPhotos',
-      path: 'family/:_id/photos'
-      #layoutTemplate: 'layoutInverse'
-      before: ->
-        $('body')?.addClass("photoBody")
-        Session.set('currentRecordId', @params._id)
-        Session.set('messageTagFilter', 'family')
-      waitOn: ->
-        Meteor.subscribe('singleFamily', @params._id)
-        #@FamilyPhotosHandle = Meteor.subscribeWithPagination('familyPhotos', @params._id, 20)
-      data: ->
-        data = Families.findOne(@params._id)
-        data.title = "Family Photos"
-        data.goBackPath = "viewFamily"  # Got to get _id into this....
-        data
+  @route 'familyPhotos',
+    path: 'family/:_id/photos'
+    #layoutTemplate: 'layoutInverse'
+    before: ->
+      $('body')?.addClass("photoBody")
+      Session.set('currentRecordId', @params._id)
+      Session.set('messageTagFilter', 'family')
+    waitOn: ->
+      Meteor.subscribe('singleFamily', @params._id)
+      #@FamilyPhotosHandle = Meteor.subscribeWithPagination('familyPhotos', @params._id, 20)
+    data: ->
+      data = Families.findOne(@params._id)
+      data.title = "Family Photos"
+      data.goBackPath = "viewFamily"  # Got to get _id into this....
+      data
 
-    @route 'casePhotos',
-      path: 'case/:_id/photos'
-      #layoutTemplate: 'layoutInverse'
-      before: ->
-        $('body')?.addClass("photoBody")
-        Session.set('currentRecordId', @params._id)
-        Session.set('messageTagFilter', 'case')
-      waitOn: ->
-        Meteor.subscribe('singleCase', @params._id)
-        #@CasePhotosHandle = Meteor.subscribeWithPagination('casePhotos', @params._id, 20)
-      data: ->
-        data = Cases.findOne(@params._id)
-        data.title = "Case Photos"
-        data.goBackPath = "viewCase"  # Got to get _id into this....
-        data
-      
+  @route 'casePhotos',
+    path: 'case/:_id/photos'
+    #layoutTemplate: 'layoutInverse'
+    before: ->
+      $('body')?.addClass("photoBody")
+      Session.set('currentRecordId', @params._id)
+      Session.set('messageTagFilter', 'case')
+    waitOn: ->
+      Meteor.subscribe('singleCase', @params._id)
+      #@CasePhotosHandle = Meteor.subscribeWithPagination('casePhotos', @params._id, 20)
+    data: ->
+      data = Cases.findOne(@params._id)
+      data.title = "Case Photos"
+      data.goBackPath = "viewCase"  # Got to get _id into this....
+      data
+    
 
-    @route 'contacts',
-      data:
-        title: 'Contacts'
+  @route 'contacts',
+    data:
+      title: 'Contacts'
 
-    @route 'viewContact',
-      path: 'contacts/:_id'
-      before: ->
-        Session.set('currentRecordId', @params._id)
-        Session.set('messageTagFilter', 'user')
-      #waitOn: ->
-      #  Meteor.subscribe('singleUser', @params._id)
-      data: ->
-        data = Meteor.users.findOne(@params._id)
-        data.title = data.profile.name
-        data.goBackPath = "contacts"
-        data
+  @route 'viewContact',
+    path: 'contacts/:_id'
+    before: ->
+      Session.set('currentRecordId', @params._id)
+      Session.set('messageTagFilter', 'user')
+    #waitOn: ->
+    #  Meteor.subscribe('singleUser', @params._id)
+    data: ->
+      data = Meteor.users.findOne(@params._id)
+      data.title = data.profile.name
+      data.goBackPath = "contacts"
+      data
 
-    @route 'messages',
-      data:
-        title: 'Messages'
+  @route 'messages',
+    data:
+      title: 'Messages'
 
-    @route 'docs',
-      data:
-        title: 'Documents'
-
-
-    @route 'settings',
-      data:
-        title: 'Settings'
+  @route 'docs',
+    data:
+      title: 'Documents'
 
 
-    @route 'googleAuth',
-      data:
-        title: "Google Drive"
+  @route 'settings',
+    data:
+      title: 'Settings'
 
-    @route 'googleDocs',
-      path: '/googledocs'
-      data:
-        title: 'Google Docs'
 
-    @route 'newGoogleDoc',
-      path: '/googledocs/new'
-      data:
-        title: 'Create Google Doc'
+  @route 'googleAuth',
+    data:
+      title: "Google Drive"
 
-    @route 'cryptoTest',
-      path: '/crypto/test'
-      data:
-          title: "Key Generation Test"
+  @route 'googleDocs',
+    path: '/googledocs'
+    data:
+      title: 'Google Docs'
 
-    #
-    #  Server Side
-    #
+  @route 'newGoogleDoc',
+    path: '/googledocs/new'
+    data:
+      title: 'Create Google Doc'
 
-    @route 'serverGenerateBID',
-      where: 'server'
-      path: "cases/bid/:_id/server_generate"
-      action: ->
-        @response.writeHead 200, 
-          'Content-Type': 'text/html'
-        @response.write('Show Generated BID')
-        @response.end()
-        console.log("Generated BID for ", @params._id, @userId)
+  @route 'cryptoTest',
+    path: '/crypto/test'
+    data:
+        title: "Key Generation Test"
+
+  #
+  #  Server Side
+  #
+
+  @route 'serverGenerateBID',
+    where: 'server'
+    path: "cases/bid/:_id/server_generate"
+    action: ->
+      @response.writeHead 200, 
+        'Content-Type': 'text/html'
+      @response.write('Show Generated BID')
+      @response.end()
+      console.log("Generated BID for ", @params._id, @userId)
 
 mustBeSignedIn = ->
   if not user = Meteor.user()

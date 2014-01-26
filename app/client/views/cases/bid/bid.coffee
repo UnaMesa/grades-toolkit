@@ -52,11 +52,20 @@ saveBid = (routeOnSave = false, bidOverrides = {}) ->
             window.scrollTo(0, 0)
         else
             if routeOnSave
-                if routeOnSave is 'viewCase'
-                    CoffeeAlerts.success("Created Bid")
-                
-                # TODO: Go to the Document            
-                Router.go(routeOnSave, {_id: Session.get('currentRecordId')})
+                switch routeOnSave
+                    when 'generatedBid'
+                        console.log(routeOnSave, window)
+                        newWindow = window.open Router.routes[routeOnSave].path
+                            _id: Session.get('currentRecordId')
+
+                        if !newWindow or newWindow.closed or typeof newWindow.closed=='undefined'
+                            alert("Pop Up Blocked!  Opening in current window") 
+                            Router.go(routeOnSave, {_id: Session.get('currentRecordId')})
+
+                    else
+                        CoffeeAlerts.success("Created Bid")
+                        
+                        Router.go(routeOnSave, {_id: Session.get('currentRecordId')})
 
                 # Write it to Google Docs
                 # Cases/Name/BID.txt
@@ -209,7 +218,6 @@ Template.bidConsiderations.helpers
                                 data.no = "checked=checked"
                         break
             considerations.push(data)
-        console.log("considerations", considerations)
         considerations
 
 bidSummarySetUp = ->
