@@ -7,6 +7,8 @@ Router.configure
     disableProgressSpinner : true
 
 Router.map ->
+    @route: 'accessDenied'
+
     @route 'home',
       path: '/'
       before: ->

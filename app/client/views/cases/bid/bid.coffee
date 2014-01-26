@@ -4,7 +4,7 @@ saveBid = (routeOnSave = false, bidOverrides = {}) ->
     $(".has-error").removeClass('has-error')
 
     if not user = Meteor.user()
-        @render("accessDenied")
+        Router.go("accessDenied")
         return
 
     theBid = $('form').serializeObject()
