@@ -7,15 +7,16 @@
 #  Check every N seconds...
 #
 
-#
-#  TODO: 
-#   We are currently using the node-edit-google-spreadsheet npm.
-#   This does not use the token cache in google-awt-oauth.  Looks
-#   Like it would be easy to encorporate this in.  Probably write
-#   a atmosphere package that has the google-awt-oauth but we write
-#   the parts of the google spreadsheet api we need.  For IMHO the 
-#   spreadheeet package has a fair amount of fluff.
-#
+###
+
+ This is using the google-oauth-jwt Node NPM
+    https://github.com/extrabacon/google-oauth-jwt
+
+Uses Google OAuth 2.0 for server-to-server interactions, 
+allowing secure use of Google APIs without URL redirects and authorization prompts.
+
+###
+
 
 
 @gDrive = {}
