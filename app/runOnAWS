@@ -4,9 +4,6 @@
 # StartUp Script for the AWS Site using meteor
 #
 
-# Export Path for Passenger                                                                                                                                          
-export PATH=/opt/passenger/passenger/bin:$PATH
-
 # Meteor Environment Variables
 export MONGO_URL='mongodb://localhost:27017/grades'
 export ROOT_URL='http://grades.sharedrecords.org/'

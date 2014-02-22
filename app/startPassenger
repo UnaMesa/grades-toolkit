@@ -4,9 +4,6 @@
 # StartUp Script for the AWS Site using passenger
 #
 
-# Export Path for Passenger                                                                                                                                          
-export PATH=/opt/passenger/passenger/bin:$PATH
-
 # Meteor Environment Variables
 export MONGO_URL='mongodb://localhost:27017/grades'
 export ROOT_URL='http://grades.sharedrecords.org/'
@@ -20,5 +17,5 @@ passenger start --port 80 --user ubuntu --environment production --daemonize
 
 #To stop Passenger Standalone, run:                                                                                                                                  
 #                                                                                                                                                                    
-#   sudo passenger stop --pid-file /home/bia/src/bia-website/app/tmp/pids/passenger.80.pid                                                                                                                                             
+#   sudo passenger stop --pid-file /home/ubuntu/grades-toolkit/app/tmp/pids/passenger.80.pid                                                                                                                                            
 
