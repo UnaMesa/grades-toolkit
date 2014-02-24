@@ -90,7 +90,6 @@ Template.newNoteDialog.events
 
     "submit form": (e) ->
         e.preventDefault()
-        console.log("submit form")
         message =
             message: $("[name=message]").val()
 

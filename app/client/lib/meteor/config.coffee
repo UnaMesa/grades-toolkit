@@ -1,8 +1,4 @@
 #
-#
-#
-
-#
 #  Google Scopes
 #
 #    Drive Scopes:

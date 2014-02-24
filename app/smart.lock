@@ -15,6 +15,7 @@
       "fastclick": {},
       "ionicons": {},
       "font-awesome": {},
+      "iron-router-progress": {},
       "bootstrap-3-switch-less": {
         "git": "https://github.com/pfafman/meteor-bootstrap-3-switch-less.git",
         "branch": "master"
@@ -27,7 +28,10 @@
         "git": "https://github.com/pfafman/meteor-owl-carousel.git",
         "branch": "master"
       },
-      "iron-router-progress": {}
+      "accounts-entry": {
+        "git": "https://github.com/pfafman/meteor-accounts-entry.git",
+        "branch": "master"
+      }
     },
     "packages": {
       "bootstrap-less-3": {
@@ -47,8 +51,8 @@
       },
       "iron-router": {
         "git": "https://github.com/EventedMind/iron-router.git",
-        "tag": "v0.6.2",
-        "commit": "ce56e58b45624dce992490f3a1c10f10d3948bae"
+        "tag": "v0.6.4",
+        "commit": "927bbaed1b87894fb6fb70807f74ff3a5bd89f29"
       },
       "moment": {
         "git": "https://github.com/acreeger/meteor-moment.git",
@@ -80,6 +84,11 @@
         "tag": "v4.0.3",
         "commit": "61e9361384347547ae144f8228faa4deffda23db"
       },
+      "iron-router-progress": {
+        "git": "https://github.com/Multiply/iron-router-progress.git",
+        "tag": "v0.2.0",
+        "commit": "ce730d1d26feadb7c75ea25f22c5bfdb0c549a8b"
+      },
       "bootstrap-3-switch-less": {
         "git": "https://github.com/pfafman/meteor-bootstrap-3-switch-less.git",
         "branch": "master",
@@ -95,15 +104,25 @@
         "branch": "master",
         "commit": "3f24d79c4b1bed29a9b0094829e0335ae1ee897e"
       },
-      "iron-router-progress": {
-        "git": "https://github.com/Multiply/iron-router-progress.git",
-        "tag": "v0.2.0",
-        "commit": "ce730d1d26feadb7c75ea25f22c5bfdb0c549a8b"
+      "accounts-entry": {
+        "git": "https://github.com/pfafman/meteor-accounts-entry.git",
+        "branch": "master",
+        "commit": "7ad1ce8da799ddd769a088048864d21125a5eadf"
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
         "tag": "v0.2.38",
         "commit": "2deec0041fc6cb2666df8cd6a51914e499e95683"
+      },
+      "just-i18n": {
+        "git": "https://github.com/subhog/meteor-just-i18n.git",
+        "tag": "v0.1.1",
+        "commit": "ce88ac66c0dc107dc2da93ce152616115838101f"
+      },
+      "accounts-t9n": {
+        "git": "https://github.com/softwarerero/meteor-accounts-t9n.git",
+        "tag": "v0.0.2",
+        "commit": "408e3a037114cb72163073110e2121e3d548c1a2"
       }
     }
   }

@@ -1,3 +1,4 @@
+###
 Template.docs.created = ->
     console.log("documents created")
     gDrive.reset()
@@ -25,3 +26,5 @@ Template.docs.events
     "click #authorize": (e) ->
         gDrive.userInitiatedAuth()
         gDrive.call(gDrive.getFileList)
+
+###

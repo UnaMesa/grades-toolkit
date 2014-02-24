@@ -68,13 +68,15 @@ gDrive.baseUrl = (spreadsheetId, worksheetId) ->
     'https://spreadsheets.google.com/feeds/cells/' + spreadsheetId + '/' + worksheetId + '/private/full'
 
 gDrive.getAndUpdateFamilyList = ->
+    console.log("getAndUpdateFamilyList")
     gDrive.init()
     
     gDrive._request
         url: gDrive.baseUrl(GoogleFamilySpreadsheetId, GoogleFamilyWorksheetId) + '?alt=json'
         jwt: GoogleJWT
     , Meteor.bindEnvironment gDrive._updateFamilyList, (err) ->   # This works but need to understand
-        throw err
+        console.log("getAndUpdateFamilyList Error", err)
+        #throw err
 
 
 gDrive._updateFamilyList = (err, res, body) ->
@@ -125,7 +127,7 @@ gDrive.checkFamilyList = ->
         url: "https://www.googleapis.com/drive/v2/files/" + GoogleFamilySpreadsheetId 
         jwt: GoogleJWT
     , Meteor.bindEnvironment gDrive.staleFamilyListCheck, (err) ->   # This works but need to understand
-        throw err
+        console.log("checkFamilyList Error", err)
 
 
 gDrive.staleFamilyListCheck = (err, res, body) ->

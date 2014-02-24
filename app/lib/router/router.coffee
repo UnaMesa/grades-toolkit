@@ -239,7 +239,6 @@ Router.map ->
     data:
       title: 'Documents'
 
-
   @route 'settings',
     data:
       title: 'Settings'
@@ -283,6 +282,7 @@ mustBeSignedIn = ->
     if Meteor.loggingIn()
       @render("loading")
     else
+      #AccountsEntry.signInRequired(@)
       @render("accessDenied")
     @stop()
   else
@@ -314,8 +314,15 @@ googleDriveAuthorize = ->
       @stop()
 
 
+# Google Only Log In
 # this hook will run on almost all routes
 Router.before mustBeSignedIn, except: ['home', 'serverGenerateBID']
+
+# If Adding Passwords
+# this hook will run on all routes
+#Router.before mustBeSignedIn, 
+#    except: ['entrySignIn', 'entrySignUp', 'entryForgotPassword', 'entryResetPassword', 'entryStart', 'terms', 'privacy']
+
 
 Router.before setTags, except: ['serverGenerateBID']
 

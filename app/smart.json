@@ -3,7 +3,6 @@
     "bootstrap-less-3": {
       "git": "https://github.com/pfafman/meteor-bootstrap-less.git"
     },
-
     "spin": {},
     "paginated-subscription": {},
     "iron-router": {},
@@ -13,6 +12,7 @@
     "fastclick": {},
     "ionicons": {},
     "font-awesome": {},
+    "iron-router-progress": {},
     "bootstrap-3-switch-less": {
       "git": "https://github.com/pfafman/meteor-bootstrap-3-switch-less.git"
     },
@@ -22,6 +22,8 @@
     "owl-carousel": {
       "git": "https://github.com/pfafman/meteor-owl-carousel.git"
     },
-    "iron-router-progress": {}
+    "accounts-entry": {
+      "git": "https://github.com/pfafman/meteor-accounts-entry.git"
+    }
   }
 }

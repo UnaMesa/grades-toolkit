@@ -3,7 +3,8 @@
     {{> docs}}
 </template>
 
-<template name="docs">
+<template name="gdocs">
+    <!-- OLD Google Docs  NOT IN USE!!!-->
     {{#if authorized}}
       {{> gDrive}}
     {{else}}
@@ -21,4 +22,20 @@
         {{/if}}
       </div>
     {{/if}}
+</template>
+
+
+
+<template name="docs">
+    <div class="containter text-center">
+        <h4>
+            <a href="#">Doc Link 1</a>
+        </h4>
+        <h4>
+            <a href="#">Doc Link 2</a>
+        </h4>
+        <h4>
+            <a href="#">Doc Link 3</a>
+        </h4>
+    </div>
 </template>
