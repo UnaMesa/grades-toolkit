@@ -17,6 +17,6 @@ passenger start --port 80 --user ubuntu --environment production --daemonize
 
 #To stop Passenger Standalone, run:                                                                                                                                  
 #                                                                                                                                                                    
-#   sudo passenger stop --pid-file /usr/local/grades-toolkit/app/tmp/pids/passenger.80.pid
+#   sudo passenger stop --pid-file /home/ubuntu/grades-toolkit/app/tmp/pids/passenger.80.pid
 #                                                                                                                                            
 
