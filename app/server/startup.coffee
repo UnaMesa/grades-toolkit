@@ -4,6 +4,7 @@
 Meteor.startup ->
     console.log("Server Startup")
 
+    ###
     # Update cases with no tag
     Cases.find(
         "tag":
@@ -19,8 +20,9 @@ Meteor.startup ->
                 console.log("Error adding tag", error)
             else
                 console.log("Adding Tag successful")
+    ###
 
-
+    ###
     Meteor.users.find().forEach (rec) ->
         console.log('user', rec.profile.name, rec.tag)
         if rec.tag?[0] is '#'
@@ -33,6 +35,7 @@ Meteor.startup ->
                     console.log("Error changing user tag", error)
                 else
                     console.log("Adding user tag successful")
+    ###
 
     #gDrive.getFileList()
     #console.log(gDrive.fileList())  # Will be null till callback
@@ -41,7 +44,7 @@ Meteor.startup ->
 
     # Do with a push notification from Google but requires a valie SSL cert!!!
     # Check the spreadsheet every N seconds 
-    familyCheckIntervalId = Meteor.setInterval(gDrive.checkFamilyList, 10000)
+    familyCheckIntervalId = Meteor.setInterval(gDrive.checkFamilyList, 60000)
 
 
     #
