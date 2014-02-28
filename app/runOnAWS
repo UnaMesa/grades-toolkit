@@ -20,5 +20,5 @@ export ROOT_URL='http://grades.sharedrecords.org/'
 #   sudo passenger stop --pid-file /home/bia/src/bia-website/app/tmp/pids/passenger.80.pid                                                                                                                                             
 
 # Old way
-meteor run --production
-#--release 0.7.0.1 --port 80 
+meteor run --port 80 --production
+#--release 0.7.0.1
