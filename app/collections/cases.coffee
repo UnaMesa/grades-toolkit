@@ -312,7 +312,7 @@ Meteor.methods
         try   
             caseId = Cases.insert(theCase)
         catch error
-            console.log("Error on new case insert", error, Cases, Cases.simpleSchema().namedContext?().invalidKeys?())
+            console.log("Error on new case insert", error)
             result =
                 error: 
                     reason: "Error on new case insert"
