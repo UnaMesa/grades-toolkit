@@ -15,8 +15,7 @@ export ROOT_URL='http://grades.sharedrecords.org/'
 # application under.  Using ec2-user for now probably should switch to something else
 passenger start --port 80 --user ubuntu --environment production --release 0.7.2-rc1 --daemonize 
 
-#To stop Passenger Standalone, run:                                                                                                                                  
-#                                                                                                                                                                    
-#   sudo passenger stop --pid-file /home/ubuntu/grades-toolkit/app/tmp/pids/passenger.80.pid
-#                                                                                                                                            
+echo " To stop passenger run:"                                                                                                                                                                 
+echo "    sudo passenger stop --pid-file /home/ubuntu/grades-toolkit/app/tmp/pids/passenger.80.pid"
+                                                                                                                                           
 
