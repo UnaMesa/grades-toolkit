@@ -6,7 +6,7 @@
 
 # Meteor Environment Variables
 export MONGO_URL='mongodb://localhost:27017/grades'
-export ROOT_URL='http://grades.sharedrecords.org/'
+export ROOT_URL='https://grades.sharedrecords.org/'
 
 
 # Start Passenger Standalone in daemonized mode. Passenger will be started as
