@@ -18,7 +18,8 @@ CERT_DIR='/home/ubuntu/cert'
 SSL_CERT_LINE="--ssl-certificate $CERT_DIR/grades.sharedrecords.org.cert" 
 SSL_KEY_LINE="--ssl-certificate-key $CERT_DIR/grades.sharedrecords.org.key"
 
-passenger start --port 80 --ssl --ssl-port 443 $SSL_CERT_LINE $SSL_KEY_LINE --user ubuntu --environment production --daemonize 
+passenger start --port 80 --ssl --ssl-port 443 $SSL_CERT_LINE $SSL_KEY_LINE --user ubuntu --environment production
+# --daemonize 
 
 echo " To stop passenger run:"                                                                                                                                                                 
 echo "    sudo passenger stop --pid-file /home/ubuntu/grades-toolkit/app/tmp/pids/passenger.80.pid"
