@@ -2,10 +2,6 @@
   "meteor": {},
   "dependencies": {
     "basePackages": {
-      "bootstrap-less-3": {
-        "git": "https://github.com/pfafman/meteor-bootstrap-less.git",
-        "branch": "master"
-      },
       "spin": {},
       "paginated-subscription": {},
       "iron-router": {},
@@ -31,14 +27,10 @@
       "accounts-entry": {
         "git": "https://github.com/pfafman/meteor-accounts-entry.git",
         "branch": "master"
-      }
+      },
+      "bootstrap3-less": {}
     },
     "packages": {
-      "bootstrap-less-3": {
-        "git": "https://github.com/pfafman/meteor-bootstrap-less.git",
-        "branch": "master",
-        "commit": "669752f8be8d834cbe9b842c0eebd3b62c26d295"
-      },
       "spin": {
         "git": "https://github.com/SachaG/meteor-spin.git",
         "tag": "v0.2.2",
@@ -66,8 +58,8 @@
       },
       "collection2": {
         "git": "https://github.com/aldeed/meteor-collection2.git",
-        "tag": "v0.3.8",
-        "commit": "69aff2a21ba3c382f915e1f9dbcca2ad38edb6d5"
+        "tag": "v0.3.11",
+        "commit": "7e970671305657678e8508d8107d5e6c5e158559"
       },
       "fastclick": {
         "git": "https://github.com/percolatestudio/meteor-fastclick",
@@ -76,8 +68,8 @@
       },
       "ionicons": {
         "git": "https://github.com/Pagebakers/meteor-ionicons.git",
-        "tag": "v1.3.3",
-        "commit": "782f9b99b098bfd1f82f36f9142e70cbbcc7e7e3"
+        "tag": "v1.4.1",
+        "commit": "c3c07eba87d42ef900c9c61323ce4499bdce3204"
       },
       "font-awesome": {
         "git": "https://github.com/nate-strauser/meteor-font-awesome.git",
@@ -92,7 +84,7 @@
       "bootstrap-3-switch-less": {
         "git": "https://github.com/pfafman/meteor-bootstrap-3-switch-less.git",
         "branch": "master",
-        "commit": "86dad236e495b37e1b80c2df98e7da1e3e004ba2"
+        "commit": "1c357774e78514cbf160eb88d7aa237b7f52cf2f"
       },
       "photo-uploader": {
         "git": "https://github.com/pfafman/meteor-photo-uploader.git",
@@ -107,12 +99,17 @@
       "accounts-entry": {
         "git": "https://github.com/pfafman/meteor-accounts-entry.git",
         "branch": "master",
-        "commit": "7ad1ce8da799ddd769a088048864d21125a5eadf"
+        "commit": "bb0becb5d068a3df98fd7bd065822a6f9f4a715f"
+      },
+      "bootstrap3-less": {
+        "git": "https://github.com/eprochasson/bootstrap3-less",
+        "tag": "v0.1.9",
+        "commit": "5c812c4d7ce72917a065f0424c3cf54e5ff2d16a"
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.2.39",
-        "commit": "02afc77cba60ce5829e453567ebac76e4b69bc81"
+        "tag": "v0.2.43",
+        "commit": "12ae1551c3fc6aec242525423db436e319e79bdf"
       },
       "just-i18n": {
         "git": "https://github.com/subhog/meteor-just-i18n.git",

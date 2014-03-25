@@ -1,8 +1,5 @@
 {
   "packages": {
-    "bootstrap-less-3": {
-      "git": "https://github.com/pfafman/meteor-bootstrap-less.git"
-    },
     "spin": {},
     "paginated-subscription": {},
     "iron-router": {},
@@ -24,6 +21,7 @@
     },
     "accounts-entry": {
       "git": "https://github.com/pfafman/meteor-accounts-entry.git"
-    }
+    },
+    "bootstrap3-less": {}
   }
 }

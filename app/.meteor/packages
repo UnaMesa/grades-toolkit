@@ -18,7 +18,6 @@ fastclick
 http
 google-server-auth
 font-awesome
-bootstrap-less-3
 owl-carousel
 iron-router-progress
 cryptojs
@@ -29,3 +28,4 @@ accounts-entry
 accounts-password
 service-configuration
 force-ssl
+bootstrap3-less

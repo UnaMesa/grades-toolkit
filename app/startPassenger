@@ -18,5 +18,8 @@ passenger start --user ubuntu
 # --daemonize 
 
 echo " To stop passenger run:"                                                                                                                                                                 
+echo "    sudo passenger stop"
+echo "  or "
 echo "    sudo passenger stop --pid-file /home/ubuntu/grades-toolkit/app/tmp/pids/passenger.80.pid"
-                                                                                                                                           
+
+
