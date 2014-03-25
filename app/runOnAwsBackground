@@ -7,7 +7,7 @@
 # Meteor Environment Variables
 export MONGO_URL='mongodb://localhost:27017/grades'
 export ROOT_URL='https://grades.sharedrecords.org/'
-
+export MONGO_OPLOG_URL=mongodb://oplogger:PasswordForOplogger@localhost/local?authSource=admin
 
 # Start Passenger Standalone in daemonized mode. Passenger will be started as
 # root when run from this file, so we also tell it to drop its privileges to a
