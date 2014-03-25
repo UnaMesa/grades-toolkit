@@ -3,6 +3,6 @@
   "environment": "production",
   "ssl": true,
   "ssl_port": 443,
-  "ssl_certificate": "/home/ubuntu/cert/grades.sharedrecords.org.cert",
+  "ssl_certificate": "/home/ubuntu/cert/grades.sharedrecords.org.chained.cert",
   "ssl_certificate_key": "/home/ubuntu/cert/grades.sharedrecords.org.key"
 }
