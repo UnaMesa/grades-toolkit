@@ -93,15 +93,19 @@
     <li class="list-group-item">
         {{#if isaFolder}}
             <a class="folder" href="#">
+                <img src="{{iconLink}}"/>
+                <span>{{title}}</span>
+            </a>
         {{else}}
             {{#if testingOk}}
-            <button class="btn btn-link btn-xs read-file"><i class="fa fa-stethoscope"></i></button>
+                <button class="btn btn-link btn-xs read-file"><i class="fa fa-stethoscope"></i></button>
             {{/if}}
             <a target="_blank" href="{{alternateLink}}">
+                <img src="{{iconLink}}"/>
+                <span>{{title}}</span>
+            </a>
         {{/if}}
-        <img src="{{iconLink}}"/>
-        <span>{{title}}</span>
-        </a>
+            
         <span class="pull-right">
             {{#if deleteOk}}
             <a class="delete-file" href="#">

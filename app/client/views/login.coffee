@@ -4,8 +4,9 @@ demoWidth = 400
 
 Template.login.helpers
     "doDemoLaunch": ->
-        console.log("doDemoLaunch", window.innerWidth, window.innerHeight)
-        not /mobile/i.test(navigator.userAgent) and (window.innerWidth > demoWidth or window.innerHeight > demoHeight)
+        false
+        #console.log("doDemoLaunch", window.innerWidth, window.innerHeight)
+        #not /mobile/i.test(navigator.userAgent) and (window.innerWidth > demoWidth or window.innerHeight > demoHeight)
 
 Template.login.events
     "click #login": (e, tmpl) ->

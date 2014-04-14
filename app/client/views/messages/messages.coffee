@@ -16,11 +16,11 @@ scrollToBottomOk = false
 @messageFilter = ->
     filter = {}
     if Session.get('messageTagFilter')?
-            filter = tags:
-                $elemMatch:
-                    type: Session.get('messageTagFilter')
-            if Session.get('currentRecordId')?
-                filter.tags.$elemMatch._id = Session.get('currentRecordId')
+        filter = tags:
+            $elemMatch:
+                type: Session.get('messageTagFilter')
+        if Session.get('currentRecordId')?
+            filter.tags.$elemMatch._id = Session.get('currentRecordId')
     filter
 
 

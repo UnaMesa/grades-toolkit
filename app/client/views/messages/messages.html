@@ -1,6 +1,4 @@
 
-
-
 <template name="messages">
     <div class="message-center clearfix">
       {{> messagesList}}
@@ -51,15 +49,13 @@
     {{else}}
         <i class="fa fa-user fa-5x author-no-picture"></i>
     {{/if}}
-    <strong>{{author}}</strong> <span class="flat-tag text-muted"><em>{{authorTag}}</em></muted>
+    <strong>{{author}}</strong> <span class="flat-tag text-muted"><em>{{authorTag}}</em></span>
 </template>
 
 <template name="tag">
-    {{#constant}}
     <a href='{{pathFor path}}'>
         <span class='label label-default tag-{{type}}'>{{name}} <em>{{tag}}</em></span>
     </a>
-    {{/constant}}
 </template>
 
 

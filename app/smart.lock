@@ -43,8 +43,8 @@
       },
       "iron-router": {
         "git": "https://github.com/EventedMind/iron-router.git",
-        "tag": "v0.6.4",
-        "commit": "927bbaed1b87894fb6fb70807f74ff3a5bd89f29"
+        "tag": "v0.7.0",
+        "commit": "05f34bc48c4cad9fdaa366c1ddcabe6980232ece"
       },
       "moment": {
         "git": "https://github.com/acreeger/meteor-moment.git",
@@ -78,8 +78,8 @@
       },
       "iron-router-progress": {
         "git": "https://github.com/Multiply/iron-router-progress.git",
-        "tag": "v0.2.0",
-        "commit": "ce730d1d26feadb7c75ea25f22c5bfdb0c549a8b"
+        "tag": "v0.3.1",
+        "commit": "3f7900feb4bb70a1289b39a1fdcd1f438c0335b3"
       },
       "bootstrap-3-switch-less": {
         "git": "https://github.com/pfafman/meteor-bootstrap-3-switch-less.git",
@@ -99,27 +99,32 @@
       "accounts-entry": {
         "git": "https://github.com/pfafman/meteor-accounts-entry.git",
         "branch": "master",
-        "commit": "bb0becb5d068a3df98fd7bd065822a6f9f4a715f"
+        "commit": "c2969e2f7ec02a970765ed2fec5c859043c7f1e5"
       },
       "bootstrap3-less": {
         "git": "https://github.com/eprochasson/bootstrap3-less",
         "tag": "v0.1.9",
         "commit": "5c812c4d7ce72917a065f0424c3cf54e5ff2d16a"
       },
+      "blaze-layout": {
+        "git": "https://github.com/EventedMind/blaze-layout.git",
+        "tag": "v0.2.2",
+        "commit": "8bc53798fe5965669ae67c72f91829fcfdceabfd"
+      },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.2.43",
-        "commit": "12ae1551c3fc6aec242525423db436e319e79bdf"
+        "tag": "v0.2.46",
+        "commit": "30b5d3e08433fbbfe49f09845559bf3ca0ab9101"
       },
       "just-i18n": {
         "git": "https://github.com/subhog/meteor-just-i18n.git",
-        "tag": "v0.1.1",
-        "commit": "ce88ac66c0dc107dc2da93ce152616115838101f"
+        "tag": "v0.2.4",
+        "commit": "91decfcf5b3b5e67f202a67658350b862330bf3d"
       },
       "accounts-t9n": {
-        "git": "https://github.com/softwarerero/meteor-accounts-t9n.git",
-        "tag": "v0.0.2",
-        "commit": "408e3a037114cb72163073110e2121e3d548c1a2"
+        "git": "https://github.com/Differential/meteor-accounts-t9n.git",
+        "branch": "fix-just-i18n",
+        "commit": "0e3f96d189b8cac3813b1f5a20a59115881f628d"
       }
     }
   }

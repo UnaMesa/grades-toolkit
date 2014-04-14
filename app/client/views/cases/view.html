@@ -4,7 +4,7 @@
         <div class="record well well-sm">
 
             {{> caseSummary}}
-            
+
             <div class="mou-bid-btns">
                 {{#if stayAtCurrentSchool}}
                     <a class="btn btn-primary btn-xs check-btn" href={{pathFor 'mou'}}>
@@ -30,7 +30,9 @@
                             Case Details
                         </button>
 
-                        <a id="edit-link" class="btn btn-link btn-xs pull-right" href="{{pathFor 'editCase' this}}"><i class="fa fa-edit fa-2x"></i></a>
+                        <a id="edit-link" class="btn btn-link btn-xs pull-right" href="{{pathFor 'editCase'}}">
+                            <i class="fa fa-edit fa-2x"></i>
+                        </a>
                     </h4>
                 </div>
 
@@ -39,12 +41,12 @@
                         <table class="table table-striped table-condensed">
                             <tbody>
                             {{#each case}}  
-                            <tr class="">
-                                <td class="td-key"><strong>{{key}} :</strong></td>
-                                <td class="td-val">
-                                    <strong>{{value}}</strong>
-                                </td>
-                            </tr>
+                                <tr class="">
+                                    <td class="td-key"><strong>{{key}} :</strong></td>
+                                    <td class="td-val">
+                                        <strong>{{value}}</strong>
+                                    </td>
+                                </tr>
                             {{/each}}
                             </tbody>
                         </table>

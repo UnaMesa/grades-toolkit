@@ -14,22 +14,19 @@ Template.viewCase.rendered = ->
     $("#collapseMessages").on "shown.bs.collapse", ->
         messagesIn = "in"
         Meteor.defer ->
-            console.log("shown.bs.collapse")
             height =  setMessageListHeight()
             $("#collapseMessages").css("height", height + "px")
             scrollToBottom()
     $("#collapseDetails").on "hidden.bs.collapse", ->
         detailsIn = ""
         Meteor.defer ->
-            console.log("shown.bs.collapse")
             height = setMessageListHeight()
             $("#collapseMessages").css("height", height + "px")
 
 Template.viewCase.helpers
     case: ->
-        theCase = Cases.findOne(Session.get('currentRecordId'))
         caseAsArray = []
-        for key, value of theCase
+        for key, value of @
             if key in ['submitted', 'modified']
                 caseAsArray.push
                     key: key
@@ -65,7 +62,6 @@ Template.viewCase.helpers
 
 Template.viewCase.events
     "shown.bs.collapse #collapseMessages": (e)  ->
-        console.log("shown.bs.collapse")
         setMessageListHeight()
         scrollToBottom()
 

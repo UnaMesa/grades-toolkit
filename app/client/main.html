@@ -19,7 +19,7 @@
         {{/if}}
         <div id="main" class="main">
             {{> coffeeAlerts}}
-            {{yield}}
+            {{> yield}}
         </div>
         {{#if currentUser}}
           {{> navbar}}
@@ -29,5 +29,5 @@
 </template>
 
 <template name="empty">
-    {{yield}}
+    {{> yield}}
 </template>

@@ -11,10 +11,10 @@ Router.map ->
 
   @route 'home',
     path: '/'
-    before: ->
+    onBeforeAction: (pause) ->
       if not Meteor.user()
         @render("login")
-        @stop();
+        pause();
     data:
       title: 'Grades'
 
@@ -36,20 +36,24 @@ Router.map ->
 
   @route 'viewCase',
     path: 'cases/:_id'
-    before: ->
+    onBeforeAction: ->
+      console.log("viewCase:onBeforeAction", @params._id)
       Session.set('currentRecordId', @params._id)
       Session.set('messageTagFilter', 'case')
     waitOn: ->
       Meteor.subscribe('singleCase', @params._id)
     data: ->
+      console.log("viewCase:data", @params._id)
       data = Cases.findOne(@params._id)
+      if not data
+        data = {}
       data.title = "Case"
       data.goBackPath = "cases"
       data
 
   @route 'editCase',
     path: 'cases/edit/:_id'
-    before: ->
+    onBeforeAction: ->
       Session.set('currentRecordId', @params._id)
       Session.set('messageTagFilter', 'case')
     waitOn: ->
@@ -63,7 +67,7 @@ Router.map ->
   @route 'editCasePhoto',
     path: 'cases/photo/edit/:_id'
     template: 'photoEditor'
-    before: ->
+    onBeforeAction: ->
       Session.set('currentRecordId', @params._id)
       Session.set('messageTagFilter', 'case')
     waitOn: ->
@@ -76,7 +80,7 @@ Router.map ->
 
   @route 'caseNotes',
     path: 'cases/notes/:_id'
-    before: ->
+    onBeforeAction: ->
       Session.set('currentRecordId', @params._id)
       Session.set('messageTagFilter', 'case')
     waitOn: ->
@@ -89,7 +93,7 @@ Router.map ->
 
   @route 'bid',
     path: "cases/bid/:_id"
-    before: ->
+    onBeforeAction: ->
       Session.set('currentRecordId', @params._id)
       Session.set("bidAttendees", null)
     waitOn: ->
@@ -103,7 +107,7 @@ Router.map ->
   @route 'generatedBid',
     path: "cases/bid/:_id/generated"
     layoutTemplate: 'empty'
-    before: ->
+    onBeforeAction: ->
       Session.set('currentRecordId', @params._id)
       Session.set("bidAttendees", null)
     waitOn: ->
@@ -115,7 +119,7 @@ Router.map ->
 
   @route 'mou',
     path: "cases/mou/:_id"
-    before: ->
+    onBeforeAction: ->
       Session.set('currentRecordId', @params._id)
     waitOn: ->
       Meteor.subscribe('singleCase', @params._id)
@@ -127,7 +131,7 @@ Router.map ->
 
   @route 'generatedMou',
     path: "cases/mou/:_id/generated"
-    before: ->
+    onBeforeAction: ->
       Session.set('currentRecordId', @params._id)
     waitOn: ->
       Meteor.subscribe('singleCase', @params._id)
@@ -143,7 +147,7 @@ Router.map ->
 
   @route 'viewFamily',
     path: 'families/:_id'
-    before: ->
+    onBeforeAction: ->
       Session.set('currentRecordId', @params._id)
       Session.set('messageTagFilter', 'family')
     waitOn: ->
@@ -156,7 +160,7 @@ Router.map ->
 
   @route 'editFamily',
     path: 'families/edit/:_id'
-    before: ->
+    onBeforeAction: ->
       Session.set('currentRecordId', @params._id)
       Session.set('messageTagFilter', 'family')
     waitOn: ->
@@ -170,7 +174,7 @@ Router.map ->
   @route 'editFamilyPhoto',
     path: 'families/photo/edit/:_id'
     template: 'photoEditor'
-    before: ->
+    onBeforeAction: ->
       Session.set('currentRecordId', @params._id)
       Session.set('messageTagFilter', 'family')
     waitOn: ->
@@ -184,7 +188,7 @@ Router.map ->
   @route 'familyPhotos',
     path: 'family/:_id/photos'
     #layoutTemplate: 'layoutInverse'
-    before: ->
+    onBeforeAction: ->
       $('body')?.addClass("photoBody")
       Session.set('currentRecordId', @params._id)
       Session.set('messageTagFilter', 'family')
@@ -200,7 +204,7 @@ Router.map ->
   @route 'casePhotos',
     path: 'case/:_id/photos'
     #layoutTemplate: 'layoutInverse'
-    before: ->
+    onBeforeAction: ->
       $('body')?.addClass("photoBody")
       Session.set('currentRecordId', @params._id)
       Session.set('messageTagFilter', 'case')
@@ -220,7 +224,7 @@ Router.map ->
 
   @route 'viewContact',
     path: 'contacts/:_id'
-    before: ->
+    onBeforeAction: ->
       Session.set('currentRecordId', @params._id)
       Session.set('messageTagFilter', 'user')
     #waitOn: ->
@@ -277,14 +281,14 @@ Router.map ->
       @response.end()
       console.log("Generated BID for ", @params._id, @userId)
 
-mustBeSignedIn = ->
+mustBeSignedIn = (pause) ->
   if not user = Meteor.user()
     if Meteor.loggingIn()
       @render("loading")
     else
       #AccountsEntry.signInRequired(@)
       @render("accessDenied")
-    @stop()
+    pause()
   else
     # Token Testing  REMOVE FOR FLIGHT
     console.log('clientToken expires_in', gapi?.auth?.getToken?()?.expires_in)
@@ -306,28 +310,28 @@ cleanUp = ->
   Session.set('messageTagFilter', null)
   Session.set('currentRecordId', null)
 
-googleDriveAuthorize = ->
+googleDriveAuthorize = (pause) ->
   #console.log("Check google auth", gDrive)
   if Meteor.user()
     if not gDrive.userDeclined and not gDrive.authorized() and not gDrive.authorizing()
       @render("googleAuth")
-      @stop()
+      pause()
 
 
 # Google Only Log In
 # this hook will run on almost all routes
-Router.before mustBeSignedIn, except: ['home', 'serverGenerateBID']
+Router.onBeforeAction mustBeSignedIn, except: ['home', 'serverGenerateBID']
 
 # If Adding Passwords
 # this hook will run on all routes
-#Router.before mustBeSignedIn, 
+#Router.onBeforeAction mustBeSignedIn, 
 #    except: ['entrySignIn', 'entrySignUp', 'entryForgotPassword', 'entryResetPassword', 'entryStart', 'terms', 'privacy']
 
 
-Router.before setTags, except: ['serverGenerateBID']
+Router.onBeforeAction setTags, except: ['serverGenerateBID']
 
 # this hook will run on all routes
-Router.before cleanUp, except: ['serverGenerateBID']
+Router.load cleanUp, except: ['serverGenerateBID']
  
 addPageTag = ->
   if Session.get('messageTagFilter')? and Session.get('currentRecordId')?
@@ -348,14 +352,14 @@ setPath = ->
   Session.set('path', location.pathname)
 
 # this hook will run on almost all routes
-#Router.after googleDriveAuthorize, except: []
+#Router.onAfterAction googleDriveAuthorize, except: []
 
-Router.after addPageTag, except: ['home','serverGenerateBID']
+Router.onAfterAction addPageTag, except: ['home','serverGenerateBID']
 
-Router.after  setPath, except: ['serverGenerateBID']
+Router.onAfterAction  setPath, except: ['serverGenerateBID']
  
 
-#Router.after ->
+#Router.onAfterAction ->
 #  addPageTag()
 ### 
   if /mobile/i.test(navigator.userAgent)
