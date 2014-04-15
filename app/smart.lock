@@ -89,7 +89,7 @@
       "photo-uploader": {
         "git": "https://github.com/pfafman/meteor-photo-uploader.git",
         "branch": "master",
-        "commit": "c5015ea038ff718357196406224b20e8098f6ae3"
+        "commit": "b73c0a9f32d33eb373746e603229e730e324c6d3"
       },
       "owl-carousel": {
         "git": "https://github.com/pfafman/meteor-owl-carousel.git",
@@ -113,8 +113,8 @@
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.2.46",
-        "commit": "30b5d3e08433fbbfe49f09845559bf3ca0ab9101"
+        "tag": "v0.2.47",
+        "commit": "d97bf419498efb560771e94a8a3e2c92db33d06d"
       },
       "just-i18n": {
         "git": "https://github.com/subhog/meteor-just-i18n.git",

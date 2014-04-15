@@ -44,9 +44,7 @@ Router.map ->
       Meteor.subscribe('singleCase', @params._id)
     data: ->
       console.log("viewCase:data", @params._id)
-      data = Cases.findOne(@params._id)
-      if not data
-        data = {}
+      data = Cases.findOne(@params._id) or {}
       data.title = "Case"
       data.goBackPath = "cases"
       data
@@ -59,7 +57,7 @@ Router.map ->
     waitOn: ->
       Meteor.subscribe('singleCase', @params._id)
     data: ->
-      data = Cases.findOne(@params._id)
+      data = Cases.findOne(@params._id) or {}
       data.title = "Edit Case"
       data.goBackPath = "viewCase"
       data
@@ -73,7 +71,7 @@ Router.map ->
     waitOn: ->
       Meteor.subscribe('singleCase', @params._id)
     data: ->
-      data = Cases.findOne(@params._id)
+      data = Cases.findOne(@params._id) or {}
       data.title = "Edit Photo"
       data.goBackPath = "editCase"
       data
@@ -86,8 +84,9 @@ Router.map ->
     waitOn: ->
       Meteor.subscribe('singleCase', @params._id)
     data: ->
-      data = Cases.findOne(@params._id)
-      data.title = "#{data.name} Case Notes"
+      data = Cases.findOne(@params._id) or {}
+      name = data?.name
+      data.title = "#{name} Case Notes"
       data.goBackPath = "cases"
       data
 
@@ -99,7 +98,7 @@ Router.map ->
     waitOn: ->
       Meteor.subscribe('singleCase', @params._id)
     data: ->
-      data = Cases.findOne(@params._id)
+      data = Cases.findOne(@params._id) or {}
       data.title = "BID for #{data.name}"
       data.goBackPath = "viewCase"
       data
@@ -113,7 +112,7 @@ Router.map ->
     waitOn: ->
       Meteor.subscribe('singleCase', @params._id)
     data: ->
-      data = Cases.findOne(@params._id)
+      data = Cases.findOne(@params._id) or {}
       data.title = "BID for #{data.name}"
       data
 
@@ -124,7 +123,7 @@ Router.map ->
     waitOn: ->
       Meteor.subscribe('singleCase', @params._id)
     data: ->
-      data = Cases.findOne(@params._id)
+      data = Cases.findOne(@params._id) or {}
       data.title = "MOU for #{data.name}"
       data.goBackPath = "viewCase"
       data
@@ -136,7 +135,7 @@ Router.map ->
     waitOn: ->
       Meteor.subscribe('singleCase', @params._id)
     data: ->
-      data = Cases.findOne(@params._id)
+      data = Cases.findOne(@params._id) or {}
       data.title = "MOU for #{data.name}"
       data.goBackPath = "viewCase"
       data
@@ -153,7 +152,7 @@ Router.map ->
     waitOn: ->
       Meteor.subscribe('singleFamily', @params._id)
     data: ->
-      data = Families.findOne(@params._id)
+      data = Families.findOne(@params._id) or {}
       data.title = "Family"
       data.goBackPath = "families"
       data
@@ -166,7 +165,7 @@ Router.map ->
     waitOn: ->
       Meteor.subscribe('singleFamily', @params._id)
     data: ->
-      data = Families.findOne(@params._id)
+      data = Families.findOne(@params._id) or {}
       data.title = "Edit Family"
       data.goBackPath = "viewFamily"
       data
@@ -180,7 +179,7 @@ Router.map ->
     waitOn: ->
       Meteor.subscribe('singleFamily', @params._id)
     data: ->
-      data = Families.findOne(@params._id)
+      data = Families.findOne(@params._id) or {}
       data.title = "Edit Photo"
       data.goBackPath = "editFamily"
       data
@@ -196,7 +195,7 @@ Router.map ->
       Meteor.subscribe('singleFamily', @params._id)
       #@FamilyPhotosHandle = Meteor.subscribeWithPagination('familyPhotos', @params._id, 20)
     data: ->
-      data = Families.findOne(@params._id)
+      data = Families.findOne(@params._id) or {}
       data.title = "Family Photos"
       data.goBackPath = "viewFamily"  # Got to get _id into this....
       data
@@ -212,7 +211,7 @@ Router.map ->
       Meteor.subscribe('singleCase', @params._id)
       #@CasePhotosHandle = Meteor.subscribeWithPagination('casePhotos', @params._id, 20)
     data: ->
-      data = Cases.findOne(@params._id)
+      data = Cases.findOne(@params._id) or {}
       data.title = "Case Photos"
       data.goBackPath = "viewCase"  # Got to get _id into this....
       data
@@ -230,7 +229,7 @@ Router.map ->
     #waitOn: ->
     #  Meteor.subscribe('singleUser', @params._id)
     data: ->
-      data = Meteor.users.findOne(@params._id)
+      data = Meteor.users.findOne(@params._id) or {}
       data.title = data.profile.name
       data.goBackPath = "contacts"
       data
@@ -331,7 +330,7 @@ Router.onBeforeAction mustBeSignedIn, except: ['home', 'serverGenerateBID']
 Router.onBeforeAction setTags, except: ['serverGenerateBID']
 
 # this hook will run on all routes
-Router.load cleanUp, except: ['serverGenerateBID']
+Router.onRun cleanUp, except: ['serverGenerateBID']
  
 addPageTag = ->
   if Session.get('messageTagFilter')? and Session.get('currentRecordId')?

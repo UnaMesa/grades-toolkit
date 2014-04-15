@@ -4,12 +4,12 @@
 
 @Families = new Meteor.Collection('families')
 
-
 @FamilyPhotos = new Meteor.Collection('familyPhotos')
 
 Meteor.methods
     
     insertFamilyPhoto: (photo, options) ->
+        console.log("insertFamilyPhoto", options)
         user = Meteor.user()
 
         # ensure the user is logged in

@@ -1,24 +1,24 @@
 
-casePhotoUploader = null
 
-CasePhotosHandle = null
+casePhotoUploader = null
+CasePhotosHandle  = null
 
 Template.casePhotos.created = ->
     $('#main-container').addClass('main-container-inverse')
     $('body').addClass("photoBody")
-    if not casePhotoUploader?
-        casePhotoUploader = new PhotoUploadHandler
-            serverUploadMethod: "insertCasePhoto"
-            takePhotoButtonLabel: "Add a Photo"
-            uploadButtonLabel: "Save Photo"
-            #resizeMaxHeight: 300
-            #resizeMaxWidth: 320
-            editTitle: true
-            editCaption: true
-            serverUploadOptions: 
-                caseId: Session.get('currentRecordId')
-            callback: (error, result) ->
-                console.log("Photo Upload", error, result)
+    
+    PhotoUploader.setOptions
+        serverUploadMethod: "insertCasePhoto"
+        takePhotoButtonLabel: "Add a Photo"
+        uploadButtonLabel: "Save Photo"
+        resizeMaxHeight: 400
+        resizeMaxWidth: 320
+        editTitle: true
+        editCaption: true
+        serverUploadOptions: 
+            caseId: Session.get('currentRecordId')
+        callback: (error, result) ->
+            console.log("Photo Upload", error, result)
     CasePhotosHandle = Meteor.subscribeWithPagination('casePhotos', Session.get('currentRecordId'), 20)
 
 Template.casePhotos.destroyed = ->
@@ -33,19 +33,16 @@ Template.casePhotos.rendered = ->
     #CasePhotosHandle = Meteor.subscribeWithPagination('casePhotos', Session.get('currentRecordId'), 20)
 
 
-    casePhotoUploader.setOptions
-        serverUploadOptions: 
-            caseId: Session.get('currentRecordId')
-
+carouselInit = ->
     if CasePhotosHandle?.ready()
         $(".owl-carousel").owlCarousel
             #navigation : true # Show next and prev buttons
             slideSpeed : 300
             paginationSpeed : 400
             singleItem:true
+            transitionStyle : "fade"
             #itemsScaleUp:true
             autoHeight: true
-            transitionStyle : "fade"
             lazyLoad: true
             lazyFollow: true
             lazyLoadCallback: (img) ->
@@ -58,11 +55,9 @@ Template.casePhotos.rendered = ->
 Template.casePhotos.helpers
 
     imagesReady: ->
-        console.log("imagesReady", CasePhotosHandle, CasePhotos)
         CasePhotosHandle?.ready()
 
     haveImages: ->
-        console.log("haveImages")
         CasePhotos.find(
             case_id: Session.get('currentRecordId')
         ).count() > 0
@@ -73,11 +68,18 @@ Template.casePhotos.helpers
         ).count()
 
     images: ->
-        CasePhotos.find
-            case_id: Session.get('currentRecordId')
-        ,
-            fields:
-                src: 0
-            sort:
-                submitted: -1
+        if CasePhotosHandle?.ready()
+            if $(".owl-carousel").data?('owlCarousel')?
+                $(".owl-carousel").data('owlCarousel').destroy()
+            Meteor.defer ->
+                carouselInit()
+                
+            pc = CasePhotos.find
+                    case_id: Session.get('currentRecordId')
+                ,
+                    fields:
+                        src: 0
+                    sort:
+                        submitted: -1
+            pc.fetch()
 
