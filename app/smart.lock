@@ -11,7 +11,6 @@
       "fastclick": {},
       "ionicons": {},
       "font-awesome": {},
-      "iron-router-progress": {},
       "bootstrap-3-switch-less": {
         "git": "https://github.com/pfafman/meteor-bootstrap-3-switch-less.git",
         "branch": "master"
@@ -75,11 +74,6 @@
         "git": "https://github.com/nate-strauser/meteor-font-awesome.git",
         "tag": "v4.0.3",
         "commit": "61e9361384347547ae144f8228faa4deffda23db"
-      },
-      "iron-router-progress": {
-        "git": "https://github.com/Multiply/iron-router-progress.git",
-        "tag": "v0.3.1",
-        "commit": "3f7900feb4bb70a1289b39a1fdcd1f438c0335b3"
       },
       "bootstrap-3-switch-less": {
         "git": "https://github.com/pfafman/meteor-bootstrap-3-switch-less.git",

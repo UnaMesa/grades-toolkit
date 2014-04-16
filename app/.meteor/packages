@@ -18,7 +18,6 @@ http
 google-server-auth
 font-awesome
 owl-carousel
-iron-router-progress
 cryptojs
 photo-uploader
 jsencrypt

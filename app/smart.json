@@ -9,7 +9,6 @@
     "fastclick": {},
     "ionicons": {},
     "font-awesome": {},
-    "iron-router-progress": {},
     "bootstrap-3-switch-less": {
       "git": "https://github.com/pfafman/meteor-bootstrap-3-switch-less.git"
     },
