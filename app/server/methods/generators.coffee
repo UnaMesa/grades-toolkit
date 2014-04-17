@@ -118,11 +118,14 @@ Meteor.methods
               console.log("wkhtmltopdf:", data)
 
             toPdf.stderr.setEncoding('utf8');
+            toPdfStderr = ""
             toPdf.stderr.on 'data', (data) ->
-              console.log("wkhtmltopdf error:", data)
+              toPdfStderr += data
 
             toPdf.on 'close', (code) ->
               console.log("wkhtmltopdf exit:", code)
+              if code isnt 0
+                console.log("wkhtmltopdf error:", toPdfStderr)
 
       else
         console.log("generatedBid: Could not generate html for bid. id:#{id}")
