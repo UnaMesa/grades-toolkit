@@ -112,7 +112,7 @@ Meteor.methods
           if err
             console.log("Error writing BID #{htmlFile}", err)
           else 
-            toPdf = child.spawn "/usr/bin/wkhtmltopdf", [htmlFile, pdfFile]
+            toPdf = child.spawn "wkhtmltopdf", [htmlFile, pdfFile]
             toPdf.stdout.setEncoding('utf8');
             toPdf.stdout.on 'data', (data) ->
               console.log("wkhtmltopdf:", data)
