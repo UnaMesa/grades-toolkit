@@ -107,8 +107,8 @@
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.2.47",
-        "commit": "d97bf419498efb560771e94a8a3e2c92db33d06d"
+        "tag": "v0.2.48",
+        "commit": "1bc4aec5d6189093b8c0efbd32e761946bcd4a5b"
       },
       "just-i18n": {
         "git": "https://github.com/subhog/meteor-just-i18n.git",

@@ -43,35 +43,36 @@ Template.generatedBid.helpers
         considerations
 
     stayAtCurrentSchool: ->
-        @BID.teamRecommendation is 'stayAtCurrentSchool'
+        console.log("stayAtCurrentSchool", @BID)
+        @BID?.teamRecommendation is 'stayAtCurrentSchool'
         
     moveToNewSchool: ->
-        @BID.teamRecommendation is 'moveToNewSchool'
+        @BID?.teamRecommendation is 'moveToNewSchool'
 
     teamDisagrees: ->
-        @BID.teamRecommendation is 'teamDisagrees'
+        @BID?.teamRecommendation is 'teamDisagrees'
 
 
     currentSchool: ->
-        if @BID.teamRecommendation is 'stayAtCurrentSchool'
+        if @BID?.teamRecommendation is 'stayAtCurrentSchool'
             @BID.schoolToAttend
         else
             " &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; "
 
     currentSUSD: ->
-        if @BID.teamRecommendation is 'stayAtCurrentSchool'
+        if @BID?.teamRecommendation is 'stayAtCurrentSchool'
             @BID.susd
         else
             " &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; "
 
     newSchool: ->
-        if @BID.teamRecommendation is 'moveToNewSchool'
+        if @BID?.teamRecommendation is 'moveToNewSchool'
             @BID.schoolToAttend
         else
             " &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; "
 
     newSUSD: ->
-        if @BID.teamRecommendation is 'moveToNewSchool'
+        if @BID?.teamRecommendation is 'moveToNewSchool'
             @BID.susd
         else
             " &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; "
