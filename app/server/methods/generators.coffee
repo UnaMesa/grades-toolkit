@@ -9,7 +9,6 @@ UPLOAD_DIR = '/var/spool/grades/'
 
 
 documentsUsedForBid = (rec) ->
-    console.log("documentsUsedForBid", BID.documentsUsed, rec.BID?.documentsUsed)
     vals = []
     for val in BID.documentsUsed
          data =
