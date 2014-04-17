@@ -117,9 +117,9 @@ Meteor.methods
             toPdf.stdout.on 'data', (data) ->
               console.log("wkhtmltopdf:", data)
 
-            #toPdf.stderr.setEncoding('utf8');
-            #toPdf.stderr.on 'data', (data) ->
-            #  console.log("wkhtmltopdf error:", data)
+            toPdf.stderr.setEncoding('utf8');
+            toPdf.stderr.on 'data', (data) ->
+              console.log("wkhtmltopdf error:", data)
 
             toPdf.on 'close', (code) ->
               console.log("wkhtmltopdf exit:", code)
