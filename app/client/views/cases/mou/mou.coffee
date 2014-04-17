@@ -31,6 +31,7 @@ saveMou = (routeOnSave = false) ->
         
                 switch routeOnSave
                     when 'generatedMou'
+                        Meteor.call('generateMou', Session.get('currentRecordId'))
                         newWindow = window.open Router.routes[routeOnSave].path
                             _id: Session.get('currentRecordId')
 

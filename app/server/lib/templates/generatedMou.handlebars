@@ -1,0 +1,227 @@
+<html>
+<head>
+    <title>BID for {{name}} {{bidDate}}</title>
+
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+<style type="text/css">
+
+html {
+  //max-width: 500px;
+  //margin: 0 auto;
+  height: 100%;
+  width: 100%;
+  position: relative; /* Fix for absolute positioning */
+}
+
+body {
+    padding-top: 36px; 
+    padding-bottom: 55px;
+    background-color: #fff; 
+    //height: 100%;
+    //width: 100%;
+    font-size: 14px;
+    //height:5000px;
+}
+
+p {
+    font-size: 14px;
+}
+
+.nobreak {
+    page-break-inside: avoid;
+}
+
+tr {
+    page-break-inside: avoid;
+}
+
+table {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.bidForm {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  /* Everything but the jumbotron gets side spacing for mobile first views */
+  /* Custom page header */
+  /* Make the masthead heading the same height as the navigation */
+  /* Custom page footer */
+  /* Customize container */
+  /* Main marketing message and sign up button */
+  /* Supporting marketing content */
+  /* Responsive: Portrait tablets and up */
+}
+.bidForm .header,
+.bidForm .marketing,
+.bidForm .footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.bidForm .header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  padding-bottom: 19px;
+}
+.bidForm .footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+@media (min-width: 768px) {
+  .bidForm .container {
+    max-width: 730px;
+  }
+}
+.bidForm .container-narrow > hr {
+  margin: 30px 0;
+}
+.bidForm .jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+.bidForm .jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+.bidForm .marketing {
+  margin: 40px 0;
+}
+.bidForm .marketing p + h4 {
+  margin-top: 28px;
+}
+@media screen and (min-width: 768px) {
+  .bidForm {
+    /* Remove the padding we set earlier */
+    /* Space out the masthead */
+    /* Remove the bottom border on the jumbotron for visual effect */
+  }
+  .bidForm .header,
+  .bidForm .marketing,
+  .bidForm .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .bidForm .header {
+    margin-bottom: 30px;
+  }
+  .bidForm .jumbotron {
+    border-bottom: 0;
+  }
+}
+.bidForm .value {
+  font-weight: bold;
+}
+.bidForm .other-docs {
+  width: 610;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #00000a;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  min-height: 30px;
+}
+.bidForm .school,
+.bidForm .susd,
+.bidForm .bidInfo {
+  font-style: italic;
+  text-decoration: underline;
+  min-width: 50px;
+}
+.bidForm .bid-rec {
+  margin-left: -17px;
+  margin-right: 5px;
+}
+
+
+
+</style>
+
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+
+</head>
+<body class="bidForm">
+
+
+  <div class="container">
+    <div class="header" style="padding-bottom: 100px;">
+      <div>
+      <span class="pull-left">
+           <img src="header.jpg">
+
+          </span>
+          <span class="pull-right">
+              Family Services <br/>
+              103 South Main Street <br/>
+              Waterbury, VT 05671-2401 <br/>
+              Phone: (802) 241-2131 <br/>
+              Fax: (802) 241-2407<br/>
+          </span>
+      </div>
+      <h3 class="text-muted">&nbsp;</h3>
+    </div>
+
+  
+    <div class="row">
+      <div class="col-lg-6">
+        <p>
+          {{today}}
+        </p>
+        <p>
+          {{MOU.schoolDistrict}} <br/>
+          {{MOU.superintendentAddress}}
+        </p>
+
+        <p>
+        Dear Superintendent:
+        </p>
+
+        <p>
+          I am writing from the Department for Children and Families to request that {{name}}, who came into state custody 
+          on {{dateOfCustody}}, maintain school placement at {{BID.schoolToAttend}}. 
+        </p>
+        <p>
+          The child has moved to the home of {{MOU.resourceFamilyName}} at {{MOU.resourceFamilyAddress}}. 
+        </p>
+        <p>
+          {{#if MOU.mothersName}}
+            This child’s mother, {{MOU.mothersName}}, lives in {{MOU.mothersTown}}. <br/>
+          {{/if}}
+          {{#if MOU.fathersName}}
+            This child’s father, {{MOU.fathersName}}, lives in {{MOU.fathersTown}}.
+          {{/if}}
+        </p>
+        <p>
+          Attached is a copy of the Best Interest Determination Evaluation Form that has been completed by input from this student’s team. This document and attachments outline the student’s educational needs and why those needs can be best met by the student remaining in their current school.
+        </p>
+        <p>
+          Thank you!
+        </p>
+        <p>
+          Sincerely,
+        </p>
+        <p>
+
+          {{username}}
+          Social Worker
+        </p>
+        <p>
+        Cc:Principal Superintendent
+        </p>
+
+
+        <hr/>
+
+        <footer>
+          <p>&copy; VTFutures 2014</p>
+        </footer>
+      </div>
+    </div>
+  </div> <!-- /container -->
+
+</body>
+</html>

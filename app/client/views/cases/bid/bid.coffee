@@ -54,7 +54,6 @@ saveBid = (routeOnSave = false, bidOverrides = {}) ->
             if routeOnSave
                 switch routeOnSave
                     when 'generatedBid'
-                        console.log(routeOnSave, window)
                         Meteor.call('generateBid', Session.get('currentRecordId'))
                         newWindow = window.open Router.routes[routeOnSave].path
                             _id: Session.get('currentRecordId')

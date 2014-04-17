@@ -89,19 +89,19 @@ Meteor.methods
 
     theCase = Cases.findOne(id)
 
-    theCase.bidDate = moment().format('lll')
-
-    theCase.documentsUsedForBid = documentsUsedForBid(theCase)
-    theCase.considerations = considerations(theCase)
-    theCase.stayAtCurrentSchool = stayAtCurrentSchool(theCase)
-    theCase.moveToNewSchool = moveToNewSchool(theCase)
-    theCase.teamDisagrees = teamDisagrees(theCase)
-    theCase.currentSchool = currentSchool(theCase)
-    theCase.currentSUSD = currentSUSD(theCase)
-    theCase.newSchool = newSchool(theCase)
-    theCase.newSUSD = newSUSD(theCase)
-
     if theCase?
+      theCase.bidDate = moment().format('lll')
+
+      theCase.documentsUsedForBid = documentsUsedForBid(theCase)
+      theCase.considerations = considerations(theCase)
+      theCase.stayAtCurrentSchool = stayAtCurrentSchool(theCase)
+      theCase.moveToNewSchool = moveToNewSchool(theCase)
+      theCase.teamDisagrees = teamDisagrees(theCase)
+      theCase.currentSchool = currentSchool(theCase)
+      theCase.currentSUSD = currentSUSD(theCase)
+      theCase.newSchool = newSchool(theCase)
+      theCase.newSUSD = newSUSD(theCase)
+
       html = Handlebars.templates['generatedBid'](theCase)
 
       if html?
@@ -132,3 +132,47 @@ Meteor.methods
   
     else
       console.log("generatedBid: Could not get case to generate bid for id:#{id}")
+
+
+
+  generateMou: (id) ->
+    console.log("generateMou", id)
+
+    theCase = Cases.findOne(id)
+    
+    if theCase?
+      
+      theCase.today = moment().format('LL')
+
+      theCase.dateOfCustody = moment(theCase.MOU.dataOfCustody).format('LL')
+      html = Handlebars.templates['generatedMou'](theCase)
+
+      if html?
+        htmlFile = UPLOAD_DIR + 'mous/' + moment().format('YYYY-MM-DD-HH-mm-ss') + '_' + id + '.html'
+        pdfFile  = UPLOAD_DIR + 'mous/' + moment().format('YYYY-MM-DD-HH-mm-ss') + '_' + id + '.pdf'
+
+        fs.writeFile htmlFile, html, (err) ->
+          if err
+            console.log("Error writing MOU #{htmlFile}", err)
+          else 
+            toPdf = child.spawn "wkhtmltopdf", [htmlFile, pdfFile]
+            toPdf.stdout.setEncoding('utf8');
+            toPdf.stdout.on 'data', (data) ->
+              console.log("wkhtmltopdf:", data)
+
+            toPdf.stderr.setEncoding('utf8');
+            toPdfStderr = ""
+            toPdf.stderr.on 'data', (data) ->
+              toPdfStderr += data
+
+            toPdf.on 'close', (code) ->
+              console.log("wkhtmltopdf exit:", code)
+              if code isnt 0
+                console.log("wkhtmltopdf error:", toPdfStderr)
+
+      else
+        console.log("generatedMou: Could not generate html for MOU. id:#{id}")
+  
+    else
+      console.log("generatedMou: Could not get case to generate MOU for id:#{id}")
+
