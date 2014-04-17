@@ -123,6 +123,7 @@ table {
   margin-top: 0px;
   margin-bottom: 20px;
   margin-left: 20px;
+  min-height: 30px;
 }
 .bidForm .school,
 .bidForm .susd,
@@ -244,9 +245,11 @@ table {
                 {{/each}}
               </div>
             </div>
-            <table class="other-docs" CELLPADDING=7 CELLSPACING=0>
+            <table class="other-docs" CELLPADDING="7" CELLSPACING="0">
                 <tr>
-                    <td width='594' valign='top'>{{BID.otherDocumentsUsed}}</td>
+                    <td width='594' valign='top'">
+                        {{BID.otherDocumentsUsed}}
+                    </td>
                 </tr>
             </table>
 
@@ -320,9 +323,9 @@ table {
             <P CLASS="western" STYLE="margin-bottom: 0in; line-height: 100%;">
                 Please summarize the key factors influencing the decision of the team below:
             </P>
-            <TABLE WIDTH=610 BORDER=1 BORDERCOLOR="#00000a" CELLPADDING=7 CELLSPACING=0>
+            <TABLE WIDTH=610 BORDER=1 BORDERCOLOR="#00000a" CELLPADDING=7 CELLSPACING=0 STYLE="page-break-inside: avoid;>
                 <COL WIDTH=594>
-                <TR>
+                <TR STYLE="page-break-inside: avoid;>
                     <TD WIDTH=594 HEIGHT=325 VALIGN=TOP>
                         {{BID.bidSummary}}
                     </TD>
