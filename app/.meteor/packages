@@ -26,3 +26,4 @@ accounts-entry
 accounts-password
 service-configuration
 bootstrap3-less
+handlebars-server

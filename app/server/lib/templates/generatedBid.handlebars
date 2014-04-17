@@ -1,5 +1,150 @@
+<html>
+<head>
+    <title>BID for {{name}} {{bidDate}}</title>
 
-<template name="generatedBid">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+<style type="text/css">
+
+html {
+  //max-width: 500px;
+  //margin: 0 auto;
+  height: 100%;
+  width: 100%;
+  position: relative; /* Fix for absolute positioning */
+}
+
+body {
+    padding-top: 36px; 
+    padding-bottom: 55px;
+    background-color: #fff; 
+    //height: 100%;
+    //width: 100%;
+    font-size: 14px;
+    //height:5000px;
+}
+
+p {
+    font-size: 14px;
+}
+
+.nobreak {
+    page-break-inside: avoid;
+}
+
+tr {
+    page-break-inside: avoid;
+}
+
+table {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.bidForm {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  /* Everything but the jumbotron gets side spacing for mobile first views */
+  /* Custom page header */
+  /* Make the masthead heading the same height as the navigation */
+  /* Custom page footer */
+  /* Customize container */
+  /* Main marketing message and sign up button */
+  /* Supporting marketing content */
+  /* Responsive: Portrait tablets and up */
+}
+.bidForm .header,
+.bidForm .marketing,
+.bidForm .footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.bidForm .header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  padding-bottom: 19px;
+}
+.bidForm .footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+@media (min-width: 768px) {
+  .bidForm .container {
+    max-width: 730px;
+  }
+}
+.bidForm .container-narrow > hr {
+  margin: 30px 0;
+}
+.bidForm .jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+.bidForm .jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+.bidForm .marketing {
+  margin: 40px 0;
+}
+.bidForm .marketing p + h4 {
+  margin-top: 28px;
+}
+@media screen and (min-width: 768px) {
+  .bidForm {
+    /* Remove the padding we set earlier */
+    /* Space out the masthead */
+    /* Remove the bottom border on the jumbotron for visual effect */
+  }
+  .bidForm .header,
+  .bidForm .marketing,
+  .bidForm .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .bidForm .header {
+    margin-bottom: 30px;
+  }
+  .bidForm .jumbotron {
+    border-bottom: 0;
+  }
+}
+.bidForm .value {
+  font-weight: bold;
+}
+.bidForm .other-docs {
+  width: 610;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #00000a;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+.bidForm .school,
+.bidForm .susd,
+.bidForm .bidInfo {
+  font-style: italic;
+  text-decoration: underline;
+  min-width: 50px;
+}
+.bidForm .bid-rec {
+  margin-left: -17px;
+  margin-right: 5px;
+}
+
+
+
+</style>
+
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+
+</head>
+<body class="bidForm">
+
 
     <div class="container">
         <div class="header" style="border-bottom: 1px solid #e5e5e5;">
@@ -13,13 +158,13 @@
           <div class="col-lg-6">
           
             <p>
-                <span class="field">Child’s Name:</span> 
+                <span class="field">Child's Name:</span> 
                 <span class="value">{{name}}</span>
             </p>
             <p>
                 <span class="field">DCF Family / Child #:</span> 
                 <span class="value">{{dcfId}}</span>
-                <span class="field" style="margin-left:30px;">Child’s Education ID#:</span> 
+                <span class="field" style="margin-left:30px;">Child's Education ID#:</span> 
                 <span class="value">{{BID.edID}}</span>
             </p>
       
@@ -35,19 +180,19 @@
                         <p style="margin-bottom: 0in;">    
                             This process is based on the assumption that a student should remain in their current school<sup><b>*</b></sup> 
                             <I><U>unless</U></I> the considerations on the following pages indicate that 
-                            <I>a change of school placement is in the child’s best interest</I>.
+                            <I>a change of school placement is in the child's best interest</I>.
                         </p>
                         
                         <ul>
                             <li>
                                 <p style="margin-bottom: 0in;">
-                                    This form is to be filled out at the child’s date of placement and each time there is a c
+                                    This form is to be filled out at the child's date of placement and each time there is a c
                                     hange in living arrangement.
                                 </p>
                             </li>
                             <li>
-                                <p style="margin-bottom: 0in; ">
-                                    Individuals with insight into the child’s educational best interest are encouraged to 
+                                <p style="margin-bottom: 0in;">
+                                    Individuals with insight into the child's educational best interest are encouraged to 
                                     participate in a BID meeting or conversation.
                                 </p>
                             </li>
@@ -114,12 +259,12 @@
                             </p>
                         </TD>
                         <TD WIDTH=30 BGCOLOR="#808080" style="padding-top:5px;">
-                            <p ALIGN=CENTER style="color:#ffffff; ">
+                            <p ALIGN=CENTER style="color:#ffffff;">
                                 <b>Yes</b>
                             </p>
                         </TD>
                         <TD WIDTH=29 BGCOLOR="#808080" style="padding-top:5px;">
-                            <p ALIGN=CENTER style="color:#ffffff; ">
+                            <p ALIGN=CENTER style="color:#ffffff;">
                                 <B>No</B>
                             </p>
                         </TD>
@@ -128,8 +273,8 @@
                 <TBODY>
 
                     {{#each considerations}}
-                    <TR VALIGN=TOP>
-                        <TD WIDTH=552>
+                    <TR VALIGN=TOP STYLE="page-break-inside: avoid;">
+                        <TD WIDTH=552 style="padding-top:5px;">
                             <OL START={{index}}>
                                 <li>
                                     <p STYLE="margin-bottom: 0in;">
@@ -150,12 +295,12 @@
                             <P STYLE="margin-left: 0.25in"><BR>
                             </P>
                         </TD>
-                        <TD WIDTH=30>
+                        <TD WIDTH=30  style="padding-top:5px;">
                             <P CLASS="western" ALIGN=CENTER>
                                 <i class="fa fa-{{yes}}square-o"></i>
                             </P>
                         </TD>
-                        <TD WIDTH=29>
+                        <TD WIDTH=29  style="padding-top:5px;">
                             <P CLASS="western" ALIGN=CENTER>
                                 <i class="fa fa-{{no}}square-o"></i>
                             </P>
@@ -169,10 +314,10 @@
             <P CLASS="western" STYLE="margin-bottom: 0in; line-height: 100%">
                 <BR/>
             </P>
-            <P CLASS="western" STYLE="margin-bottom: 0in; line-height: 100%; font-size:large;">
+            <P CLASS="western" STYLE="margin-bottom: 0in; line-height: 100%; font-size:large">
                 <B>Best Interest Determination Summary</B>
             </P>
-            <P CLASS="western" STYLE="margin-bottom: 0in; line-height: 100%; ">
+            <P CLASS="western" STYLE="margin-bottom: 0in; line-height: 100%;">
                 Please summarize the key factors influencing the decision of the team below:
             </P>
             <TABLE WIDTH=610 BORDER=1 BORDERCOLOR="#00000a" CELLPADDING=7 CELLSPACING=0>
@@ -185,7 +330,7 @@
             </TABLE>
 
 
-            <h4> Education Best Interest Determination Recommendation of the Team</h4>
+            <h4 STYLE="page-break-before: always"> Education Best Interest Determination Recommendation of the Team</h4>
 
             <div class="checkbox">
                 <label>
@@ -238,17 +383,15 @@
             </div>
 
 
-            <P STYLE="margin-left: 0.25in; margin-top: 0.04in; margin-bottom: 0.04in; line-height: 100%">
-                <FONT FACE="Times New Roman, serif"><FONT SIZE=3>
-                    <div class="row" STYLE="margin-left: 0.25in; padding:0px;">
-                        <div class="col-xs-5" style="padding: 0px;">
-                            School: <span class="school"> &nbsp; {{{newSchool}}} &nbsp; </span> 
-                        </div>
-                        <div class="col-xs-5">
-                            SU / SD: <span class="susd"> &nbsp; {{{newSUSD}}} &nbsp; </span>
-                        </div>
+            <P STYLE="margin-left: 0.25in; margin-top: 0.04in; margin-bottom: 0.04in; line-height: 100%">    
+                <div class="row" STYLE="margin-left: 0.25in; padding:0px;">
+                    <div class="col-xs-5" style="padding: 0px;">
+                        School: <span class="school"> &nbsp; {{{newSchool}}} &nbsp; </span> 
                     </div>
-                </FONT></FONT>
+                    <div class="col-xs-5">
+                        SU / SD: <span class="susd"> &nbsp; {{{newSUSD}}} &nbsp; </span>
+                    </div>
+                </div>       
             </P>
 
 
@@ -271,8 +414,8 @@
             <OL>
                 <LI>
                     <P STYLE="margin-bottom: 0in; line-height: 100%;">
-                        The child’s school transfer date should be determined by the child’s best interest.  
-                        Does it coincide with a logical juncture in the child’s academic or personal progress 
+                        The child's school transfer date should be determined by the child's best interest.  
+                        Does it coincide with a logical juncture in the child's academic or personal progress 
                         (e.g., after an event that is significant to the child or end of the school year)?
                     </P>
                 </LI>
@@ -285,7 +428,7 @@
             <OL START=2>
                 <LI>
                     <P STYLE="margin-top: 0.04in; margin-bottom: 0.04in; line-height: 100%;">
-                        Enrollment in the new school should take place without interruption of the child’s
+                        Enrollment in the new school should take place without interruption of the child's
                         education, with all education records provided to the new school.
                         <I>(See interagency guidelines).</I>
                     </P>
@@ -328,4 +471,6 @@
         </div> <!-- row? -->
     </div> <!-- container -->
 
-</template>
+</body>
+</html>
+
