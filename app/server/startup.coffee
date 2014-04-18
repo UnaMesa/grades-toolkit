@@ -31,7 +31,7 @@ validEmails = [
   'margaret.burbank@state.vt.us'
   'joan.rock@state.vt.us'
   'gregwolff@unamesa.org'
-  #'tim@pfafman.com'
+  'tim@pfafman.com'
 ]
 
 admins = [

@@ -16,7 +16,8 @@ Accounts.onCreateUser (options, user) ->
 validateUserEmail = (user) ->
     console.log("validateUserEmail", user?.services?.google?.email)
     throw new Meteor.Error(403, "You are not authorized to use this site") unless user?.services?.google?.email?
-        
+    
+    email = user.services.google.email.toLowerCase()
     validEmail = ValidUsers.findOne
         email: user.services.google.email
     if not validEmail
