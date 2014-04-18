@@ -7,80 +7,88 @@ child  = Npm.require('child_process')
 
 UPLOAD_DIR = '/var/spool/grades/'
 
+console.log("generators")
 
 documentsUsedForBid = (rec) ->
-    vals = []
-    for val in BID.documentsUsed
-         data =
-             key: val
-         if rec.BID?.documentsUsed and val in rec.BID.documentsUsed
-             data.checked = "check-"
-         vals.push(data)
-    vals
+  rows = []
+  row = []
+  for val in BID.documentsUsed
+    data =
+      key: val
+    if rec.BID?.documentsUsed and val in rec.BID.documentsUsed
+      data.checked = "check-"
+    row.push(data)
+    if row.length is 2
+      rows.push(row)
+      row = []
+  if row.length is 1
+    rows.push(row)
+  rows
 
 
 considerations = (rec) ->
-    considerations = []
-    index = 0
-    for consideration in BID.considerations
-        data = _.clone(consideration)
-        index++
-        data.index = index
-        if data.helpBlock
-            data.helpText = "<ul>"
-            for help in data.helpBlock
-                data.helpText +=  '<li>' + help + '</li>';
-            data.helpText += "</ul>"
-        if rec.BID?.considerations
-            for theCons in rec.BID.considerations
-                if theCons.key is data.key
-                    data.factors = theCons.factors
-                    switch theCons.yesNo
-                        when 'yes'
-                            data.yes = "check-"
-                        when 'no'
-                            data.no = "check-"
-                    break
-        considerations.push(data)
-    
-    considerations
+  considerations = []
+  index = 0
+  for consideration in @BID.considerations
+    data = _.clone(consideration)
+    index++
+    data.index = index
+    if data.helpBlock
+      data.helpText = "<ul>"
+      for help in data.helpBlock
+        data.helpText +=  '<li>' + help + '</li>';
+      data.helpText += "</ul>"
+    if rec?.BID?.considerations
+      for theCons in rec.BID.considerations
+        if theCons.key is data.key
+          data.factors = theCons.factors
+          switch theCons.yesNo
+            when 'yes'
+              data.yes = "check-"
+            when 'no'
+              data.no = "check-"
+          break
+    considerations.push(data)
+  
+  considerations
 
 
 stayAtCurrentSchool = (rec) ->
-    rec.BID?.teamRecommendation is 'stayAtCurrentSchool'
+  rec.BID?.teamRecommendation is 'stayAtCurrentSchool'
     
 moveToNewSchool = (rec) ->
-    rec.BID?.teamRecommendation is 'moveToNewSchool'
+  rec.BID?.teamRecommendation is 'moveToNewSchool'
 
 teamDisagrees = (rec) ->
-    rec.BID?.teamRecommendation is 'teamDisagrees'
+  rec.BID?.teamRecommendation is 'teamDisagrees'
 
 
 currentSchool = (rec) ->
-    if rec.BID?.teamRecommendation is 'stayAtCurrentSchool'
-        rec.BID.schoolToAttend
-    else
-        " &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; "
+  if rec.BID?.teamRecommendation is 'stayAtCurrentSchool'
+    rec.BID.schoolToAttend
+  else
+    " &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; "
 
 currentSUSD = (rec) ->
-    if rec.BID?.teamRecommendation is 'stayAtCurrentSchool'
-        rec.BID.susd
-    else
-        " &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; "
+  if rec.BID?.teamRecommendation is 'stayAtCurrentSchool'
+    rec.BID.susd
+  else
+    " &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; "
 
 newSchool = (rec) ->
-    if rec.BID?.teamRecommendation is 'moveToNewSchool'
-        rec.BID.schoolToAttend
-    else
-        " &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; "
+  if rec.BID?.teamRecommendation is 'moveToNewSchool'
+    rec.BID.schoolToAttend
+  else
+    " &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; "
 
 newSUSD = (rec) ->
-    if rec.BID?.teamRecommendation is 'moveToNewSchool'
-        rec.BID.susd
-    else
-        " &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; "
+  if rec.BID?.teamRecommendation is 'moveToNewSchool'
+    rec.BID.susd
+  else
+    " &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; "
 
-
+otherDocumentsUsed = (rec) ->
+  rec.BID?.otherDocumentsUsed or "&nbsp; &nbsp; &nbsp; -- NONE -- "
 
 Meteor.methods
   
@@ -90,18 +98,22 @@ Meteor.methods
     theCase = Cases.findOne(id)
 
     if theCase?
-      theCase.bidDate = moment().format('lll')
-
+      theCase.bidDate = moment().format('LL')
+      
+      console.log("Do helpers")
       theCase.documentsUsedForBid = documentsUsedForBid(theCase)
-      theCase.considerations = considerations(theCase)
+      console.log("Do helpers 2")
+      theCase.considerations      = considerations(theCase)
+      console.log("Do helpers 3")
       theCase.stayAtCurrentSchool = stayAtCurrentSchool(theCase)
-      theCase.moveToNewSchool = moveToNewSchool(theCase)
-      theCase.teamDisagrees = teamDisagrees(theCase)
-      theCase.currentSchool = currentSchool(theCase)
-      theCase.currentSUSD = currentSUSD(theCase)
-      theCase.newSchool = newSchool(theCase)
-      theCase.newSUSD = newSUSD(theCase)
+      theCase.moveToNewSchool     = moveToNewSchool(theCase)
+      theCase.teamDisagrees       = teamDisagrees(theCase)
+      theCase.currentSchool       = currentSchool(theCase)
+      theCase.currentSUSD         = currentSUSD(theCase)
+      theCase.newSchool           = newSchool(theCase)
+      theCase.newSUSD             = newSUSD(theCase)
 
+      console.log("Do HTML")
       html = Handlebars.templates['generatedBid'](theCase)
 
       if html?

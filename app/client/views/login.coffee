@@ -12,7 +12,7 @@ Template.login.events
     "click #login": (e, tmpl) ->
         Meteor.loginWithGoogle
             requestPermissions: googleScopes
-            forceApprovalPrompt: false
+            forceApprovalPrompt: true
             requestOfflineToken: true
         ,
             (error) ->

@@ -2,12 +2,10 @@ Package.describe({
   summary: "Wrapper for Google APIs Client Library for Node"
 });
 
-Npm.depends({googleapis: '0.4.5'});
+Npm.depends({googleapis: '0.7.0'});
 
 Package.on_use(function (api) {
-    api.use(['coffeescript'], 'server');
-  
-    api.add_files('google.coffee', 'server');
+    api.add_files('google.js', 'server');
     if(api.export)
         api.export('GoogleApi');
 });

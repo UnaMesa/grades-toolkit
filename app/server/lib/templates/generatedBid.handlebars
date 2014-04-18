@@ -8,8 +8,6 @@
 <style type="text/css">
 
 html {
-  //max-width: 500px;
-  //margin: 0 auto;
   height: 100%;
   width: 100%;
   position: relative; /* Fix for absolute positioning */
@@ -19,10 +17,8 @@ body {
     padding-top: 36px; 
     padding-bottom: 55px;
     background-color: #fff; 
-    //height: 100%;
-    //width: 100%;
+    width: 100%;
     font-size: 14px;
-    //height:5000px;
 }
 
 p {
@@ -45,99 +41,73 @@ table {
 .bidForm {
   padding-top: 20px;
   padding-bottom: 20px;
-  /* Everything but the jumbotron gets side spacing for mobile first views */
-  /* Custom page header */
-  /* Make the masthead heading the same height as the navigation */
-  /* Custom page footer */
-  /* Customize container */
-  /* Main marketing message and sign up button */
-  /* Supporting marketing content */
-  /* Responsive: Portrait tablets and up */
 }
-.bidForm .header,
-.bidForm .marketing,
-.bidForm .footer {
-  padding-left: 15px;
-  padding-right: 15px;
+
+.container {
+  max-width: 650px;
 }
-.bidForm .header h3 {
+
+.header,
+.footer {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.header {
+  margin-bottom: 10px;
+
+}
+.header h3 {
   margin-top: 0;
   margin-bottom: 0;
   line-height: 40px;
   padding-bottom: 19px;
 }
-.bidForm .footer {
+.footer {
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
 }
-@media (min-width: 768px) {
-  .bidForm .container {
-    max-width: 730px;
-  }
-}
-.bidForm .container-narrow > hr {
+.container-narrow > hr {
   margin: 30px 0;
 }
-.bidForm .jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-}
-.bidForm .jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
-}
-.bidForm .marketing {
-  margin: 40px 0;
-}
-.bidForm .marketing p + h4 {
-  margin-top: 28px;
-}
-@media screen and (min-width: 768px) {
-  .bidForm {
-    /* Remove the padding we set earlier */
-    /* Space out the masthead */
-    /* Remove the bottom border on the jumbotron for visual effect */
-  }
-  .bidForm .header,
-  .bidForm .marketing,
-  .bidForm .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .bidForm .header {
-    margin-bottom: 30px;
-  }
-  .bidForm .jumbotron {
-    border-bottom: 0;
-  }
-}
-.bidForm .value {
+.value {
   font-weight: bold;
 }
-.bidForm .other-docs {
+.other-docs {
   width: 610;
   border-style: solid;
   border-width: 1px;
   border-color: #00000a;
   margin-top: 0px;
   margin-bottom: 20px;
-  margin-left: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 95%;
   min-height: 30px;
 }
-.bidForm .school,
-.bidForm .susd,
-.bidForm .bidInfo {
+
+.other-docs td {
+  padding-top: 5px;
+  width: 100%;
+  height: 100%;
+}
+
+.school,
+.susd,
+.bidInfo {
   font-style: italic;
   text-decoration: underline;
   min-width: 50px;
 }
-.bidForm .bid-rec {
+.bid-rec {
   margin-left: -17px;
   margin-right: 5px;
 }
 
-
+.documents-used {
+  margin: 0;
+  padding: 0;
+}
 
 </style>
 
@@ -161,6 +131,7 @@ table {
             <p>
                 <span class="field">Child's Name:</span> 
                 <span class="value">{{name}}</span>
+                <span class="pull-right">{{bidDate}}</span>
             </p>
             <p>
                 <span class="field">DCF Family / Child #:</span> 
@@ -170,10 +141,10 @@ table {
             </p>
       
 
-            <table width='610' border='1' BORDERCOLOR="#00000a" CELLPADDING='7' CELLSPACING='0'>
+            <table width='630' border='1' BORDERCOLOR="#00000a" CELLPADDING='7' CELLSPACING='0'>
                 
                 <tr>
-                    <td WIDTH=594 VALIGN=TOP style="padding: 10px;">
+                    <td WIDTH=600 VALIGN=TOP style="padding: 10px;">
                         <p style="margin-bottom: 0in; font-size: large;">
                             <b>Instructions:</b>
                         </p>
@@ -233,27 +204,32 @@ table {
             <h3> Documentation and Records</h3>
             <p>Which of these were used for BID? <i>Check all that apply and include in chart: </i></p>
         
-            <div class="row">
-              <div class="col-md-4">
-                {{#each documentsUsedForBid}}
-                    <div class="checkbox">
+            
+            {{#each documentsUsedForBid}}
+              <div class="row">
+                {{#each this}}
+                  <div class="col-xs-6">
+                    <div class="checkbox documents-used">
                       <label>
                         <i class="fa fa-{{checked}}square-o"></i>
                         {{key}}
                       </label>
                     </div>
+                  </div>
                 {{/each}}
               </div>
-            </div>
-            <table class="other-docs" CELLPADDING="7" CELLSPACING="0">
+            {{/each}}
+
+            {{#if BID.otherDocumentsUsed}}
+            <table class="other-docs">
                 <tr>
-                    <td width='594' valign='top'">
-                        {{BID.otherDocumentsUsed}}
-                    </td>
+                    <td valign='top'>{{BID.otherDocumentsUsed}}</td>
                 </tr>
             </table>
+            {{/if}}
 
-            <TABLE WIDTH=655 BORDER=1 BORDERCOLOR="#00000a" CELLPADDING=7 CELLSPACING=0 STYLE="page-break-before: always">
+            <TABLE WIDTH=655 BORDER=1 BORDERCOLOR="#00000a" CELLPADDING=7 CELLSPACING=0 
+                STYLE="page-break-before: always; margin-top:15px;">
                 <THEAD>
                     <TR VALIGN=TOP>
                         <TD WIDTH=552 BGCOLOR="#808080" style="padding-top:5px;">
@@ -323,7 +299,7 @@ table {
             <P CLASS="western" STYLE="margin-bottom: 0in; line-height: 100%;">
                 Please summarize the key factors influencing the decision of the team below:
             </P>
-            <TABLE WIDTH=610 BORDER=1 BORDERCOLOR="#00000a" CELLPADDING=7 CELLSPACING=0 STYLE="page-break-inside: avoid;>
+            <TABLE WIDTH=640 BORDER=1 BORDERCOLOR="#00000a" CELLPADDING=7 CELLSPACING=0 STYLE="page-break-inside: avoid;>
                 <COL WIDTH=594>
                 <TR STYLE="page-break-inside: avoid;>
                     <TD WIDTH=594 HEIGHT=325 VALIGN=TOP>

@@ -7,14 +7,20 @@ Template.generatedBid.rendered = ->
 Template.generatedBid.helpers
     
     documentsUsedForBid: ->
-        vals = []
+        rows = []
+        row = []
         for val in BID.documentsUsed
-             data =
-                 key: val
-             if @BID?.documentsUsed and val in @BID.documentsUsed
-                 data.checked = "check-"
-             vals.push(data)
-        vals
+            data =
+                key: val
+            if @BID?.documentsUsed and val in @BID.documentsUsed
+                data.checked = "check-"
+            row.push(data)
+            if row.length is 2
+                rows.push(row)
+                row = []
+        if row.length is 1
+            rows.push(row)
+        rows
 
     considerations: ->
         considerations = []
@@ -43,7 +49,6 @@ Template.generatedBid.helpers
         considerations
 
     stayAtCurrentSchool: ->
-        console.log("stayAtCurrentSchool", @BID)
         @BID?.teamRecommendation is 'stayAtCurrentSchool'
         
     moveToNewSchool: ->
@@ -77,6 +82,9 @@ Template.generatedBid.helpers
         else
             " &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; "
 
+    otherDocumentsUsed: ->
+        @BID?.otherDocumentsUsed or "&nbsp; &nbsp; &nbsp; -- NONE -- "
 
-
+    bidDate: ->
+        moment().format('LL')
 

@@ -15,6 +15,7 @@
             <p>
                 <span class="field">Child’s Name:</span> 
                 <span class="value">{{name}}</span>
+                <span class="pull-right">{{bidDate}}</span>
             </p>
             <p>
                 <span class="field">DCF Family / Child #:</span> 
@@ -24,10 +25,10 @@
             </p>
       
 
-            <table width='610' border='1' BORDERCOLOR="#00000a" CELLPADDING='7' CELLSPACING='0'>
+            <table width='630' border='1' BORDERCOLOR="#00000a" CELLPADDING='7' CELLSPACING='0'>
                 
                 <tr>
-                    <td WIDTH=594 VALIGN=TOP style="padding: 10px;">
+                    <td WIDTH=600 VALIGN=TOP style="padding: 10px;">
                         <p style="margin-bottom: 0in; font-size: large;">
                             <b>Instructions:</b>
                         </p>
@@ -87,25 +88,29 @@
             <h3> Documentation and Records</h3>
             <p>Which of these were used for BID? <i>Check all that apply and include in chart: </i></p>
         
-            <div class="row">
-              <div class="col-md-4">
-                {{#each documentsUsedForBid}}
-                    <div class="checkbox">
-                      <label>
-                        <i class="fa fa-{{checked}}square-o"></i>
-                        {{key}}
-                      </label>
-                    </div>
-                {{/each}}
-              </div>
-            </div>
-            <table class="other-docs" CELLPADDING=7 CELLSPACING=0>
+            {{#each documentsUsedForBid}}
+                <div class="row">
+                    {{#each this}}
+                        <div class="col-xs-6">
+                            <div class="checkbox documents-used">
+                              <label>
+                                <i class="fa fa-{{checked}}square-o"></i>
+                                {{key}}
+                              </label>
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+            {{/each}}
+
+            <table class="other-docs">
                 <tr>
-                    <td width='594' valign='top'>{{BID.otherDocumentsUsed}}</td>
+                    <td valign='top'>{{{otherDocumentsUsed}}}</td>
                 </tr>
             </table>
+            
 
-            <TABLE WIDTH=655 BORDER=1 BORDERCOLOR="#00000a" CELLPADDING=7 CELLSPACING=0 STYLE="page-break-before: always">
+            <TABLE WIDTH="655" BORDER="1" BORDERCOLOR="#00000a" CELLPADDING="7" CELLSPACING="0" STYLE="page-break-before: always; margin-top:15px;">
                 <THEAD>
                     <TR VALIGN=TOP>
                         <TD WIDTH=552 BGCOLOR="#808080" style="padding-top:5px;">
@@ -175,7 +180,7 @@
             <P CLASS="western" STYLE="margin-bottom: 0in; line-height: 100%; ">
                 Please summarize the key factors influencing the decision of the team below:
             </P>
-            <TABLE WIDTH=610 BORDER=1 BORDERCOLOR="#00000a" CELLPADDING=7 CELLSPACING=0>
+            <TABLE WIDTH=640 BORDER=1 BORDERCOLOR="#00000a" CELLPADDING=7 CELLSPACING=0>
                 <COL WIDTH=594>
                 <TR>
                     <TD WIDTH=594 HEIGHT=325 VALIGN=TOP>
@@ -329,3 +334,4 @@
     </div> <!-- container -->
 
 </template>
+

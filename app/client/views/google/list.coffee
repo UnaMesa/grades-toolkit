@@ -31,12 +31,21 @@ Template.googleDocs.events
         gDrive.call(gDrive.getFileList)
         false
 
-    "click #new-folder-test": (e) ->
+    "click #new-folder": (e) ->
         e.preventDefault()
-        gDrive.createDirectory("Test Folder", "root")
-        Meteor.defer ->
-            window.scroll(0,0)
-        false
+        CoffeeAlerts.clearSeen()
+        $(".has-error").removeClass('has-error')
+        folderName = $('#new-folder-name').val()
+        if not folderName
+            CoffeeAlerts.error("No new folder name!")
+            $('#new-folder-name').parent().addClass('has-error')
+        else
+            console.log("new folder", folderName)
+            gDrive.createDirectory(folderName, "root")
+            Meteor.defer ->
+                $('#new-folder-name').val("")
+                window.scroll(0,0)
+            false
 
     "click #test": (e) ->
         e.preventDefault()

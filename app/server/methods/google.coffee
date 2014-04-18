@@ -14,13 +14,14 @@ getAccessToken = ->
     user.services?.google?.accessToken
 
 refreshGoogleAccessToken = ->
-    console.log("refreshGoogleAccessToken")
     user = Meteor.user()
-        
+       
     throw Meteor.Error(401, "You need to be logged in to have access")  unless user
 
+    console.log("refreshGoogleAccessToken", user?.services?.google)
+    
     throw Meteor.Error(401, "No Refresh Token") unless user.services?.google?.refreshToken?
-
+    
     loginServiceConfig = Accounts.loginServiceConfiguration.findOne
         service: "google"
 

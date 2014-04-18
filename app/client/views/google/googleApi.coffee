@@ -265,6 +265,7 @@
         Meteor.call "refreshGoogleAccessToken", (error, result) ->
             if error
                 console.log("Error getting new token", error, result)
+                CoffeeAlerts.error("Could not get new token #{error?.message}")
             else if result
                 gDrive._refreshingToken = false
                 gDrive.checkAuth()

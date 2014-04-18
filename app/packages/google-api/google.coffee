@@ -1,2 +1,0 @@
-
-GoogleApi = Npm.require 'googleapis'
