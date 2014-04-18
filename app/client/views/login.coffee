@@ -19,7 +19,7 @@ Template.login.events
                 if error
                     # This is returning something regardless
                     console.log("Login Error", error)
-                    #CoffeeAlerts.error(Google Login Failed)
+                    CoffeeAlerts.error("Login failed: #{error.reason}")
                     #throw new Meteor.Error(Accounts.LoginCancelledError.numericError, "Error")
                 else if not Meteor.user()?.tag 
                     # Need a Tag
