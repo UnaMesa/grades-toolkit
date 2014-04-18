@@ -7,7 +7,7 @@ Package.describe({
   summary: "Google OAuth 2.0 authentication for server-to-server applications with Meteor"
 });
 
-Npm.depends({"google-oauth-jwt": '0.1.2'});
+Npm.depends({"google-oauth-jwt": '0.1.4'});
 
 Package.on_use(function (api) {
     api.use(['coffeescript'], 'server');

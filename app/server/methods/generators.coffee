@@ -157,6 +157,17 @@ Meteor.methods
       theCase.today = moment().format('LL')
 
       theCase.dateOfCustody = moment(theCase.MOU.dataOfCustody).format('LL')
+      
+      user = Meteor.user()
+      google = user?.services?.google
+      if user?.profile.name?
+        theCase.socialWorkerName = user.profile.name
+      else if google?
+        theCase.socialWorkerName = google.name or "#{google.given_name} #{google.family_name}"
+      else
+        theCase.socialWorkerName = "No Name"
+
+      # Generate HTML from handlebars
       html = Handlebars.templates['generatedMou'](theCase)
 
       if html?
