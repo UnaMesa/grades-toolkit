@@ -90,10 +90,23 @@ newSUSD = (rec) ->
 otherDocumentsUsed = (rec) ->
   rec.BID?.otherDocumentsUsed or "&nbsp; &nbsp; &nbsp; -- NONE -- "
 
+
+toArrayBuffer = (buffer) ->
+  ab = new ArrayBuffer(buffer.length)
+  view = new Uint8Array(ab)
+  i = 0
+  while i < buffer.length
+    view[i] = buffer[i]
+    ++i
+  ab
+
 Meteor.methods
   
   generateBid: (id) ->
     console.log("generateBid", id)
+    user = Meteor.user()
+    # ensure the user is logged in
+    throw new Meteor.Error(401, "Need to be logged in")  unless user
 
     theCase = Cases.findOne(id)
 
@@ -117,27 +130,39 @@ Meteor.methods
       html = Handlebars.templates['generatedBid'](theCase)
 
       if html?
-        htmlFile = UPLOAD_DIR + 'bids/' + moment().format('YYYY-MM-DD-HH-mm-ss') + '_' + id + '.html'
-        pdfFile  = UPLOAD_DIR + 'bids/' + moment().format('YYYY-MM-DD-HH-mm-ss') + '_' + id + '.pdf'
+        fileId = moment().format('YYYYMMDD_HHmmss') + '_' + id
+        htmlFile = UPLOAD_DIR + 'bids/' + fileId+ '.html'
+        pdfFile  = UPLOAD_DIR + 'bids/' + fileId + '.pdf'
 
-        fs.writeFile htmlFile, html, (err) ->
-          if err
-            console.log("Error writing BID #{htmlFile}", err)
-          else 
-            toPdf = child.spawn "wkhtmltopdf", [htmlFile, pdfFile]
-            toPdf.stdout.setEncoding('utf8');
-            toPdf.stdout.on 'data', (data) ->
-              console.log("wkhtmltopdf:", data)
+        fs.writeFileSync(htmlFile, html)
+        
+        toPdf = child.spawn "wkhtmltopdf", [htmlFile, pdfFile]
+        toPdf.stdout.setEncoding('utf8');
+        toPdf.stdout.on 'data', (data) ->
+          console.log("wkhtmltopdf:", data)
 
-            toPdf.stderr.setEncoding('utf8');
-            toPdfStderr = ""
-            toPdf.stderr.on 'data', (data) ->
-              toPdfStderr += data
+        toPdf.stderr.setEncoding('utf8');
+        toPdfStderr = ""
+        toPdf.stderr.on 'data', (data) ->
+          toPdfStderr += data
 
-            toPdf.on 'close', (code) ->
-              console.log("wkhtmltopdf exit:", code)
-              if code isnt 0
-                console.log("wkhtmltopdf error:", toPdfStderr)
+        toPdf.on 'close', (code) ->
+          console.log("wkhtmltopdf exit:", code)
+          if code isnt 0
+            console.log("wkhtmltopdf error:", toPdfStderr)
+
+        if user.services?.google?.email?
+          console.log("Sending Email Link to", user.services.google.email)
+          link = Meteor.absoluteUrl("cases/bid/pdf/#{fileId}")
+          Email.send 
+            from: "grades@sharedrecord.org"
+            to: user.services.google.email
+            subject: "New BID Generated"
+            html: """
+              <p>New BUD Generated for #{theCase.name}</p>
+              <p><a href="#{link}">Link to BID<a></p>
+              <p>Grades</p>
+            """
 
       else
         console.log("generatedBid: Could not generate html for bid. id:#{id}")
@@ -145,10 +170,12 @@ Meteor.methods
     else
       console.log("generatedBid: Could not get case to generate bid for id:#{id}")
 
-
-
+  
   generateMou: (id) ->
     console.log("generateMou", id)
+    user = Meteor.user()
+    # ensure the user is logged in
+    throw new Meteor.Error(401, "Need to be logged in")  unless user
 
     theCase = Cases.findOne(id)
     
@@ -171,31 +198,69 @@ Meteor.methods
       html = Handlebars.templates['generatedMou'](theCase)
 
       if html?
-        htmlFile = UPLOAD_DIR + 'mous/' + moment().format('YYYY-MM-DD-HH-mm-ss') + '_' + id + '.html'
-        pdfFile  = UPLOAD_DIR + 'mous/' + moment().format('YYYY-MM-DD-HH-mm-ss') + '_' + id + '.pdf'
+        fileId = moment().format('YYYYMMDD_HHmmss') + '_' + id
+        htmlFile = UPLOAD_DIR + 'mous/' + fileId + '.html'
+        pdfFile  = UPLOAD_DIR + 'mous/' + fileId + '.pdf'
 
-        fs.writeFile htmlFile, html, (err) ->
-          if err
-            console.log("Error writing MOU #{htmlFile}", err)
-          else 
-            toPdf = child.spawn "wkhtmltopdf", [htmlFile, pdfFile]
-            toPdf.stdout.setEncoding('utf8');
-            toPdf.stdout.on 'data', (data) ->
-              console.log("wkhtmltopdf:", data)
+        fs.writeFileSync(htmlFile, html)
+           
+        toPdf = child.spawn "wkhtmltopdf", [htmlFile, pdfFile]
+        toPdf.stdout.setEncoding('utf8');
+        toPdf.stdout.on 'data', (data) ->
+          console.log("wkhtmltopdf:", data)
 
-            toPdf.stderr.setEncoding('utf8');
-            toPdfStderr = ""
-            toPdf.stderr.on 'data', (data) ->
-              toPdfStderr += data
+        toPdf.stderr.setEncoding('utf8');
+        toPdfStderr = ""
+        toPdf.stderr.on 'data', (data) ->
+          toPdfStderr += data
 
-            toPdf.on 'close', (code) ->
-              console.log("wkhtmltopdf exit:", code)
-              if code isnt 0
-                console.log("wkhtmltopdf error:", toPdfStderr)
+        toPdf.on 'close', (code) ->
+          console.log("wkhtmltopdf exit:", code)
+          if code isnt 0
+            console.log("wkhtmltopdf error:", toPdfStderr)
+
+        if user.services?.google?.email?
+          console.log("Sending Email Link to", user.services.google.email)
+          link = Meteor.absoluteUrl("cases/mou/pdf/#{fileId}")
+          Email.send 
+            from: "grades@sharedrecord.org"
+            to: user.services.google.email
+            subject: "New MOU Generated"
+            html: """
+              <p>New MOU Generated for #{theCase.name}</p>
+              <p><a href="#{link}">Link to MOU<a></p>
+              <p>Grades</p>
+            """
+
 
       else
         console.log("generatedMou: Could not generate html for MOU. id:#{id}")
   
     else
       console.log("generatedMou: Could not get case to generate MOU for id:#{id}")
+
+
+  getBid: (fileId) ->
+    user = Meteor.user()
+    # ensure the user is logged in
+    throw new Meteor.Error(401, "Need to be logged in")  unless user
+    
+    # TODO: Check ACL
+    
+    theFile  = UPLOAD_DIR + 'bids/' + fileId + '.html'
+    fs.readFileSync(theFile, 'utf8')
+    
+
+  getMou: (fileId) ->
+    user = Meteor.user()
+    # ensure the user is logged in
+    throw new Meteor.Error(401, "Need to be logged in")  unless user
+
+    # TODO: Check ACL
+      
+    theFile  = UPLOAD_DIR + 'mous/' + fileId + '.html'
+    fs.readFileSync(theFile, 'utf8')
+    
+
+
 

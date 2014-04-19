@@ -22,6 +22,7 @@
       "git": "https://github.com/pfafman/meteor-accounts-entry.git"
     },
     "bootstrap3-less": {},
-    "handlebars-server": {}
+    "handlebars-server": {},
+    "filesaver": {}
   }
 }

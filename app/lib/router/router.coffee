@@ -116,6 +116,48 @@ Router.map ->
       data.title = "BID for #{data.name}"
       data
 
+  @route 'downloadBid',
+    path: "cases/bid/pdf/:fileId"
+    #layoutTemplate: 'empty'
+    action: ->
+      console.log("Get download File", @params.fileId)
+      fileId = @params.fileId
+      Meteor.call "getBid", @params.fileId, (error, result) =>
+        if error
+          CoffeeAlerts.error("Error geting BID #{error.message}")
+        else if result?
+          file = result
+          blob = new Blob [file],
+            type: "text/html"
+          console.log("Sending download", fileId)
+          saveAs(blob, fileId + ".html")
+        else
+          CoffeeAlerts.error("Error geting BID, could not find file")
+        
+        Router.go('home')
+  
+          
+  @route 'downloadMou',
+    path: "cases/mou/pdf/:fileId"
+    #layoutTemplate: 'empty'
+    action: ->
+      console.log("Get download File", @params.fileId)
+      fileId = @params.fileId
+      Meteor.call "getMou", @params.fileId, (error, result) =>
+        if error
+          CoffeeAlerts.error("Error geting MOU #{error.message}")
+        else if result?
+          file = result
+          blob = new Blob [file],
+            type: "text/html"
+          console.log("Sending download", fileId,  file.length)
+          saveAs(blob, fileId + ".html")
+        else
+          CoffeeAlerts.error("Error geting MOU, could not find file")
+        
+        Router.go('home')
+        
+
   @route 'mou',
     path: "cases/mou/:_id"
     onBeforeAction: ->

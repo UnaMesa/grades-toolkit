@@ -28,7 +28,8 @@
         "branch": "master"
       },
       "bootstrap3-less": {},
-      "handlebars-server": {}
+      "handlebars-server": {},
+      "filesaver": {}
     },
     "packages": {
       "spin": {
@@ -106,6 +107,11 @@
         "tag": "v1.2.0",
         "commit": "1b72c4e9d82af66293e50be4516c487d15d97464"
       },
+      "filesaver": {
+        "git": "https://github.com/Meloncon/meteor-filesaver.git",
+        "tag": "v0.0.1",
+        "commit": "650d840d168cf9905908fbfb714cb33388321d4d"
+      },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
         "tag": "v0.2.4",
@@ -113,8 +119,8 @@
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.2.48",
-        "commit": "1bc4aec5d6189093b8c0efbd32e761946bcd4a5b"
+        "tag": "v0.3.0",
+        "commit": "8093f4350dc707af51d668deaeed529e8434a090"
       },
       "just-i18n": {
         "git": "https://github.com/subhog/meteor-just-i18n.git",
