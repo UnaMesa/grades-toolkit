@@ -2,8 +2,6 @@
 #  Start Stop and Monitor for grades server
 #
 
-SOURCE="${BASH_SOURCE[0]}"
-DIR=`dirname "$SOURCE"`
 PROG="runOnAWS"
 
 function start {
