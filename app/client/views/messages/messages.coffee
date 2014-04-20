@@ -68,7 +68,8 @@ $(window).resize(setMessageBodyWidth)
 @scrollWatch = (e) ->
     #console.log("scrollWatch", $(window).scrollTop() + $(window).height(), $(document).height())
     if  $(window).scrollTop() + $(window).height() >= $(document).height()
-        if MessagesHandle.ready() and Messages.find(messageFilter()).count() > MessagesHandle.loaded()
+        #console.log("check for more messages", Messages.find(messageFilter()).count(), MessagesHandle.loaded())
+        if MessagesHandle.ready() and Messages.find(messageFilter()).count() >= MessagesHandle.loaded()
             $('#small-spinner').fadeTo(100, 1)
             Meteor.defer ->
                 console.log("Fetch Older messages")
