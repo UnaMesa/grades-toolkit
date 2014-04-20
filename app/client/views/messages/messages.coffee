@@ -124,7 +124,9 @@ Template.messagesList.helpers
         MessagesHandle.ready()
     
     allMessagesLoaded: ->
-        MessagesHandle.ready() and Messages.find(messageFilter()).count() < MessagesHandle.loaded()
+        count = Messages.find(messageFilter()).count()
+        console.log("allMessagesLoaded",  "ready", MessagesHandle.ready(), "count",  count, "loaded", MessagesHandle.loaded())
+        MessagesHandle.ready() and count < MessagesHandle.loaded()
 
 
 Template.message.created = ->

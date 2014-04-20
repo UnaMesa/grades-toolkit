@@ -38,7 +38,9 @@
         {{/if}}
         <h3 class="record-name">{{name}}</h3> 
         {{#if tag}}<span class="label label-default tag tag-{{type}}">{{tag}}</span>{{/if}}
-        <span class="age text-muted">Capacity: {{capacity}}</span>
+        
+        {{#if cap}}<span class="age text-muted">Capacity: {{cap}}</span>{{/if}}
+        
         {{#if commentsCount}}<span class="badge comments-count-badge">{{commentsCount}}</span>{{/if}}
         <a class="photos-link" href="{{pathFor 'familyPhotos'}}">
             <i class="fa fa-picture-o fa-2x"></i>

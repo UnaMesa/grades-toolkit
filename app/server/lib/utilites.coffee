@@ -6,12 +6,31 @@
 #  create a Unique Tag
 #     todo: errors?
 #
+
+
+@createFamilyTag = (tagFromString) ->
+    baseTag = '#'
+    # First attempt is just initials
+    parts = tagFromString.toLowerCase().split(" ")
+    for part in parts
+        if part?[0]?
+            baseTag += part[0]
+
+    # Check if this tag exists already
+    tag = baseTag
+    counter = 0
+    while Families.findOne(tag: tag)
+        counter++
+        tag = "#{baseTag}#{counter}"
+    tag
+
 @createCaseTag = (tagFromString) ->
     baseTag = '#'
     # First attempt is just initials
     parts = tagFromString.toLowerCase().split(" ")
     for part in parts
-        baseTag += part[0]
+        if part?[0]?
+            baseTag += part[0]
 
     # Check if this tag exists already
     tag = baseTag
@@ -27,7 +46,8 @@
     # First attempt is just initials
     parts = tagFromString.toLowerCase().split(" ")
     for part in parts
-        baseTag += part[0]
+        if part?[0]?
+            baseTag += part[0]
 
     # Check if this tag exists already
     tag = baseTag

@@ -18,7 +18,6 @@ allowing secure use of Google APIs without URL redirects and authorization promp
 ###
 
 
-
 @gDrive = {}
 
 gDrive._request = null
@@ -64,8 +63,40 @@ gDrive.getFileList = ->
 gDrive.fileList = ->
     gDrive._fileList
 
+
+gDrive.getSpreadSheetList = ->
+    console.log("getSpreadSheetList")
+    gDrive.init()
+    gDrive._request
+        url: "https://spreadsheets.google.com/feeds/spreadsheets/private/full"
+        jwt: GoogleJWT
+    , (err, res, body) ->
+        console.log("getSpreadSheetList return")
+        if err
+            console.log("getSpreadSheetList Error:", err)
+        else
+            console.log("getSpreadSheetList", body)
+            #console.log("getSpreadSheetList", JSON.parse(body))
+
+
+gDrive.getSpreadSheetWorkSheetList = (key) ->
+    console.log("getSpreadSheetWorkSheetList")
+    gDrive.init()
+    gDrive._request
+        url: "https://spreadsheets.google.com/feeds/worksheets/#{key}/private/full"
+        jwt: GoogleJWT
+    , (err, res, body) ->
+        console.log("getSpreadSheetWorkSheetList return")
+        if err
+            console.log("getSpreadSheetWorkSheetList Error:", err)
+        else
+            console.log("getSpreadSheetWorkSheetList", body)
+            #console.log("getSpreadSheetWorkSheetList", JSON.parse(body))
+
+
 gDrive.baseUrl = (spreadsheetId, worksheetId) ->
     'https://spreadsheets.google.com/feeds/cells/' + spreadsheetId + '/' + worksheetId + '/private/full'
+
 
 gDrive.getAndUpdateFamilyList = ->
     console.log("getAndUpdateFamilyList")
@@ -76,40 +107,48 @@ gDrive.getAndUpdateFamilyList = ->
         jwt: GoogleJWT
     , Meteor.bindEnvironment gDrive._updateFamilyList, (err) ->   # This works but need to understand
         console.log("getAndUpdateFamilyList Error", err)
-        #throw err
-
 
 gDrive._updateFamilyList = (err, res, body) ->
-        if err
-            throw err
-        result = JSON.parse(body)
-        
-        entries = result.feed?.entry || []
-        
-        rawData = {}
-        headers = {}
-        for entry in entries
-            cell = entry.gs$cell
+    if err
+        throw err
+    result = JSON.parse(body)
+    
+    entries = result.feed?.entry || []
+    
+    rawData = {}
+    headers = {}
+    for entry in entries
+        cell = entry.gs$cell
 
-            if (cell.row is "1")
-                headers[cell.col] = cell.inputValue.toLowerCase()
-            else
-                if not rawData[cell.row]
-                    rawData[cell.row] = {}
-                rawData[cell.row][headers[cell.col]] = cell.inputValue
+        if (cell.row is "1")
+            headers[cell.col] = cell.inputValue.toLowerCase()
+        else
+            if not rawData[cell.row]
+                rawData[cell.row] = {}
+            rawData[cell.row][headers[cell.col]] = cell.inputValue
 
-        # TODO: Find a way to get this into an array from the start
-        gDrive._families = []
-        for key, val of rawData
-            gDrive._families.push val
+    # TODO: Find a way to get this into an array from the start
+    gDrive._families = []
+    for key, val of rawData
+        if val["lastname"] is '__END__'
+            break
+        gDrive._families.push val
 
-        #console.log("Updating family list from spreadsheet", gDrive._families)
-        for family in gDrive._families 
+    # Might not want this for flight
+    #console.log("remove families")
+    #Families.remove({})
+
+    #console.log("Updating family list from spreadsheet", gDrive._families)
+    for family in gDrive._families 
+        if family['lastname'] and family['firstname']
+            if not family.tag or family.tag is ''
+                tagString = family['lastname'].split('/')?.join(' ') + " " + family['firstname'].split('/').join(' ')
+                # TODO: We should generate tags not the spreadsheet and update
+                family.tag = createFamilyTag(tagString) 
             
-            # TODO: We should generate tags not the spreadsheet and update
-            family.tag = family.tag.toLowerCase()
-
-            Families.update 
+            #console.log("Upsert", tagString, family.tag)
+            
+            Families.upsert 
                 tag: family.tag
             ,
                 $set: family
@@ -118,8 +157,8 @@ gDrive._updateFamilyList = (err, res, body) ->
             , (error, result) ->
                 if error
                     console.log("Error upserting family", error)
+    gDrive._familyListUpdated = moment()
 
-        gDrive._familyListUpdated = moment()
 
 gDrive.checkFamilyList = ->
     gDrive.init()

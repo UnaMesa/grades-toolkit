@@ -134,7 +134,8 @@ Router.map ->
         else
           CoffeeAlerts.error("Error geting BID, could not find file")
         
-        Router.go('home')
+        Router.go 'viewCase', 
+          _id: @params.case
   
           
   @route 'downloadMou',
@@ -155,7 +156,8 @@ Router.map ->
         else
           CoffeeAlerts.error("Error geting MOU, could not find file")
         
-        Router.go('home')
+        Router.go 'viewCase', 
+          _id: @params.case
         
 
   @route 'mou',
@@ -370,6 +372,8 @@ Router.onBeforeAction mustBeSignedIn, except: ['home', 'serverGenerateBID']
 
 
 Router.onBeforeAction setTags, except: ['serverGenerateBID']
+
+Router.onBeforeAction "loading"
 
 # this hook will run on all routes
 Router.onRun cleanUp, except: ['serverGenerateBID']

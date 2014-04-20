@@ -4,6 +4,12 @@
 Meteor.startup ->
     console.log("Server Startup")
 
+    #gDrive.getSpreadSheetList()
+
+    #gDrive.getSpreadSheetWorkSheetList(GoogleFamilySpreadsheetId)
+
+    #gDrive.getSpreadSheetWorkSheetList(GoogleFamilySpreadsheetOldId)
+    
     gDrive.getAndUpdateFamilyList()
 
     # Do with a push notification from Google but requires a valie SSL cert!!!

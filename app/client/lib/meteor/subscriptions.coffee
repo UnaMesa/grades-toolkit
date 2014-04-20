@@ -10,4 +10,4 @@ Meteor.subscribe "userData"
 
 @CasesHandle = Meteor.subscribeWithPagination("cases", 10)
 
-@FamiliesHandle = Meteor.subscribeWithPagination("families", 10)
+@FamiliesHandle = Meteor.subscribeWithPagination("families", 20)
