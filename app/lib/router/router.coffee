@@ -126,11 +126,15 @@ Router.map ->
         if error
           CoffeeAlerts.error("Error geting BID #{error.message}")
         else if result?
-          file = result
-          blob = new Blob [file],
-            type: "text/html"
-          console.log("Sending download", fileId)
-          saveAs(blob, fileId + ".html")
+          bidWindow = window.open("", "blank")
+          bidWindow.document.write(result)
+          console.log("print BID")
+          bidWindow.print()
+          #file = result
+          #blob = new Blob [file],
+          #  type: "text/html"
+          #console.log("Sending download", fileId)
+          #saveAs(blob, fileId + ".html")
         else
           CoffeeAlerts.error("Error geting BID, could not find file")
         
@@ -148,11 +152,14 @@ Router.map ->
         if error
           CoffeeAlerts.error("Error geting MOU #{error.message}")
         else if result?
-          file = result
-          blob = new Blob [file],
-            type: "text/html"
-          console.log("Sending download", fileId,  file.length)
-          saveAs(blob, fileId + ".html")
+          bidWindow = window.open("", "blank")
+          bidWindow.document.write(result)
+          console.log("print MOU")
+          #file = result
+          #blob = new Blob [file],
+          #  type: "text/html"
+          #console.log("Sending download", fileId,  file.length)
+          #saveAs(blob, fileId + ".html")
         else
           CoffeeAlerts.error("Error geting MOU, could not find file")
         
