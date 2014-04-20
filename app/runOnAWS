@@ -1,24 +1,25 @@
 #!/bin/bash
 
 # 
-# StartUp Script for the AWS Site using meteor
+# StartUp Script for the AWS Site using passenger
 #
 
 # Meteor Environment Variables
 export MONGO_URL='mongodb://localhost:27017/grades'
-export ROOT_URL='http://grades.sharedrecords.org/'
-
+export ROOT_URL='https://grades.sharedrecords.org/'
+#export MONGO_OPLOG_URL='mongodb://oplogger:PasswordForOplogger@localhost:27017/local?authSource=admin'
+export OPLOG_URL='mongodb://localhost:27017/local'
 
 # Start Passenger Standalone in daemonized mode. Passenger will be started as
 # root when run from this file, so we also tell it to drop its privileges to a
 # normal user. Replace 'someusername' with the user you want to run your
 # application under.  Using ec2-user for now probably should switch to something else
-#passenger start --port 80 --user ubuntu --environment production --daemonize 
 
-#To stop Passenger Standalone, run:                                                                                                                                  
-#                                                                                                                                                                    
-#   sudo passenger stop --pid-file /home/bia/src/bia-website/app/tmp/pids/passenger.80.pid                                                                                                                                             
+passenger start --user ubuntu --daemonize 
 
-# Old way
-meteor run --production --port 80 
-#--release 0.7.0.1
+echo " To stop passenger run:"                                                                                                                                                                 
+echo "    sudo passenger stop"
+echo "  or "
+echo "    sudo passenger stop --pid-file /home/ubuntu/grades-toolkit/app/tmp/pids/passenger.80.pid"
+
+
