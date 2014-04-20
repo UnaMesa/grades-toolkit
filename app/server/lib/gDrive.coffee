@@ -135,8 +135,8 @@ gDrive._updateFamilyList = (err, res, body) ->
         gDrive._families.push val
 
     # Might not want this for flight
-    #console.log("remove families")
-    #Families.remove({})
+    console.log("remove families")
+    Families.remove({})
 
     #console.log("Updating family list from spreadsheet", gDrive._families)
     for family in gDrive._families 
