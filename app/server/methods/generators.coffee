@@ -151,14 +151,15 @@ Meteor.methods
         if user.services?.google?.email?
           console.log("Sending Email Link to", user.services.google.email)
           link = Meteor.absoluteUrl("cases/bid/pdf/#{fileId}?case=#{id}")
+          gradesLink = Meteor.absoluteUrl("")
           Email.send 
             from: "grades@sharedrecord.org"
             to: user.services.google.email
             subject: "New BID Generated"
             html: """
               <p>New BUD Generated for #{theCase.name}</p>
-              <p><a href="#{link}">Link to BID<a></p>
-              <p>Grades</p>
+              <p><a href="#{link}">Link to BID</a></p>
+              <p><a href="#{gradesLink}">Grades</a></p>
             """
 
       else
@@ -219,14 +220,15 @@ Meteor.methods
         if user.services?.google?.email?
           console.log("Sending Email Link to", user.services.google.email)
           link = Meteor.absoluteUrl("cases/mou/pdf/#{fileId}?case=#{id}")
+          gradesLink = Meteor.absoluteUrl("")
           Email.send 
             from: "grades@sharedrecord.org"
             to: user.services.google.email
             subject: "New MOU Generated"
             html: """
               <p>New MOU Generated for #{theCase.name}</p>
-              <p><a href="#{link}">Link to MOU<a></p>
-              <p>Grades</p>
+              <p><a href="#{link}">Link to MOU</a></p>
+              <p><a href="#{gradesLink}">Grades</a></p>
             """
 
 
