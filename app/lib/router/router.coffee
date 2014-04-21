@@ -118,10 +118,9 @@ Router.map ->
 
 
   @route 'downloadBid',
-    path: "cases/bid/pdf/:fileId"
-    #layoutTemplate: 'empty'
-    action: ->
-      console.log("Get download File", @params.fileId)
+    path: "cases/bid/download/:fileId"
+    onRun: ->
+      console.log("Get download BID File", @params.fileId)
       fileId = @params.fileId
       Meteor.call "getBid", @params.fileId, (error, result) =>
         if error
@@ -129,65 +128,45 @@ Router.map ->
           CoffeeAlerts.error("Error geting BID: #{error.reason}")
         else if result?
           bidWindow = window.open("","_self")
-          #if not bidWindow?
-          #  # Try in same frame
-          #  bidWindow = window.open("","_self")
           if bidWindow?
             bidWindow.document.write(result)
-            #if false
             #  console.log("print BID")
             #  bidWindow.print()
           else
             CoffeeAlerts.error("Error geting BID, you need pop up windows enabled for this to work")
             Router.go 'viewCase', 
               _id: @params.case
-          #file = result
-          #blob = new Blob [file],
-          #  type: "text/html"
-          #console.log("Sending download", fileId)
-          #saveAs(blob, fileId + ".html")
         else
           CoffeeAlerts.error("Error geting BID, could not find file")
-        
           Router.go 'viewCase', 
             _id: @params.case
-  
+    action: ->
+      console.log("download BID Action")
           
   @route 'downloadMou',
-    path: "cases/mou/pdf/:fileId"
-    #layoutTemplate: 'empty'
+    path: "cases/mou/download/:fileId"
     onRun: ->
-      console.log("downloadMou:onRun", @params.fileId)
+      console.log("Get download MOU File", @params.fileId)
       fileId = @params.fileId
       Meteor.call "getMou", @params.fileId, (error, result) =>
         if error
           CoffeeAlerts.error("Error geting MOU: #{error.reason}")
         else if result?
-          console.log("mouWindow?", mouWindow)
           mouWindow = window.open("","_self")
-          #if not mouWindow?
-          #  # Try in same frame
-          #  mouWindow = window.open("","_self")
           if mouWindow?
             mouWindow.document.write(result)
-            #if false
             #  console.log("print MOU")
             #  mouWindow.print()
           else
             CoffeeAlerts.error("Error geting MOU, you need pop up windows enabled for this to work")
             Router.go 'viewCase', 
               _id: @params.case
-          #file = result
-          #blob = new Blob [file],
-          #  type: "text/html"
-          #console.log("Sending download", fileId,  file.length)
-          #saveAs(blob, fileId + ".html")
         else
           CoffeeAlerts.error("Error geting MOU, could not find file")
           Router.go 'viewCase', 
             _id: @params.case
     action: ->
-      console.log("downloadMou Action")
+      console.log("download MOU Action")
         
 
   @route 'mou',
