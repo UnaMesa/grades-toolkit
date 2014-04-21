@@ -157,7 +157,7 @@ Meteor.methods
             to: user.services.google.email
             subject: "New BID Generated"
             html: """
-              <p>New BUD Generated for #{theCase.name}</p>
+              <p>New BID Generated for #{theCase.name}</p>
               <p><a href="#{link}">Link to BID</a></p>
               <p><a href="#{gradesLink}">Grades</a></p>
             """
