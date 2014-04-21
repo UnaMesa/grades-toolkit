@@ -113,11 +113,8 @@ Meteor.methods
     if theCase?
       theCase.bidDate = moment().format('LL')
       
-      console.log("Do helpers")
       theCase.documentsUsedForBid = documentsUsedForBid(theCase)
-      console.log("Do helpers 2")
       theCase.considerations      = considerations(theCase)
-      console.log("Do helpers 3")
       theCase.stayAtCurrentSchool = stayAtCurrentSchool(theCase)
       theCase.moveToNewSchool     = moveToNewSchool(theCase)
       theCase.teamDisagrees       = teamDisagrees(theCase)
@@ -248,8 +245,14 @@ Meteor.methods
     # TODO: Check ACL
     
     theFile  = UPLOAD_DIR + 'bids/' + fileId + '.html'
-    fs.readFileSync(theFile, 'utf8')
-    
+    try
+      file = fs.readFileSync(theFile, 'utf8')
+      if not file
+        throw new Meteor.Error(401, "Could not find BID")
+      file
+    catch e
+      console.log("Error getting generated BID", e)
+      throw new Meteor.Error(401, "Could not find BID")
 
   getMou: (fileId) ->
     user = Meteor.user()
@@ -259,7 +262,14 @@ Meteor.methods
     # TODO: Check ACL
       
     theFile  = UPLOAD_DIR + 'mous/' + fileId + '.html'
-    fs.readFileSync(theFile, 'utf8')
+    try
+      file = fs.readFileSync(theFile, 'utf8')
+      if not file
+          throw new Meteor.Error(401, "Could not find MOU")
+      file
+    catch e
+      console.log("Error getting generated BID", e)
+      throw new Meteor.Error(401, "Could not find BID")
     
 
 

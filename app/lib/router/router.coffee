@@ -116,6 +116,7 @@ Router.map ->
       data.title = "BID for #{data.name}"
       data
 
+
   @route 'downloadBid',
     path: "cases/bid/pdf/:fileId"
     #layoutTemplate: 'empty'
@@ -124,9 +125,13 @@ Router.map ->
       fileId = @params.fileId
       Meteor.call "getBid", @params.fileId, (error, result) =>
         if error
-          CoffeeAlerts.error("Error geting BID #{error.message}")
+          console.log("Error geting BID", error)
+          CoffeeAlerts.error("Error geting BID: #{error.reason}")
         else if result?
-          bidWindow = window.open("", "blank")
+          bidWindow = window.open("")
+          if not bidWindow?
+            # Try in same frame
+            bidWindow = window.open("","_self")
           if bidWindow?
             bidWindow.document.write(result)
             if false
@@ -155,9 +160,12 @@ Router.map ->
       fileId = @params.fileId
       Meteor.call "getMou", @params.fileId, (error, result) =>
         if error
-          CoffeeAlerts.error("Error geting MOU #{error.message}")
+          CoffeeAlerts.error("Error geting MOU: #{error.reason}")
         else if result?
-          mouWindow = window.open("", "blank")
+          mouWindow = window.open("")
+          if not mouWindow?
+            # Try in same frame
+            mouWindow = window.open("","_self")
           if mouWindow?
             mouWindow.document.write(result)
             if false
