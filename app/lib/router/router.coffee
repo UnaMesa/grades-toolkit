@@ -156,8 +156,8 @@ Router.map ->
   @route 'downloadMou',
     path: "cases/mou/pdf/:fileId"
     #layoutTemplate: 'empty'
-    action: ->
-      console.log("Get download File", @params.fileId)
+    onRun: ->
+      console.log("downloadMou:onRun", @params.fileId)
       fileId = @params.fileId
       Meteor.call "getMou", @params.fileId, (error, result) =>
         if error
@@ -186,6 +186,8 @@ Router.map ->
           CoffeeAlerts.error("Error geting MOU, could not find file")
           Router.go 'viewCase', 
             _id: @params.case
+    action: ->
+      console.log("downloadMou Action")
         
 
   @route 'mou',
