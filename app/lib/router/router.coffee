@@ -127,10 +127,14 @@ Router.map ->
           CoffeeAlerts.error("Error geting BID #{error.message}")
         else if result?
           bidWindow = window.open("", "blank")
-          bidWindow.document.write(result)
-          if false
-            console.log("print BID")
-            bidWindow.print()
+          if bidWindow?
+            bidWindow.document.write(result)
+            if false
+              console.log("print BID")
+              bidWindow.print()
+          else
+            CoffeeAlerts.error("Error geting BID, you need pop up windows enabled for this to work")
+        
           #file = result
           #blob = new Blob [file],
           #  type: "text/html"
@@ -154,10 +158,14 @@ Router.map ->
           CoffeeAlerts.error("Error geting MOU #{error.message}")
         else if result?
           mouWindow = window.open("", "blank")
-          mouWindow.document.write(result)
-          if false
-            console.log("print MOU")
-            mouWindow.print()
+          if mouWindow?
+            mouWindow.document.write(result)
+            if false
+              console.log("print MOU")
+              mouWindow.print()
+          else
+            CoffeeAlerts.error("Error geting MOU, you need pop up windows enabled for this to work")
+        
           #file = result
           #blob = new Blob [file],
           #  type: "text/html"
