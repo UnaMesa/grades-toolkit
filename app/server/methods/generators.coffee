@@ -150,7 +150,7 @@ Meteor.methods
 
         if user.services?.google?.email?
           console.log("Sending Email Link to", user.services.google.email)
-          link = Meteor.absoluteUrl("cases/bid/pdf/#{fileId}?case=#{id}")
+          link = Meteor.absoluteUrl("cases/bid/download/#{fileId}?case=#{id}")
           gradesLink = Meteor.absoluteUrl("")
           Email.send 
             from: "grades@sharedrecord.org"
@@ -219,7 +219,7 @@ Meteor.methods
 
         if user.services?.google?.email?
           console.log("Sending Email Link to", user.services.google.email)
-          link = Meteor.absoluteUrl("cases/mou/pdf/#{fileId}?case=#{id}")
+          link = Meteor.absoluteUrl("cases/mou/download/#{fileId}?case=#{id}")
           gradesLink = Meteor.absoluteUrl("")
           Email.send 
             from: "grades@sharedrecord.org"
