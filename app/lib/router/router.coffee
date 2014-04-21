@@ -128,18 +128,19 @@ Router.map ->
           console.log("Error geting BID", error)
           CoffeeAlerts.error("Error geting BID: #{error.reason}")
         else if result?
-          bidWindow = window.open("")
-          if not bidWindow?
-            # Try in same frame
-            bidWindow = window.open("","_self")
+          bidWindow = window.open("","_self")
+          #if not bidWindow?
+          #  # Try in same frame
+          #  bidWindow = window.open("","_self")
           if bidWindow?
             bidWindow.document.write(result)
-            if false
-              console.log("print BID")
-              bidWindow.print()
+            #if false
+            #  console.log("print BID")
+            #  bidWindow.print()
           else
             CoffeeAlerts.error("Error geting BID, you need pop up windows enabled for this to work")
-        
+            Router.go 'viewCase', 
+              _id: @params.case
           #file = result
           #blob = new Blob [file],
           #  type: "text/html"
@@ -148,8 +149,8 @@ Router.map ->
         else
           CoffeeAlerts.error("Error geting BID, could not find file")
         
-        Router.go 'viewCase', 
-          _id: @params.case
+          Router.go 'viewCase', 
+            _id: @params.case
   
           
   @route 'downloadMou',
@@ -162,18 +163,20 @@ Router.map ->
         if error
           CoffeeAlerts.error("Error geting MOU: #{error.reason}")
         else if result?
-          mouWindow = window.open("")
-          if not mouWindow?
-            # Try in same frame
-            mouWindow = window.open("","_self")
+          console.log("mouWindow?", mouWindow)
+          mouWindow = window.open("","_self")
+          #if not mouWindow?
+          #  # Try in same frame
+          #  mouWindow = window.open("","_self")
           if mouWindow?
             mouWindow.document.write(result)
-            if false
-              console.log("print MOU")
-              mouWindow.print()
+            #if false
+            #  console.log("print MOU")
+            #  mouWindow.print()
           else
             CoffeeAlerts.error("Error geting MOU, you need pop up windows enabled for this to work")
-        
+            Router.go 'viewCase', 
+              _id: @params.case
           #file = result
           #blob = new Blob [file],
           #  type: "text/html"
@@ -181,9 +184,8 @@ Router.map ->
           #saveAs(blob, fileId + ".html")
         else
           CoffeeAlerts.error("Error geting MOU, could not find file")
-        
-        Router.go 'viewCase', 
-          _id: @params.case
+          Router.go 'viewCase', 
+            _id: @params.case
         
 
   @route 'mou',
