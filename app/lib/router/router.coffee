@@ -128,8 +128,9 @@ Router.map ->
         else if result?
           bidWindow = window.open("", "blank")
           bidWindow.document.write(result)
-          console.log("print BID")
-          bidWindow.print()
+          if false
+            console.log("print BID")
+            bidWindow.print()
           #file = result
           #blob = new Blob [file],
           #  type: "text/html"
@@ -152,9 +153,11 @@ Router.map ->
         if error
           CoffeeAlerts.error("Error geting MOU #{error.message}")
         else if result?
-          bidWindow = window.open("", "blank")
-          bidWindow.document.write(result)
-          console.log("print MOU")
+          mouWindow = window.open("", "blank")
+          mouWindow.document.write(result)
+          if false
+            console.log("print MOU")
+            mouWindow.print()
           #file = result
           #blob = new Blob [file],
           #  type: "text/html"
@@ -321,6 +324,7 @@ Router.map ->
   #  Server Side
   #
 
+  ###
   @route 'serverGenerateBID',
     where: 'server'
     path: "cases/bid/:_id/server_generate"
@@ -330,6 +334,7 @@ Router.map ->
       @response.write('Show Generated BID')
       @response.end()
       console.log("Generated BID for ", @params._id, @userId)
+  ###
 
 mustBeSignedIn = (pause) ->
   if not user = Meteor.user()
