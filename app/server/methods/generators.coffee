@@ -136,7 +136,7 @@ Meteor.methods
         toPdf = child.spawn "wkhtmltopdf", [htmlFile, pdfFile]
         toPdf.stdout.setEncoding('utf8');
         toPdf.stdout.on 'data', (data) ->
-          console.log("wkhtmltopdf:", data)
+          #console.log("wkhtmltopdf:", data)
 
         toPdf.stderr.setEncoding('utf8');
         toPdfStderr = ""
@@ -205,7 +205,7 @@ Meteor.methods
         toPdf = child.spawn "wkhtmltopdf", [htmlFile, pdfFile]
         toPdf.stdout.setEncoding('utf8');
         toPdf.stdout.on 'data', (data) ->
-          console.log("wkhtmltopdf:", data)
+          #console.log("wkhtmltopdf:", data)
 
         toPdf.stderr.setEncoding('utf8');
         toPdfStderr = ""
