@@ -38,6 +38,7 @@ validEmails = [
   'joan.rock@state.vt.us'
   'gregwolff@unamesa.org'
   'tim@pfafman.com'
+  'amandaroselevin@gmail.com'
 ]
 
 admins = [

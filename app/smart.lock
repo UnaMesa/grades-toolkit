@@ -49,8 +49,8 @@
       },
       "moment": {
         "git": "https://github.com/acreeger/meteor-moment.git",
-        "tag": "v2.5.1",
-        "commit": "8c9bc5d3fc96705057737cb9743d555417f6e551"
+        "tag": "v2.6.0",
+        "commit": "26156df681750fd6e6ed77043eef32b6653ebbdf"
       },
       "coffee-alerts": {
         "git": "https://github.com/pfafman/meteor-coffee-alerts.git",
@@ -95,7 +95,7 @@
       "accounts-entry": {
         "git": "https://github.com/pfafman/meteor-accounts-entry.git",
         "branch": "master",
-        "commit": "c2969e2f7ec02a970765ed2fec5c859043c7f1e5"
+        "commit": "ff2732faa0987fd5f061461553b4ecb99f0d50a1"
       },
       "bootstrap3-less": {
         "git": "https://github.com/eprochasson/bootstrap3-less",
@@ -119,18 +119,13 @@
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.3.0",
-        "commit": "8093f4350dc707af51d668deaeed529e8434a090"
-      },
-      "just-i18n": {
-        "git": "https://github.com/subhog/meteor-just-i18n.git",
-        "tag": "v0.2.4",
-        "commit": "91decfcf5b3b5e67f202a67658350b862330bf3d"
+        "tag": "v0.4.0",
+        "commit": "2cc6aac0d35a4e00b065c1437d540b2aefba5241"
       },
       "accounts-t9n": {
-        "git": "https://github.com/Differential/meteor-accounts-t9n.git",
-        "branch": "fix-just-i18n",
-        "commit": "0e3f96d189b8cac3813b1f5a20a59115881f628d"
+        "git": "https://github.com/softwarerero/meteor-accounts-t9n.git",
+        "tag": "v0.0.3",
+        "commit": "d1710f979d6955459d9ce0374df81d22c3c6a6ab"
       }
     }
   }

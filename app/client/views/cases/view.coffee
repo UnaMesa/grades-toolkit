@@ -35,10 +35,6 @@ Template.viewCase.helpers
                 caseAsArray.push
                     key: "DCF Family/Child#"
                     value: value
-            else if key not in  ['_id','contact', 'userId', 'name', 'commentsCount', 'tag', 'urgent', 'BID', 'picture']
-                caseAsArray.push
-                    key: key
-                    value: value
             else if key is 'contact'
                 caseAsArray.push
                     key: 'Contact'
@@ -46,6 +42,10 @@ Template.viewCase.helpers
                 caseAsArray.push
                     key: 'Contact Number'
                     value: value.number
+            else if key not in  ['_id','contact', 'userId', 'name', 'commentsCount', 'tag', 'urgent', 'BID', 'MOU', 'picture', 'goBackPath']
+                caseAsArray.push
+                    key: key
+                    value: value
         caseAsArray
 
     caseId: ->
