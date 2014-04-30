@@ -7,6 +7,8 @@
 # Meteor Environment Variables
 export MONGO_URL='mongodb://localhost:27017/grades'
 export ROOT_URL='https://grades.sharedrecords.org/'
+
+# Oplog....  Not sure what the diff is between these ...
 #export MONGO_OPLOG_URL='mongodb://oplogger:PasswordForOplogger@localhost:27017/local?authSource=admin'
 export OPLOG_URL='mongodb://localhost:27017/local'
 
