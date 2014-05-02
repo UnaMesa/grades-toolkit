@@ -76,6 +76,7 @@
 
 
     load: ->
+        console.log("gDrive.load")
         if not gapi.client?
             # If this starts up before the Google API has loaded
             console.log("Google API has not loaded....")
@@ -88,6 +89,7 @@
 
 
     afterLoad: ->
+        console.log("gapi.client.drive loaded", gapi.client.drive)
         gDrive._loading = false
         gDrive._currentStateListeners.changed()
         if user = Meteor.user()
@@ -120,28 +122,25 @@
         console.log("checkAuth called", gDrive._immediate)
         if not gDrive._authorized and not gDrive._authorizing
             if user = Meteor.user()
+                console.log("checkAuth", user)
                 # TODO: Add checks to keep the token in sync!!!
                 if user.services?.google?.accessToken?
-                    console.log("Check accessToken", user.services?.google)
+                    console.log("Doing authorization transfer", user, user.services?.google?.accessToken)
                     expiresAt = moment(user.services.google.expiresAt)
                     expiresIn = expiresAt.diff(moment(), 'seconds')
-                    console.log("Expired?", expiresAt, expiresIn)
-                    if expiresIn < 1000
-                        console.log("Token Expired.  Refresh...")
-                        @_refreshToken()
-                    else
-                        gapi.auth.setToken
-                            access_token: user.services.google.accessToken
-                            expires_in: expiresIn
-                        gDrive._authorized = true
-                        gDrive._currentStateListeners.changed()
-                        if gDrive._callBack?
-                            gDrive._callBack()
+                    gapi.auth.setToken
+                        access_token: user.services.google.accessToken
+                        expires_in: expiresIn
+                    gDrive._authorized = true
+                    gDrive._currentStateListeners.changed()
+                    if gDrive._callBack?
+                        gDrive._callBack()
 
             return
             #
             #  TODO: Check for popup blocking for this causes havoc!!!
             #
+            console.log("checkAuth", gDrive._immediate)
             gDrive._authorizing = true
             gDrive._currentStateListeners.changed()
             #gDrive._currentFileListListeners.changed()
@@ -154,6 +153,7 @@
                                                # permissions dialog if they have not previously authorized 
                                                # your application.
             , (authResult) ->
+                console.log("Google Auth Callback", authResult, gDrive.immediate)
                 gDrive._authorizing = false
                 gDrive._userInitiatedAuth = false
                 if authResult and not authResult.error
@@ -166,7 +166,9 @@
                 else 
                     if authResult?.error?
                         console.log("Google Auth Error", authResult.error)
-                        CoffeeAlerts.error("Google Authorization Failed  #{authResult?.error?.message}")
+                    else
+                        console.log("Google No Auth Return", authResult)
+                    CoffeeAlerts.error("Google Authorization Failed  #{authResult?.error?.message}")
                 gDrive._currentStateListeners.changed()
         else if gDrive._callBack?
             gDrive._callBack()
@@ -210,40 +212,6 @@
     fileList: ->
         gDrive._currentFileListListeners.depend()
         gDrive._fileList
-
-
-    findOrCreateFolder: (title, parentId, callback) ->
-        gDrive.searchForFolder title, parentId, (resp) ->
-            console.log("findOrCreateFolder search:", title, resp)
-            if resp.error?
-                callback(resp)
-            if not resp.items?[0]?
-                gDrive.createDirectory(title, parentId, callback)
-            else
-                callback(resp.items[0])
-
-    searchForFolder: (title, parentId, callback) ->
-        searchString = "trashed = false and title = '#{title}'"
-        searchString += " and mimeType = 'application/vnd.google-apps.folder'"
-        if parentId?
-            searchString += " and '#{parentId}' in parents"
-        gDrive.call ->
-            gDrive._searchForFile(searchString, callback)
-
-
-    searchForFile: (title, callback) ->
-        searchString = "trashed = false and title = '#{title}'"
-        gDrive.call ->
-            gDrive._searchForFile(searchString, callback)
-        
-
-    _searchForFile: (searchString, callback) ->
-        if  searchString
-            request = gapi.client.drive.files.list
-                q: searchString
-            request.execute (resp) ->
-                callback(resp)
-
 
 
     _appendToFileList: (newFiles) ->
@@ -421,8 +389,7 @@
                     return file
 
 
-    createDirectory: (title, parentId, callback) ->
-        console.log("createDirectory", title, parentId)
+    createDirectory: (title, parentId) ->
         if not parentId?
             parentId = 'root'
         if gDrive.findDirectory(title, parentId)
@@ -439,12 +406,11 @@
                     'Content-Type': 'application/json'
                 'body': JSON.stringify(metadata)
             request.execute (newFolder) ->
-                callback?(newFolder)
                 if newFolder.error
                     console.log("createDirectory Error",newFolder.error)
                     CoffeeAlerts.error("Could not create folder")
                 else
-                    #console.log("new folder", newFolder, gDrive)
+                    console.log("new folder", newFolder, gDrive)
                     gDrive._fileList.unshift(newFolder)
                     gDrive._currentFileListListeners.changed()
 
@@ -483,56 +449,4 @@
         else
             callback null
         
-
-
-    createFile: (title, body, parentId, contentType, callback) ->
-        if not parentId
-            parentId = 'root'
-
-        parent =
-            id: parentId
-            isRoot: parentId is 'root'
-            kind: "drive#parentReference"
-
-        if not contentType
-            contentType = "text/plain"
-        console.log("Create File", title, parentId)
-        
-        doc =
-            title: title
-            body: body
-
-        boundary = "-------314159265358979323846"
-        delimiter = "\r\n--" + boundary + "\r\n"
-        close_delim = "\r\n--" + boundary + "--"
-        metadata = 
-            title: doc.title
-            mimeType: contentType
-            parents: [parent]
-
-        base64Data = btoa(doc.body)
-
-        multipartRequestBody = delimiter + 
-            "Content-Type: application/json\r\n\r\n" + 
-            JSON.stringify(metadata) + delimiter + 
-            "Content-Type: " + contentType + "\r\n" + 
-            "Content-Transfer-Encoding: base64\r\n" + 
-            "\r\n" + base64Data + close_delim
-        
-        gapi.client.request(
-            path: "/upload/drive/v2/files"
-            method: "POST"
-            params:
-                uploadType: "multipart"
-            headers:
-                "Content-Type": "multipart/mixed; boundary=\"" + boundary + "\""
-
-            body: multipartRequestBody
-        ).execute (file) ->
-            console.log("Created file", file)
-            if callback?
-                callback(file)
-
-
-
 

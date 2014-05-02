@@ -7,16 +7,16 @@ child  = Npm.require('child_process')
 
 UPLOAD_DIR = '/var/spool/grades/'
 
-console.log("generators")
-
 documentsUsedForBid = (rec) ->
   rows = []
   row = []
   for val in BID.documentsUsed
     data =
       key: val
-    if rec.BID?.documentsUsed and val in rec.BID.documentsUsed
+    if rec.BID?.documentsUsed? and val in rec.BID?.documentsUsed
+      #console.log("used doc", val)
       data.checked = "check-"
+    console.log("doc used?",data)
     row.push(data)
     if row.length is 2
       rows.push(row)
@@ -56,8 +56,10 @@ considerations = (rec) ->
 stayAtCurrentSchool = (rec) ->
   rec.BID?.teamRecommendation is 'stayAtCurrentSchool'
     
+
 moveToNewSchool = (rec) ->
   rec.BID?.teamRecommendation is 'moveToNewSchool'
+
 
 teamDisagrees = (rec) ->
   rec.BID?.teamRecommendation is 'teamDisagrees'
@@ -69,11 +71,13 @@ currentSchool = (rec) ->
   else
     " &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; "
 
+
 currentSUSD = (rec) ->
   if rec.BID?.teamRecommendation is 'stayAtCurrentSchool'
     rec.BID.susd
   else
     " &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; "
+
 
 newSchool = (rec) ->
   if rec.BID?.teamRecommendation is 'moveToNewSchool'
@@ -81,14 +85,34 @@ newSchool = (rec) ->
   else
     " &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; "
 
+
 newSUSD = (rec) ->
   if rec.BID?.teamRecommendation is 'moveToNewSchool'
     rec.BID.susd
   else
     " &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; "
 
+
 otherDocumentsUsed = (rec) ->
   rec.BID?.otherDocumentsUsed or "&nbsp; &nbsp; &nbsp; -- NONE -- "
+
+
+sendUserEmail = (subject, html) ->
+  console.log("sendUserEmail", subject)
+
+  user = Meteor.user()
+  
+  # ensure the user is logged in
+  throw new Meteor.Error(401, "Need to be logged in")  unless user
+
+  if user.services?.google?.email?
+    console.log("Sending Email Link to", user.services.google.email)
+    gradesLink = Meteor.absoluteUrl("")
+    Email.send 
+      from: "grades@sharedrecord.org"
+      to: user.services.google.email
+      subject: subject
+      html: html + "<p><a href="#{gradesLink}">Grades</a></p>"
 
 
 toArrayBuffer = (buffer) ->
@@ -123,7 +147,7 @@ Meteor.methods
       theCase.newSchool           = newSchool?(theCase)
       theCase.newSUSD             = newSUSD?(theCase)
 
-      console.log("Do HTML")
+      #console.log("Do HTML", theCase.documentsUsedForBid)
       html = Handlebars.templates['generatedBid'](theCase)
 
       if html?
@@ -148,6 +172,14 @@ Meteor.methods
           if code isnt 0
             console.log("wkhtmltopdf error:", toPdfStderr)
 
+        result =
+          ok: true
+          id: id
+          title: fileId+ '.html'
+          html: html
+          link: Meteor.absoluteUrl("cases/bid/download/#{fileId}?case=#{id}")
+
+        ###
         if user.services?.google?.email?
           console.log("Sending Email Link to", user.services.google.email)
           link = Meteor.absoluteUrl("cases/bid/download/#{fileId}?case=#{id}")
@@ -161,6 +193,7 @@ Meteor.methods
               <p><a href="#{link}">Link to BID</a></p>
               <p><a href="#{gradesLink}">Grades</a></p>
             """
+        ###
 
       else
         console.log("generatedBid: Could not generate html for bid. id:#{id}")
@@ -217,6 +250,14 @@ Meteor.methods
           if code isnt 0
             console.log("wkhtmltopdf error:", toPdfStderr)
 
+        result =
+          ok: true 
+          id: id
+          title: fileId+ '.html'
+          html: html
+          link: Meteor.absoluteUrl("cases/mou/download/#{fileId}?case=#{id}")
+
+        ###  Have client initiate
         if user.services?.google?.email?
           console.log("Sending Email Link to", user.services.google.email)
           link = Meteor.absoluteUrl("cases/mou/download/#{fileId}?case=#{id}")
@@ -230,7 +271,7 @@ Meteor.methods
               <p><a href="#{link}">Link to MOU</a></p>
               <p><a href="#{gradesLink}">Grades</a></p>
             """
-
+        ###
 
       else
         console.log("generatedMou: Could not generate html for MOU. id:#{id}")
@@ -256,6 +297,7 @@ Meteor.methods
       console.log("Error getting generated BID", e)
       throw new Meteor.Error(401, "Could not find BID")
 
+
   getMou: (fileId) ->
     user = Meteor.user()
     # ensure the user is logged in
@@ -273,6 +315,25 @@ Meteor.methods
       console.log("Error getting generated BID", e)
       throw new Meteor.Error(401, "Could not find BID")
     
+
+  sendCaseEmail: (type, id, gDriveDownloadLink, link) ->
+    user = Meteor.user()
+    throw new Meteor.Error(401, "Need to be logged in")  unless user
+
+    theCase = Cases.findOne(id)
+    throw new Meteor.Error(401, "Could not find case")  unless theCase
+    
+    gradesLink = Meteor.absoluteUrl("")
+    html = """
+      <p>New #{type} Generated for #{theCase.name}</p>
+      <p><a href="#{gDriveDownloadLink}">Link to Google Drive #{type} download</a></p>
+      <p><a href="#{link}">Link to #{type} on Grades</a></p>
+      <p><a href="#{gradesLink}">Grades</a></p>
+    """
+
+    sendUserEmail("New #{type} Generated", html)
+
+ 
 
 
 

@@ -55,19 +55,27 @@
 
 <template name="moreNav">
   <ul class="dropdown-menu">
-    <li>
-      <a href="mailto:support@grades.sharedrecord.org">
-         <i class="fa fa-question-circle fa-2x"></i> Support
-      </a>
-    </li>
+    {{#if admin}}
     <li class="{{activeRouteClass 'cryptoTest'}}">
       <a href="{{pathFor 'cryptoTest'}}">
         <i class="fa fa-key fa-2x"></i> Encryption Tests
       </a>
     </li>
+    <li class="{{activeRouteClass 'tests'}}">
+      <a href="{{pathFor 'tests'}}">
+        <i class="fa fa-bug fa-2x"></i> Testing
+      </a>
+    </li>
+    <li class="divider"></li>
+    {{/if}}
+    <li>
+      <a href="mailto:support@grades.sharedrecord.org">
+         <i class="fa fa-question-circle fa-2x"></i> Support
+      </a>
+    </li>
     <li class="{{activeRouteClass 'googleDocs'}}">
       <a href="{{pathFor 'googleDocs'}}">
-        <i class="fa fa-google-plus-square fa-2x"></i> Google Tests
+        <i class="fa fa-google-plus-square fa-2x"></i> Google Drive
       </a>
     </li>
     <li class="{{activeRouteClass 'settings'}}">

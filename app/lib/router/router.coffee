@@ -93,6 +93,8 @@ Router.map ->
   @route 'bid',
     path: "cases/bid/:_id"
     onBeforeAction: ->
+      gDrive.reset()
+      gDrive.init()
       Session.set('currentRecordId', @params._id)
       Session.set("bidAttendees", null)
     waitOn: ->
@@ -173,6 +175,8 @@ Router.map ->
     path: "cases/mou/:_id"
     onBeforeAction: ->
       Session.set('currentRecordId', @params._id)
+      gDrive.reset()
+      gDrive.init()
     waitOn: ->
       Meteor.subscribe('singleCase', @params._id)
     data: ->
@@ -319,6 +323,10 @@ Router.map ->
     data:
         title: "Key Generation Test"
 
+
+  @route 'tests'
+
+  
   #
   #  Server Side
   #

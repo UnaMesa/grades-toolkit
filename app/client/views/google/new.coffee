@@ -63,6 +63,7 @@ Template.newGoogleDoc.events
                 CoffeeAlerts.success("Error creating document #{file?.error?.message} #{file?.error?.code}")
             else if file.title is doc.title
                 CoffeeAlerts.success("Created new doc")            
+                # TODO: This needs to change.  Probably make this a modal on main page...
                 Router.go("googleDocs")
             else
                 CoffeeAlerts.error("Error creating document")

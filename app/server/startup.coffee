@@ -42,15 +42,27 @@ validEmails = [
 ]
 
 admins = [
-    'joan.rock@state.vt.us'
-    'gregwolff@unamesa.org'
-    'tim@pfafman.com'
+  'joan.rock@state.vt.us'
+  'gregwolff@unamesa.org'
+  'tim@pfafman.com'
 ]
 
 if validEmails.length isnt ValidUsers.find().count()
-    console.log("Set up Valid Emails Table")
-    ValidUsers.remove({})
-    for email in validEmails
-        ValidUsers.insert
-            email: email
-            admin: email in admins
+  console.log("Set up Valid Emails Table")
+  ValidUsers.remove({})
+  for email in validEmails
+    ValidUsers.insert
+      email: email
+      admin: email in admins
+
+for email in admins
+  Meteor.users.update
+    "services.google.email": email
+  ,
+    $set:
+      admin: true
+
+
+
+
+

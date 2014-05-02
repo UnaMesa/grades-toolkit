@@ -5,6 +5,7 @@ Meteor.publish "userData", ->
         _id: @userId
     ,
         fields:
+            'admin': 1
             'tag': 1
             'commentsCount': 1
             'createdAt': 1

@@ -6,8 +6,9 @@ Template.layout.rendered = ->
 
 Meteor.startup ->
     console.log("Meteor Startup on client")
+
     AccountsEntry.config
-        #logo: 'img/bia.png'
+        #logo: 'img/grades?.png'
         privacyUrl: '/privacy-policy'
         termsUrl: '/terms-of-use'
         homeRoute: '/'

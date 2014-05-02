@@ -72,7 +72,6 @@ $(window).resize(setMessageBodyWidth)
         if MessagesHandle.ready() and Messages.find(messageFilter()).count() >= MessagesHandle.loaded()
             $('#small-spinner').fadeTo(100, 1)
             Meteor.defer ->
-                console.log("Fetch Older messages")
                 scrollToTopOK = false
                 Meteor.defer ->
                     MessagesHandle.loadNextPage()
@@ -126,7 +125,7 @@ Template.messagesList.helpers
     
     allMessagesLoaded: ->
         count = Messages.find(messageFilter()).count()
-        console.log("allMessagesLoaded",  "ready", MessagesHandle.ready(), "count",  count, "loaded", MessagesHandle.loaded())
+        #console.log("allMessagesLoaded",  "ready", MessagesHandle.ready(), "count",  count, "loaded", MessagesHandle.loaded())
         MessagesHandle.ready() and count < MessagesHandle.loaded()
 
 

@@ -54,7 +54,11 @@ saveBid = (routeOnSave = false, bidOverrides = {}) ->
             if routeOnSave
                 switch routeOnSave
                     when 'generatedBid'
-                        Meteor.call('generateBid', Session.get('currentRecordId'))
+                        Meteor.call 'generateBid', Session.get('currentRecordId'), (error, result) ->
+                            if not error and result?.ok and result.html and result.title
+                                console.log("Send BID to Google", result)
+                                GoogleDriveSaveBID(result)
+
                         newWindow = window.open Router.routes[routeOnSave].path
                             _id: Session.get('currentRecordId')
 
@@ -67,12 +71,8 @@ saveBid = (routeOnSave = false, bidOverrides = {}) ->
                         
                         Router.go(routeOnSave, {_id: Session.get('currentRecordId')})
 
-                # Write it to Google Docs
-                # Cases/Name/BID.txt
 
-
-#Template.bid.created = ->
-    
+#Template.bid.created = ->   
 
 #Template.bid.rendered = ->
     #$(".make-switch").bootstrapSwitch()
@@ -200,6 +200,7 @@ Template.bidConsiderations.rendered = ->
 
 Template.bidConsiderations.helpers
     considerations: ->
+        #console.log("considerations", BID.considerations, @BID.considerations)
         considerations = []
         for consideration in BID.considerations
             data = _.clone(consideration)
@@ -210,14 +211,16 @@ Template.bidConsiderations.helpers
             if @BID?.considerations
                 for theCons in @BID.considerations
                     if theCons.key is data.key
+                        #console.log("theCons", theCons)
                         data.factors = theCons.factors
                         switch theCons.yesNo
                             when 'yes'
-                                data.yes = "checked=checked"
+                                data.yes = "checked"
                             when 'no'
-                                data.no = "checked=checked"
+                                data.no = "checked"
                         break
             considerations.push(data)
+        #console.log("considerations", considerations)
         considerations
 
 bidSummarySetUp = ->

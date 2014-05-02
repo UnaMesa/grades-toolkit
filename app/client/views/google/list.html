@@ -92,10 +92,10 @@
 <template name="gDriveItem">
     <li class="list-group-item">
         {{#if isaFolder}}
-            <a class="folder" href="#">
+            <button class="folder btn btn-link">
                 <img src="{{iconLink}}"/>
                 <span>{{title}}</span>
-            </a>
+            </button>
         {{else}}
             {{#if testingOk}}
                 <button class="btn btn-link btn-xs read-file"><i class="fa fa-stethoscope"></i></button>
@@ -108,9 +108,9 @@
             
         <span class="pull-right">
             {{#if deleteOk}}
-            <a class="delete-file" href="#">
+            <button class="btn btn-link delete-file">
                 <i class="fa fa-trash-o fa-lg"></i>
-            </a>
+            </button>
             {{/if}}
             {{#if getDownLoadUrl}}
             <a target="_blank" href="{{getDownLoadUrl}}">

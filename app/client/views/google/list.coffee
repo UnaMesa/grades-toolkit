@@ -116,7 +116,7 @@ Template.gDriveItem.events
             console.log("Deleting", @title)
             theId = @id
             # change trash to delete to really delete it
-            gapi.client.drive.files.trash(
+            gapi.client.drive.files.delete(
                 'fileId': @id
             ).execute (response) ->
                 console.log(response, theId)

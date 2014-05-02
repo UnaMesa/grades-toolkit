@@ -31,11 +31,15 @@ saveMou = (routeOnSave = false) ->
         
                 switch routeOnSave
                     when 'generatedMou'
-                        Meteor.call('generateMou', Session.get('currentRecordId'))
+                        Meteor.call 'generateMou', Session.get('currentRecordId'), (error, result) ->
+                            if not error and result?.ok and result.html and result.title
+                                console.log("Send MOU to Google", result)
+                                GoogleDriveSaveMOU(result)
+
                         newWindow = window.open Router.routes[routeOnSave].path
                             _id: Session.get('currentRecordId')
 
-                        if !newWindow or newWindow.closed or typeof newWindow.closed=='undefined'
+                        if !newWindow or newWindow.closed or typeof newWindow.closed == 'undefined'
                             alert("Pop Up Blocked!  Opening in current window") 
                             Router.go(routeOnSave, {_id: Session.get('currentRecordId')})
 
@@ -55,6 +59,7 @@ Template.mou.helpers
                 when Date
                     type = 'date'
                     placeholder = 'MM/DD/YYYY'
+                    console.log("moment", @MOU?[key])
                     value = moment(@MOU?[key]).format('LL')
                 else
                     type = 'text'
