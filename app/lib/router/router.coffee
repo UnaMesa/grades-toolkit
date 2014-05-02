@@ -144,6 +144,7 @@ Router.map ->
             _id: @params.case
     action: ->
       console.log("download BID Action")
+ 
           
   @route 'downloadMou',
     path: "cases/mou/download/:fileId"

@@ -125,7 +125,7 @@
       "accounts-t9n": {
         "git": "https://github.com/softwarerero/meteor-accounts-t9n.git",
         "branch": "master",
-        "commit": "97780ec3c89db03543bd11284f2a4b537dd8033b"
+        "commit": "f7db403808c134efd9de9e6d39737275e881ebcb"
       }
     }
   }

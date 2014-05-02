@@ -16,7 +16,6 @@ documentsUsedForBid = (rec) ->
     if rec.BID?.documentsUsed? and val in rec.BID?.documentsUsed
       #console.log("used doc", val)
       data.checked = "check-"
-    console.log("doc used?",data)
     row.push(data)
     if row.length is 2
       rows.push(row)
@@ -98,10 +97,7 @@ otherDocumentsUsed = (rec) ->
 
 
 sendUserEmail = (subject, html) ->
-  console.log("sendUserEmail", subject)
-
-  user = Meteor.user()
-  
+  user = Meteor.user()  
   # ensure the user is logged in
   throw new Meteor.Error(401, "Need to be logged in")  unless user
 
