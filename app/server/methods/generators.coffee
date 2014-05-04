@@ -108,7 +108,7 @@ sendUserEmail = (subject, html) ->
       from: "grades@sharedrecord.org"
       to: user.services.google.email
       subject: subject
-      html: html + "<p><a href="#{gradesLink}">Grades</a></p>"
+      html: html + "<p><a href='#{gradesLink}'>Grades</a></p>"
 
 
 toArrayBuffer = (buffer) ->
