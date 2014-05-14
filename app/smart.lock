@@ -39,8 +39,8 @@
       },
       "paginated-subscription": {
         "git": "https://github.com/tmeasday/meteor-paginated-subscription.git",
-        "tag": "v0.1.2",
-        "commit": "35e0c6112df2b4cfeb60b559276a93cac5ee2dd6"
+        "tag": "v0.2.2",
+        "commit": "2133a2163575f569f90253f81314f21b2bf08d20"
       },
       "iron-router": {
         "git": "https://github.com/EventedMind/iron-router.git",
@@ -95,7 +95,7 @@
       "accounts-entry": {
         "git": "https://github.com/pfafman/meteor-accounts-entry.git",
         "branch": "master",
-        "commit": "a51251c2fc6dbcbc88d66af4e6b82dea52f3c214"
+        "commit": "50213cc25b7350060107a7001e84eb57bdcbc380"
       },
       "bootstrap3-less": {
         "git": "https://github.com/eprochasson/bootstrap3-less",
@@ -109,8 +109,8 @@
       },
       "filesaver": {
         "git": "https://github.com/Meloncon/meteor-filesaver.git",
-        "tag": "v0.0.1",
-        "commit": "650d840d168cf9905908fbfb714cb33388321d4d"
+        "tag": "v0.0.3",
+        "commit": "a8dffab43edc88722138e6416b024fbf6b8fa44a"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
@@ -119,12 +119,12 @@
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.4.0",
-        "commit": "2cc6aac0d35a4e00b065c1437d540b2aefba5241"
+        "tag": "v0.5.0",
+        "commit": "c90127c383ad829747502bf7f6dfb6aabae094b8"
       },
       "accounts-t9n": {
         "git": "https://github.com/softwarerero/meteor-accounts-t9n.git",
-        "branch": "master",
+        "tag": "v0.0.7",
         "commit": "f7db403808c134efd9de9e6d39737275e881ebcb"
       }
     }
