@@ -28,9 +28,11 @@ gDrive._families = []
 
 gDrive._familyListUpdated = null
 
+
 gDrive.init = ->
     if not gDrive?._request?
         gDrive._request = GoogleServerAuth.requestWithJWT()
+
 
 gDrive.authTest = ->
     # Test Google Server to Server Authentication
@@ -46,19 +48,40 @@ gDrive.authTest = ->
         console.log JSON.parse(body)
 
 
-gDrive.getFileList = ->
+gDrive.getFileList = (folderId) ->
     gDrive.init()
-    gDrive._request
-        url: "https://www.googleapis.com/drive/v2/files"
-        jwt: GoogleJWT
-    , (err, res, body) ->
+    url = "https://www.googleapis.com/drive/v2/files"
+    
+    if folderId
+        url += '?q=' + encodeURIComponent("'#{folderId}' in parents")
+    
+    # Must bind the callback to meteor !!!
+    callback =  Meteor.bindEnvironment (err, res, body) ->
         if err
             throw err
         body = JSON.parse(body)
         if body.kind is 'drive#fileList' and body.items?
             gDrive._fileList = body.items
             console.log("Received file list")
-            console.log(gDrive._fileList)
+            for file in gDrive._fileList
+                Links.upsert
+                    id: file.id
+                ,
+                    file
+                
+                #console.log("gDrive File: #{file.title} (#{file.kind})", file.id, file.mimeType)
+                #console.log(file)
+                #console.log(" selfLink", file.selfLink)
+                #console.log(" alternateLink", file.alternateLink)
+                #console.log(" iconLink", file.iconLink)
+
+    gDrive._request
+        url: url
+        jwt: GoogleJWT
+    , callback
+
+
+
 
 gDrive.fileList = ->
     gDrive._fileList
@@ -107,6 +130,7 @@ gDrive.getAndUpdateFamilyList = ->
         jwt: GoogleJWT
     , Meteor.bindEnvironment gDrive._updateFamilyList, (err) ->   # This works but need to understand
         console.log("getAndUpdateFamilyList Error", err)
+
 
 gDrive._updateFamilyList = (err, res, body) ->
     if err

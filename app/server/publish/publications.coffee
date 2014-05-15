@@ -71,9 +71,11 @@ Meteor.publish "cases", (limit) ->
             modified: -1
         limit: limit
 
+
 Meteor.publish "singleCase", (id) ->
     if id
         Cases.find(id)
+
 
 Meteor.publish "casePhotos", (case_id, limit) ->
     if case_id
@@ -81,4 +83,10 @@ Meteor.publish "casePhotos", (case_id, limit) ->
             case_id: case_id
         ,
             limit: limit
+
+
+Meteor.publish "links", ->
+    if @userId
+        Links.find()
+
 

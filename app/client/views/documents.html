@@ -8,7 +8,7 @@
     {{#if authorized}}
       {{> gDrive}}
     {{else}}
-      <div class="containter text-center">
+      <div class="container text-center">
         <div class="alert alert-info">You need to have Google Drive access to use this application.</div>
         {{#if authorizing}}
             <button class="btn btn-warning" id="authorize">
@@ -27,15 +27,17 @@
 
 
 <template name="docs">
-    <div class="containter text-center">
-        <h4>
-            <a href="#">Doc Link 1</a>
-        </h4>
-        <h4>
-            <a href="#">Doc Link 2</a>
-        </h4>
-        <h4>
-            <a href="#">Doc Link 3</a>
-        </h4>
+    <div class="container center-block">
+        <div class="panel panel-default">
+            <ul class="list-group">
+                {{#each links}}
+                    <li class="list-group-item">
+                        <h4>
+                            <a href="{{link}}" target="_blank"><img src="{{iconLink}}" /> {{title}}</a>
+                        </h4>  
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
     </div>
 </template>

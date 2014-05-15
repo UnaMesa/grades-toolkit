@@ -28,3 +28,10 @@ Template.docs.events
         gDrive.call(gDrive.getFileList)
 
 ###
+
+Template.docs.rendered = ->
+    console.log("docs rendered", @)
+
+Template.docs.helpers
+    link: ->
+        @embedLink or @webContentLink

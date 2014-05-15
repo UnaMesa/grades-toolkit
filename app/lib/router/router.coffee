@@ -297,8 +297,13 @@ Router.map ->
       title: 'Messages'
 
   @route 'docs',
-    data:
-      title: 'Documents'
+    waitOn: ->
+      Meteor.subscribe('links')
+    data: ->
+      data = {}
+      data.title = "Documents"
+      data.links = Links.find()
+      data
 
   @route 'settings',
     data:
