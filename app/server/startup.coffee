@@ -14,8 +14,11 @@ Meteor.startup ->
   # Check the spreadsheet every N seconds 
   familyCheckIntervalId = Meteor.setInterval(gDrive.checkFamilyList, 60000)
 
-  console.log("Get File List")
-  gDrive.getFileList("0Bx5D6Rv-8lE8dmt2M0V3eGxBMU0")
+  console.log("Get Docs Links List")
+  gDrive.getDocLinks()
+
+  # Update links once an hour
+  Meteor.setInterval(gDrive.getDocLinks, 1000*60*60)
 
   Links._ensureIndex
     id: 1

@@ -81,6 +81,9 @@ gDrive.getFileList = (folderId) ->
     , callback
 
 
+gDrive.getDocLinks = ->
+    console.log("getDocLinks")
+    gDrive.getFileList("0Bx5D6Rv-8lE8dmt2M0V3eGxBMU0")
 
 
 gDrive.fileList = ->
