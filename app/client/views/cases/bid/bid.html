@@ -1,5 +1,5 @@
 <template name="bid">
-    <div class="container">
+    <div class="bid container">
         
         <form role="form">
 
@@ -58,19 +58,21 @@
 
             </div>
 
-            <button id="save-bid" type="submit" class="btn btn-primary">
-                <i class="fa fa-floppy-o"></i> Save BID
-            </button>
+            <div class="button-container">
+                <button id="save-bid" type="submit" class="btn btn-primary btn-sm">
+                    <i class="fa fa-floppy-o"></i> Save BID
+                </button>
 
-            <button id="generate-bid" type="submit" class="btn btn-primary">
-                <i class="fa fa-print"></i> Generate BID
-            </button>
-            
-            <button id="create-mou" type="submit" class="btn btn-primary hidden">
-                <i class="fa fa-pencil-square-o"></i> Create MOU
-            </button>
-            
-            <!-- <button type="reset" id="reset" class="btn btn-default">Reset</button> -->
+                <button id="generate-bid" type="submit" class="btn btn-primary btn-sm">
+                    <i class="fa fa-print"></i> Generate BID
+                </button>
+                
+                <button id="create-mou" type="submit" class="btn btn-primary btn-sm hidden">
+                    <i class="fa fa-pencil-square-o"></i> Create MOU
+                </button>
+                
+                <!-- <button type="reset" id="reset" class="btn btn-default">Reset</button> -->
+            </div>
         </form>
     
     </div>
@@ -186,25 +188,30 @@
 <template name="bidConsiderations">
 
     {{#each considerations}}
-     <div class="form-group">
-        <label for="childBeliefs" class="control-label">
-            {{label}}
-            {{#if helpText}} 
-                <button class="btn btn-link" data-toggle="popover" data-content="{{helpText}}" data-html="true"
-                    data-placement="bottom auto" data-container='form' rel="popover" role="button">
-                    <i class="fa fa-question-circle"></i>
-                </button> 
-            {{/if}}
-
-            <div class="consideration-switch pull-right">
-                <input type="radio" name="{{key}}_yesNo" value="yes" checked="{{yes}}"> Yes
-                <input type="radio" name="{{key}}_yesNo" value="no" checked="{{no}}"> No
-            </div>
-
-        </label>
-        <i>Key factors in decision:</i>
-        <textarea class="form-control" id="{{key}}_factors" placeholder="{{placeholder}}">{{factors}}</textarea>
-    </div>
+        <div class="considerations-form-group form-group">
+            <label class="control-label">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8">
+                            {{label}}
+                            {{#if helpText}} 
+                                <button class="help-text-btn btn btn-link" data-toggle="popover" 
+                                    data-content="{{helpText}}" data-html="true"
+                                    data-placement="bottom auto" data-container='form' rel="popover" role="button">
+                                    <i class="fa fa-question-circle"></i>
+                                </button> 
+                            {{/if}}
+                        </div>
+                        <div class="col-xs-4 col-sm-3 consideration-switch">
+                            <input type="radio" name="{{key}}_yesNo" value="yes" checked="{{yes}}"> Yes
+                            <input type="radio" name="{{key}}_yesNo" value="no" checked="{{no}}"> No
+                        </div>
+                    </div>
+                </div>
+            </label>
+            <span class="help-block"><i>Key factors in decision:</i></span>
+            <textarea class="form-control" id="{{key}}_factors" placeholder="{{placeholder}}">{{factors}}</textarea>
+        </div>
     {{/each}}
 
 </template>
