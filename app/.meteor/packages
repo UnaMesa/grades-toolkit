@@ -28,6 +28,6 @@ service-configuration
 bootstrap3-less
 handlebars-server
 google-api
-force-ssl
 email
 filesaver
+force-ssl
