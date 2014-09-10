@@ -19,8 +19,9 @@ validateUserEmail = (user) ->
     
     email = user.services.google.email.toLowerCase()
     validEmail = ValidUsers.findOne
-        email: user.services.google.email
+        email: email
     if not validEmail
+        console.log("Invalid email not in list", email)
         throw new Meteor.Error(403, "You are not authorized to use this site")
     else
         true

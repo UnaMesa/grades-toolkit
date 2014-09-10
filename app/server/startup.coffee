@@ -43,6 +43,7 @@ Meteor.startup ->
     'kathy.shackett@state.vt.us'
     'margaret.burbank@state.vt.us'
     'joan.rock@state.vt.us'
+    'Tracey.Lamoureux@state.vt.us'
     'gregwolff@unamesa.org'
     'tim@pfafman.com'
     'amandaroselevin@gmail.com'
@@ -58,6 +59,7 @@ Meteor.startup ->
     console.log("Set up Valid Emails Table")
     ValidUsers.remove({})
     for email in validEmails
+      email = email.toLowerCase()
       ValidUsers.insert
         email: email
         admin: email in admins
